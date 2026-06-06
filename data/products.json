@@ -1,0 +1,8 @@
+{
+    "products":{
+        "product":"AAAA"
+    },
+    "cart":[
+        {"predect":"Olá"}
+    ]
+}
