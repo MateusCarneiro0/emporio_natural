@@ -13,7 +13,7 @@ function Motives() {
     {
       texto:
         "Fortalecimento do comércio local, impulsionando a economia do nosso bairro e gerando empregos na região.",
-      icone: "/icons/icon_2.png",
+      icone: "/icons/icon_4.png",
     },
     {
       texto:
@@ -23,7 +23,7 @@ function Motives() {
     {
       texto:
         "Fortalecimento da agricultura local, apoiando pequenos produtores que cultivam de forma sustentável.",
-      icone: "/icons/icon_4.png",
+      icone: "/icons/icon_2.png",
     },
   ];
   useEffect(() => {

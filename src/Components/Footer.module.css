@@ -1,0 +1,6 @@
+.footer {
+  display: flex;
+  background-color: var(--dark-green-principal);
+  padding-bottom: 45px;
+  justify-content: space-around;
+}

@@ -1,3 +1,4 @@
+import Footer from "../Components/Footer"
 import HomeMain from "../Components/homeComponents/HomeMain"
 import NavBar from "../Components/NavBar"
 
@@ -6,6 +7,7 @@ function Home() {
         <div>
             <NavBar />
             <HomeMain />
+            <Footer />
         </div>
     )
 }
