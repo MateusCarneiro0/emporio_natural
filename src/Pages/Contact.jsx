@@ -1,4 +1,4 @@
-import NavBar from "../Components/NavBar"
+import NavBar from "../Components/NavBarComponents/NavBar"
 
 function Contact() {
     return (
