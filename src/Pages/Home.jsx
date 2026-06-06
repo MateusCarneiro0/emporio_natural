@@ -1,4 +1,4 @@
-import HomeMain from "../Components/HomeMain"
+import HomeMain from "../Components/homeComponents/HomeMain"
 import NavBar from "../Components/NavBar"
 
 function Home() {
