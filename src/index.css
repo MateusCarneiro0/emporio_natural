@@ -1,3 +1,9 @@
+:root{
+  --principal-green:rgb(192, 195, 137);
+  --dark-green-principal:rgb(170, 173, 121);
+  --principal-bg-color:#f7f4e3
+}
+
 *{
   margin: 0;
   padding: 0;

@@ -2,7 +2,7 @@
   padding: 25px;
   display: flex;
   justify-content: space-around;
-  background-color: #f7f4e3;
+  background-color: var(--principal-bg-color);
   gap: 15px;
   align-items: center;
 }
@@ -19,8 +19,8 @@
   color: rgb(49, 36, 36);
 }
 .nav :global(.active):not(.imageLink) {
-  color: rgb(170, 173, 121);
+  color: var(--dark-green-principal);
 }
 .nav .textLink:not(:global(.active)):hover {
-  color: rgb(192, 195, 137);
+  color: var(--principal-green);
 }

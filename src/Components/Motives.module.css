@@ -1,0 +1,9 @@
+.motives{
+    display: flex;
+    flex-direction: column;
+}
+.motives h1{
+    padding-top: 15px;
+    justify-self: center;
+    align-self: center;
+}

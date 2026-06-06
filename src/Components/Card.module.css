@@ -1,0 +1,31 @@
+.card {
+  display: flex;
+  justify-content: start;
+  border: 1px var(--dark-green-principal) solid;
+  border-radius: 13px;
+  width: 35%;
+  height: 75px;
+  margin-top: 100px;
+  background-color: var(--principal-green);
+  color: white;
+  align-items: center;
+  gap: 10px;
+}
+.card p {
+  text-wrap: balance;
+  word-break: break-word;
+}
+.card img {
+  height: 50px;
+  width: 50px;
+  padding-left: 7px;
+}
+.left {
+  align-self: flex-start;
+}
+.right {
+  margin-left: auto;
+}
+.last {
+  margin-bottom: 100px;
+}
