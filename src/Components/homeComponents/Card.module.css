@@ -31,7 +31,3 @@
 .last {
   margin-bottom: 100px;
 }
-.card:hover{
-  transform: translateY(-100px);
-  box-shadow: 1.5px 1.5px 1.5px rgba(0,0,0,0.6);
-}

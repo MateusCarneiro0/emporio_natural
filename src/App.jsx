@@ -1,26 +1,29 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Home from "./Pages/Home"
-import Products from "./Pages/Products"
-import Contact from "./Pages/Contact"
-import NotFound from "./Pages/NotFound"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./Pages/Home";
+import Products from "./Pages/Products";
+import Contact from "./Pages/Contact";
+import NotFound from "./Pages/NotFound";
+import { Provider } from "react-redux";
+import store from "./store";
 
 function App() {
-
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/produtos" element={<Products/>} />
-          <Route path="/contato" element={<Contact/>} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/produtos" element={<Products />} />
+            <Route path="/contato" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </Provider>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
 
 //In 4 version of vite
 //Use in terminal: npm i eslint vite-plugin-eslint eslint-config-react-app --save-dev

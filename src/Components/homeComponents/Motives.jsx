@@ -32,17 +32,20 @@ function Motives() {
   return (
     <div className={styles.motives}>
       <h1>Por quê comprar?</h1>
-      {motives.map((item, i) => (
-        <Card
-          isLast={i === motives.length - 1}
-          src={item.icone}
-          key={crypto.randomUUID}
-          id="icon"
-          right={i % 2 === 0}
-        >
-          {item.texto}
-        </Card>
-      ))}
+      {motives.map((item, i) => {
+        const key = crypto.randomUUID()
+        return (
+          <Card
+            isLast={i === motives.length - 1}
+            src={item.icone}
+            key={key}
+            id="icon"
+            right={i % 2 === 0}
+          >
+            {item.texto}
+          </Card>
+        );
+      })}
     </div>
   );
 }
