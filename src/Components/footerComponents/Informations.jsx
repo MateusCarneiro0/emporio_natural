@@ -1,4 +1,4 @@
-import { NUMBER_PHONE } from "../NumberPhone";
+import { NUMBER_PHONE } from "../../NumberPhone";
 import styles from "./Informations.module.css";
 
 function Informations() {
