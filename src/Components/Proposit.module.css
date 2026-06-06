@@ -1,0 +1,51 @@
+.proposit {
+  display: inline-block;
+  position: relative;
+}
+
+.heroImg {
+  display: block;
+  height: 450px;
+  width: 100vw;
+  justify-self: center;
+  margin-top: 35px;
+  object-fit: cover;
+}
+.textAction {
+  position: absolute;
+  justify-self: center;
+  text-wrap: balance;
+  word-break: break-word;
+  padding: 20px;
+  line-height: 25px;
+  position: absolute; /* Remove o texto do fluxo e o sobrepõe à imagem */
+  top: 50%; /* Alinha verticalmente no meio */
+  left: 50%; /* Alinha horizontalmente no meio */
+  transform: translate(-50%, -50%); /* Centraliza perfeitamente o bloco */
+  color: white;
+  text-align: center;
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Fundo semi-transparente para leitura */
+  padding: 15px;
+  border-radius: 8px;
+}
+.textAction button {
+  align-self: center;
+  margin-top: 15px;
+  height: 45px;
+  width: 200px;
+  border-radius: 20px;
+  background-color: #f7f4e3;
+  outline: none;
+  border: none;
+  transition: all 0.2s ease-in;
+}
+.textAction button:hover {
+  background-color: #ece6c4;
+  transform: scale(1.1);
+  cursor: pointer;
+}

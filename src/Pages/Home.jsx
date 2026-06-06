@@ -1,10 +1,11 @@
+import HomeMain from "../Components/HomeMain"
 import NavBar from "../Components/NavBar"
 
 function Home() {
     return (
         <div>
             <NavBar />
-            HOME
+            <HomeMain />
         </div>
     )
 }

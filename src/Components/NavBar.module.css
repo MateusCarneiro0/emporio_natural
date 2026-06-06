@@ -1,19 +1,26 @@
-.nav{
-    padding: 25px;
-    display: flex;
-    justify-content: space-around;
-    background-color: #F7F4E3;
-    gap:15px;
-    align-items: center;
+.nav {
+  padding: 25px;
+  display: flex;
+  justify-content: space-around;
+  background-color: #f7f4e3;
+  gap: 15px;
+  align-items: center;
 }
-.nav a{
-    font-size: 20px;
-    text-decoration: none;
-    color: rgb(49, 36, 36);
+.nav .imageLink {
+  text-decoration: none;
+  color: rgb(49, 36, 36);
 }
-.nav :global(.active){
-    color: rgb(170, 173, 121);
+.nav .imageLink:hover {
+  cursor: pointer;
 }
-.nav a:not(:global(.active)):hover {
-    color:rgb(192, 195, 137) ;
+.nav .textLink {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(49, 36, 36);
+}
+.nav :global(.active):not(.imageLink) {
+  color: rgb(170, 173, 121);
+}
+.nav .textLink:not(:global(.active)):hover {
+  color: rgb(192, 195, 137);
 }
