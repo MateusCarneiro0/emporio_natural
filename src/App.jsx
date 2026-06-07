@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products";
-import Contact from "./Pages/Contact";
+import Cart from "./Pages/Cart"
 import NotFound from "./Pages/NotFound";
 import { Provider } from "react-redux";
 import store from "./store";
@@ -17,7 +17,7 @@ function App() {
             <Route path="/produtos" element={<Products />}>
               <Route path="/produtos/:id" element={<Product />} />
             </Route>
-            <Route path="/contato" element={<Contact />} />
+            <Route path="/cart" element={<Cart />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

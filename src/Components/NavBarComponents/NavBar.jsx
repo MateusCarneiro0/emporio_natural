@@ -1,6 +1,8 @@
 import { NavLink } from "react-router-dom";
 import Logo from "./Logo";
 import styles from "./NavBar.module.css";
+import IconButton from "@mui/material/IconButton";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 function NavBar() {
   return (
     <nav className={styles.nav}>
@@ -10,9 +12,26 @@ function NavBar() {
       <NavLink to="/produtos" className={styles.textLink}>
         Produtos
       </NavLink>
-      <NavLink to="/contato" className={styles.textLink}>
+      <a href="mailto:emporionatural36@gmail.com" className={styles.textLink}>
         Contato
-      </NavLink>
+      </a>
+      <NavLink 
+      to="/cart" 
+      className={styles.textLink}
+    >
+      {({ isActive }) => (
+        /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
+        <IconButton>
+          <ShoppingCartOutlinedIcon 
+            sx={{ 
+              // Se estiver ativo, fica azul, se não, fica cinza
+              color: isActive ? 'rgb(170, 173, 121)' : '#757575',
+              transition: 'color 0.2s ease'
+            }} 
+          />
+        </IconButton>
+      )}
+    </NavLink>
     </nav>
   );
 }
