@@ -1,0 +1,24 @@
+.productsContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 3fr);
+  gap: 20px;
+
+  max-width: 1200px; /* Limita a largura máxima do bloco inteiro de produtos */
+  margin: 0 auto; /* Centraliza o bloco inteiro na tela do site */
+  padding: 20px;
+}
+.products {
+  display: flex-box;
+}
+.products header {
+  align-self: center;
+  justify-self: center;
+  margin-bottom: 40px;
+  margin-top: 40px;
+}
+.spinner {
+  align-self: center;
+  justify-self: center;
+  margin-top: 300px;
+  height: 150px;
+}

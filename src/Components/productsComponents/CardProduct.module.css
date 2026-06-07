@@ -4,12 +4,12 @@
   border: 1px solid var(--dark-green-principal);
   background-color: var(--principal-bg-color);
   border-radius: 15px;
-  width: 20%;
+  width: 100%; /*Quando se usa porcentagem tem haver com o container*/
   height: 350px;
   overflow-y: hidden;
 }
 .card button {
-  margin-top: 15px;
+  margin-top: 25px;
   background-color: blueviolet;
   color: white;
   width: 98%;
