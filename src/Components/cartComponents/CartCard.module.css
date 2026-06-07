@@ -1,0 +1,40 @@
+.card {
+  border: 1px solid var(--dark-green-principal);
+  background-color: var(--principal-bg-color);
+  width: 90vw;
+  height: 65px;
+  display: flex;
+  border-radius: 17.5px;
+  margin-top: 15px;
+  margin-left: 15px;
+  justify-content: space-between;
+  align-items: center;
+}
+.card h3{
+    color: var(--principal-green);
+    margin-right:225px ;
+}
+.card img {
+  height: 65px;
+}
+.price {
+  margin-right: 225px;
+}
+.card button {
+  margin-right: 35px;
+  background-color: red;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 24px;
+}
+.card button:hover {
+  cursor: pointer;
+
+}
+.last {
+  margin-bottom: 100px;
+}

@@ -1,12 +1,12 @@
 {
-    "products": [
+  "products": [
     {
       "nome": "Maçã Fuji",
       "descricao": "Maçã fresca, doce e crocante. Excelente para lanches saudáveis e preparo de sucos.",
       "imagem": "https://images.unsplash.com/photo-1560806887-1e4cd0b6faa6?auto=format&fit=crop&w=500&q=80",
       "alias": "Fuji Apple",
       "categorias": ["frutas", "frescos"],
-      "preco": 8.90
+      "preco": 8.9
     },
     {
       "nome": "Banana Prata",
@@ -14,7 +14,7 @@
       "imagem": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80",
       "alias": "Silver Banana",
       "categorias": ["frutas", "frescos"],
-      "preco": 6.50
+      "preco": 6.5
     },
     {
       "nome": "Laranja Pera",
@@ -22,7 +22,7 @@
       "imagem": "https://images.unsplash.com/photo-1547514701-42722101795e?auto=format&fit=crop&w=500&q=80",
       "alias": "Orange",
       "categorias": ["frutas", "frescos"],
-      "preco": 5.20
+      "preco": 5.2
     },
     {
       "nome": "Morango Orgânico",
@@ -30,7 +30,7 @@
       "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
       "alias": "Organic Strawberry",
       "categorias": ["frutas", "frescos", "orgânicos"],
-      "preco": 12.90
+      "preco": 12.9
     },
     {
       "nome": "Uva Thompson",
@@ -38,7 +38,7 @@
       "imagem": "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=500&q=80",
       "alias": "Thompson Grape",
       "categorias": ["frutas", "frescos"],
-      "preco": 14.30
+      "preco": 14.3
     },
     {
       "nome": "Abacate",
@@ -46,7 +46,7 @@
       "imagem": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80",
       "alias": "Avocado",
       "categorias": ["frutas", "frescos"],
-      "preco": 7.80
+      "preco": 7.8
     },
     {
       "nome": "Mamão Formosa",
@@ -54,7 +54,7 @@
       "imagem": "https://images.unsplash.com/photo-1614435227303-1ddda3da906c?auto=format&fit=crop&w=500&q=80",
       "alias": "Papaya",
       "categorias": ["frutas", "frescos"],
-      "preco": 9.40
+      "preco": 9.4
     },
     {
       "nome": "Manga Palmer",
@@ -78,7 +78,7 @@
       "imagem": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80",
       "alias": "Watermelon",
       "categorias": ["frutas", "frescos"],
-      "preco": 18.50
+      "preco": 18.5
     },
     {
       "nome": "Castanha de Caju W1",
@@ -86,7 +86,7 @@
       "imagem": "https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?auto=format&fit=crop&w=500&q=80",
       "alias": "Cashew Nut",
       "categorias": ["granel", "castanhas"],
-      "preco": 45.00
+      "preco": 45.0
     },
     {
       "nome": "Castanha do Pará",
@@ -94,7 +94,7 @@
       "imagem": "https://images.unsplash.com/photo-1543257580-7269da773bf5?auto=format&fit=crop&w=500&q=80",
       "alias": "Brazil Nut",
       "categorias": ["granel", "castanhas"],
-      "preco": 52.80
+      "preco": 52.8
     },
     {
       "nome": "Amêndoa Crua",
@@ -102,7 +102,7 @@
       "imagem": "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=500&q=80",
       "alias": "Raw Almond",
       "categorias": ["granel", "castanhas"],
-      "preco": 39.90
+      "preco": 39.9
     },
     {
       "nome": "Nozes Mariposa",
@@ -110,7 +110,7 @@
       "imagem": "https://images.unsplash.com/photo-1606923829579-0ac99d6db3ec?auto=format&fit=crop&w=500&q=80",
       "alias": "Walnuts",
       "categorias": ["granel", "castanhas"],
-      "preco": 48.00
+      "preco": 48.0
     },
     {
       "nome": "Semente de Chia",
@@ -118,7 +118,7 @@
       "imagem": "https://images.unsplash.com/photo-1599351221447-06dfa9a3b900?auto=format&fit=crop&w=500&q=80",
       "alias": "Chia Seeds",
       "categorias": ["granel", "sementes"],
-      "preco": 15.40
+      "preco": 15.4
     },
     {
       "nome": "Linhaça Dourada",
@@ -126,7 +126,7 @@
       "imagem": "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80",
       "alias": "Golden Flaxseed",
       "categorias": ["granel", "sementes"],
-      "preco": 11.20
+      "preco": 11.2
     },
     {
       "nome": "Semente de Abóbora",
@@ -134,7 +134,7 @@
       "imagem": "https://images.unsplash.com/photo-1590004953392-5aba2e72269a?auto=format&fit=crop&w=500&q=80",
       "alias": "Pumpkin Seeds",
       "categorias": ["granel", "sementes"],
-      "preco": 22.00
+      "preco": 22.0
     },
     {
       "nome": "Quinoa em Grãos Branca",
@@ -142,7 +142,7 @@
       "imagem": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80",
       "alias": "White Quinoa",
       "categorias": ["granel", "grãos"],
-      "preco": 19.80
+      "preco": 19.8
     },
     {
       "nome": "Aveia em Flocos Grossos",
@@ -150,7 +150,7 @@
       "imagem": "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=500&q=80",
       "alias": "Rolled Oats",
       "categorias": ["granel", "cereais"],
-      "preco": 9.50
+      "preco": 9.5
     },
     {
       "nome": "Granola Tradicional com Castanhas",
@@ -158,7 +158,7 @@
       "imagem": "https://images.unsplash.com/photo-1517881917431-134888973873?auto=format&fit=crop&w=500&q=80",
       "alias": "Traditional Granola",
       "categorias": ["granel", "cereais"],
-      "preco": 16.90
+      "preco": 16.9
     },
     {
       "nome": "Whey Protein Concentrado 80%",
@@ -166,7 +166,7 @@
       "imagem": "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=500&q=80",
       "alias": "Concentrated Whey Protein",
       "categorias": ["whey's", "suplementos"],
-      "preco": 98.00
+      "preco": 98.0
     },
     {
       "nome": "Whey Protein Isolado",
@@ -174,7 +174,7 @@
       "imagem": "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80",
       "alias": "Isolated Whey Protein",
       "categorias": ["whey's", "suplementos"],
-      "preco": 145.00
+      "preco": 145.0
     },
     {
       "nome": "Whey Protein Vegano (Ervilha e Arroz)",
@@ -182,7 +182,7 @@
       "imagem": "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?auto=format&fit=crop&w=500&q=80",
       "alias": "Vegan Protein Powder",
       "categorias": ["whey's", "suplementos", "veganos"],
-      "preco": 89.90
+      "preco": 89.9
     },
     {
       "nome": "Creatina Monohidratada 100% Pura",
@@ -190,7 +190,7 @@
       "imagem": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80",
       "alias": "Creatine Monohydrate",
       "categorias": ["suplementos", "energia"],
-      "preco": 75.00
+      "preco": 75.0
     },
     {
       "nome": "Glutamina Pura",
@@ -198,7 +198,7 @@
       "imagem": "https://images.unsplash.com/photo-1611571491426-97dbb3408a53?auto=format&fit=crop&w=500&q=80",
       "alias": "Glutamine",
       "categorias": ["suplementos", "imunidade"],
-      "preco": 42.50
+      "preco": 42.5
     },
     {
       "nome": "Mel de Abelha Silvestre Puro",
@@ -206,7 +206,7 @@
       "imagem": "https://images.unsplash.com/photo-1587049633562-b3513a0e1e2b?auto=format&fit=crop&w=500&q=80",
       "alias": "Pure Honey",
       "categorias": ["naturais", "adoçantes"],
-      "preco": 32.00
+      "preco": 32.0
     },
     {
       "nome": "Pasta de Amendoim Integral",
@@ -214,7 +214,7 @@
       "imagem": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=500&q=80",
       "alias": "Peanut Butter",
       "categorias": ["naturais", "pastas", "suplementos"],
-      "preco": 19.90
+      "preco": 19.9
     },
     {
       "nome": "Óleo de Coco Extravirgem",
@@ -222,7 +222,7 @@
       "imagem": "https://images.unsplash.com/photo-1538689193196-a848c776fb08?auto=format&fit=crop&w=500&q=80",
       "alias": "Extra Virgin Coconut Oil",
       "categorias": ["naturais", "óleos"],
-      "preco": 34.60
+      "preco": 34.6
     },
     {
       "nome": "Chá Verde a Granel",
@@ -230,7 +230,7 @@
       "imagem": "https://images.unsplash.com/photo-1531958635795-af3b7bde76e1?auto=format&fit=crop&w=500&q=80",
       "alias": "Green Tea",
       "categorias": ["granel", "chás"],
-      "preco": 12.00
+      "preco": 12.0
     },
     {
       "nome": "Cúrcuma em Pó Puro",
@@ -238,10 +238,23 @@
       "imagem": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80",
       "alias": "Turmeric Powder",
       "categorias": ["granel", "temperos", "naturais"],
-      "preco": 14.50
+      "preco": 14.5
     }
   ],
-    "cart":[
-        {"predect":"Olá"}
-    ]
+  "users": [
+    {
+      "nome": "Mateus",
+      "id": "idiffififffid",
+      "cart": [
+        {
+          "nome": "Cúrcuma em Pó Puro",
+          "descricao": "Açafrão-da-terra natural com potentes propriedades anti-inflamatórias.",
+          "imagem": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80",
+          "alias": "Turmeric Powder",
+          "categorias": ["granel", "temperos", "naturais"],
+          "preco": 14.5
+        }
+      ]
+    }
+  ]
 }
