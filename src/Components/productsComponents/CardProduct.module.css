@@ -18,7 +18,7 @@
   outline: none;
   border: none;
   text-align: center;
-  box-shadow: 0.75px 0.75px 0.75px rgba(0,0,0,0.25);
+  box-shadow: 0.75px 0.75px 0.75px rgba(0, 0, 0, 0.25);
   transition: 0.2s all ease-in;
 }
 .card img {
@@ -37,8 +37,8 @@
   margin-top: 25px;
   justify-self: center;
 }
-.card button:hover{
-    cursor: pointer;
-    transform: translateY(-10px);
-    box-shadow: 2px 2px 2px rgba(0,0,0,0.8);
+.card button:hover {
+  cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
 }
