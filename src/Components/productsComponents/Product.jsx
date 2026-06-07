@@ -1,12 +1,16 @@
+import { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";
-import { useState } from "react";
-import { getProduct } from "../features/productsSlice";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { getProduct } from "../features/productsSlice";
+
 import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
-import styles from "./Product.module.css";
 import Button from "../Button";
+
+import styles from "./Product.module.css";
+
 function Product() {
   const [quantity, setQuantity] = useState(1);
 
@@ -17,7 +21,7 @@ function Product() {
   const { isLoading, currentProduct, error } = useSelector(
     (store) => store.products,
   );
-  const { nome, imagem, categorias, descricao,preco } = currentProduct;
+  const { nome, imagem, categorias, descricao, preco } = currentProduct;
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
@@ -57,7 +61,7 @@ function Product() {
             type="number"
             placeholder="digite uma quantidade"
             className={styles.productInput}
-            value={quantity || 1}
+            value={quantity}
             onChange={(ev) => {
               setQuantity((quantity) =>
                 +ev.target.value < 0 ? quantity : +ev.target.value,
