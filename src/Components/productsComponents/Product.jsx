@@ -64,7 +64,7 @@ function Product() {
               );
             }}
           />
-          <p className={styles.price}>Total:{preco * quantity} R$</p>
+          <p className={styles.price}>Total:{Math.ceil(preco * quantity)} R$</p>
         </div>
         <Button>Adicionar ao carrinho</Button>
       </div>
