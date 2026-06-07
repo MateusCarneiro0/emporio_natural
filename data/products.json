@@ -5,240 +5,364 @@
       "descricao": "Maçã fresca, doce e crocante. Excelente para lanches saudáveis e preparo de sucos.",
       "imagem": "https://images.unsplash.com/photo-1560806887-1e4cd0b6faa6?auto=format&fit=crop&w=500&q=80",
       "alias": "Fuji Apple",
-      "categorias": ["frutas", "frescos"],
-      "preco": 8.9
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 8.9,
+      "id": "mTMCImqCVtU"
     },
     {
       "nome": "Banana Prata",
       "descricao": "Rica em potássio e energia. Perfeita para vitaminas ou consumo in natura.",
       "imagem": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80",
       "alias": "Silver Banana",
-      "categorias": ["frutas", "frescos"],
-      "preco": 6.5
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 6.5,
+      "id": "PF2QtX6WUnU"
     },
     {
       "nome": "Laranja Pera",
       "descricao": "Laranja suculenta, ideal para espremer e fazer aquele suco natural com muita vitamina C.",
       "imagem": "https://images.unsplash.com/photo-1547514701-42722101795e?auto=format&fit=crop&w=500&q=80",
       "alias": "Orange",
-      "categorias": ["frutas", "frescos"],
-      "preco": 5.2
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 5.2,
+      "id": "JU0ODKAwSYo"
     },
     {
       "nome": "Morango Orgânico",
       "descricao": "Morangos selecionados, docinhos e livres de agrotóxicos.",
       "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
       "alias": "Organic Strawberry",
-      "categorias": ["frutas", "frescos", "orgânicos"],
-      "preco": 12.9
+      "categorias": [
+        "frutas",
+        "frescos",
+        "orgânicos"
+      ],
+      "preco": 12.9,
+      "id": "8QbgXQWMTBU"
     },
     {
       "nome": "Uva Thompson",
       "descricao": "Uvas verdes doces e sem semente, perfeitas para um lanche rápido.",
       "imagem": "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=500&q=80",
       "alias": "Thompson Grape",
-      "categorias": ["frutas", "frescos"],
-      "preco": 14.3
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 14.3,
+      "id": "I1JhWj67kYk"
     },
     {
       "nome": "Abacate",
       "descricao": "Fonte de gorduras boas e muito versátil para receitas doces e salgadas.",
       "imagem": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80",
       "alias": "Avocado",
-      "categorias": ["frutas", "frescos"],
-      "preco": 7.8
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 7.8,
+      "id": "fdbUqO1O8-Q"
     },
     {
       "nome": "Mamão Formosa",
       "descricao": "Excelente aliado da digestão, colhido no ponto certo de maturação.",
       "imagem": "https://images.unsplash.com/photo-1614435227303-1ddda3da906c?auto=format&fit=crop&w=500&q=80",
       "alias": "Papaya",
-      "categorias": ["frutas", "frescos"],
-      "preco": 9.4
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 9.4,
+      "id": "4e_kAxIXN18"
     },
     {
       "nome": "Manga Palmer",
       "descricao": "Manga com polpa firme, muito doce e sem fiapos.",
       "imagem": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=500&q=80",
       "alias": "Palmer Mango",
-      "categorias": ["frutas", "frescos"],
-      "preco": 8.15
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 8.15,
+      "id": "VRR_iQYWwks"
     },
     {
       "nome": "Limão Tahiti",
       "descricao": "Essencial para temperos, chás e sucos refrescantes.",
       "imagem": "https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&w=500&q=80",
       "alias": "Lime",
-      "categorias": ["frutas", "frescos"],
-      "preco": 4.99
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 4.99,
+      "id": "Wv3zW7vPoMA"
     },
     {
       "nome": "Melancia",
       "descricao": "Altamente hidratante e refrescante, vendida em fatias ou inteira.",
       "imagem": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80",
       "alias": "Watermelon",
-      "categorias": ["frutas", "frescos"],
-      "preco": 18.5
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 18.5,
+      "id": "9PJ_eMb_HaI"
     },
     {
       "nome": "Castanha de Caju W1",
       "descricao": "Castanha de caju inteira, torrada e levemente salgada. Excelente fonte de energia.",
       "imagem": "https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?auto=format&fit=crop&w=500&q=80",
       "alias": "Cashew Nut",
-      "categorias": ["granel", "castanhas"],
-      "preco": 45.0
+      "categorias": [
+        "granel",
+        "castanhas"
+      ],
+      "preco": 45,
+      "id": "gaUPojw_b8k"
     },
     {
       "nome": "Castanha do Pará",
       "descricao": "Rica em selênio, ajuda na imunidade e saúde do cérebro.",
       "imagem": "https://images.unsplash.com/photo-1543257580-7269da773bf5?auto=format&fit=crop&w=500&q=80",
       "alias": "Brazil Nut",
-      "categorias": ["granel", "castanhas"],
-      "preco": 52.8
+      "categorias": [
+        "granel",
+        "castanhas"
+      ],
+      "preco": 52.8,
+      "id": "dwpPaWu0u0w"
     },
     {
       "nome": "Amêndoa Crua",
       "descricao": "Amêndoas naturais e crocantes, perfeitas para fazer leites vegetais ou lanches.",
       "imagem": "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=500&q=80",
       "alias": "Raw Almond",
-      "categorias": ["granel", "castanhas"],
-      "preco": 39.9
+      "categorias": [
+        "granel",
+        "castanhas"
+      ],
+      "preco": 39.9,
+      "id": "xQJs0B8uEm8"
     },
     {
       "nome": "Nozes Mariposa",
       "descricao": "Nozes chilenas de alta qualidade, sabor suave e rico em Ômega-3.",
       "imagem": "https://images.unsplash.com/photo-1606923829579-0ac99d6db3ec?auto=format&fit=crop&w=500&q=80",
       "alias": "Walnuts",
-      "categorias": ["granel", "castanhas"],
-      "preco": 48.0
+      "categorias": [
+        "granel",
+        "castanhas"
+      ],
+      "preco": 48,
+      "id": "V5yaQSfmeT8"
     },
     {
       "nome": "Semente de Chia",
       "descricao": "Superalimento rico em fibras, proteínas e ômega-3.",
       "imagem": "https://images.unsplash.com/photo-1599351221447-06dfa9a3b900?auto=format&fit=crop&w=500&q=80",
       "alias": "Chia Seeds",
-      "categorias": ["granel", "sementes"],
-      "preco": 15.4
+      "categorias": [
+        "granel",
+        "sementes"
+      ],
+      "preco": 15.4,
+      "id": "Aak3n9F55Zk"
     },
     {
       "nome": "Linhaça Dourada",
       "descricao": "Semente rica em nutrientes. Ideal bater no liquidificador antes do consumo para absorção total.",
       "imagem": "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80",
       "alias": "Golden Flaxseed",
-      "categorias": ["granel", "sementes"],
-      "preco": 11.2
+      "categorias": [
+        "granel",
+        "sementes"
+      ],
+      "preco": 11.2,
+      "id": "Xv0R5K9P3yo"
     },
     {
       "nome": "Semente de Abóbora",
       "descricao": "Torrada e sem casca. Ótima fonte de magnésio e zinco para adicionar às saladas.",
       "imagem": "https://images.unsplash.com/photo-1590004953392-5aba2e72269a?auto=format&fit=crop&w=500&q=80",
       "alias": "Pumpkin Seeds",
-      "categorias": ["granel", "sementes"],
-      "preco": 22.0
+      "categorias": [
+        "granel",
+        "sementes"
+      ],
+      "preco": 22,
+      "id": "UkvlB0MWHro"
     },
     {
       "nome": "Quinoa em Grãos Branca",
       "descricao": "Cereal de alto valor proteico, ótimo substituto para o arroz nas refeições.",
       "imagem": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80",
       "alias": "White Quinoa",
-      "categorias": ["granel", "grãos"],
-      "preco": 19.8
+      "categorias": [
+        "granel",
+        "grãos"
+      ],
+      "preco": 19.8,
+      "id": "aDxpuzqnVNc"
     },
     {
       "nome": "Aveia em Flocos Grossos",
       "descricao": "Aveia integral de excelente qualidade, auxiliando no funcionamento intestinal.",
       "imagem": "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=500&q=80",
       "alias": "Rolled Oats",
-      "categorias": ["granel", "cereais"],
-      "preco": 9.5
+      "categorias": [
+        "granel",
+        "cereais"
+      ],
+      "preco": 9.5,
+      "id": "dGIm6i04jEQ"
     },
     {
       "nome": "Granola Tradicional com Castanhas",
       "descricao": "Mix crocante de cereais, castanhas e mel. Sem conservantes.",
       "imagem": "https://images.unsplash.com/photo-1517881917431-134888973873?auto=format&fit=crop&w=500&q=80",
       "alias": "Traditional Granola",
-      "categorias": ["granel", "cereais"],
-      "preco": 16.9
+      "categorias": [
+        "granel",
+        "cereais"
+      ],
+      "preco": 16.9,
+      "id": "nvIABNgeZM4"
     },
     {
       "nome": "Whey Protein Concentrado 80%",
       "descricao": "Proteína de alto valor biológico com sabor baunilha. Auxilia no ganho de massa magra.",
       "imagem": "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=500&q=80",
       "alias": "Concentrated Whey Protein",
-      "categorias": ["whey's", "suplementos"],
-      "preco": 98.0
+      "categorias": [
+        "whey's",
+        "suplementos"
+      ],
+      "preco": 98,
+      "id": "N05M3DGvqk0"
     },
     {
       "nome": "Whey Protein Isolado",
       "descricao": "Máxima pureza e rápida absorção, ideal para intolerantes à lactose. Sabor chocolate.",
       "imagem": "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80",
       "alias": "Isolated Whey Protein",
-      "categorias": ["whey's", "suplementos"],
-      "preco": 145.0
+      "categorias": [
+        "whey's",
+        "suplementos"
+      ],
+      "preco": 145,
+      "id": "OhkiVeqR7dc"
     },
     {
       "nome": "Whey Protein Vegano (Ervilha e Arroz)",
       "descricao": "Blend de proteínas vegetais, 100% natural e adoçado com stévia.",
       "imagem": "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?auto=format&fit=crop&w=500&q=80",
       "alias": "Vegan Protein Powder",
-      "categorias": ["whey's", "suplementos", "veganos"],
-      "preco": 89.9
+      "categorias": [
+        "whey's",
+        "suplementos",
+        "veganos"
+      ],
+      "preco": 89.9,
+      "id": "xxijh-7s79w"
     },
     {
       "nome": "Creatina Monohidratada 100% Pura",
       "descricao": "Aumenta a força e a explosão muscular durante os treinos.",
       "imagem": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80",
       "alias": "Creatine Monohydrate",
-      "categorias": ["suplementos", "energia"],
-      "preco": 75.0
+      "categorias": [
+        "suplementos",
+        "energia"
+      ],
+      "preco": 75,
+      "id": "g2HMta4wvgk"
     },
     {
       "nome": "Glutamina Pura",
       "descricao": "Aminoácido essencial que auxilia na recuperação muscular e sistema imunológico.",
       "imagem": "https://images.unsplash.com/photo-1611571491426-97dbb3408a53?auto=format&fit=crop&w=500&q=80",
       "alias": "Glutamine",
-      "categorias": ["suplementos", "imunidade"],
-      "preco": 42.5
+      "categorias": [
+        "suplementos",
+        "imunidade"
+      ],
+      "preco": 42.5,
+      "id": "-Ef4ZkvXX-8"
     },
     {
       "nome": "Mel de Abelha Silvestre Puro",
       "descricao": "Mel 100% natural extraído de floradas silvestres. Adoçante natural perfeito.",
       "imagem": "https://images.unsplash.com/photo-1587049633562-b3513a0e1e2b?auto=format&fit=crop&w=500&q=80",
       "alias": "Pure Honey",
-      "categorias": ["naturais", "adoçantes"],
-      "preco": 32.0
+      "categorias": [
+        "naturais",
+        "adoçantes"
+      ],
+      "preco": 32,
+      "id": "vcp9qt8pPc4"
     },
     {
       "nome": "Pasta de Amendoim Integral",
       "descricao": "Sem adição de açúcar. Crocante e energética, ideal para pré-treino.",
       "imagem": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=500&q=80",
       "alias": "Peanut Butter",
-      "categorias": ["naturais", "pastas", "suplementos"],
-      "preco": 19.9
+      "categorias": [
+        "naturais",
+        "pastas",
+        "suplementos"
+      ],
+      "preco": 19.9,
+      "id": "2-BRj3aXprY"
     },
     {
       "nome": "Óleo de Coco Extravirgem",
       "descricao": "Prensado a frio. Ideal para preparos culinários saudáveis e hidratação.",
       "imagem": "https://images.unsplash.com/photo-1538689193196-a848c776fb08?auto=format&fit=crop&w=500&q=80",
       "alias": "Extra Virgin Coconut Oil",
-      "categorias": ["naturais", "óleos"],
-      "preco": 34.6
+      "categorias": [
+        "naturais",
+        "óleos"
+      ],
+      "preco": 34.6,
+      "id": "BRLO2AdtbQ0"
     },
     {
       "nome": "Chá Verde a Granel",
       "descricao": "Folhas secas de Camellia sinensis. Termogênico natural e rico em antioxidantes.",
       "imagem": "https://images.unsplash.com/photo-1531958635795-af3b7bde76e1?auto=format&fit=crop&w=500&q=80",
       "alias": "Green Tea",
-      "categorias": ["granel", "chás"],
-      "preco": 12.0
+      "categorias": [
+        "granel",
+        "chás"
+      ],
+      "preco": 12,
+      "id": "GtIrOIHjATk"
     },
     {
       "nome": "Cúrcuma em Pó Puro",
       "descricao": "Açafrão-da-terra natural com potentes propriedades anti-inflamatórias.",
       "imagem": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80",
       "alias": "Turmeric Powder",
-      "categorias": ["granel", "temperos", "naturais"],
-      "preco": 14.5
+      "categorias": [
+        "granel",
+        "temperos",
+        "naturais"
+      ],
+      "preco": 14.5,
+      "id": "PJLVfueSmMw"
     }
   ],
   "users": [
@@ -247,14 +371,19 @@
       "id": "idiffififffid",
       "cart": [
         {
-          "nome": "Cúrcuma em Pó Puro",
-          "descricao": "Açafrão-da-terra natural com potentes propriedades anti-inflamatórias.",
-          "imagem": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80",
-          "alias": "Turmeric Powder",
-          "categorias": ["granel", "temperos", "naturais"],
-          "preco": 14.5
+          "nome": "Morango Orgânico",
+          "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
+          "categorias": [
+            "frutas",
+            "frescos",
+            "orgânicos"
+          ],
+          "descricao": "Morangos selecionados, docinhos e livres de agrotóxicos.",
+          "total": 181,
+          "id": "8QbgXQWMTBU"
         }
       ]
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -5,25 +5,24 @@ const initialState = {
   cartProducts: [],
   isLoading: false,
   error: "",
-  userId: "",
+  userId: "idiffififffid",
 };
 
 const cartReducer = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    loadingCart(sta, act) {
+    loadingCart(sta) {
       sta.isLoading = true;
     },
     receiveCart(sta, act) {
-      sta.cartProducts = act.payload.cart;
+      sta.cartProducts = act.payload;
       sta.isLoading = false;
       sta.error = "";
-      sta.userId = act.payload.userId;
     },
     rejected(sta, act) {
       sta.isLoading = false;
-      sta.error = "Error";
+      sta.error = act.payload;
     },
     addProductCart(sta, act) {
       sta.cartProducts = [...sta.cartProducts, act.payload];
@@ -41,30 +40,36 @@ export function fetchCart(userId) {
         type: "cart/receiveCart",
         payload: { cart: data.cart, userId },
       });
-    } catch {
-      dispatch({ type: "cart/rejected" });
+    } catch (err) {
+      dispatch({ type: "cart/rejected", payload: err.name });
     }
   };
 }
+
+
 export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { userId, cartProducts } = getState().cart;
+    if (cartProducts.some((cartProduct) => cartProduct.id === product.id))
+      return;
+
     dispatch({ type: "cart/loadingCart" });
     try {
-      const res = await fetch(`${BASE_URL}/users/${userId}`, {
+      await fetch(`${BASE_URL}/users/${userId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          // Junta o anterior e o novo em uma única lista
           cart: [...cartProducts, product],
         }),
       });
-      const data = await res.json();
-      dispatch({ type: "cart/receiveCart", payload: data.cart });
-    } catch {
-      dispatch({ type: "cart/rejected" });
+      dispatch({
+        type: "cart/receiveCart",
+        payload: [...cartProducts, product],
+      });
+    } catch (err) {
+      dispatch({ type: "cart/rejected", payload: err.message });
     }
   };
 }

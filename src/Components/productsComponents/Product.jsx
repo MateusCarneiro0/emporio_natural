@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProduct } from "../features/productsSlice";
@@ -10,9 +10,12 @@ import Error from "../Error";
 import Button from "../Button";
 
 import styles from "./Product.module.css";
+import { addProductCart } from "../features/cartSlice";
 
 function Product() {
   const [quantity, setQuantity] = useState(1);
+
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
 
@@ -68,9 +71,12 @@ function Product() {
               );
             }}
           />
-          <p className={styles.price}>Total:{Math.ceil(preco * quantity)} R$</p>
+          <p className={styles.price}>Total:{Math.round(preco * quantity)} R$</p>
         </div>
-        <Button>Adicionar ao carrinho</Button>
+        <Button onClick={() => {
+          dispatch(addProductCart({nome,imagem,categorias,descricao,total:Math.round(preco * quantity),id}))
+          navigate("/cart")
+        }}>Adicionar ao carrinho</Button>
       </div>
     </div>
   );
