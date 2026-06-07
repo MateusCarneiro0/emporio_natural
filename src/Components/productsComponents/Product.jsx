@@ -17,7 +17,7 @@ function Product() {
   const { isLoading, currentProduct, error } = useSelector(
     (store) => store.products,
   );
-  const { nome, imagem, categorias, descricao } = currentProduct;
+  const { nome, imagem, categorias, descricao,preco } = currentProduct;
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
@@ -64,7 +64,7 @@ function Product() {
               );
             }}
           />
-          <p className={styles.price}>Total:{25 * quantity} R$</p>
+          <p className={styles.price}>Total:{preco * quantity} R$</p>
         </div>
         <Button>Adicionar ao carrinho</Button>
       </div>

@@ -43,7 +43,7 @@ const ProductMain = memo(function ProductMain() {
             key={product.id}
             title={product.nome}
             src={product.imagem}
-            price={25}
+            price={product.preco}
             id={product.id}
           >
             {product.descricao}
