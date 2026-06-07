@@ -5,8 +5,12 @@ import { memo } from "react";
 import CardProduct from "./CardProduct";
 import styles from "./ProductMain.module.css";
 import { ThreeDots } from "react-loader-spinner";
+import Error from "../Error";
+import { Outlet, useParams } from "react-router-dom";
 const ProductMain = memo(function ProductMain() {
   const dispatch = useDispatch();
+  const { id } = useParams();
+
   const frase = [
     "o que falta para o seu dia ficar mais saudável?🌞",
     "Vamos comprar aquele Whey para começar o dia?🔋",
@@ -21,21 +25,11 @@ const ProductMain = memo(function ProductMain() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
+  if(id) return <Outlet />
+
   if (isLoading) return <ThreeDots wrapperClass={styles.spinner} />;
-  if (error)
-    return (
-      <h3
-        style={{
-          fontSize: "60px",
-          justifySelf: "center",
-          alignSelf: "center",
-          color: "red",
-          marginTop:"150px"
-        }}
-      >
-        A error ocurred in fetch data try again later
-      </h3>
-    );
+  if (error) return <Error />;
+  
   return (
     <main className={styles.products}>
       <header>
@@ -50,6 +44,7 @@ const ProductMain = memo(function ProductMain() {
             title={product.nome}
             src={product.imagem}
             price={25}
+            id={product.id}
           >
             {product.descricao}
           </CardProduct>

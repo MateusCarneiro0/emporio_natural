@@ -5,6 +5,7 @@ import Contact from "./Pages/Contact";
 import NotFound from "./Pages/NotFound";
 import { Provider } from "react-redux";
 import store from "./store";
+import Product from "./Components/productsComponents/Product";
 
 function App() {
   return (
@@ -13,7 +14,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/produtos" element={<Products />} />
+            <Route path="/produtos" element={<Products />}>
+              <Route path="/produtos/:id" element={<Product />} />
+            </Route>
             <Route path="/contato" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

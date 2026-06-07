@@ -6,6 +6,7 @@ const initialState = {
   isLoading: false,
   products: [],
   error: "",
+  currentProduct: {},
 };
 
 const productsSlice = createSlice({
@@ -23,6 +24,7 @@ const productsSlice = createSlice({
       sta.displayProducts = act.payload;
       sta.products = act.payload;
       sta.isLoading = false;
+      sta.error = "";
     },
     searchProducts(sta, act) {
       const search = act.payload;
@@ -35,6 +37,11 @@ const productsSlice = createSlice({
             cate.toLocaleLowerCase().includes(search),
           ),
       );
+    },
+    receivedCurrentProduct(sta, act) {
+      sta.isLoading = false;
+      sta.currentProduct = act.payload;
+      sta.error = "";
     },
   },
 });
@@ -49,6 +56,19 @@ export function fetchProducts() {
       const res = await fetch(`${BASE_URL}/products`);
       const data = await res.json();
       dispatch({ type: "products/receiveProducts", payload: data });
+    } catch {
+      dispatch({ type: "products/rejected" });
+    }
+  };
+}
+
+export function getProduct(id) {
+  return async (dispatch, getState) => {
+    dispatch({ type: "products/loadingProducts" });
+    try {
+      const res = await fetch(`${BASE_URL}/products/${id}`);
+      const data = await res.json();
+      dispatch({ type: "products/receivedCurrentProduct", payload: data });
     } catch {
       dispatch({ type: "products/rejected" });
     }
