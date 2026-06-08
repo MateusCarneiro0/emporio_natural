@@ -7,220 +7,6 @@
       "alias": "Fuji Apple",
       "categorias": ["frutas", "frescos"],
       "preço": 8.9,
-      "link": "https://pt.wikipedia.org/wiki/Fuji_(ma%C3%A7%C3%A3)"
-    },
-    {
-      "nome": "Banana Prata",
-      "descricao": "Rica em potássio e energia. Perfeita para vitaminas ou consumo in natura.",
-      "imagem": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80",
-      "alias": "Silver Banana",
-      "categorias": ["frutas", "frescos"],
-      "preço": 6.5,
-      "link": "https://pt.wikipedia.org/wiki/Banana"
-    },
-    {
-      "nome": "Laranja Pera",
-      "descricao": "Laranja suculenta, ideal para espremer e fazer aquele suco natural com muita vitamina C.",
-      "imagem": "https://images.unsplash.com/photo-1547514701-42722101795e?auto=format&fit=crop&w=500&q=80",
-      "alias": "Orange",
-      "categorias": ["frutas", "frescos"],
-      "preço": 5.2,
-      "link": "https://pt.wikipedia.org/wiki/Laranja"
-    },
-    {
-      "nome": "Morango Orgânico",
-      "descricao": "Morangos selecionados, docinhos e livres de agrotóxicos.",
-      "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
-      "alias": "Organic Strawberry",
-      "categorias": ["frutas", "frescos", "orgânicos"],
-      "preço": 12.9,
-      "link": "https://pt.wikipedia.org/wiki/Morango"
-    },
-    {
-      "nome": "Uva Thompson",
-      "descricao": "Uvas verdes doces e sem semente, perfeitas para um lanche rápido.",
-      "imagem": "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=500&q=80",
-      "alias": "Thompson Grape",
-      "categorias": ["frutas", "frescos"],
-      "preço": 14.3,
-      "link": "https://en.wikipedia.org/wiki/Sultana_(grape)"
-    },
-    {
-      "nome": "Abacate",
-      "descricao": "Fonte de gorduras boas e muito versátil para receitas doces e salgadas.",
-      "imagem": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80",
-      "alias": "Avocado",
-      "categorias": ["frutas", "frescos"],
-      "preço": 7.8,
-      "link": "https://pt.wikipedia.org/wiki/Abacate"
-    },
-    {
-      "nome": "Mamão Formosa",
-      "descricao": "Excelente aliado da digestão, colhido no ponto certo de maturação.",
-      "imagem": "https://images.unsplash.com/photo-1614435227303-1ddda3da906c?auto=format&fit=crop&w=500&q=80",
-      "alias": "Papaya",
-      "categorias": ["frutas", "frescos"],
-      "preço": 9.4,
-      "link": "https://pt.wikipedia.org/wiki/Mam%C3%A3o"
-    },
-    {
-      "nome": "Manga Palmer",
-      "descricao": "Manga com polpa firme, muito doce e sem fiapos.",
-      "imagem": "https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&w=500&q=80",
-      "alias": "Palmer Mango",
-      "categorias": ["frutas", "frescos"],
-      "preço": 8.15,
-      "link": "https://en.wikipedia.org/wiki/Palmer_(mango)"
-    },
-    {
-      "nome": "Limão Tahiti",
-      "descricao": "Essencial para temperos, chás e sucos refrescantes.",
-      "imagem": "https://images.unsplash.com/photo-1590502593747-42a996133562?auto=format&fit=crop&w=500&q=80",
-      "alias": "Lime",
-      "categorias": ["frutas", "frescos"],
-      "preço": 4.99,
-      "link": "https://pt.wikipedia.org/wiki/Citrus_×_latifolia"
-    },
-    {
-      "nome": "Melancia",
-      "descricao": "Altamente hidratante e refrescante, vendida em fatias ou inteira.",
-      "imagem": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80",
-      "alias": "Watermelon",
-      "categorias": ["frutas", "frescos"],
-      "preço": 18.5,
-      "link": "https://pt.wikipedia.org/wiki/Melancia"
-    },
-    {
-      "nome": "Castanha de Caju W1",
-      "descricao": "Castanha de caju inteira, torrada e levemente salgada. Excelente fonte de energia.",
-      "imagem": "https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?auto=format&fit=crop&w=500&q=80",
-      "alias": "Cashew Nut",
-      "categorias": ["granel", "castanhas"],
-      "preço": 45.0,
-      "link": "https://pt.wikipedia.org/wiki/Castanha-de-caju"
-    },
-    {
-      "nome": "Castanha do Pará",
-      "descricao": "Rica em selênio, ajuda na imunidade e saúde do cérebro.",
-      "imagem": "https://images.unsplash.com/photo-1543257580-7269da773bf5?auto=format&fit=crop&w=500&q=80",
-      "alias": "Brazil Nut",
-      "categorias": ["granel", "castanhas"],
-      "preço": 52.8,
-      "link": "https://pt.wikipedia.org/wiki/Castanha-do-par%C3%A1"
-    },
-    {
-      "nome": "Amêndoa Crua",
-      "descricao": "Amêndoas naturais e crocantes, perfeitas para fazer leites vegetais ou lanches.",
-      "imagem": "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=500&q=80",
-      "alias": "Raw Almond",
-      "categorias": ["granel", "castanhas"],
-      "preço": 39.9,
-      "link": "https://pt.wikipedia.org/wiki/Am%C3%AAndoa"
-    },
-    {
-      "nome": "Nozes Mariposa",
-      "descricao": "Nozes chilenas de alta qualidade, sabor suave e rico em Ômega-3.",
-      "imagem": "https://images.unsplash.com/photo-1606923829579-0ac99d6db3ec?auto=format&fit=crop&w=500&q=80",
-      "alias": "Walnuts",
-      "categorias": ["granel", "castanhas"],
-      "preço": 48.0,
-      "link": "https://pt.wikipedia.org/wiki/Noz"
-    },
-    {
-      "nome": "Semente de Chia",
-      "descricao": "Superalimento rico em fibras, proteínas e ômega-3.",
-      "imagem": "https://images.unsplash.com/photo-1599351221447-06dfa9a3b900?auto=format&fit=crop&w=500&q=80",
-      "alias": "Chia Seeds",
-      "categorias": ["granel", "sementes"],
-      "preço": 15.4,
-      "link": "https://pt.wikipedia.org/wiki/Chia"
-    },
-    {
-      "nome": "Linhaça Dourada",
-      "descricao": "Semente rica em nutrientes. Ideal bater no liquidificador antes do consumo para absorção total.",
-      "imagem": "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80",
-      "alias": "Golden Flaxseed",
-      "categorias": ["granel", "sementes"],
-      "preço": 11.2,
-      "link": "https://pt.wikipedia.org/wiki/Linha%C3%A7a"
-    },
-    {
-      "nome": "Semente de Abóbora",
-      "descricao": "Torrada e sem casca. Ótima fonte de magnésio e zinco para adicionar às saladas.",
-      "imagem": "https://images.unsplash.com/photo-1590004953392-5aba2e72269a?auto=format&fit=crop&w=500&q=80",
-      "alias": "Pumpkin Seeds",
-      "categorias": ["granel", "sementes"],
-      "preço": 22.0,
-      "link": "https://en.wikipedia.org/wiki/Pumpkin_seed"
-    },
-    {
-      "nome": "Quinoa em Grãos Branca",
-      "descricao": "Cereal de alto valor proteico, ótimo substituto para o arroz nas refeições.",
-      "imagem": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80",
-      "alias": "White Quinoa",
-      "categorias": ["granel", "grãos"],
-      "preço": 19.8,
-      "link": "https://pt.wikipedia.org/wiki/Quinoa"
-    },
-    {
-      "nome": "Aveia em Flocos Grossos",
-      "descricao": "Aveia integral de excelente qualidade, auxiliando no funcionamento intestinal.",
-      "imagem": "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=500&q=80",
-      "alias": "Rolled Oats",
-      "categorias": ["granel", "cereais"],
-      "preço": 9.5,
-      "link": "https://pt.wikipedia.org/wiki/Aveia"
-    },
-    {
-      "nome": "Granola Tradicional com Castanhas",
-      "descricao": "Mix crocante de cereais, castanhas e mel. Sem conservantes.",
-      "imagem": "https://images.unsplash.com/photo-1517881917431-134888973873?auto=format&fit=crop&w=500&q=80",
-      "alias": "Traditional Granola",
-      "categorias": ["granel", "cereais"],
-      "preço": 16.9,
-      "link": "https://pt.wikipedia.org/wiki/Granola"
-    },
-    {
-      "nome": "Whey Protein Concentrado 80%",
-      "descricao": "Proteína de alto valor biológico com sabor baunilha. Auxilia no ganho de massa magra.",
-      "imagem": "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=500&q=80",
-      "alias": "Concentrated Whey Protein",
-      "categorias": ["whey's", "suplementos"],
-      "preço": 98.0,
-      "link": "https://www.gsuplementos.com.br/whey-protein-concentrado-1kg-growth-supplements-p985936"
-    },
-    {
-      "nome": "Whey Protein Isolado",
-      "descricao": "Máxima pureza e rápida absorção, ideal para intolerantes à lactose. Sabor chocolate.",
-      "imagem": "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80",
-      "alias": "Isolated Whey Protein",
-      "categorias": ["whey's", "suplementos"],
-      "preço": 145.0,
-      "link": "https://www.gsuplementos.com.br/top-whey-protein-isolado-1kg-growth-supplements-p985937"
-    },
-    {
-      "nome": "Whey Protein Vegano (Ervilha e Arroz)",
-      "descricao": "Blend de proteínas vegetais, 100% natural e adoçado com stévia.",
-      "imagem": "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?auto=format&fit=crop&w=500&q=80",
-      "alias": "Vegan Protein Powder",
-      "categorias": ["whey's", "suplementos", "veganos"],
-      "preço": 89.9,
-      "link": "https://www.gsuplementos.com.br/whey-protein-vegano-growth-supplements"
-    },
-    {
-      "nome": "Creatina Monohidratada 100% Pura",
-      "descricao": "Aumenta a força e a explosão muscular durante os treinos.",
-      "imagem": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80",
-      "alias": "Creatine Monohydrate",
-      "categorias": ["suplementos", "energia"],
-      "preço": 75.0,"products": [
-    {
-      "nome": "Maçã Fuji",
-      "descricao": "Maçã fresca, doce e crocante. Excelente para lanches saudáveis e preparo de sucos.",
-      "imagem": "https://images.unsplash.com/photo-1560806887-1e4cd0b6faa6?auto=format&fit=crop&w=500&q=80",
-      "alias": "Fuji Apple",
-      "categorias": ["frutas", "frescos"],
-      "preço": 8.90,
       "link": "https://pt.wikipedia.org/wiki/Fuji_(ma%C3%A7%C3%A3)",
       "categoria": "kg"
     },
@@ -230,7 +16,7 @@
       "imagem": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80",
       "alias": "Silver Banana",
       "categorias": ["frutas", "frescos"],
-      "preço": 6.50,
+      "preço": 6.5,
       "link": "https://pt.wikipedia.org/wiki/Banana",
       "categoria": "kg"
     },
@@ -240,7 +26,7 @@
       "imagem": "https://images.unsplash.com/photo-1547514701-42722101795e?auto=format&fit=crop&w=500&q=80",
       "alias": "Orange",
       "categorias": ["frutas", "frescos"],
-      "preço": 5.20,
+      "preço": 5.2,
       "link": "https://pt.wikipedia.org/wiki/Laranja",
       "categoria": "kg"
     },
@@ -250,7 +36,7 @@
       "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
       "alias": "Organic Strawberry",
       "categorias": ["frutas", "frescos", "orgânicos"],
-      "preço": 12.90,
+      "preço": 12.9,
       "link": "https://pt.wikipedia.org/wiki/Morango",
       "categoria": "un"
     },
@@ -260,7 +46,7 @@
       "imagem": "https://images.unsplash.com/photo-1537084642907-629340c7e59c?auto=format&fit=crop&w=500&q=80",
       "alias": "Thompson Grape",
       "categorias": ["frutas", "frescos"],
-      "preço": 14.30,
+      "preço": 14.3,
       "link": "https://en.wikipedia.org/wiki/Sultana_(grape)",
       "categoria": "un"
     },
@@ -270,7 +56,7 @@
       "imagem": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80",
       "alias": "Avocado",
       "categorias": ["frutas", "frescos"],
-      "preço": 7.80,
+      "preço": 7.8,
       "link": "https://pt.wikipedia.org/wiki/Abacate",
       "categoria": "kg"
     },
@@ -280,7 +66,7 @@
       "imagem": "https://images.unsplash.com/photo-1614435227303-1ddda3da906c?auto=format&fit=crop&w=500&q=80",
       "alias": "Papaya",
       "categorias": ["frutas", "frescos"],
-      "preço": 9.40,
+      "preço": 9.4,
       "link": "https://pt.wikipedia.org/wiki/Mam%C3%A3o",
       "categoria": "kg"
     },
@@ -310,7 +96,7 @@
       "imagem": "https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=500&q=80",
       "alias": "Watermelon",
       "categorias": ["frutas", "frescos"],
-      "preço": 18.50,
+      "preço": 18.5,
       "link": "https://pt.wikipedia.org/wiki/Melancia",
       "categoria": "un"
     },
@@ -320,7 +106,7 @@
       "imagem": "https://images.unsplash.com/photo-1629115916087-7e8c114a24ed?auto=format&fit=crop&w=500&q=80",
       "alias": "Cashew Nut",
       "categorias": ["granel", "castanhas"],
-      "preço": 45.00,
+      "preço": 45.0,
       "link": "https://pt.wikipedia.org/wiki/Castanha-de-caju",
       "categoria": "kg"
     },
@@ -330,7 +116,7 @@
       "imagem": "https://images.unsplash.com/photo-1543257580-7269da773bf5?auto=format&fit=crop&w=500&q=80",
       "alias": "Brazil Nut",
       "categorias": ["granel", "castanhas"],
-      "preço": 52.80,
+      "preço": 52.8,
       "link": "https://pt.wikipedia.org/wiki/Castanha-do-par%C3%A1",
       "categoria": "kg"
     },
@@ -340,7 +126,7 @@
       "imagem": "https://images.unsplash.com/photo-1508061253366-f7da158b6d46?auto=format&fit=crop&w=500&q=80",
       "alias": "Raw Almond",
       "categorias": ["granel", "castanhas"],
-      "preço": 39.90,
+      "preço": 39.9,
       "link": "https://pt.wikipedia.org/wiki/Am%C3%AAndoa",
       "categoria": "kg"
     },
@@ -350,7 +136,7 @@
       "imagem": "https://images.unsplash.com/photo-1606923829579-0ac99d6db3ec?auto=format&fit=crop&w=500&q=80",
       "alias": "Walnuts",
       "categorias": ["granel", "castanhas"],
-      "preço": 48.00,
+      "preço": 48.0,
       "link": "https://pt.wikipedia.org/wiki/Noz",
       "categoria": "kg"
     },
@@ -360,7 +146,7 @@
       "imagem": "https://images.unsplash.com/photo-1599351221447-06dfa9a3b900?auto=format&fit=crop&w=500&q=80",
       "alias": "Chia Seeds",
       "categorias": ["granel", "sementes"],
-      "preço": 15.40,
+      "preço": 15.4,
       "link": "https://pt.wikipedia.org/wiki/Chia",
       "categoria": "kg"
     },
@@ -370,7 +156,7 @@
       "imagem": "https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2?auto=format&fit=crop&w=500&q=80",
       "alias": "Golden Flaxseed",
       "categorias": ["granel", "sementes"],
-      "preço": 11.20,
+      "preço": 11.2,
       "link": "https://pt.wikipedia.org/wiki/Linha%C3%A7a",
       "categoria": "kg"
     },
@@ -380,7 +166,7 @@
       "imagem": "https://images.unsplash.com/photo-1590004953392-5aba2e72269a?auto=format&fit=crop&w=500&q=80",
       "alias": "Pumpkin Seeds",
       "categorias": ["granel", "sementes"],
-      "preço": 22.00,
+      "preço": 22.0,
       "link": "https://en.wikipedia.org/wiki/Pumpkin_seed",
       "categoria": "kg"
     },
@@ -390,7 +176,7 @@
       "imagem": "https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=500&q=80",
       "alias": "White Quinoa",
       "categorias": ["granel", "grãos"],
-      "preço": 19.80,
+      "preço": 19.8,
       "link": "https://pt.wikipedia.org/wiki/Quinoa",
       "categoria": "kg"
     },
@@ -400,7 +186,7 @@
       "imagem": "https://images.unsplash.com/photo-1586444248902-2f64eddc13df?auto=format&fit=crop&w=500&q=80",
       "alias": "Rolled Oats",
       "categorias": ["granel", "cereais"],
-      "preço": 9.50,
+      "preço": 9.5,
       "link": "https://pt.wikipedia.org/wiki/Aveia",
       "categoria": "kg"
     },
@@ -410,7 +196,7 @@
       "imagem": "https://images.unsplash.com/photo-1517881917431-134888973873?auto=format&fit=crop&w=500&q=80",
       "alias": "Traditional Granola",
       "categorias": ["granel", "cereais"],
-      "preço": 16.90,
+      "preço": 16.9,
       "link": "https://pt.wikipedia.org/wiki/Granola",
       "categoria": "kg"
     },
@@ -420,7 +206,7 @@
       "imagem": "https://images.unsplash.com/photo-1579758629938-03607ccdbaba?auto=format&fit=crop&w=500&q=80",
       "alias": "Concentrated Whey Protein",
       "categorias": ["whey's", "suplementos"],
-      "preço": 98.00,
+      "preço": 98.0,
       "link": "https://www.gsuplementos.com.br/whey-protein-concentrado-1kg-growth-supplements-p985936",
       "categoria": "un"
     },
@@ -430,7 +216,7 @@
       "imagem": "https://images.unsplash.com/photo-1593095948071-474c5cc2989d?auto=format&fit=crop&w=500&q=80",
       "alias": "Isolated Whey Protein",
       "categorias": ["whey's", "suplementos"],
-      "preço": 145.00,
+      "preço": 145.0,
       "link": "https://www.gsuplementos.com.br/top-whey-protein-isolado-1kg-growth-supplements-p985937",
       "categoria": "un"
     },
@@ -440,7 +226,7 @@
       "imagem": "https://images.unsplash.com/photo-1542223189-67a03fa0f0bd?auto=format&fit=crop&w=500&q=80",
       "alias": "Vegan Protein Powder",
       "categorias": ["whey's", "suplementos", "veganos"],
-      "preço": 89.90,
+      "preço": 89.9,
       "link": "https://www.gsuplementos.com.br/whey-protein-vegano-growth-supplements",
       "categoria": "un"
     },
@@ -450,7 +236,7 @@
       "imagem": "https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=500&q=80",
       "alias": "Creatine Monohydrate",
       "categorias": ["suplementos", "energia"],
-      "preço": 75.00,
+      "preço": 75.0,
       "link": "https://www.gsuplementos.com.br/creatina-monohidratada-250g-growth-supplements",
       "categoria": "un"
     },
@@ -460,7 +246,7 @@
       "imagem": "https://images.unsplash.com/photo-1611571491426-97dbb3408a53?auto=format&fit=crop&w=500&q=80",
       "alias": "Glutamine",
       "categorias": ["suplementos", "imunidade"],
-      "preço": 42.50,
+      "preço": 42.5,
       "link": "https://www.gsuplementos.com.br/l-glutamina-250g-growth-supplements",
       "categoria": "un"
     },
@@ -470,7 +256,7 @@
       "imagem": "https://images.unsplash.com/photo-1587049633562-b3513a0e1e2b?auto=format&fit=crop&w=500&q=80",
       "alias": "Pure Honey",
       "categorias": ["naturais", "adoçantes"],
-      "preço": 32.00,
+      "preço": 32.0,
       "link": "https://pt.wikipedia.org/wiki/Mel",
       "categoria": "un"
     },
@@ -480,7 +266,7 @@
       "imagem": "https://images.unsplash.com/photo-1590080875515-8a3a8dc5735e?auto=format&fit=crop&w=500&q=80",
       "alias": "Peanut Butter",
       "categorias": ["naturais", "pastas", "suplementos"],
-      "preço": 19.90,
+      "preço": 19.9,
       "link": "https://pt.wikipedia.org/wiki/Manteiga_de_amendoim",
       "categoria": "un"
     },
@@ -490,7 +276,7 @@
       "imagem": "https://images.unsplash.com/photo-1538689193196-a848c776fb08?auto=format&fit=crop&w=500&q=80",
       "alias": "Extra Virgin Coconut Oil",
       "categorias": ["naturais", "óleos"],
-      "preço": 34.60,
+      "preço": 34.6,
       "link": "https://pt.wikipedia.org/wiki/%C3%93leo_de_coco",
       "categoria": "un"
     },
@@ -500,7 +286,7 @@
       "imagem": "https://images.unsplash.com/photo-1531958635795-af3b7bde76e1?auto=format&fit=crop&w=500&q=80",
       "alias": "Green Tea",
       "categorias": ["granel", "chás"],
-      "preço": 12.00,
+      "preço": 12.0,
       "link": "https://pt.wikipedia.org/wiki/Ch%C3%A1_verde",
       "categoria": "kg"
     },
@@ -510,11 +296,11 @@
       "imagem": "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=500&q=80",
       "alias": "Turmeric Powder",
       "categorias": ["granel", "temperos", "naturais"],
-      "preço": 14.50,
+      "preço": 14.5,
       "link": "https://pt.wikipedia.org/wiki/C%C3%BArcuma",
       "categoria": "kg"
     }
-      ],
+  ],
   "users": [
     {
       "nome": "Mateus",
