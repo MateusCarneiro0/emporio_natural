@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./CardProduct.module.css";
 import Button from "../Button";
-
-function CardProduct({ src, title, children, categorias, price, id }) {
+import { memo } from "react";
+const CardProduct = memo(function CardProduct({ src, title, children, categorias, price, id }) {
   const navigate = useNavigate();
 
   return (
@@ -16,6 +16,6 @@ function CardProduct({ src, title, children, categorias, price, id }) {
       <Button onClick={() => navigate(`${id}`)}>Veja mais</Button>
     </div>
   );
-}
+})
 
 export default CardProduct;
