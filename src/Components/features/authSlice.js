@@ -64,10 +64,13 @@ const authReducer = createSlice({
   },
 });
 
-export const { logout,loginUser } = authReducer.actions;
+export const { logout, loginUser } = authReducer.actions;
 
 export function receiveUsers() {
   return async (dispatch, getState) => {
+    const { users } = getState().auth;
+    if (!users.lenght) return;
+
     dispatch({ type: "auth/loadingUsers" });
     try {
       const res = await fetch(`${BASE_URL}/users`);
