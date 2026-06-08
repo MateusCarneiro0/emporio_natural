@@ -16,11 +16,11 @@ function CartMain() {
     dispatch(fetchCart(userId));
   }, [dispatch, userId]);
 
-  const totalCust = cartProducts.reduce((prev, cur) => prev + cur.total, 0);
+  const totalCust = cartProducts?.reduce((prev, cur) => prev + cur.total, 0);
 
   if (isLoading) return <ThreeDots />;
   if (error) return <Error />;
-  if (!cartProducts.length)
+  if (!cartProducts?.length)
     return (
       <div
         style={{
@@ -36,7 +36,7 @@ function CartMain() {
     );
   return (
     <div className={styles.cart}>
-      {cartProducts.map((product) => (
+      {cartProducts?.map((product) => (
         <CartCard
           key={product.id}
           src={product.imagem}

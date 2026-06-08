@@ -4,16 +4,17 @@ import styles from "./NavBar.module.css";
 import IconButton from "@mui/material/IconButton";
 import WestIcon from "@mui/icons-material/West";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import { useSelector } from "react-redux";
 function NavBar() {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const { cartProducts } = useSelector((store) => store.cart);
   return (
     <nav className={styles.nav}>
       {id && (
         <NavLink>
-          <IconButton>
-            <WestIcon onClick={() => navigate(-1)} />
+          <IconButton onClick={() => navigate(-1)}>
+            <WestIcon />
           </IconButton>
         </NavLink>
       )}
@@ -37,6 +38,9 @@ function NavBar() {
                 transition: "color 0.2s ease",
               }}
             />
+            <span>
+              {!cartProducts?.length ? null : `(${cartProducts?.length})`}
+            </span>
           </IconButton>
         )}
       </NavLink>

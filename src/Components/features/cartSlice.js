@@ -19,7 +19,7 @@ const cartReducer = createSlice({
       sta.cartProducts = act.payload.cart;
       sta.isLoading = false;
       sta.error = "";
-      sta.userId = act.payload.userId;
+      sta.userId = act.payload.userId || "idiffififffid";
     },
     rejected(sta, act) {
       sta.isLoading = false;
@@ -57,10 +57,10 @@ export function fetchCart(userId) {
 export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { userId, cartProducts } = getState().cart;
-    const products = cartProducts.some(
-      (cartProduct) => cartProduct.id === product.id,
+    const products = cartProducts?.some(
+      (cartProduct) => cartProduct?.id === product.id,
     )
-      ? cartProducts.map((cartProduct) =>
+      ? cartProducts?.map((cartProduct) =>
           cartProduct.id === product.id ? product : cartProduct,
         )
       : [...cartProducts, product];
@@ -104,7 +104,7 @@ export function deleteProductCart(productId) {
         }),
       });
       dispatch({
-        type: "cart/receiveCart",
+        type: "cart/addProductCart",
         payload: products,
       });
     } catch (err) {

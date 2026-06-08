@@ -7,6 +7,7 @@ function Error() {
         alignSelf: "center",
         color: "red",
         marginTop: "150px",
+        marginBottom:"350px"
       }}
     >
       A error ocurred in fetch data try again later
