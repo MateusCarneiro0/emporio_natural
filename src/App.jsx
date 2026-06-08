@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products";
-import Cart from "./Pages/Cart"
+import Cart from "./Pages/Cart";
 import NotFound from "./Pages/NotFound";
 import { Provider } from "react-redux";
 import store from "./store";

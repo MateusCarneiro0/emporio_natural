@@ -1,9 +1,5 @@
 function NotFound() {
-    return (
-        <div>
-            404 Not Found :(
-        </div>
-    )
+  return <div style={{ color: "red", fontSize: "70px" }}>404 Not Found :(</div>;
 }
 
-export default NotFound
+export default NotFound;

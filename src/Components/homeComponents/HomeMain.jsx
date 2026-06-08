@@ -1,13 +1,13 @@
-import Motives from "./Motives"
-import Proposit from "./Proposit"
+import Motives from "./Motives";
+import Proposit from "./Proposit";
 
 function HomeMain() {
-    return (
-        <div>
-            <Proposit />
-            <Motives />
-        </div>
-    )
+  return (
+    <div>
+      <Proposit />
+      <Motives />
+    </div>
+  );
 }
 
-export default HomeMain
+export default HomeMain;

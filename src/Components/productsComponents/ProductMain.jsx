@@ -25,11 +25,11 @@ const ProductMain = memo(function ProductMain() {
     dispatch(fetchProducts());
   }, [dispatch]);
 
-  if(id) return <Outlet />
+  if (id) return <Outlet />;
 
   if (isLoading) return <ThreeDots wrapperClass={styles.spinner} />;
   if (error) return <Error />;
-  
+
   return (
     <main className={styles.products}>
       <header>

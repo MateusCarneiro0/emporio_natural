@@ -9,6 +9,6 @@
   text-decoration: none;
   color: #faf7f7;
 }
-.links a:hover{
-    color: var(--principal-green);
+.links a:hover {
+  color: var(--principal-green);
 }
