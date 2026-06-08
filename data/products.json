@@ -369,20 +369,7 @@
     {
       "nome": "Mateus",
       "id": "idiffififffid",
-      "cart": [
-        {
-          "nome": "Morango Orgânico",
-          "imagem": "https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=500&q=80",
-          "categorias": [
-            "frutas",
-            "frescos",
-            "orgânicos"
-          ],
-          "descricao": "Morangos selecionados, docinhos e livres de agrotóxicos.",
-          "total": 181,
-          "id": "8QbgXQWMTBU"
-        }
-      ]
+      "cart": []
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -10,18 +10,21 @@
   justify-content: space-between;
   align-items: center;
 }
-.card h3{
-    color: var(--principal-green);
-    margin-right:225px ;
+.card h3 {
+  color: var(--principal-green);
+  margin-right: 225px;
 }
 .card img {
   height: 65px;
+  width: 75px;
+  object-fit: cover;
 }
 .price {
   margin-right: 225px;
 }
-.card button {
-  margin-right: 35px;
+.button {
+  margin-top: 11.5px;
+  margin-left: 15px;
   background-color: red;
   color: #fff;
   width: 40px;
@@ -31,10 +34,21 @@
   outline: none;
   font-size: 24px;
 }
-.card button:hover {
+.button:hover {
   cursor: pointer;
-
+}
+.card:hover {
+  cursor: pointer;
+  background-color: #e3dfcb;
 }
 .last {
   margin-bottom: 100px;
+}
+.cartCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.quantity{
+    margin-right: 75px;
 }

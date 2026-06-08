@@ -15,7 +15,7 @@ import { addProductCart } from "../features/cartSlice";
 function Product() {
   const [quantity, setQuantity] = useState(1);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -71,12 +71,28 @@ function Product() {
               );
             }}
           />
-          <p className={styles.price}>Total:{Math.round(preco * quantity)} R$</p>
+          <p className={styles.price}>
+            Total:{Math.round(preco * quantity)} R$
+          </p>
         </div>
-        <Button onClick={() => {
-          dispatch(addProductCart({nome,imagem,categorias,descricao,total:Math.round(preco * quantity),id}))
-          navigate("/cart")
-        }}>Adicionar ao carrinho</Button>
+        <Button
+          onClick={() => {
+            dispatch(
+              addProductCart({
+                nome,
+                imagem,
+                categorias,
+                descricao,
+                total: Math.round(preco * quantity),
+                id,
+                quantity,
+              }),
+            );
+            navigate("/cart");
+          }}
+        >
+          Adicionar ao carrinho
+        </Button>
       </div>
     </div>
   );
