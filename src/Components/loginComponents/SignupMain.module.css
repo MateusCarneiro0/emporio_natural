@@ -1,0 +1,27 @@
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+  margin-bottom: 100px;
+}
+
+.login {
+  background-color: rgb(164, 217, 120);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 70vh;
+  gap: 45px;
+  width: 90vw;
+  border-radius: 25px;
+}
+.link {
+  transition: all 0.2s ease;
+  color: white;
+  text-decoration: none;
+}
+.link:hover {
+  transform: translateY(-5px);
+}

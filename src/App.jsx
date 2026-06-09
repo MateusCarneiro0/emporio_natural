@@ -1,12 +1,13 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import Home from "./Pages/Home";
 import Products from "./Pages/Products";
 import Cart from "./Pages/Cart";
-import NotFound from "./Pages/NotFound";
-import { Provider } from "react-redux";
-import store from "./store";
 import Product from "./Components/productsComponents/Product";
 import Login from "./Pages/Login"
+import Signup from "./Pages/Signup";
+import NotFound from "./Pages/NotFound";
 function App() {
   return (
     <>
@@ -19,6 +20,7 @@ function App() {
             </Route>
             <Route path="/cart" element={<Cart />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

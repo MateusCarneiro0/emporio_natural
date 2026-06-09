@@ -69,15 +69,18 @@ export const { logout, loginUser } = authReducer.actions;
 export function receiveUsers() {
   return async (dispatch, getState) => {
     const { users } = getState().auth;
-    if (!users.lenght) return;
+    console.log(users, !users.length === 0);
+    if (!users.length) {
 
-    dispatch({ type: "auth/loadingUsers" });
-    try {
-      const res = await fetch(`${BASE_URL}/users`);
-      const data = await res.json();
-      dispatch({ type: "auth/receiveUsers", payload: data });
-    } catch (err) {
-      dispatch({ type: "auth/rejected", payload: err.message });
+      dispatch({ type: "auth/loadingUsers" });
+      try {
+        const res = await fetch(`${BASE_URL}/users`);
+        const data = await res.json();
+        dispatch({ type: "auth/receiveUsers", payload: data });
+      } catch (err) {
+        dispatch({ type: "auth/rejected", payload: err.message });
+      }
+
     }
   };
 }
