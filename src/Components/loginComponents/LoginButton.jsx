@@ -1,8 +1,12 @@
 import styles from "./LoginButton.module.css";
 
-function LoginButton({ children, color, backgroundColor }) {
+function LoginButton({ children, color, backgroundColor, onClick }) {
   return (
-    <button className={styles.button} style={{ color, backgroundColor }}>
+    <button
+      onClick={onClick}
+      className={styles.button}
+      style={{ color, backgroundColor }}
+    >
       {children}
     </button>
   );

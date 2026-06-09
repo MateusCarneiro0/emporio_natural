@@ -3,18 +3,13 @@ import CartCard from "./CartCard";
 import styles from "./CartMain.module.css";
 import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
-import { useEffect } from "react";
-import { fetchCart, payCart } from "../features/cartSlice";
+import {  payCart } from "../features/cartSlice";
 import Button from "../Button";
 function CartMain() {
-  const { cartProducts, isLoading, error, userId } = useSelector(
+  const { cartProducts, isLoading, error } = useSelector(
     (store) => store.cart,
   );
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCart(userId));
-  }, [dispatch, userId]);
 
   const totalCust = cartProducts?.reduce((prev, cur) => prev + cur.total, 0);
 

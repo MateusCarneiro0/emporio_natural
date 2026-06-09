@@ -19,33 +19,20 @@ const authReducer = createSlice({
       sta.error = "";
     },
     createNewUser(sta, action) {
-      sta.authUserId = crypto.randomUUID();
+      sta.authUserId = action.payload.id;
       sta.users = [...sta.users, { ...action.payload, id: sta.authUserId }];
       sta.authUser = action.payload.user;
       sta.password = action.payload.password;
       sta.isLoading = false;
       sta.error = "";
+      sta.isAuthenticated = true;
     },
-    loginUser: {
-      prepare(username, password) {
-        return {
-          payload: { username, password },
-        };
-      },
-      reducer(sta, action) {
-        const loggedUser = sta.users.find(
-          (user) =>
-            user.user === action.payload.username &&
-            user.password === action.payload.password,
-        );
-        if (loggedUser.length) {
-          sta.authUser = loggedUser.user;
-          sta.password = loggedUser.password;
-          sta.authUserId = loggedUser.id;
-          sta.isLoading = false;
-          sta.error = "";
-        }
-      },
+    loginUser(sta, action) {
+      sta.authUser = action.payload.user;
+      sta.password = action.payload.password;
+      sta.authUserId = action.payload.id;
+      sta.isLoading = false;
+      sta.error = "";
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -64,14 +51,13 @@ const authReducer = createSlice({
   },
 });
 
-export const { logout, loginUser } = authReducer.actions;
+export const { logout } = authReducer.actions;
 
 export function receiveUsers() {
   return async (dispatch, getState) => {
     const { users } = getState().auth;
     console.log(users, !users.length === 0);
     if (!users.length) {
-
       dispatch({ type: "auth/loadingUsers" });
       try {
         const res = await fetch(`${BASE_URL}/users`);
@@ -80,7 +66,6 @@ export function receiveUsers() {
       } catch (err) {
         dispatch({ type: "auth/rejected", payload: err.message });
       }
-
     }
   };
 }
@@ -88,13 +73,15 @@ export function receiveUsers() {
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
+    const uuid = crypto.randomUUID();
+    const id = uuid.replace(/\D/g, "");
     try {
       const res = await fetch(`${BASE_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify({ ...user, cart: [], id }),
       });
       const data = await res.json();
       dispatch({ type: "auth/createNewUser", payload: data });
@@ -104,7 +91,7 @@ export function createNewUser(user) {
   };
 }
 
-/*export function loginUser(username, password) {
+export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
     try {
@@ -127,5 +114,5 @@ export function createNewUser(user) {
       dispatch({ type: "auth/rejected", payload: err.message });
     }
   };
-}*/
+}
 export default authReducer.reducer;

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { fetchProducts } from "../features/productsSlice";
+import { fetchCart } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
@@ -10,7 +11,8 @@ import { Outlet, useParams } from "react-router-dom";
 const ProductMain = memo(function ProductMain() {
   const dispatch = useDispatch();
   const { id } = useParams();
-
+  const { authUserId: userId, authUser } = useSelector((store) => store.auth);
+  const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
   const frase = [
     "o que falta para o seu dia ficar mais saudável?🌞",
     "Vamos comprar aquele Whey para começar o dia?🔋",
@@ -23,18 +25,20 @@ const ProductMain = memo(function ProductMain() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-  }, [dispatch]);
+    dispatch(fetchCart(userId));
+  }, [dispatch, userId]);
 
   if (id) return <Outlet />;
 
-  if (isLoading) return <ThreeDots wrapperClass={styles.spinner} />;
+  if (isLoading || isLoadingCart)
+    return <ThreeDots wrapperClass={styles.spinner} />;
   if (error) return <Error />;
 
   return (
     <main className={styles.products}>
       <header>
         <h2>
-          Olá <i>%NAME%</i>,{frase}
+          Olá <i>{authUser}</i>,{frase}
         </h2>
       </header>
       <div className={styles.productsContainer}>

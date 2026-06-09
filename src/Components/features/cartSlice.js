@@ -5,7 +5,7 @@ const initialState = {
   cartProducts: [],
   isLoading: false,
   error: "",
-  userId: "idiffififffid",
+  userId: "",
 };
 
 const cartReducer = createSlice({
@@ -19,7 +19,7 @@ const cartReducer = createSlice({
       sta.cartProducts = act.payload.cart;
       sta.isLoading = false;
       sta.error = "";
-      sta.userId = act.payload.userId || "idiffififffid";
+      sta.userId = act.payload.userId;
     },
     rejected(sta, act) {
       sta.isLoading = false;
@@ -38,9 +38,10 @@ const cartReducer = createSlice({
   },
 });
 
-export function fetchCart(userId) {
+export function fetchCart() {
   return async (dispatch, getState) => {
     dispatch({ type: "cart/loadingCart" });
+    const { authUserId: userId } = getState().auth;
     try {
       const res = await fetch(`${BASE_URL}/users/${userId}`);
       const data = await res.json();
