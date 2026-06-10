@@ -456,6 +456,12 @@
         }
       ],
       "id": "sFurVziXfIo"
+    },
+    {
+      "user": "Mark",
+      "password": "#Marteus123",
+      "cart": [],
+      "id": "b6Q7YZ5CovY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

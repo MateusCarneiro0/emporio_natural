@@ -5,7 +5,6 @@ const initialState = {
   cartProducts: [],
   isLoading: false,
   error: "",
-  userId: "",
 };
 
 const cartReducer = createSlice({
@@ -19,7 +18,6 @@ const cartReducer = createSlice({
       sta.cartProducts = act.payload.cart;
       sta.isLoading = false;
       sta.error = "";
-      sta.userId = act.payload.userId;
     },
     rejected(sta, act) {
       sta.isLoading = false;
@@ -57,7 +55,8 @@ export function fetchCart() {
 
 export function addProductCart(product) {
   return async (dispatch, getState) => {
-    const { userId, cartProducts } = getState().cart;
+    const { cartProducts } = getState().cart;
+    const { authUserId: userId } = getState().auth;
     const products = cartProducts?.some(
       (cartProduct) => cartProduct?.id === product.id,
     )
@@ -89,7 +88,8 @@ export function addProductCart(product) {
 
 export function deleteProductCart(productId) {
   return async (dispatch, getState) => {
-    const { userId, cartProducts } = getState().cart;
+    const { cartProducts } = getState().cart;
+    const {authUserId:userId} = getState().auth
     const products = cartProducts.filter(
       (cartProduct) => cartProduct.id !== productId,
     );
@@ -115,7 +115,7 @@ export function deleteProductCart(productId) {
 }
 export function payCart() {
   return async (dispatch, getState) => {
-    const { userId } = getState().cart;
+    const { userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
       await fetch(`${BASE_URL}/users/${userId}`, {
