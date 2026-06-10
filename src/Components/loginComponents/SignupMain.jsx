@@ -20,7 +20,8 @@ function SignupMain() {
   );
   const clickabel = username && password
 
-  function handleSignup() {
+  function handleSignup(ev) {
+    ev.preventDefault()
     const newUser = {
       user: username,
       password,
@@ -35,7 +36,7 @@ function SignupMain() {
   if (error) return <Error />;
   return (
     <div className={styles.loginContainer}>
-      <form className={styles.login}>
+      <form className={styles.login} onSubmit={handleSignup}>
         <h1 style={{ color: "#f7f4e3" }}>Vamos se registrar</h1>
         <Input
           placeholder={"Digite seu username"}
@@ -51,7 +52,6 @@ function SignupMain() {
           <ThreeDots color="black" />
         ) : (
           <LoginButton
-            onClick={handleSignup}
             color="white"
             backgroundColor="rgb(94, 133, 231)"
             disabled={!clickabel}
