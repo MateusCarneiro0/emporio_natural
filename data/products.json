@@ -462,6 +462,25 @@
       "password": "#Marteus123",
       "cart": [],
       "id": "b6Q7YZ5CovY"
+    },
+    {
+      "user": "Mateus",
+      "password": "#Marteus123",
+      "cart": [
+        {
+          "nome": "Banana Prata",
+          "imagem": "https://images.unsplash.com/photo-1571501679680-de32f1e7aad4?auto=format&fit=crop&w=500&q=80",
+          "categorias": [
+            "frutas",
+            "frescos"
+          ],
+          "descricao": "Rica em potássio e energia. Perfeita para vitaminas ou consumo in natura.",
+          "total": 33,
+          "id": "42GyBmAZ3BU",
+          "quantity": 5
+        }
+      ],
+      "id": "Ks0Pfu9FENY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

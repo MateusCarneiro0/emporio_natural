@@ -24,7 +24,7 @@ function Product() {
   const { isLoading, currentProduct, error } = useSelector(
     (store) => store.products,
   );
-  const { nome, imagem, categorias, descricao, preco } = currentProduct;
+  const { nome, imagem, categorias, descricao, preco, link } = currentProduct;
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
@@ -50,6 +50,12 @@ function Product() {
                 : `${categoria},`}
             </strong>
           ))}
+        </p>
+        <p className={styles.seePlus}>
+          Conheça mais clicando{" "}
+          <a href={link}>
+            <strong>aqui</strong>
+          </a>
         </p>
         <div
           className={styles.priceContainer}
