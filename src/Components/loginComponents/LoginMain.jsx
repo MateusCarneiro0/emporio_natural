@@ -27,7 +27,7 @@ function LoginMain() {
           setState={setPassword}
           value={password}
         />
-        <LoginButton color="white" backgroundColor="rgb(163, 220, 79)">Login</LoginButton>
+        <LoginButton disabled={!clickabel} color="white" backgroundColor="rgb(163, 220, 79)">Login</LoginButton>
         <p>
           Não tem uma conta ainda ? Aperte <Link className={styles.link} to="/signup">Aqui</Link> para ter uma conta
         </p>
