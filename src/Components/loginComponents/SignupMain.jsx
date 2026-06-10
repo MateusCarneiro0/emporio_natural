@@ -18,6 +18,7 @@ function SignupMain() {
   const { isAuthenticated, isLoading, error } = useSelector(
     (store) => store.auth,
   );
+  const clickabel = username && password
 
   function handleSignup() {
     const newUser = {
@@ -34,7 +35,7 @@ function SignupMain() {
   if (error) return <Error />;
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.login}>
+      <form className={styles.login}>
         <h1 style={{ color: "#f7f4e3" }}>Vamos se registrar</h1>
         <Input
           placeholder={"Digite seu username"}
@@ -53,7 +54,8 @@ function SignupMain() {
             onClick={handleSignup}
             color="white"
             backgroundColor="rgb(94, 133, 231)"
-          >
+            disabled={!clickabel}
+            >
             Registrar
           </LoginButton>
         )}
@@ -64,7 +66,7 @@ function SignupMain() {
           </Link>{" "}
           para logar nela
         </p>
-      </div>
+      </form>
     </div>
   );
 }
