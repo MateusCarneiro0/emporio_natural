@@ -3,6 +3,7 @@ import styles from "./LoginButton.module.css";
 function LoginButton({ children, color, backgroundColor, onClick,disabled }) {
   return (
     <button
+      type="submit"
       onClick={onClick}
       className={styles.button}
       style={{ color, backgroundColor }}
