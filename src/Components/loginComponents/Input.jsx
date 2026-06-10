@@ -7,7 +7,8 @@ function Input({ setState, placeholder, value }) {
       placeholder={placeholder}
       value={value}
       onChange={(ev) => setState(ev.target.value)}
-    />
+      required
+      />
   );
 }
 
