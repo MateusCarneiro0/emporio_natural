@@ -7,6 +7,7 @@ const initialState = {
   users: [],
   isLoading: false,
   isAuthenticated: false,
+  authError:false
 };
 
 const authReducer = createSlice({
@@ -33,12 +34,14 @@ const authReducer = createSlice({
       sta.authUserId = action.payload.id;
       sta.isLoading = false;
       sta.error = "";
+      sta.authError = false
     },
     loadingUsers(sta) {
       sta.isLoading = true;
     },
     rejected(sta, act) {
       sta.error = act.payload;
+      sta.authError = false
     },
     logout(sta) {
       sta.authUser = "";
@@ -47,7 +50,13 @@ const authReducer = createSlice({
       sta.isAuthenticated = false;
       sta.error = "";
       sta.isLoading = false;
+      sta.authError = false
     },
+    authRejected(sta){
+      sta.error = ""
+      sta.isLoading = false
+      sta.authError = true
+    }
   },
 });
 
@@ -109,6 +118,8 @@ export function loginUser(username, password) {
             id: loggedUser.id,
           },
         });
+      }else{
+        dispatch({type:"auth/authRejected"})
       }
     } catch (err) {
       dispatch({ type: "auth/rejected", payload: err.message });
