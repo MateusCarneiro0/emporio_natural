@@ -12,10 +12,10 @@ function LoginMain() {
   }, [dispatch]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const clickabel = username && password
   return (
     <div className={styles.loginContainer}>
-      <div className={styles.login}>
+      <form className={styles.login}>
         <h1 style={{ color: "#f7f4e3" }}>Que bom te ver de volta</h1>
         <Input
           placeholder={"Digite seu username"}
@@ -31,7 +31,7 @@ function LoginMain() {
         <p>
           Não tem uma conta ainda ? Aperte <Link className={styles.link} to="/signup">Aqui</Link> para ter uma conta
         </p>
-      </div>
+      </form>
     </div>
   );
 }
