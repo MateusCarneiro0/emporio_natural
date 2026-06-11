@@ -5,7 +5,9 @@ import IconButton from "@mui/material/IconButton";
 import WestIcon from "@mui/icons-material/West";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
+import NavLoginButton from "./NavLoginButton";
 function NavBar() {
+  const {isAuthenticated} = useSelector(store => store.auth)
   const { id } = useParams();
   const navigate = useNavigate();
   const { cartProducts } = useSelector((store) => store.cart);
@@ -27,7 +29,7 @@ function NavBar() {
       <a href="mailto:emporionatural36@gmail.com" className={styles.textLink}>
         Contato
       </a>
-      <NavLink to="/cart" className={styles.textLink}>
+      {isAuthenticated ?<NavLink to="/cart" className={styles.textLink}>
         {({ isActive }) => (
           /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
           <IconButton>
@@ -43,7 +45,7 @@ function NavBar() {
             </span>
           </IconButton>
         )}
-      </NavLink>
+      </NavLink>:<NavLoginButton />}
     </nav>
   );
 }

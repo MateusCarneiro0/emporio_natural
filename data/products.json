@@ -425,43 +425,6 @@
       "id": "76GtRAUDn1E"
     }
   ],
-  "users": [
-    {
-      "user": "Mateus",
-      "password": "ddfdfdff",
-      "cart": [],
-      "id": "xU82sMVfuVg"
-    },
-    {
-      "user": "Mateus",
-      "password": "ddfdfdff",
-      "cart": [],
-      "id": "BBkv02C_tJA"
-    },
-    {
-      "user": "Marcos",
-      "password": "dfdfdf",
-      "cart": [],
-      "id": "t5hhB5vVFDk"
-    },
-    {
-      "user": "Mateus",
-      "password": "Marteus",
-      "cart": [],
-      "id": "jJEoBPk-cvo"
-    },
-    {
-      "user": "Mateus",
-      "password": "Marteus",
-      "cart": [],
-      "id": "Vav01IurMv0"
-    },
-    {
-      "user": "Mateus",
-      "password": "Marteusdffdg",
-      "cart": [],
-      "id": "KqSg2F7UamA"
-    }
-  ],
+  "users": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
