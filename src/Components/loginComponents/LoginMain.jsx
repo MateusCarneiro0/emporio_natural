@@ -22,7 +22,7 @@ function LoginMain() {
   }
 
   useEffect(() => {
-    if (isAuthenticated) navigate("/products");
+    if (isAuthenticated) navigate("/produtos");
   }, [isAuthenticated, navigate]);
   if (error) return <Error />;
   return (
@@ -39,6 +39,7 @@ function LoginMain() {
           setState={setPassword}
           value={password}
         />
+        {authError && <p className={styles.authError}>Senha ou usuários inválidos</p>}
         {isLoading ? (
           <ThreeDots />
         ) : (

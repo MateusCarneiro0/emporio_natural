@@ -25,3 +25,6 @@
 .link:hover {
   transform: translateY(-5px);
 }
+.errorSignup {
+  color: rgb(246, 75, 75);
+}

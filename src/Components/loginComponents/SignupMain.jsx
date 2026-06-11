@@ -6,7 +6,7 @@ import Input from "./Input";
 import { Link, useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import { ThreeDots } from "react-loader-spinner";
-import  Error  from "../Error";
+import Error from "../Error";
 function SignupMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -15,13 +15,13 @@ function SignupMain() {
   }, [dispatch]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuthenticated, isLoading, error } = useSelector(
+  const { isAuthenticated, isLoading, error, signupError } = useSelector(
     (store) => store.auth,
   );
-  const clickabel = username && password
+  const clickabel = username && password;
 
   function handleSignup(ev) {
-    ev.preventDefault()
+    ev.preventDefault();
     const newUser = {
       user: username,
       password,
@@ -48,6 +48,9 @@ function SignupMain() {
           setState={setPassword}
           value={password}
         />
+        {signupError && (
+          <p className={styles.errorSignup}>Este nome de usuário já existe</p>
+        )}
         {isLoading ? (
           <ThreeDots color="black" />
         ) : (
@@ -55,7 +58,7 @@ function SignupMain() {
             color="white"
             backgroundColor="rgb(94, 133, 231)"
             disabled={!clickabel}
-            >
+          >
             Registrar
           </LoginButton>
         )}

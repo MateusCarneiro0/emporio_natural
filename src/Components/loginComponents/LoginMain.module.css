@@ -20,8 +20,10 @@
 .link{
   transition: all 0.2s ease;
   color: white;
-  text-decoration: none;
 }
 .link:hover{
   transform: translateY(-5px);
+}
+.authError{
+  color: rgb(246, 75, 75);
 }

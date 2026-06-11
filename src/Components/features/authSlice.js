@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   isAuthenticated: false,
   authError: false,
+  signupError: false,
 };
 
 const authReducer = createSlice({
@@ -35,6 +36,7 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.error = "";
       sta.authError = false;
+      sta.isAuthenticated = true;
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -57,6 +59,11 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.authError = true;
     },
+    rejectedSignup(sta) {
+      sta.error = "";
+      sta.isLoading = false;
+      sta.signupError = true;
+    },
   },
 });
 
@@ -65,7 +72,6 @@ export const { logout } = authReducer.actions;
 export function receiveUsers() {
   return async (dispatch, getState) => {
     const { users } = getState().auth;
-    console.log(users, !users.length === 0);
     if (!users.length) {
       dispatch({ type: "auth/loadingUsers" });
       try {
@@ -84,16 +90,23 @@ export function createNewUser(user) {
     dispatch({ type: "auth/loadingUsers" });
     const uuid = crypto.randomUUID();
     const id = uuid.replace(/\D/g, "");
+
     try {
-      const res = await fetch(`${BASE_URL}/users`, {
+      await fetch(`${BASE_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ ...user, cart: [], id }),
       });
+      const res = await fetch(`${BASE_URL}/users`);
       const data = await res.json();
-      dispatch({ type: "auth/createNewUser", payload: data });
+
+      if (data.some((userActual) => user.user === user.Actual)) {
+        dispatch({ type: "auth/createNewUser", payload: data });
+      } else {
+        dispatch({ type: "auth/rejectedSignup" });
+      }
     } catch (err) {
       dispatch({ type: "auth/rejected", payload: err.message });
     }
@@ -106,10 +119,12 @@ export function loginUser(username, password) {
     try {
       const res = await fetch(`${BASE_URL}/users`);
       const data = await res.json();
-      const loggedUser = data.find(
-        (user) => user.user === username && user.password === password,
+
+      const loggedUser = await data.find(
+        (userActual) => userActual.user === username && userActual.password === password,
       );
-      if (loggedUser.length) {
+      console.log(data);
+      if (loggedUser?.length) {
         dispatch({
           type: "auth/loginUser",
           payload: {
@@ -120,9 +135,10 @@ export function loginUser(username, password) {
         });
       } else {
         dispatch({ type: "auth/authRejected" });
+        
       }
     } catch (err) {
-      dispatch({ type: "auth/rejected", payload: err.message });
+      console.error(err.message)
     }
   };
 }
