@@ -16,7 +16,8 @@ function LoginMain() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const clickabel = username && password;
-  function handleClick() {
+  function handleClick(ev) {
+    ev.preventDefault()
     dispatch(loginUser(username, password));
   }
 
@@ -42,6 +43,7 @@ function LoginMain() {
           <ThreeDots />
         ) : (
           <LoginButton
+          onClick={handleClick}
             disabled={!clickabel}
             color="white"
             backgroundColor="rgb(163, 220, 79)"
