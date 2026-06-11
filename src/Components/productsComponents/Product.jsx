@@ -78,7 +78,7 @@ function Product() {
             }}
           />
           <p className={styles.price}>
-            Total:{Math.round(preco * quantity)} R$
+            Total:{Number((preco * quantity).toFixed(2))} R$
           </p>
         </div>
         <Button
@@ -89,7 +89,7 @@ function Product() {
                 imagem,
                 categorias,
                 descricao,
-                total: Math.round(preco * quantity),
+                total: Number((preco * quantity).toFixed(2)),
                 id,
                 quantity,
               }),
