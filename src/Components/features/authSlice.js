@@ -110,8 +110,6 @@ export function receiveUsers() {
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
-    const uuid = crypto.randomUUID();
-    const id = uuid.replace(/\D/g, "");
     const newUser = { ...user, cart: [] };
     try {
       const res = await fetch(`${BASE_URL}/users`);
@@ -149,8 +147,8 @@ export function loginUser(username, password) {
         (userActual) =>
           userActual.user === username && userActual.password === password,
       );
-      console.log(data);
-      if (loggedUser?.length) {
+      console.log(loggedUser);
+      if (loggedUser?.id) {
         dispatch({
           type: "auth/loginUser",
           payload: {
