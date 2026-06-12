@@ -425,6 +425,38 @@
       "id": "76GtRAUDn1E"
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "user": "MateusAdm123",
+      "password": "MateusAdm123",
+      "cart": [
+        {
+          "nome": "Banana Prata",
+          "imagem": "/products/banana.png",
+          "categorias": [
+            "frutas",
+            "frescos"
+          ],
+          "descricao": "Rica em potássio e energia. Perfeita para vitaminas ou consumo in natura.",
+          "total": 6.5,
+          "id": "42GyBmAZ3BU",
+          "quantity": 1
+        },
+        {
+          "nome": "Mamão Formosa",
+          "imagem": "/products/mamao.jpg",
+          "categorias": [
+            "frutas",
+            "frescos"
+          ],
+          "descricao": "Excelente aliado da digestão, colhido no ponto certo de maturação.",
+          "total": 9.4,
+          "id": "H0uSbUviXag",
+          "quantity": 1
+        }
+      ],
+      "id": "0a1xsRmgp80"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }

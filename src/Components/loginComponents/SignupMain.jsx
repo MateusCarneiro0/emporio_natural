@@ -10,9 +10,6 @@ import Error from "../Error";
 function SignupMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(receiveUsers());
-  }, [dispatch]);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isAuthenticated, isLoading, error, signupError } = useSelector(

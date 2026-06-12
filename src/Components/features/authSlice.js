@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../NumberPhone";
+import getLocalStorage from "./localStorageThunk";
 const initialState = {
   authUser: "",
   password: "",
@@ -28,6 +29,8 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.error = "";
       sta.isAuthenticated = true;
+      sta.signupError = false;
+      localStorage.setItem("id", JSON.stringify(action.payload.id));
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
@@ -37,6 +40,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
+      localStorage.setItem("id", JSON.stringify(action.payload.id));
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -53,6 +57,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isLoading = false;
       sta.authError = false;
+      localStorage.setItem("id", "");
     },
     authRejected(sta) {
       sta.error = "";
@@ -64,6 +69,23 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.signupError = true;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getLocalStorage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getLocalStorage.fulfilled, (sta, action) => {
+        if (action.payload !== null) {
+          sta.authUser = action.payload.user;
+          sta.password = action.payload.password;
+          sta.authUserId = action.payload.id;
+          sta.isAuthenticated = true;
+        }
+        sta.isLoading = false;
+        sta.error = "";
+        sta.authError = false;
+      });
   },
 });
 
@@ -90,20 +112,23 @@ export function createNewUser(user) {
     dispatch({ type: "auth/loadingUsers" });
     const uuid = crypto.randomUUID();
     const id = uuid.replace(/\D/g, "");
-
+    const newUser = { ...user, cart: [] };
     try {
-      await fetch(`${BASE_URL}/users`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...user, cart: [], id }),
-      });
       const res = await fetch(`${BASE_URL}/users`);
       const data = await res.json();
-
-      if (data.some((userActual) => user.user === user.Actual)) {
-        dispatch({ type: "auth/createNewUser", payload: data });
+      console.log(data);
+      if (!data.some((userActual) => user.user === userActual.user)) {
+        dispatch({ type: "auth/createNewUser", payload: newUser });
+        const resNewUser = await fetch(`${BASE_URL}/users`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newUser),
+        });
+        const dataId = await resNewUser.json();
+        const { id } = dataId;
+        dispatch({ type: "auth/createNewUser", payload: { newUser, id } });
       } else {
         dispatch({ type: "auth/rejectedSignup" });
       }
@@ -121,7 +146,8 @@ export function loginUser(username, password) {
       const data = await res.json();
 
       const loggedUser = await data.find(
-        (userActual) => userActual.user === username && userActual.password === password,
+        (userActual) =>
+          userActual.user === username && userActual.password === password,
       );
       console.log(data);
       if (loggedUser?.length) {
@@ -135,10 +161,9 @@ export function loginUser(username, password) {
         });
       } else {
         dispatch({ type: "auth/authRejected" });
-        
       }
     } catch (err) {
-      console.error(err.message)
+      console.error(err.message);
     }
   };
 }

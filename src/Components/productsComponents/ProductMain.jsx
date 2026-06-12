@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { fetchProducts } from "../features/productsSlice";
-import { fetchCart } from "../features/cartSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
@@ -11,7 +10,7 @@ import { Outlet, useParams } from "react-router-dom";
 const ProductMain = memo(function ProductMain() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { authUserId: userId, authUser } = useSelector((store) => store.auth);
+  const { authUser } = useSelector((store) => store.auth);
   const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
   const frase = [
     "o que falta para o seu dia ficar mais saudável?🌞",
@@ -25,8 +24,7 @@ const ProductMain = memo(function ProductMain() {
 
   useEffect(() => {
     dispatch(fetchProducts());
-    dispatch(fetchCart(userId));
-  }, [dispatch, userId]);
+  }, [dispatch]);
 
   if (id) return <Outlet />;
 
