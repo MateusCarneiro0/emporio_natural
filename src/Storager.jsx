@@ -10,7 +10,9 @@ function Storager({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!isAuthenticated) dispatch(getLocalStorage());
+    if (!isAuthenticated) {
+      dispatch(getLocalStorage())
+    };
   }, [dispatch, isAuthenticated]);
   useEffect(() => {
     if(userId) dispatch(fetchCart(userId));

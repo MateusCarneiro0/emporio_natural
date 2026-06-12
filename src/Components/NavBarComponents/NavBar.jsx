@@ -4,21 +4,36 @@ import styles from "./NavBar.module.css";
 import IconButton from "@mui/material/IconButton";
 import WestIcon from "@mui/icons-material/West";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import NavLoginButton from "./NavLoginButton";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { logout } from "../features/authSlice";
 function NavBar() {
-  const {isAuthenticated} = useSelector(store => store.auth)
+  const { isAuthenticated } = useSelector((store) => store.auth);
   const { id } = useParams();
   const navigate = useNavigate();
   const { cartProducts } = useSelector((store) => store.cart);
+  const dispatch = useDispatch();
   return (
     <nav className={styles.nav}>
-      {id && (
+      {id ? (
         <NavLink>
           <IconButton onClick={() => navigate(-1)}>
             <WestIcon />
           </IconButton>
         </NavLink>
+      ) : (
+        isAuthenticated && (
+          <IconButton
+            onClick={() => {
+              navigate("/");
+              dispatch(logout());
+            }}
+            className={styles.logout}
+          >
+            <LogoutIcon />
+          </IconButton>
+        )
       )}
       <NavLink className={styles.textLink} to="/">
         <Logo />
@@ -29,23 +44,27 @@ function NavBar() {
       <a href="mailto:emporionatural36@gmail.com" className={styles.textLink}>
         Contato
       </a>
-      {isAuthenticated ?<NavLink to="/cart" className={styles.textLink}>
-        {({ isActive }) => (
-          /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
-          <IconButton>
-            <ShoppingCartOutlinedIcon
-              sx={{
-                // Se estiver ativo, fica azul, se não, fica cinza
-                color: isActive ? "rgb(170, 173, 121)" : "#757575",
-                transition: "color 0.2s ease",
-              }}
-            />
-            <span>
-              {!cartProducts?.length ? null : `(${cartProducts?.length})`}
-            </span>
-          </IconButton>
-        )}
-      </NavLink>:<NavLoginButton />}
+      {isAuthenticated ? (
+        <NavLink to="/cart" className={styles.textLink}>
+          {({ isActive }) => (
+            /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
+            <IconButton>
+              <ShoppingCartOutlinedIcon
+                sx={{
+                  // Se estiver ativo, fica azul, se não, fica cinza
+                  color: isActive ? "rgb(170, 173, 121)" : "#757575",
+                  transition: "color 0.2s ease",
+                }}
+              />
+              <span>
+                {!cartProducts?.length ? null : `(${cartProducts?.length})`}
+              </span>
+            </IconButton>
+          )}
+        </NavLink>
+      ) : (
+        <NavLoginButton />
+      )}
     </nav>
   );
 }
