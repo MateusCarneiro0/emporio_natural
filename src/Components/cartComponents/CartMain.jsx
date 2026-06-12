@@ -38,6 +38,7 @@ function CartMain() {
           price={product.total}
           productId={product.id}
           quantity={product.quantity}
+          categoria={product.categoria}
         >
           {product.nome}
         </CartCard>

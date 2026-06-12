@@ -76,8 +76,8 @@ function Product() {
             onChange={(ev) => {
               setQuantity((quantity) => {
                 const value =
-                  +ev.target.value < 0 ? quantity : +ev.target.value;
-                return categoria === "Un" ? value.toFixed(0) : value;
+                  +ev.target.value <= 0 ? quantity : +ev.target.value;
+                return categoria === "Un" ? Math.round(value) : value;
               });
             }}
           />
@@ -96,6 +96,7 @@ function Product() {
                 total: Number((preco * quantity).toFixed(2)),
                 id,
                 quantity,
+                categoria
               }),
             );
             navigate("/cart");

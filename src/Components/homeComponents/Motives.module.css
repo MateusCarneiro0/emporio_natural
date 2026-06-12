@@ -1,7 +1,6 @@
 .motives {
   display: flex;
   flex-direction: column;
-  background-color: aliceblue;
 }
 .motives h1 {
   color: var(--principal-green);

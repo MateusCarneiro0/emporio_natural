@@ -450,6 +450,58 @@
       "password": "Marteus123",
       "cart": [],
       "id": "xgTxw-fM4ag"
+    },
+    {
+      "user": "MateusAlfaMoggador",
+      "password": "MarcosBeta",
+      "cart": [],
+      "id": "ZwjJ8BQDgwQ"
+    },
+    {
+      "user": "Mark",
+      "password": "#Marteus123",
+      "cart": [
+        {
+          "nome": "Mel de Abelha Silvestre Puro",
+          "imagem": "/products/mel.png",
+          "categorias": [
+            "naturais",
+            "adoçantes"
+          ],
+          "descricao": "Mel 100% natural extraído de floradas silvestres. Adoçante natural perfeito.",
+          "total": 96,
+          "id": "tKH6pz5eYs8",
+          "quantity": 3,
+          "categoria": "Un"
+        },
+        {
+          "nome": "Abacate",
+          "imagem": "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?auto=format&fit=crop&w=500&q=80",
+          "categorias": [
+            "frutas",
+            "frescos"
+          ],
+          "descricao": "Fonte de gorduras boas e muito versátil para receitas doces e salgadas.",
+          "total": 78,
+          "id": "xlKzagkNgUg",
+          "quantity": 10,
+          "categoria": "Kg"
+        },
+        {
+          "nome": "Nozes Mariposa",
+          "imagem": "/products/nozes_mariposa.jpg",
+          "categorias": [
+            "granel",
+            "castanhas"
+          ],
+          "descricao": "Nozes chilenas de alta qualidade, sabor suave e rico em Ômega-3.",
+          "total": 720,
+          "id": "XQW4DbbtKKo",
+          "quantity": 15,
+          "categoria": "Kg"
+        }
+      ],
+      "id": "JYoGuZjBRak"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

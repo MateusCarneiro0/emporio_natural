@@ -2,7 +2,15 @@ import { useNavigate } from "react-router-dom";
 import styles from "./CartCard.module.css";
 import { deleteProductCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
-function CartCard({ src, children, price, productId, quantity, isLast }) {
+function CartCard({
+  src,
+  children,
+  price,
+  productId,
+  quantity,
+  isLast,
+  categoria,
+}) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
@@ -19,7 +27,9 @@ function CartCard({ src, children, price, productId, quantity, isLast }) {
         <p className={styles.price}>
           <strong>{price} R$</strong>
         </p>
-        <p className={styles.quantity}>{quantity} kg</p>
+        <p className={styles.quantity}>
+          {quantity} {categoria}
+        </p>
       </div>
       <button
         className={styles.button}
