@@ -453,6 +453,18 @@
           "total": 9.4,
           "id": "H0uSbUviXag",
           "quantity": 1
+        },
+        {
+          "nome": "Quinoa em Grãos Branca",
+          "imagem": "/products/quinoaBranca.jpg",
+          "categorias": [
+            "granel",
+            "grãos"
+          ],
+          "descricao": "Cereal de alto valor proteico, ótimo substituto para o arroz nas refeições.",
+          "total": 19.8,
+          "id": "aTiSQwfZcfo",
+          "quantity": 1
         }
       ],
       "id": "0a1xsRmgp80"

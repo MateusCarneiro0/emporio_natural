@@ -20,11 +20,13 @@ function Product() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
+  const { cartProducts } = useSelector((store) => store.cart);
 
   const { isLoading, currentProduct, error } = useSelector(
     (store) => store.products,
   );
-  const { nome, imagem, categorias, descricao, preco, link } = currentProduct;
+  const { nome, imagem, categorias, descricao, preco, link, categoria } =
+    currentProduct;
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
@@ -72,9 +74,11 @@ function Product() {
             className={styles.productInput}
             value={quantity}
             onChange={(ev) => {
-              setQuantity((quantity) =>
-                +ev.target.value < 0 ? quantity : +ev.target.value,
-              );
+              setQuantity((quantity) => {
+                const value =
+                  +ev.target.value < 0 ? quantity : +ev.target.value;
+                return categoria === "un" ? value.toFixed(0) : value;
+              });
             }}
           />
           <p className={styles.price}>
@@ -97,7 +101,9 @@ function Product() {
             navigate("/cart");
           }}
         >
-          Adicionar ao carrinho
+          {cartProducts.some((productItem) => productItem.nome === nome)
+            ? "Editar no Carrinho"
+            : "Adicionar ao carrinho"}
         </Button>
       </div>
     </div>

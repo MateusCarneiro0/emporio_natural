@@ -47,6 +47,7 @@ const ProductMain = memo(function ProductMain() {
             src={product.imagem}
             price={product.preco}
             id={product.id}
+            categoria={product.categoria}
           >
             {product.descricao}
           </CardProduct>

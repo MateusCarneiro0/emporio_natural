@@ -1,6 +1,6 @@
 import styles from "./SignupMain.module.css";
 import { useEffect, useState } from "react";
-import { createNewUser, receiveUsers } from "../features/authSlice";
+import { createNewUser } from "../features/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Input from "./Input";
 import { Link, useNavigate } from "react-router-dom";
