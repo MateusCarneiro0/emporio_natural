@@ -11,7 +11,7 @@
       ],
       "preco": 8.9,
       "link": "https://pt.wikipedia.org/wiki/Fuji_(ma%C3%A7%C3%A3)",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "ow7FDsA0hfg"
     },
     {
@@ -25,7 +25,7 @@
       ],
       "preco": 6.5,
       "link": "https://pt.wikipedia.org/wiki/Banana",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "42GyBmAZ3BU"
     },
     {
@@ -39,7 +39,7 @@
       ],
       "preco": 5.2,
       "link": "https://pt.wikipedia.org/wiki/Laranja",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "yezP-VuX0Bg"
     },
     {
@@ -54,7 +54,7 @@
       ],
       "preco": 12.9,
       "link": "https://pt.wikipedia.org/wiki/Morango",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "2IKmBL0eRv4"
     },
     {
@@ -68,7 +68,7 @@
       ],
       "preco": 14.3,
       "link": "https://en.wikipedia.org/wiki/Sultana_(grape)",
-      "categoria": "un",
+      "categoria": "Kg",
       "id": "oV4aa32NHxU"
     },
     {
@@ -82,7 +82,7 @@
       ],
       "preco": 7.8,
       "link": "https://pt.wikipedia.org/wiki/Abacate",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "xlKzagkNgUg"
     },
     {
@@ -96,7 +96,7 @@
       ],
       "preco": 9.4,
       "link": "https://pt.wikipedia.org/wiki/Mam%C3%A3o",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "H0uSbUviXag"
     },
     {
@@ -110,7 +110,7 @@
       ],
       "preco": 8.15,
       "link": "https://en.wikipedia.org/wiki/Palmer_(mango)",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "JWPHzHCvVTk"
     },
     {
@@ -124,7 +124,7 @@
       ],
       "preco": 4.99,
       "link": "https://pt.wikipedia.org/wiki/Citrus_×_latifolia",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "y8R5HfYknTk"
     },
     {
@@ -138,7 +138,7 @@
       ],
       "preco": 18.5,
       "link": "https://pt.wikipedia.org/wiki/Melancia",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "GBRcL7Yxsmw"
     },
     {
@@ -152,7 +152,7 @@
       ],
       "preco": 45,
       "link": "https://pt.wikipedia.org/wiki/Castanha-de-caju",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "CopVnXbSB44"
     },
     {
@@ -166,7 +166,7 @@
       ],
       "preco": 52.8,
       "link": "https://pt.wikipedia.org/wiki/Castanha-do-par%C3%A1",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "sVYBB26EGuQ"
     },
     {
@@ -180,7 +180,7 @@
       ],
       "preco": 39.9,
       "link": "https://pt.wikipedia.org/wiki/Am%C3%AAndoa",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "3Er26b98WPw"
     },
     {
@@ -194,7 +194,7 @@
       ],
       "preco": 48,
       "link": "https://pt.wikipedia.org/wiki/Noz",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "XQW4DbbtKKo"
     },
     {
@@ -208,7 +208,7 @@
       ],
       "preco": 15.4,
       "link": "https://pt.wikipedia.org/wiki/Chia",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "OMGwhWJA_8A"
     },
     {
@@ -222,7 +222,7 @@
       ],
       "preco": 11.2,
       "link": "https://pt.wikipedia.org/wiki/Linha%C3%A7a",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "IbJW2wAEOCk"
     },
     {
@@ -236,7 +236,7 @@
       ],
       "preco": 22,
       "link": "https://en.wikipedia.org/wiki/Pumpkin_seed",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "o8Ri6WLfdvI"
     },
     {
@@ -250,7 +250,7 @@
       ],
       "preco": 19.8,
       "link": "https://pt.wikipedia.org/wiki/Quinoa",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "aTiSQwfZcfo"
     },
     {
@@ -264,7 +264,7 @@
       ],
       "preco": 9.5,
       "link": "https://pt.wikipedia.org/wiki/Aveia",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "ZdaTOaDrQ6g"
     },
     {
@@ -278,7 +278,7 @@
       ],
       "preco": 16.9,
       "link": "https://pt.wikipedia.org/wiki/Granola",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "plcCC214nUc"
     },
     {
@@ -291,8 +291,8 @@
         "suplementos"
       ],
       "preco": 98,
-      "link": "https://www.gsuplementos.com.br/whey-protein-concentrado-1kg-growth-supplements-p985936",
-      "categoria": "un",
+      "link": "https://www.gsuplementos.com.br/whey-protein-concentrado-1Kg-growth-supplements-p985936",
+      "categoria": "Un",
       "id": "UKT0jbkib-g"
     },
     {
@@ -306,8 +306,8 @@
       ],
       "preco": 145,
       "link": "https://www.gsuplementos.com.br/top-whey-protein-isolado-1kg-growth-supplements-p985937",
-      "categoria": "un",
-      "id": "3H4NNJFaCKg"
+      "categoria": "Un",
+      "id": "3H4NNJFaCkg"
     },
     {
       "nome": "Whey Protein Vegano (Ervilha e Arroz)",
@@ -321,7 +321,7 @@
       ],
       "preco": 89.9,
       "link": "https://www.gsuplementos.com.br/whey-protein-vegano-growth-supplements",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "Pqg8Vx3l0vY"
     },
     {
@@ -335,7 +335,7 @@
       ],
       "preco": 75,
       "link": "https://www.gsuplementos.com.br/creatina-monohidratada-250g-growth-supplements",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "4JZEDnrgPHs"
     },
     {
@@ -349,7 +349,7 @@
       ],
       "preco": 42.5,
       "link": "https://www.gsuplementos.com.br/l-glutamina-250g-growth-supplements",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "GXxzQpxYF6M"
     },
     {
@@ -363,7 +363,7 @@
       ],
       "preco": 32,
       "link": "https://pt.wikipedia.org/wiki/Mel",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "tKH6pz5eYs8"
     },
     {
@@ -378,7 +378,7 @@
       ],
       "preco": 19.9,
       "link": "https://pt.wikipedia.org/wiki/Manteiga_de_amendoim",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "b6WsRb2WS4g"
     },
     {
@@ -392,7 +392,7 @@
       ],
       "preco": 34.6,
       "link": "https://pt.wikipedia.org/wiki/%C3%93leo_de_coco",
-      "categoria": "un",
+      "categoria": "Un",
       "id": "ef6FFbiGc4o"
     },
     {
@@ -406,7 +406,7 @@
       ],
       "preco": 12,
       "link": "https://pt.wikipedia.org/wiki/Ch%C3%A1_verde",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "_Q61dDbfvAA"
     },
     {
@@ -421,7 +421,7 @@
       ],
       "preco": 14.5,
       "link": "https://pt.wikipedia.org/wiki/C%C3%BArcuma",
-      "categoria": "kg",
+      "categoria": "Kg",
       "id": "76GtRAUDn1E"
     }
   ],

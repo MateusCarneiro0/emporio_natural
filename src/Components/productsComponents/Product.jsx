@@ -77,7 +77,7 @@ function Product() {
               setQuantity((quantity) => {
                 const value =
                   +ev.target.value < 0 ? quantity : +ev.target.value;
-                return categoria === "un" ? value.toFixed(0) : value;
+                return categoria === "Un" ? value.toFixed(0) : value;
               });
             }}
           />
