@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchProducts, searchProducts } from "../features/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
@@ -13,11 +13,14 @@ const ProductMain = memo(function ProductMain() {
   const { id } = useParams();
   const { authUser } = useSelector((store) => store.auth);
   const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
-  const frase = [
-    "o que falta para o seu dia ficar mais saudável?🌞",
-    "Vamos comprar aquele Whey para começar o dia?🔋",
-    "Deixa eu adivinhar, que tal comprar uma castanha de caju?",
-  ].at(Math.floor(Math.random() * 3));
+  const phraseRef = useRef(null)
+  useEffect(() => {
+    phraseRef.current = [
+      "o que falta para o seu dia ficar mais saudável?🌞",
+      "Vamos comprar aquele Whey para começar o dia?🔋",
+      "Deixa eu adivinhar, que tal comprar uma castanha de caju?",
+    ].at(Math.floor(Math.random() * 3));
+  }, []);
 
   const { isLoading, displayProducts, error } = useSelector(
     (store) => store.products,
@@ -39,7 +42,7 @@ const ProductMain = memo(function ProductMain() {
     <main className={styles.products}>
       <header>
         <h2>
-          Olá <i>{authUser}</i>,{frase}
+          Olá <i>{authUser}</i>,{phraseRef.current}
         </h2>
         <input
           className={styles.searchInput}

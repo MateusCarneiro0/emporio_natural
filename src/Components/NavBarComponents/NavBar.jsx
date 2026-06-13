@@ -31,7 +31,7 @@ function NavBar() {
             }}
             className={styles.logout}
           >
-            <LogoutIcon />
+            <LogoutIcon /> <span>Sair</span>
           </IconButton>
         )
       )}
