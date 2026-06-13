@@ -27,7 +27,7 @@ const productsSlice = createSlice({
       sta.error = "";
     },
     searchProducts(sta, act) {
-      const search = act.payload;
+      const search = act.payload.toLocaleLowerCase();
 
       sta.displayProducts = sta.products.filter(
         (product) =>

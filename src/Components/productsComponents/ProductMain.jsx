@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { fetchProducts } from "../features/productsSlice";
+import { useEffect, useState } from "react";
+import { fetchProducts,searchProducts } from "../features/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
@@ -8,6 +8,7 @@ import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
 import { Outlet, useParams } from "react-router-dom";
 const ProductMain = memo(function ProductMain() {
+  const [query, setQuery] = useState("");
   const dispatch = useDispatch();
   const { id } = useParams();
   const { authUser } = useSelector((store) => store.auth);
@@ -21,7 +22,9 @@ const ProductMain = memo(function ProductMain() {
   const { isLoading, displayProducts, error } = useSelector(
     (store) => store.products,
   );
-
+  useEffect(() => {
+    dispatch(searchProducts(query))
+  },[dispatch,query])
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -38,6 +41,13 @@ const ProductMain = memo(function ProductMain() {
         <h2>
           Olá <i>{authUser}</i>,{frase}
         </h2>
+        <input
+        className={styles.searchInput}
+          style={{ width: "98%",height:"100px" }}
+          placeholder="Digite um produto..."
+          value={query}
+          onChange={(ev) => setQuery(ev.target.value)}
+        />
       </header>
       <div className={styles.productsContainer}>
         {displayProducts.map((product) => (
@@ -52,6 +62,7 @@ const ProductMain = memo(function ProductMain() {
             {product.descricao}
           </CardProduct>
         ))}
+        {displayProducts.length === 0 && <h3>Nenhum produto</h3>}
       </div>
     </main>
   );
