@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./Components/features/localStorageThunk";
 import { fetchCart } from "./Components/features/cartSlice";
-import {receiveProducts} from "./Components/features/productSlice"
+import {fetchProducts} from "./Components/features/productsSlice"
 function Storager({ children }) {
   const { isAuthenticated, authUserId: userId } = useSelector(
     (store) => store.auth,
@@ -10,7 +10,7 @@ function Storager({ children }) {
   const {products} = useSelector(store => store.products)
   const dispatch = useDispatch();
   useEffect(() => {
-    if(products.length !== 0) dispatch(receiveProducts())
+    if(products.length !== 0) dispatch(fetchProducts())
   },[products])
 
   useEffect(() => {
