@@ -22,3 +22,34 @@
   margin-top: 300px;
   height: 150px;
 }
+.searchInput {
+  margin-top: 20px;
+  width: 98%;
+  height: 65px;
+  border-radius: 15px;
+  text-align: start;
+  transition: 200ms all ease-in;
+  box-shadow: 0.1px 0.1px 0.1px rgba(0, 0, 0, 0.2);
+  padding-left: 8px;
+  outline: none;
+  border-color: var(--dark-green-principal);
+}
+.searchInput:focus {
+  border-color: var(--dark-green-principal);
+
+  transform: translateY(-2px);
+  box-shadow: 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.6);
+}
+.searchInput:hover {
+  border-color: var(--dark-green-principal);
+
+  transform: translateY(-2px);
+  box-shadow: 1.5px 1.5px 1.5px rgba(0, 0, 0, 0.6);
+}
+.enough {
+  color: var(--principal-green);
+  align-self: center;
+  justify-self: center;
+  margin-top: 90px;
+  margin-bottom: 300px;
+}

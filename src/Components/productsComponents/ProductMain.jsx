@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { fetchProducts,searchProducts } from "../features/productsSlice";
+import { fetchProducts, searchProducts } from "../features/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
@@ -23,8 +23,8 @@ const ProductMain = memo(function ProductMain() {
     (store) => store.products,
   );
   useEffect(() => {
-    dispatch(searchProducts(query))
-  },[dispatch,query])
+    dispatch(searchProducts(query));
+  }, [dispatch, query]);
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
@@ -42,8 +42,7 @@ const ProductMain = memo(function ProductMain() {
           Olá <i>{authUser}</i>,{frase}
         </h2>
         <input
-        className={styles.searchInput}
-          style={{ width: "98%",height:"100px" }}
+          className={styles.searchInput}
           placeholder="Digite um produto..."
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
@@ -62,7 +61,9 @@ const ProductMain = memo(function ProductMain() {
             {product.descricao}
           </CardProduct>
         ))}
-        {displayProducts.length === 0 && <h3>Nenhum produto</h3>}
+        {displayProducts.length === 0 && (
+          <h1 className={styles.enough}>Nenhum produto</h1>
+        )}
       </div>
     </main>
   );
