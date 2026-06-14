@@ -25,6 +25,9 @@ const cartReducer = createSlice({
       sta.error = act.payload;
     },
     addProductCart(sta, act) {
+      sta.cartProducts = sta.cartProducts.filter(
+        (product) => product.id !== act.payload.id,
+      );
       sta.cartProducts = [...sta.cartProducts, act.payload];
       sta.isLoading = false;
       sta.error = "";
@@ -85,7 +88,7 @@ export function addProductCart(product) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(product),
+        body: JSON.stringify({ product }),
       });
       dispatch({
         type: "cart/addProductCart",
@@ -102,10 +105,10 @@ export function deleteProductCart(productId) {
     const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`/users/${userId}/removeProductCart`,{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify(productId)
+      await fetch(`${BASE_URL}/users/${userId}/removeProductCart`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: productId }),
       });
       dispatch({
         type: "cart/removeProductCart",
