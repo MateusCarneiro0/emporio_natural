@@ -33,11 +33,13 @@ function LoginMain() {
           placeholder={"Digite seu username"}
           setState={setUsername}
           value={username}
+          disabled={isLoading}
         />
         <Input
           placeholder={"Digite sua senha"}
           setState={setPassword}
           value={password}
+          disabled={isLoading}
         />
         {authError && (
           <p className={styles.authError}>Senha ou usuários inválidos</p>
@@ -45,7 +47,7 @@ function LoginMain() {
         {isLoading ? (
           <>
             <ThreeDots />
-            <span style={{color:"white"}}>Carregando...</span>
+            <span style={{ color: "white" }}>Carregando...</span>
           </>
         ) : (
           <LoginButton

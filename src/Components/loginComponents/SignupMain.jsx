@@ -39,11 +39,14 @@ function SignupMain() {
           placeholder={"Digite seu username"}
           setState={setUsername}
           value={username}
+          disabled={isLoading}
         />
         <Input
           placeholder={"Digite sua senha"}
           setState={setPassword}
           value={password}
+                    disabled={isLoading}
+
         />
         {signupError && (
           <p className={styles.errorSignup}>Este nome de usuário já existe</p>
