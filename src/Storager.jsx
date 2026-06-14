@@ -3,9 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./Components/features/localStorageThunk";
 import { fetchProducts } from "./Components/features/productsSlice";
 function Storager({ children }) {
-  const { isAuthenticated } = useSelector(
-    (store) => store.auth,
-  );
+  const { isAuthenticated } = useSelector((store) => store.auth);
   const { products } = useSelector((store) => store.products);
   const dispatch = useDispatch();
   useEffect(() => {

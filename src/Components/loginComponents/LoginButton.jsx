@@ -1,6 +1,6 @@
 import styles from "./LoginButton.module.css";
 
-function LoginButton({ children, color, backgroundColor, onClick,disabled }) {
+function LoginButton({ children, color, backgroundColor, onClick, disabled }) {
   return (
     <button
       type="submit"

@@ -5,6 +5,7 @@
   background-color: var(--principal-bg-color);
   gap: 15px;
   align-items: center;
+  font-family: "Inter";
 }
 .nav .imageLink {
   text-decoration: none;

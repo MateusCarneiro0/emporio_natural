@@ -9,16 +9,22 @@ import { Outlet, useParams } from "react-router-dom";
 import Spinner from "../Spinner";
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
+
   const dispatch = useDispatch();
+
   const { id } = useParams();
+
   const { authUser } = useSelector((store) => store.auth);
   const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
-  const phraseRef = useRef(null)
+
+  const phraseRef = useRef(null);
+
   useEffect(() => {
     phraseRef.current = [
-      "o que falta para o seu dia ficar mais saudável?🌞",
-      "Vamos comprar aquele Whey para começar o dia?🔋",
-      "Deixa eu adivinhar, que tal comprar uma castanha de caju?",
+      "o que falta para o seu dia ficar mais saudável? 🌞",
+      "Vamos comprar aquele Whey para começar o dia? 🔋",
+      "Deixa eu adivinhar, que tal comprar uma castanha de caju? 🥜",
+      "A noite e o dia,mas a energia vem de uma frutinha 🍎"
     ].at(Math.floor(Math.random() * 3));
   }, []);
 
@@ -31,8 +37,7 @@ const ProductMain = memo(function ProductMain() {
 
   if (id) return <Outlet />;
 
-  if (isLoading || isLoadingCart)
-    return <Spinner />;
+  if (isLoading || isLoadingCart) return <Spinner />;
   if (error) return <Error />;
 
   return (

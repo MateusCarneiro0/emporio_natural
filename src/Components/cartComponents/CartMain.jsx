@@ -2,13 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import CartCard from "./CartCard";
 import styles from "./CartMain.module.css";
 import Error from "../Error";
-import {  payCart } from "../features/cartSlice";
+import { payCart } from "../features/cartSlice";
 import Button from "../Button";
 import Spinner from "../Spinner";
 function CartMain() {
-  const { cartProducts, isLoading, error } = useSelector(
-    (store) => store.cart,
-  );
+  const { cartProducts, isLoading, error } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
   const totalCust = cartProducts?.reduce((prev, cur) => prev + cur.total, 0);

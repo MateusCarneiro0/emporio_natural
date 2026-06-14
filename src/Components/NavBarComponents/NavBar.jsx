@@ -4,16 +4,16 @@ import styles from "./NavBar.module.css";
 import IconButton from "@mui/material/IconButton";
 import WestIcon from "@mui/icons-material/West";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import NavLoginButton from "./NavLoginButton";
-import LogoutIcon from "@mui/icons-material/Logout";
-import { logout } from "../features/authSlice";
+import LogoutIconNav from "./LogoutIconNav";
+
 function NavBar() {
   const { isAuthenticated } = useSelector((store) => store.auth);
   const { id } = useParams();
   const navigate = useNavigate();
   const { cartProducts } = useSelector((store) => store.cart);
-  const dispatch = useDispatch();
+
   return (
     <nav className={styles.nav}>
       {id ? (
@@ -23,17 +23,7 @@ function NavBar() {
           </IconButton>
         </NavLink>
       ) : (
-        isAuthenticated && (
-          <IconButton
-            onClick={() => {
-              navigate("/");
-              dispatch(logout());
-            }}
-            className={styles.logout}
-          >
-            <LogoutIcon /> <span>Sair</span>
-          </IconButton>
-        )
+        isAuthenticated && <LogoutIconNav />
       )}
       <NavLink className={styles.textLink} to="/">
         <Logo />

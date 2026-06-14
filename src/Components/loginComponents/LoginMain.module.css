@@ -17,13 +17,13 @@
   width: 90vw;
   border-radius: 25px;
 }
-.link{
+.link {
   transition: all 0.2s ease;
   color: white;
 }
-.link:hover{
+.link:hover {
   transform: translateY(-5px);
 }
-.authError{
+.authError {
   color: rgb(246, 75, 75);
 }

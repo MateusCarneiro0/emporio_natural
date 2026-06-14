@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import { loginUser } from "../features/authSlice";
 import Error from "../Error";
-import Spinner from "../Spinner";
+import { ThreeDots } from "react-loader-spinner";
 function LoginMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ function LoginMain() {
   const [password, setPassword] = useState("");
   const clickabel = username && password;
   function handleClick(ev) {
-    ev.preventDefault()
+    ev.preventDefault();
     dispatch(loginUser(username, password));
   }
 
@@ -39,12 +39,17 @@ function LoginMain() {
           setState={setPassword}
           value={password}
         />
-        {authError && <p className={styles.authError}>Senha ou usuários inválidos</p>}
+        {authError && (
+          <p className={styles.authError}>Senha ou usuários inválidos</p>
+        )}
         {isLoading ? (
-          <Spinner />
+          <>
+            <ThreeDots />
+            <span style={{color:"white"}}>Carregando...</span>
+          </>
         ) : (
           <LoginButton
-          onClick={handleClick}
+            onClick={handleClick}
             disabled={!clickabel}
             color="white"
             backgroundColor="rgb(163, 220, 79)"

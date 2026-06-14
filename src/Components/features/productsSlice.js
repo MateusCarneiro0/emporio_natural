@@ -7,7 +7,7 @@ const initialState = {
   products: [],
   error: "",
   currentProduct: {},
-  times:0
+  times: 0,
 };
 
 const productsSlice = createSlice({
@@ -69,7 +69,10 @@ export function getProduct(id) {
     try {
       const res = await fetch(`${BASE_URL}/products/${id}`);
       const data = await res.json();
-      dispatch({ type: "products/receivedCurrentProduct", payload: data.at(0) });
+      dispatch({
+        type: "products/receivedCurrentProduct",
+        payload: data.at(0),
+      });
     } catch {
       dispatch({ type: "products/rejected" });
     }

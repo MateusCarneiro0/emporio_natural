@@ -20,7 +20,7 @@ function Product() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
-  
+
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
@@ -98,7 +98,7 @@ function Product() {
                 total: Number((preco * quantity).toFixed(2)),
                 id,
                 quantity,
-                categoria
+                categoria,
               }),
             );
             navigate("/cart");
