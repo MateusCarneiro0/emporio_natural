@@ -1,4 +1,4 @@
-import { NUMBER_PHONE } from "../../NumberPhone";
+import {NUMBER_PHONE} from "../../base_url"
 import styles from "./Links.module.css";
 function Links() {
   return (
