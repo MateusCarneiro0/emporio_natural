@@ -2,8 +2,10 @@
   position: relative;
   width: 100vw;
   height: 75vh;
+  overflow-y: hidden;
 }
 .spinner {
+  overflow-y: hidden;
   display: flex;
   position: absolute;
   left: 50%;
@@ -14,5 +16,7 @@
   flex-direction: column;
 }
 .spinner h2 {
+  overflow-y: hidden;
+
   color: var(--principal-green);
 }
