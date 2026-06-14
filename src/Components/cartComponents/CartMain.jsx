@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
 import CartCard from "./CartCard";
 import styles from "./CartMain.module.css";
-import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
 import {  payCart } from "../features/cartSlice";
 import Button from "../Button";
+import Spinner from "../Spinner";
 function CartMain() {
   const { cartProducts, isLoading, error } = useSelector(
     (store) => store.cart,
@@ -13,7 +13,7 @@ function CartMain() {
 
   const totalCust = cartProducts?.reduce((prev, cur) => prev + cur.total, 0);
 
-  if (isLoading) return <ThreeDots />;
+  if (isLoading) return <Spinner />;
   if (error) return <Error />;
   if (!cartProducts?.length)
     return (

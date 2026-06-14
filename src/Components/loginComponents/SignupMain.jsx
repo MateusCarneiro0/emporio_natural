@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Input from "./Input";
 import { Link, useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
-import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
+import Spinner from "../Spinner";
 function SignupMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -49,7 +49,7 @@ function SignupMain() {
           <p className={styles.errorSignup}>Este nome de usuário já existe</p>
         )}
         {isLoading ? (
-          <ThreeDots color="black" />
+          <Spinner />
         ) : (
           <LoginButton
             color="white"

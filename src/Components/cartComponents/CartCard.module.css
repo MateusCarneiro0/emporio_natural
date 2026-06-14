@@ -15,12 +15,15 @@
   margin-right: 225px;
 }
 .card img {
+  position: relative;
+  left: auto;
   height: 65px;
   width: 75px;
   object-fit: cover;
 }
 .price {
-  margin-right: 225px;
+  position: relative;
+  right: 100px;
 }
 .button {
   margin-top: 11.5px;
@@ -50,5 +53,6 @@
   align-items: center;
 }
 .quantity {
-  margin-right: 75px;
+  position: relative;
+  right: 10%;
 }

@@ -5,8 +5,8 @@ import styles from "./LoginMain.module.css";
 import { Link, useNavigate } from "react-router-dom";
 import LoginButton from "./LoginButton";
 import { loginUser } from "../features/authSlice";
-import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
+import Spinner from "../Spinner";
 function LoginMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function LoginMain() {
         />
         {authError && <p className={styles.authError}>Senha ou usuários inválidos</p>}
         {isLoading ? (
-          <ThreeDots />
+          <Spinner />
         ) : (
           <LoginButton
           onClick={handleClick}

@@ -10,7 +10,7 @@ function Error() {
         marginBottom:"350px"
       }}
     >
-      A error ocurred in fetch data try again later
+      Um erro ocorreu tente denovo
     </h3>
   );
 }

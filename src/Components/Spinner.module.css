@@ -1,0 +1,17 @@
+.spinnerContainer {
+  position: relative;
+  width: 100vw;
+  height: 75vh;
+}
+
+.spinner {
+    display: flex;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+    justify-content: center;
+}
+.spinner h2{
+    color: var(--principal-green);
+}

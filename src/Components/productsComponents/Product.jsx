@@ -5,12 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getProduct } from "../features/productsSlice";
 
-import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
 import Button from "../Button";
 
 import styles from "./Product.module.css";
 import { addProductCart } from "../features/cartSlice";
+import Spinner from "../Spinner";
 
 function Product() {
   const [quantity, setQuantity] = useState(1);
@@ -33,7 +33,7 @@ function Product() {
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
 
-  if (isLoading) return <ThreeDots />;
+  if (isLoading) return <Spinner />;
 
   if (error) return <Error />;
 

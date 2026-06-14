@@ -9,7 +9,8 @@
   overflow-y: hidden;
 }
 .card button {
-  margin-top: 25px;
+  position: relative;
+  top: 9%;
   background-color: blueviolet;
   color: white;
   width: 98%;
@@ -22,19 +23,25 @@
   transition: 0.2s all ease-in;
 }
 .card img {
+  position: relative;
+  top: auto;
   height: 150px;
   width: 100%;
   object-fit: cover;
 }
 .card h3 {
+  position: relative;
+  top: auto;
   justify-self: center;
 }
 .description {
-  margin-top: 15px;
+  position: relative;
+  top: 5%;
 }
 .price {
+  position: relative;
+  top:7.5% ;
   font-size: 24px;
-  margin-top: 25px;
   justify-self: center;
 }
 .card button:hover {

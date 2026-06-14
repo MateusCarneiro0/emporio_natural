@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
 import styles from "./ProductMain.module.css";
-import { ThreeDots } from "react-loader-spinner";
 import Error from "../Error";
 import { Outlet, useParams } from "react-router-dom";
+import Spinner from "../Spinner";
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const ProductMain = memo(function ProductMain() {
   if (id) return <Outlet />;
 
   if (isLoading || isLoadingCart)
-    return <ThreeDots wrapperClass={styles.spinner} />;
+    return <Spinner />;
   if (error) return <Error />;
 
   return (
