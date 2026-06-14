@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../NumberPhone";
+import { BASE_URL } from "../../secretKeys";
 
 const initialState = {
   displayProducts: [],
@@ -7,6 +7,7 @@ const initialState = {
   products: [],
   error: "",
   currentProduct: {},
+  times:0
 };
 
 const productsSlice = createSlice({
@@ -53,7 +54,7 @@ export function fetchProducts() {
   return async (dispatch, getState) => {
     dispatch({ type: "products/loadingProducts" });
     try {
-      const res = await fetch(`${BASE_URL}/products`);
+      const res = await fetch(`${BASE_URL}`);
       const data = await res.json();
       dispatch({ type: "products/receiveProducts", payload: data });
     } catch {
@@ -68,7 +69,7 @@ export function getProduct(id) {
     try {
       const res = await fetch(`${BASE_URL}/products/${id}`);
       const data = await res.json();
-      dispatch({ type: "products/receivedCurrentProduct", payload: data });
+      dispatch({ type: "products/receivedCurrentProduct", payload: data.at(0) });
     } catch {
       dispatch({ type: "products/rejected" });
     }

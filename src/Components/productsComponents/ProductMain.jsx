@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchProducts, searchProducts } from "../features/productsSlice";
+import { searchProducts } from "../features/productsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { memo } from "react";
 import CardProduct from "./CardProduct";
@@ -28,9 +28,6 @@ const ProductMain = memo(function ProductMain() {
   useEffect(() => {
     dispatch(searchProducts(query));
   }, [dispatch, query]);
-  useEffect(() => {
-    dispatch(fetchProducts());
-  }, [dispatch]);
 
   if (id) return <Outlet />;
 

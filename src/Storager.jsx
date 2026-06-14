@@ -1,26 +1,23 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./Components/features/localStorageThunk";
-import { fetchCart } from "./Components/features/cartSlice";
-import {fetchProducts} from "./Components/features/productsSlice"
+import { fetchProducts } from "./Components/features/productsSlice";
 function Storager({ children }) {
-  const { isAuthenticated, authUserId: userId } = useSelector(
+  const { isAuthenticated } = useSelector(
     (store) => store.auth,
   );
-  const {products} = useSelector(store => store.products)
+  const { products } = useSelector((store) => store.products);
   const dispatch = useDispatch();
   useEffect(() => {
-    if(products.length !== 0) dispatch(fetchProducts())
-  },[products])
+    if (products.length === 0) dispatch(fetchProducts());
+  }, [products, dispatch]);
 
   useEffect(() => {
     if (!isAuthenticated) {
-      dispatch(getLocalStorage())
-    };
+      dispatch(getLocalStorage());
+    }
   }, [dispatch, isAuthenticated]);
-  useEffect(() => {
-    if(userId) dispatch(fetchCart(userId));
-  }, [dispatch,userId]);
+
   return children;
 }
 

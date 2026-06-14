@@ -1,4 +1,4 @@
-import { NUMBER_PHONE } from "../../NumberPhone";
+import { NUMBER_PHONE } from "../../secretKeys";
 import styles from "./Informations.module.css";
 
 function Informations() {

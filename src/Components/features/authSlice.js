@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../NumberPhone";
+import { BASE_URL } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
 const initialState = {
   authUser: "",
-  password: "",
   authUserId: "",
   users: [],
   isLoading: false,
@@ -25,7 +24,6 @@ const authReducer = createSlice({
       sta.authUserId = action.payload.id;
       sta.users = [...sta.users, { ...action.payload, id: sta.authUserId }];
       sta.authUser = action.payload.user;
-      sta.password = action.payload.password;
       sta.isLoading = false;
       sta.error = "";
       sta.isAuthenticated = true;
@@ -34,7 +32,6 @@ const authReducer = createSlice({
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
-      sta.password = action.payload.password;
       sta.authUserId = action.payload.id;
       sta.isLoading = false;
       sta.error = "";
@@ -51,7 +48,6 @@ const authReducer = createSlice({
     },
     logout(sta) {
       sta.authUser = "";
-      sta.password = "";
       sta.authUserId = "";
       sta.isAuthenticated = false;
       sta.error = "";
@@ -78,16 +74,16 @@ const authReducer = createSlice({
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
         if (action.payload !== null) {
           sta.authUser = action.payload.user;
-          sta.password = action.payload.password;
           sta.authUserId = action.payload.id;
           sta.isAuthenticated = true;
         }
         sta.isLoading = false;
         sta.error = "";
         sta.authError = false;
-      }).addCase(getLocalStorage.rejected,(state) => {
-        state.isLoading = false
       })
+      .addCase(getLocalStorage.rejected, (state) => {
+        state.isLoading = false;
+      });
   },
 });
 
@@ -112,25 +108,23 @@ export function receiveUsers() {
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
-    const newUser = { ...user, cart: [] };
+    dispatch({ type: "cart/loadingCart" });
     try {
-      const res = await fetch(`${BASE_URL}/users`);
+      const res = await fetch(`${BASE_URL}/users/createnewuser`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(user),
+      });
       const data = await res.json();
-      console.log(data);
-      if (!data.some((userActual) => user.user === userActual.user)) {
-        dispatch({ type: "auth/createNewUser", payload: newUser });
-        const resNewUser = await fetch(`${BASE_URL}/users`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newUser),
-        });
-        const dataId = await resNewUser.json();
-        const { id } = dataId;
-        dispatch({ type: "auth/createNewUser", payload: { newUser, id } });
-      } else {
+      if (data?.error) {
         dispatch({ type: "auth/rejectedSignup" });
+      } else {
+        const { id, user: createdUser, cart } = data;
+        const newUser = { id, user: createdUser };
+        dispatch({ type: "auth/createNewUser", payload: newUser });
+        dispatch({ type: "cart/receiveCart", payload: { cart } });
       }
     } catch (err) {
       dispatch({ type: "auth/rejected", payload: err.message });
@@ -142,28 +136,26 @@ export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
     try {
-      const res = await fetch(`${BASE_URL}/users`);
+      const res = await fetch(`${BASE_URL}/users/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          username,
+          password,
+        }),
+      });
       const data = await res.json();
 
-      const loggedUser = await data.find(
-        (userActual) =>
-          userActual.user === username && userActual.password === password,
-      );
-      console.log(loggedUser);
-      if (loggedUser?.id) {
-        dispatch({
-          type: "auth/loginUser",
-          payload: {
-            user: loggedUser.user,
-            password: loggedUser.password,
-            id: loggedUser.id,
-          },
-        });
+      if (data.auth) {
+        const { id, user, cart } = data;
+        const loggedUser = { id, user };
+        dispatch({ type: "auth/loginUser", payload: loggedUser });
+        dispatch({ type: "cart/receiveCart", payload: cart });
       } else {
         dispatch({ type: "auth/authRejected" });
       }
     } catch (err) {
-      console.error(err.message);
+      dispatch({ type: "auth/rejected", payload: err.message });
     }
   };
 }

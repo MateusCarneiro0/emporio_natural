@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../NumberPhone";
+import { BASE_URL } from "../../secretKeys";
+import getLocalStorage from "./localStorageThunk";
 
 const initialState = {
   cartProducts: [],
@@ -24,7 +25,14 @@ const cartReducer = createSlice({
       sta.error = act.payload;
     },
     addProductCart(sta, act) {
-      sta.cartProducts = act.payload;
+      sta.cartProducts = [...sta.cartProducts, act.payload];
+      sta.isLoading = false;
+      sta.error = "";
+    },
+    removeProductCart(sta, act) {
+      sta.cartProducts = sta.cartProducts.filter(
+        (product) => product.id !== act.payload,
+      );
       sta.isLoading = false;
       sta.error = "";
     },
@@ -33,6 +41,19 @@ const cartReducer = createSlice({
       sta.isLoading = false;
       sta.error = "";
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(getLocalStorage.pending, (sta) => {
+        sta.isLoading = true;
+      })
+      .addCase(getLocalStorage.fulfilled, (sta, act) => {
+        if (act.payload !== null) {
+          sta.isLoading = false;
+          sta.error = "";
+          sta.cartProducts = act.payload.cart;
+        }
+      });
   },
 });
 
@@ -55,30 +76,20 @@ export function fetchCart() {
 
 export function addProductCart(product) {
   return async (dispatch, getState) => {
-    const { cartProducts } = getState().cart;
     const { authUserId: userId } = getState().auth;
-    const products = cartProducts?.some(
-      (cartProduct) => cartProduct?.id === product.id,
-    )
-      ? cartProducts?.map((cartProduct) =>
-          cartProduct.id === product.id ? product : cartProduct,
-        )
-      : [...cartProducts, product];
 
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}`, {
-        method: "PATCH",
+      await fetch(`${BASE_URL}/users/${userId}/addproductcart`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          cart: products,
-        }),
+        body: JSON.stringify(product),
       });
       dispatch({
         type: "cart/addProductCart",
-        payload: products,
+        payload: product,
       });
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: err.message });
@@ -88,25 +99,13 @@ export function addProductCart(product) {
 
 export function deleteProductCart(productId) {
   return async (dispatch, getState) => {
-    const { cartProducts } = getState().cart;
-    const {authUserId:userId} = getState().auth
-    const products = cartProducts.filter(
-      (cartProduct) => cartProduct.id !== productId,
-    );
+    const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cart: products,
-        }),
-      });
+      await fetch(`/users/${userId}/removeProductCart/${productId}`);
       dispatch({
-        type: "cart/addProductCart",
-        payload: products,
+        type: "cart/removeProductCart",
+        payload: productId,
       });
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: err.message });

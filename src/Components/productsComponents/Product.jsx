@@ -20,6 +20,11 @@ function Product() {
   const dispatch = useDispatch();
 
   const { id } = useParams();
+  
+  useEffect(() => {
+    dispatch(getProduct(id));
+  }, [id, dispatch]);
+
   const { cartProducts } = useSelector((store) => store.cart);
 
   const { isLoading, currentProduct, error } = useSelector(
@@ -27,9 +32,6 @@ function Product() {
   );
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
-  useEffect(() => {
-    dispatch(getProduct(id));
-  }, [id, dispatch]);
 
   if (isLoading) return <ThreeDots />;
 
