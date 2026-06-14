@@ -5,7 +5,7 @@ function Spinner() {
     <div className={styles.spinnerContainer}>
       <div className={styles.spinner}>
         <ThreeDots />
-        <h2>Coletando seus dados</h2>
+        <h2>Carregando dados</h2>
       </div>
     </div>
   );

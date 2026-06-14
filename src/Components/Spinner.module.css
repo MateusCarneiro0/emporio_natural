@@ -5,13 +5,15 @@
 }
 
 .spinner {
-    display: flex;
+  display: flex;
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-    justify-content: center;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.spinner h2{
-    color: var(--principal-green);
+.spinner h2 {
+  color: var(--principal-green);
 }

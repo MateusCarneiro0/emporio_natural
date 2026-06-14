@@ -1,54 +1,58 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./Pages/Home";
-import Products from "./Pages/Products";
-import Cart from "./Pages/Cart";
-import Product from "./Components/productsComponents/Product";
-import Login from "./Pages/Login";
-import Signup from "./Pages/Signup";
-import NotFound from "./Pages/NotFound";
+import { lazy, Suspense } from "react";
 import LoggedProtected from "./Components/protectedRoutes/LoggedProtected";
 import AuthProtected from "./Components/protectedRoutes/AuthProtected";
+import SpinnerFullScreen from "./Components/SpinnerFullScreen";
+const Home = lazy(() => import("./Pages/Home"));
+const Products = lazy(() => import("./Pages/Products"));
+const Cart = lazy(() => import("./Pages/Cart"));
+const Product = lazy(() => import("./Components/productsComponents/Product"));
+const Login = lazy(() => import("./Pages/Login"));
+const Signup = lazy(() => import("./Pages/Signup"));
+const NotFound = lazy(() => import("./Pages/NotFound"));
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/produtos"
-          element={
-            <AuthProtected>
-              <Products />
-            </AuthProtected>
-          }
-        >
+      <Suspense fallback={<SpinnerFullScreen />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
           <Route
-            path="/produtos/:id"
+            path="/produtos"
             element={
               <AuthProtected>
-                <Product />
+                <Products />
               </AuthProtected>
             }
+          >
+            <Route
+              path="/produtos/:id"
+              element={
+                <AuthProtected>
+                  <Product />
+                </AuthProtected>
+              }
+            />
+          </Route>
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/login"
+            element={
+              <LoggedProtected>
+                <Login />
+              </LoggedProtected>
+            }
           />
-        </Route>
-        <Route path="/cart" element={<Cart />} />
-        <Route
-          path="/login"
-          element={
-            <LoggedProtected>
-              <Login />
-            </LoggedProtected>
-          }
-        />
-        <Route
-          path="/signup"
-          element={
-            <LoggedProtected>
-              <Signup />
-            </LoggedProtected>
-          }
-        />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
+          <Route
+            path="/signup"
+            element={
+              <LoggedProtected>
+                <Signup />
+              </LoggedProtected>
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 }
