@@ -102,7 +102,11 @@ export function deleteProductCart(productId) {
     const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`/users/${userId}/removeProductCart/${productId}`);
+      await fetch(`/users/${userId}/removeProductCart`,{
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify(productId)
+      });
       dispatch({
         type: "cart/removeProductCart",
         payload: productId,
@@ -117,8 +121,8 @@ export function payCart() {
     const { userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}`, {
-        method: "PATCH",
+      await fetch(`${BASE_URL}/users/${userId}/clearCart`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
