@@ -1,5 +1,5 @@
 import { BASE_URL } from "../../secretKeys"
-class FetchApiError extends Error {
+export class FetchApiError extends Error {
     constructor(message,status){
         super(message)
         this.name = "FetchApiError"

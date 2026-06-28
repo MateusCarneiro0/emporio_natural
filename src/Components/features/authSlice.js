@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL, idKey } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
-import requestJson from "./requestJson";
+import requestJson, { FetchApiError } from "./requestJson";
 const initialState = {
   authUser: "",
   authUserId: "",
@@ -61,10 +61,10 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.authError = true;
     },
-    rejectedSignup(sta) {
+    rejectedSignup(sta, act) {
       sta.error = "";
       sta.isLoading = false;
-      sta.signupError = true;
+      sta.signupError = "More characters use less characters(100 in total)";
     },
   },
   extraReducers: (builder) => {
@@ -107,7 +107,11 @@ export function createNewUser(user) {
         body: JSON.stringify(user),
       });
       if (data?.error) {
-        dispatch({ type: "auth/rejectedSignup" });
+        if (data?.hasRepeated) {
+          dispatch({ type: "auth/rejectedSignup" });
+        } else {
+          throw new FetchApiError("Error in create user", 500);
+        }
       } else {
         const { id, user: createdUser, cart } = data;
         const newUser = { id, user: createdUser };
@@ -115,7 +119,7 @@ export function createNewUser(user) {
         dispatch({ type: "cart/receiveCart", payload: { cart } });
       }
     } catch (err) {
-      dispatch({ type: "auth/rejected", payload: err.message });
+      dispatch({ type: "auth/rejected", payload: "Erro ao criar o usuário" });
     }
   };
 }
