@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL } from "../../secretKeys";
+import requestJson from "./requestJson";
 
 const initialState = {
   displayProducts: [],
@@ -54,11 +55,11 @@ export function fetchProducts() {
   return async (dispatch, getState) => {
     dispatch({ type: "products/loadingProducts" });
     try {
-      const res = await fetch(`${BASE_URL}`);
-      const data = await res.json();
+      
+      const data = await requestJson(`${BASE_URL}`);
       dispatch({ type: "products/receiveProducts", payload: data });
-    } catch {
-      dispatch({ type: "products/rejected" });
+    } catch (err) {
+      dispatch({ type: "products/rejected", payload:"Error on fetch products" });
     }
   };
 }
@@ -67,8 +68,8 @@ export function getProduct(id) {
   return async (dispatch, getState) => {
     dispatch({ type: "products/loadingProducts" });
     try {
-      const res = await fetch(`${BASE_URL}/products/${id}`);
-      const data = await res.json();
+      const data = await requestJson(`products/${id}`);
+      
       dispatch({
         type: "products/receivedCurrentProduct",
         payload: data.at(0),
