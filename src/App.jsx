@@ -35,7 +35,14 @@ function App() {
               }
             />
           </Route>
-          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/cart"
+            element={
+              <AuthProtected>
+                <Cart />
+              </AuthProtected>
+            }
+          />
           <Route
             path="/login"
             element={
