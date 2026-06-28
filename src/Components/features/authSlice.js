@@ -109,15 +109,8 @@ export function createNewUser(user) {
         body: JSON.stringify(user),
       });
 
-      if (!user?.username || !user?.password) {
+      if (!user?.user || !user?.password) {
         throw new Error("username or password is not identificated");
-      }
-
-      if (user.username.length > 100 || user.password.length > 100) {
-        dispatch({
-          type: "auth/rejectedSignup",
-          payload: { manyCharacters: true },
-        });
       }
 
       if (data?.hasRepeated) {
@@ -125,7 +118,7 @@ export function createNewUser(user) {
           type: "auth/rejectedSignup",
           payload: { hasRepeated: true },
         });
-      } else if (user.username.length > 100 || user.password.length > 100) {
+      } else if (user.user.length > 100 || user.password.length > 100) {
         dispatch({
           type: "auth/rejectedSignup",
           payload: { manyCharacters: true },
@@ -145,7 +138,7 @@ export function createNewUser(user) {
       } else {
         dispatch({
           type: "auth/rejected",
-          payload: "Error in data verify later",
+          payload: err.message,
         });
       }
     }
