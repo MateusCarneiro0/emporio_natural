@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../secretKeys";
+import { BASE_URL, idKey } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
 const initialState = {
   authUser: "",
@@ -28,7 +28,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
-      localStorage.setItem("id", JSON.stringify(action.payload.id));
+      localStorage.setItem(idKey, JSON.stringify(action.payload.id));
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
@@ -37,7 +37,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
-      localStorage.setItem("id", JSON.stringify(action.payload.id));
+      localStorage.setItem(idKey, JSON.stringify(action.payload.id));
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -53,7 +53,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isLoading = false;
       sta.authError = false;
-      localStorage.removeItem("id")
+      localStorage.removeItem(idKey)
     },
     authRejected(sta) {
       sta.error = "";
@@ -76,6 +76,10 @@ const authReducer = createSlice({
           sta.authUser = action.payload.user;
           sta.authUserId = action.payload.id;
           sta.isAuthenticated = true;
+        }else{
+          sta.isAuthenticated = false
+          sta.authUser = ""
+          sta.authUserId = ""
         }
         sta.isLoading = false;
         sta.error = "";
