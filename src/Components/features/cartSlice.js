@@ -121,7 +121,7 @@ export function deleteProductCart(productId) {
 }
 export function payCart() {
   return async (dispatch, getState) => {
-    const { userId } = getState().auth;
+    const { authUserId:userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
       await fetch(`${BASE_URL}/users/${userId}/clearCart`, {
