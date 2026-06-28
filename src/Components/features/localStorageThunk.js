@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { BASE_URL, idKey } from "../../secretKeys";
+import { idKey } from "../../secretKeys";
+import requestJson from "./requestJson";
 
 const getLocalStorage = createAsyncThunk(
   "auth/getLocalStorage",
@@ -8,12 +9,8 @@ const getLocalStorage = createAsyncThunk(
     if (!id) return null
     
     try {
-      const response = await fetch(`${BASE_URL}/users/fetch/${id}`);
-      if (!response.ok){
-        return null
-      }
-      const data = await response.json();
-      return data;
+      const data = await requestJson(`/users/fetch/${id}`)
+      return data
     } catch (err) {
       console.log(err.message);
       return rejectWithValue(err.message);
