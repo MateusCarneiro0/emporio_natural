@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL, idKey } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
+import requestJson from "./requestJson";
 const initialState = {
   authUser: "",
   authUserId: "",
@@ -53,7 +54,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isLoading = false;
       sta.authError = false;
-      localStorage.removeItem(idKey)
+      localStorage.removeItem(idKey);
     },
     authRejected(sta) {
       sta.error = "";
@@ -76,10 +77,10 @@ const authReducer = createSlice({
           sta.authUser = action.payload.user;
           sta.authUserId = action.payload.id;
           sta.isAuthenticated = true;
-        }else{
-          sta.isAuthenticated = false
-          sta.authUser = ""
-          sta.authUserId = ""
+        } else {
+          sta.isAuthenticated = false;
+          sta.authUser = "";
+          sta.authUserId = "";
         }
         sta.isLoading = false;
         sta.error = "";
@@ -93,35 +94,18 @@ const authReducer = createSlice({
 
 export const { logout } = authReducer.actions;
 
-export function receiveUsers() {
-  return async (dispatch, getState) => {
-    const { users } = getState().auth;
-    if (!users.length) {
-      dispatch({ type: "auth/loadingUsers" });
-      try {
-        const res = await fetch(`${BASE_URL}/users`);
-        const data = await res.json();
-        dispatch({ type: "auth/receiveUsers", payload: data });
-      } catch (err) {
-        dispatch({ type: "auth/rejected", payload: err.message });
-      }
-    }
-  };
-}
-
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
     dispatch({ type: "cart/loadingCart" });
     try {
-      const res = await fetch(`${BASE_URL}/users/createnewuser`, {
+      const data = await requestJson(`users/createnewuser`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(user),
       });
-      const data = await res.json();
       if (data?.error) {
         dispatch({ type: "auth/rejectedSignup" });
       } else {
