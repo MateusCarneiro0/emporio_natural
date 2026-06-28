@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
+import requestJson from "./requestJson";
 
 const initialState = {
   cartProducts: [],
@@ -65,8 +65,7 @@ export function fetchCart() {
     dispatch({ type: "cart/loadingCart" });
     const { authUserId: userId } = getState().auth;
     try {
-      const res = await fetch(`${BASE_URL}/users/${userId}`);
-      const data = await res.json();
+      const data = await requestJson(`users/${userId}`);
       dispatch({
         type: "cart/receiveCart",
         payload: { cart: data.cart, userId },
@@ -80,10 +79,9 @@ export function fetchCart() {
 export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
-
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}/addproductcart`, {
+      await requestJson(`users/${userId}/addproductcart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +93,7 @@ export function addProductCart(product) {
         payload: product,
       });
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: err.message });
+      dispatch({ type: "cart/rejected", payload: "Error on add product in cart try later"});
     }
   };
 }
@@ -105,7 +103,7 @@ export function deleteProductCart(productId) {
     const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}/removeProductCart`, {
+      await requestJson(`users/${userId}/removeProductCart`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: productId }),
@@ -115,16 +113,17 @@ export function deleteProductCart(productId) {
         payload: productId,
       });
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: err.message });
+      dispatch({ type: "cart/rejected", payload: "Error on delete product" });
     }
   };
 }
+
 export function payCart() {
   return async (dispatch, getState) => {
     const { authUserId:userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await fetch(`${BASE_URL}/users/${userId}/clearCart`, {
+      await requestJson(`users/${userId}/clearCart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -137,7 +136,7 @@ export function payCart() {
         type: "cart/payCart",
       });
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: err.message });
+      dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
     }
   };
 }
