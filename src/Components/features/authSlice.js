@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { BASE_URL, idKey } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
-import requestJson, { FetchApiError } from "./requestJson";
+import requestJson from "./requestJson";
 const initialState = {
   authUser: "",
   authUserId: "",
@@ -64,7 +64,9 @@ const authReducer = createSlice({
     rejectedSignup(sta, act) {
       sta.error = "";
       sta.isLoading = false;
-      sta.signupError = "More characters use less characters(100 in total)";
+      sta.signupError = act.payload.manyCharacters
+        ? "Many characters use less characters(100 in total)"
+        : "User is has repeated";
     },
   },
   extraReducers: (builder) => {
@@ -106,12 +108,28 @@ export function createNewUser(user) {
         },
         body: JSON.stringify(user),
       });
-      if (data?.error) {
-        if (data?.hasRepeated) {
-          dispatch({ type: "auth/rejectedSignup" });
-        } else {
-          throw new FetchApiError("Error in create user", 500);
-        }
+
+      if (!user?.username || !user?.password) {
+        throw new Error("username or password is not identificated");
+      }
+
+      if (user.username.length > 100 || user.password.length > 100) {
+        dispatch({
+          type: "auth/rejectedSignup",
+          payload: { manyCharacters: true },
+        });
+      }
+
+      if (data?.hasRepeated) {
+        dispatch({
+          type: "auth/rejectedSignup",
+          payload: { hasRepeated: true },
+        });
+      } else if (user.username.length > 100 || user.password.length > 100) {
+        dispatch({
+          type: "auth/rejectedSignup",
+          payload: { manyCharacters: true },
+        });
       } else {
         const { id, user: createdUser, cart } = data;
         const newUser = { id, user: createdUser };
@@ -119,7 +137,17 @@ export function createNewUser(user) {
         dispatch({ type: "cart/receiveCart", payload: { cart } });
       }
     } catch (err) {
-      dispatch({ type: "auth/rejected", payload: "Erro ao criar o usuário" });
+      if (err.name === "FetchApiError") {
+        dispatch({
+          type: "auth/rejected",
+          payload: "Erro when create user in server",
+        });
+      } else {
+        dispatch({
+          type: "auth/rejected",
+          payload: "Error in data verify later",
+        });
+      }
     }
   };
 }
