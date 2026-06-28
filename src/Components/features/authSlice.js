@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL, idKey } from "../../secretKeys";
+import { idKey } from "../../secretKeys";
 import getLocalStorage from "./localStorageThunk";
 import requestJson from "./requestJson";
 const initialState = {
@@ -156,7 +156,7 @@ export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
     try {
-      const res = await fetch(`${BASE_URL}/users/login`, {
+      const data = await requestJson(`users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -164,18 +164,18 @@ export function loginUser(username, password) {
           password,
         }),
       });
-      const data = await res.json();
 
       if (data.auth) {
         const { id, user, cart } = data;
         const loggedUser = { id, user };
         dispatch({ type: "auth/loginUser", payload: loggedUser });
         dispatch({ type: "cart/receiveCart", payload: cart });
+
       } else {
         dispatch({ type: "auth/authRejected" });
       }
     } catch (err) {
-      dispatch({ type: "auth/rejected", payload: err.message });
+      dispatch({ type: "auth/rejected", payload: "Error when login user in server try later"});
     }
   };
 }
