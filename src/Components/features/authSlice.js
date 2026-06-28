@@ -53,7 +53,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isLoading = false;
       sta.authError = false;
-      localStorage.setItem("id", "");
+      localStorage.removeItem("id")
     },
     authRejected(sta) {
       sta.error = "";
