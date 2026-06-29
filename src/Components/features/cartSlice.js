@@ -30,7 +30,7 @@ const cartReducer = createSlice({
       );
       sta.cartProducts = sta.cartProducts?.length
         ? [...sta.cartProducts, act.payload]
-        : [act.apyload];
+        : [act.payload];
       sta.isLoading = false;
       sta.error = "";
     },
