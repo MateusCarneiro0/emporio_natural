@@ -9,7 +9,7 @@ function CartMain() {
   const { cartProducts, isLoading, error } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
-  const totalCust = cartProducts?.reduce((prev, cur) => prev + cur.total, 0);
+  const totalCust = Number(cartProducts?.reduce((prev, cur) => prev + cur.total, 0).toFixed(2));
 
   if (isLoading) return <Spinner />;
   if (error) return <Error />;
