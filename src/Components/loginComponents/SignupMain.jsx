@@ -49,7 +49,7 @@ function SignupMain() {
 
         />
         {signupError && (
-          <p className={styles.errorSignup}>Este nome de usuário já existe</p>
+          <p className={styles.errorSignup}>{signupError}</p>
         )}
         {isLoading ? (
           <>

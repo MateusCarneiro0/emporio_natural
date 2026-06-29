@@ -104,7 +104,7 @@ function Product() {
             navigate("/cart");
           }}
         >
-          {cartProducts?.some((productItem) => productItem.nome === nome)
+          {cartProducts?.some?.((productItem) => productItem.nome === nome)
             ? "Editar no Carrinho"
             : "Adicionar ao carrinho"}
         </Button>

@@ -118,7 +118,7 @@ export function createNewUser(user) {
           type: "auth/rejectedSignup",
           payload: { hasRepeated: true },
         });
-      } else if (user.user.length > 100 || user.password.length > 100) {
+      } else if (user.user.length > 100 || user.password.length > 100 || data?.manyCharacters) {
         dispatch({
           type: "auth/rejectedSignup",
           payload: { manyCharacters: true },
