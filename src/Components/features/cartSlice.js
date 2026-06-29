@@ -16,7 +16,7 @@ const cartReducer = createSlice({
       sta.isLoading = true;
     },
     receiveCart(sta, act) {
-      sta.cartProducts = act.payload.cart;
+      sta.cartProducts = act.payload;
       sta.isLoading = false;
       sta.error = "";
     },
@@ -28,7 +28,9 @@ const cartReducer = createSlice({
       sta.cartProducts = sta.cartProducts?.filter(
         (product) => product.id !== act.payload.id,
       );
-      sta.cartProducts = [...sta.cartProducts, act.payload];
+      sta.cartProducts = sta.cartProducts?.length
+        ? [...sta.cartProducts, act.payload]
+        : [act.apyload];
       sta.isLoading = false;
       sta.error = "";
     },
@@ -66,6 +68,7 @@ export function fetchCart() {
     const { authUserId: userId } = getState().auth;
     try {
       const data = await requestJson(`users/${userId}`);
+      console.log(data)
       dispatch({
         type: "cart/receiveCart",
         payload: { cart: data.cart, userId },
@@ -93,12 +96,10 @@ export function addProductCart(product) {
         payload: product,
       });
     } catch (err) {
-      if (err.name === "FetchApiError"){
-
-        dispatch({ type: "cart/rejected", payload: err.message+"FETCH"});
-      }else{
-        dispatch({ type: "cart/rejected", payload: err.message});
-
+      if (err.name === "FetchApiError") {
+        dispatch({ type: "cart/rejected", payload: err.message + "FETCH" });
+      } else {
+        dispatch({ type: "cart/rejected", payload: err.message });
       }
     }
   };
@@ -126,7 +127,7 @@ export function deleteProductCart(productId) {
 
 export function payCart() {
   return async (dispatch, getState) => {
-    const { authUserId:userId } = getState().auth;
+    const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
       await requestJson(`users/${userId}/clearCart`, {
