@@ -25,7 +25,7 @@ const cartReducer = createSlice({
       sta.error = act.payload;
     },
     addProductCart(sta, act) {
-      sta.cartProducts = sta.cartProducts.filter(
+      sta.cartProducts = sta.cartProducts?.filter(
         (product) => product.id !== act.payload.id,
       );
       sta.cartProducts = [...sta.cartProducts, act.payload];
@@ -93,7 +93,13 @@ export function addProductCart(product) {
         payload: product,
       });
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: "Error on add product in cart try later"});
+      if (err.name === "FetchApiError"){
+
+        dispatch({ type: "cart/rejected", payload: err.message+"FETCH"});
+      }else{
+        dispatch({ type: "cart/rejected", payload: err.message});
+
+      }
     }
   };
 }
