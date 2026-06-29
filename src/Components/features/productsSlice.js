@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { BASE_URL } from "../../secretKeys";
 import requestJson from "./requestJson";
 
 const initialState = {
@@ -56,7 +55,7 @@ export function fetchProducts() {
     dispatch({ type: "products/loadingProducts" });
     try {
       
-      const data = await requestJson(`${BASE_URL}`);
+      const data = await requestJson("/");
       dispatch({ type: "products/receiveProducts", payload: data });
     } catch (err) {
       dispatch({ type: "products/rejected", payload:"Error on fetch products" });
