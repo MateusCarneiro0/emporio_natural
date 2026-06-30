@@ -1,4 +1,4 @@
-import { BASE_URL } from "../../secretKeys";
+import { BASE_URL } from "../secretKeys";
 export class FetchApiError extends Error {
   constructor(message, status) {
     super(message);

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router-dom";
 
-import { searchProducts } from "../../api/productsApi";
+import { searchProducts } from "../features/productsSlice";
 
 import Error from "../Error";
 import Spinner from "../Spinner";
