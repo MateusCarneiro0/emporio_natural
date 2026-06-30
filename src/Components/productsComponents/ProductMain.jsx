@@ -1,12 +1,15 @@
-import { useEffect, useRef, useState } from "react";
-import { searchProducts } from "../features/productsSlice";
+import { useEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { memo } from "react";
-import CardProduct from "./CardProduct";
-import styles from "./ProductMain.module.css";
-import Error from "../Error";
 import { Outlet, useParams } from "react-router-dom";
+
+import { searchProducts } from "../../api/productsApi";
+
+import Error from "../Error";
 import Spinner from "../Spinner";
+import CardProduct from "./CardProduct";
+
+import styles from "./ProductMain.module.css";
+
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
 
@@ -24,7 +27,7 @@ const ProductMain = memo(function ProductMain() {
       "o que falta para o seu dia ficar mais saudável? 🌞",
       "Vamos comprar aquele Whey para começar o dia? 🔋",
       "Deixa eu adivinhar, que tal comprar uma castanha de caju? 🥜",
-      "A noite e o dia,mas a energia vem de uma frutinha 🍎"
+      "A noite e o dia,mas a energia vem de uma frutinha 🍎",
     ].at(Math.floor(Math.random() * 3));
   }, []);
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProduct } from "../features/productsSlice";
+import { getProduct } from "../../api/productsApi";
 
 import Error from "../Error";
 import Button from "../Button";
