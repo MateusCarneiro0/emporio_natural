@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import getLocalStorage from "../../api/localStorageThunk";
+import getLocalStorage from "../api/localStorageThunk";
 
 const initialState = {
   cartProducts: [],
