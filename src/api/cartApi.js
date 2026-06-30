@@ -15,21 +15,31 @@ import requestJson from "./requestJson";
       "id": "ow7FDsA0hfg"
     }
 */
-class ProductNotFound extends Error{
-  constructor(message){
-    super(message)
-    this.name = "ProductNotFound"
+class ProductNotFound extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "ProductNotFound";
   }
 }
 
 function verifyProduct(currentProduct) {
-  if (!currentProduct.keys()) {
+  if (!currentProduct?.keys?.()) {
     throw new ProductNotFound("Product not found");
   } else {
-    const listOfKeys =  ["nome","id","descricao","imagem","categorias","preco","categoria"]
-    const verified = listOfKeys.filter(key => currentProduct[key]).length
-    if (!verified){
-      throw new ProductNotFound("Product not found")
+    const listOfKeys = [
+      "nome",
+      "id",
+      "descricao",
+      "imagem",
+      "categorias",
+      "preco",
+      "categoria",
+      "total",
+      "quantity",
+    ];
+    const verified = listOfKeys.filter((key) => currentProduct[key]).length;
+    if (!verified) {
+      throw new ProductNotFound("Product not found");
     }
   }
 }
@@ -37,6 +47,9 @@ function verifyProduct(currentProduct) {
 export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
+
+    verifyProduct(product);
+    
     dispatch({ type: "cart/loadingCart" });
     try {
       await requestJson(`users/${userId}/addproductcart`, {
@@ -51,11 +64,7 @@ export function addProductCart(product) {
         payload: product,
       });
     } catch (err) {
-      if (err.name === "FetchApiError") {
-        dispatch({ type: "cart/rejected", payload: err.message + "FETCH" });
-      } else {
-        dispatch({ type: "cart/rejected", payload: err.message });
-      }
+      dispatch({ type: "cart/rejected", payload: err.message });
     }
   };
 }
@@ -63,6 +72,14 @@ export function addProductCart(product) {
 export function deleteProductCart(productId) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
+    const { cartProducts } = getState().cart;
+
+    const product = cartProducts.filter(
+      (productCart) => productCart?.id === productId,
+    );
+
+    verifyProduct(product);
+
     dispatch({ type: "cart/loadingCart" });
     try {
       await requestJson(`users/${userId}/removeProductCart`, {
@@ -70,12 +87,18 @@ export function deleteProductCart(productId) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: productId }),
       });
+
       dispatch({
         type: "cart/removeProductCart",
         payload: productId,
       });
+
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: "Error on delete product" });
+      if (err.name === "ProductNotFound") {
+        dispatch({ type: "cart/rejected", payload: err.message });
+      } else {
+        dispatch({ type: "cart/rejected", payload: "Error on delete product" });
+      }
     }
   };
 }
