@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { idKey } from "../../secretKeys";
-import getLocalStorage from "../../api/localStorageThunk";
+import { idKey } from "../secretKeys";
+import getLocalStorage from "../api/localStorageThunk";
 const initialState = {
   authUser: "",
   authUserId: "",
