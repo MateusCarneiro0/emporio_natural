@@ -1,4 +1,38 @@
 import requestJson from "./requestJson";
+/*
+{
+      "nome": "Maçã Fuji",
+      "descricao": "Maçã fresca, doce e crocante. Excelente para lanches saudáveis e preparo de sucos.",
+      "imagem": "/products/maca.png",
+      "alias": "Fuji Apple",
+      "categorias": [
+        "frutas",
+        "frescos"
+      ],
+      "preco": 8.9,
+      "link": "https://pt.wikipedia.org/wiki/Fuji_(ma%C3%A7%C3%A3)",
+      "categoria": "kg",
+      "id": "ow7FDsA0hfg"
+    }
+*/
+class ProductNotFound extends Error{
+  constructor(message){
+    super(message)
+    this.name = "ProductNotFound"
+  }
+}
+
+function verifyProduct(currentProduct) {
+  if (!currentProduct.keys()) {
+    throw new ProductNotFound("Product not found");
+  } else {
+    const listOfKeys =  ["nome","id","descricao","imagem","categorias","preco","categoria"]
+    const verified = listOfKeys.filter(key => currentProduct[key]).length
+    if (!verified){
+      throw new ProductNotFound("Product not found")
+    }
+  }
+}
 
 export function addProductCart(product) {
   return async (dispatch, getState) => {
@@ -64,8 +98,8 @@ export function payCart() {
         dispatch({
           type: "cart/payCart",
         });
-      }else{
-        throw new Error("Error on pay cart")
+      } else {
+        throw new Error("Error on pay cart");
       }
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
