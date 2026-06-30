@@ -9,7 +9,7 @@ import Error from "../Error";
 import Button from "../Button";
 
 import styles from "./Product.module.css";
-import { addProductCart } from "../features/cartSlice";
+import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
 
 function Product() {

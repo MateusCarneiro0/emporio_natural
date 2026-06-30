@@ -1,10 +1,14 @@
 import { useDispatch, useSelector } from "react-redux";
-import CartCard from "./CartCard";
-import styles from "./CartMain.module.css";
-import Error from "../Error";
-import { payCart } from "../features/cartSlice";
+
+import { payCart } from "../../api/cartApi";
 import Button from "../Button";
+import CartCard from "./CartCard";
+
+import Error from "../Error";
 import Spinner from "../Spinner";
+
+import styles from "./CartMain.module.css";
+
 function CartMain() {
   const { cartProducts, isLoading, error } = useSelector((store) => store.cart);
   const dispatch = useDispatch();

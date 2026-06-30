@@ -1,7 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styles from "./CartCard.module.css";
-import { deleteProductCart } from "../features/cartSlice";
 import { useDispatch } from "react-redux";
+
+import { deleteProductCart } from "../../api/cartApi";
+
+import styles from "./CartCard.module.css";
 function CartCard({
   src,
   children,
