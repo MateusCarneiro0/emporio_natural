@@ -1,4 +1,5 @@
 import requestJson from "./requestJson";
+import { verifyProductCart } from "../utils/ProductChecker";
 /*
 {
       "nome": "Maçã Fuji",
@@ -15,41 +16,13 @@ import requestJson from "./requestJson";
       "id": "ow7FDsA0hfg"
     }
 */
-class ProductNotFound extends Error {
-  constructor(message) {
-    super(message);
-    this.name = "ProductNotFound";
-  }
-}
-
-function verifyProduct(currentProduct) {
-  if (!currentProduct?.keys?.()) {
-    throw new ProductNotFound("Product not found");
-  } else {
-    const listOfKeys = [
-      "nome",
-      "id",
-      "descricao",
-      "imagem",
-      "categorias",
-      "preco",
-      "categoria",
-      "total",
-      "quantity",
-    ];
-    const verified = listOfKeys.filter((key) => currentProduct[key]).length;
-    if (!verified) {
-      throw new ProductNotFound("Product not found");
-    }
-  }
-}
 
 export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
 
-    verifyProduct(product);
-    
+    verifyProductCart(product);
+
     dispatch({ type: "cart/loadingCart" });
     try {
       await requestJson(`users/${userId}/addproductcart`, {
@@ -76,9 +49,9 @@ export function deleteProductCart(productId) {
 
     const product = cartProducts.filter(
       (productCart) => productCart?.id === productId,
-    );
+    ).at(0)
 
-    verifyProduct(product);
+    verifyProductCart(product);
 
     dispatch({ type: "cart/loadingCart" });
     try {
@@ -92,7 +65,6 @@ export function deleteProductCart(productId) {
         type: "cart/removeProductCart",
         payload: productId,
       });
-
     } catch (err) {
       if (err.name === "ProductNotFound") {
         dispatch({ type: "cart/rejected", payload: err.message });

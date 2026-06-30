@@ -57,7 +57,7 @@ const ProductMain = memo(function ProductMain() {
         />
       </header>
       <div className={styles.productsContainer}>
-        {displayProducts.map((product) => (
+        {displayProducts.length ? displayProducts.map((product) => (
           <CardProduct
             key={product.id}
             title={product.nome}
@@ -67,9 +67,7 @@ const ProductMain = memo(function ProductMain() {
             categoria={product.categoria}
           >
             {product.descricao}
-          </CardProduct>
-        ))}
-        {displayProducts.length === 0 && (
+          </CardProduct>)):(
           <h1 className={styles.enough}>Nenhum produto</h1>
         )}
       </div>

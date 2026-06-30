@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import { verifyProduct } from "../utils/ProductChecker";
 const initialState = {
   displayProducts: [],
   isLoading: false,
@@ -21,8 +21,8 @@ const productsSlice = createSlice({
       sta.isLoading = false;
     },
     receiveProducts(sta, act) {
-      sta.displayProducts = act.payload;
-      sta.products = act.payload;
+      sta.products = act.payload.filter((product) => verifyProduct(product));
+      sta.displayProducts = sta.products;
       sta.isLoading = false;
       sta.error = "";
     },
