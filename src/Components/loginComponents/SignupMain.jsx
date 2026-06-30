@@ -1,12 +1,15 @@
-import styles from "./SignupMain.module.css";
 import { useEffect, useState } from "react";
-import { createNewUser } from "../features/authSlice";
-import { useDispatch, useSelector } from "react-redux";
-import Input from "./Input";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+
+import { createNewUser } from "../../api/authApi";
+
+import Input from "./Input";
 import LoginButton from "./LoginButton";
 import Error from "../Error";
+
 import { ThreeDots } from "react-loader-spinner";
+import styles from "./SignupMain.module.css";
 function SignupMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();

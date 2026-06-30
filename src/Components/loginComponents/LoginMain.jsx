@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Input from "./Input";
-import styles from "./LoginMain.module.css";
 import { Link, useNavigate } from "react-router-dom";
+
+import { loginUser } from "../../api/authApi";
+
+import Input from "./Input";
 import LoginButton from "./LoginButton";
-import { loginUser } from "../features/authSlice";
 import Error from "../Error";
+
 import { ThreeDots } from "react-loader-spinner";
+
+import styles from "./LoginMain.module.css";
+
 function LoginMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
