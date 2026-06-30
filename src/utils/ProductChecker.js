@@ -5,58 +5,51 @@ class ProductNotFound extends Error {
   }
 }
 
-export function verifyProductCart(currentProduct) {
+function verifyKeys(listOfKeys, currentProduct) {
   if (!Object.keys(currentProduct).length) {
-    console.log("ERROR");
-    throw new ProductNotFound("Product not found");
+    return false;
   } else {
-    const listOfKeys = [
-      "nome", //
-      "id", //
-      "descricao", //
-      "imagem",
-      "categorias", //
-      "categoria", //
-      "total",
-      "quantity",
-    ];
     const verified =
       listOfKeys.filter((key) => {
         return key in currentProduct;
       }).length === listOfKeys.length;
-    console.log(listOfKeys.filter((key) => key in currentProduct));
-    console.log(verified);
+    return verified;
+  }
+}
+export function verifyProductCart(currentProduct) {
+  const listOfKeys = [
+    "nome",
+    "id", 
+    "descricao", 
+    "imagem",
+    "categorias", 
+    "categoria", 
+    "total",
+    "quantity",
+  ];
+  const verified = verifyKeys(listOfKeys, currentProduct);
 
-    console.log(currentProduct);
-    if (!verified) {
-      throw new ProductNotFound("Product not found");
-    }
+  console.log(listOfKeys.filter((key) => key in currentProduct));
+  console.log(verified);
+  console.log(currentProduct);
+  
+  if (!verified) {
+    throw new ProductNotFound("Product not found");
   }
 }
 export function verifyProduct(currentProduct) {
-  if (!Object.keys(currentProduct).length) {
-    console.log(currentProduct);
-    return false;
-  } else {
-    const listOfKeys = [
-      "nome",
-      "id",
-      "descricao",
-      "imagem",
-      "categorias",
-      "preco",
-      "categoria",
-      "alias",
-      "link",
-    ];
+  const listOfKeys = [
+    "nome",
+    "id",
+    "descricao",
+    "imagem",
+    "categorias",
+    "preco",
+    "categoria",
+    "alias",
+    "link",
+  ];
 
-    const verified =
-      listOfKeys.filter((key) => {
-        return key in currentProduct;
-      }).length === listOfKeys.length;
-    if (!verified) {
-      return false;
-    }
-  }
-  return true;
+  const verified = verifyKeys(listOfKeys, currentProduct);
+  return verified;
 }
