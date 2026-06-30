@@ -51,7 +51,7 @@ export function payCart() {
     const { authUserId: userId } = getState().auth;
     dispatch({ type: "cart/loadingCart" });
     try {
-      await requestJson(`users/${userId}/clearCart`, {
+      const data = await requestJson(`users/${userId}/clearCart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,9 +60,13 @@ export function payCart() {
           cart: [],
         }),
       });
-      dispatch({
-        type: "cart/payCart",
-      });
+      if (data?.status === "clean") {
+        dispatch({
+          type: "cart/payCart",
+        });
+      }else{
+        throw new Error("Error on pay cart")
+      }
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
     }
