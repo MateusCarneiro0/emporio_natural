@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import getLocalStorage from "./localStorageThunk";
+import getLocalStorage from "../../api/localStorageThunk";
 import requestJson from "./requestJson";
 
 const initialState = {
@@ -68,7 +68,7 @@ export function fetchCart() {
     const { authUserId: userId } = getState().auth;
     try {
       const data = await requestJson(`users/${userId}`);
-      console.log(data)
+      console.log(data);
       dispatch({
         type: "cart/receiveCart",
         payload: { cart: data.cart, userId },

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import getLocalStorage from "./Components/features/localStorageThunk";
+import getLocalStorage from "./api/localStorageThunk";
 import { fetchProducts } from "./Components/features/productsSlice";
 function Storager({ children }) {
   const { isAuthenticated } = useSelector((store) => store.auth);
