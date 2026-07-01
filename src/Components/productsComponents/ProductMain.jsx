@@ -28,7 +28,7 @@ const ProductMain = memo(function ProductMain() {
       "Vamos comprar aquele Whey para começar o dia? 🔋",
       "Deixa eu adivinhar, que tal comprar uma castanha de caju? 🥜",
       "A noite e o dia,mas a energia vem de uma frutinha 🍎",
-    ].at(Math.floor(Math.random() * 3));
+    ].at(Math.floor(Math.random() * 4));
   }, []);
 
   const { isLoading, displayProducts, error } = useSelector(
@@ -46,28 +46,39 @@ const ProductMain = memo(function ProductMain() {
   return (
     <main className={styles.products}>
       <header>
-        <h2>
-          Olá <i>{authUser}</i>,{phraseRef.current}
-        </h2>
+        {authUser && (
+          <h2>
+            Olá <i>{authUser}</i>,{phraseRef.current}
+          </h2>
+        )}
         <input
           className={styles.searchInput}
           placeholder="Digite um produto..."
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
         />
+        {displayProducts.length && (
+          <h3 className={styles.lengthDisplay}>
+            Foram encontrados <i>{displayProducts.length}</i>
+            produtos
+          </h3>
+        )}
       </header>
       <div className={styles.productsContainer}>
-        {displayProducts.length ? displayProducts.map((product) => (
-          <CardProduct
-            key={product.id}
-            title={product.nome}
-            src={product.imagem}
-            price={product.preco}
-            id={product.id}
-            categoria={product.categoria}
-          >
-            {product.descricao}
-          </CardProduct>)):(
+        {displayProducts.length ? (
+          displayProducts.map((product) => (
+            <CardProduct
+              key={product.id}
+              title={product.nome}
+              src={product.imagem}
+              price={product.preco}
+              id={product.id}
+              categoria={product.categoria}
+            >
+              {product.descricao}
+            </CardProduct>
+          ))
+        ) : (
           <h1 className={styles.enough}>Nenhum produto</h1>
         )}
       </div>

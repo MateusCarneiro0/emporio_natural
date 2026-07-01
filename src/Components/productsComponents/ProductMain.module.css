@@ -54,7 +54,11 @@
   margin-top: 90px;
   margin-bottom: 300px;
 }
-
+.lengthDisplay{
+  margin-top: 15px;
+  text-align: center;
+  color: var(--principal-green);
+}
 @media (max-width: 600px) {
   .productsContainer {
     display: grid;
@@ -64,5 +68,20 @@
     max-width: 95vw; /* Limita a largura máxima do bloco inteiro de produtos */
     margin: 0 auto; /* Centraliza o bloco inteiro na tela do site */
     padding: 1vw;
+  }
+  .searchInput {
+    width: 90vw;
+    height: 70px;
+    align-self: center;
+    justify-self: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .searchInput {
+    width: 90vw;
+    height: 50px;
+    align-self: center;
+    justify-self: center;
   }
 }
