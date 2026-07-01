@@ -59,8 +59,7 @@ const ProductMain = memo(function ProductMain() {
         />
         {displayProducts.length && (
           <h3 className={styles.lengthDisplay}>
-            Foram encontrados <i>{displayProducts.length}</i>
-            produtos
+            Foram encontrados <i>{displayProducts.length}</i> produtos
           </h3>
         )}
       </header>
