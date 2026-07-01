@@ -16,7 +16,7 @@ function CartCard({
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div className={`${styles.cartCard} ${isLast ? styles.last : ""}`}>
+    <div className={`${styles.cartContainer} ${isLast ? styles.last : ""}`}>
       <div
         className={styles.card}
         onClick={(ev) => {
@@ -32,7 +32,6 @@ function CartCard({
         <p className={styles.quantity}>
           {quantity} {categoria}
         </p>
-      </div>
       <button
         className={styles.button}
         onClick={(ev) => {
@@ -42,6 +41,7 @@ function CartCard({
       >
         &times;
       </button>
+      </div>
     </div>
   );
 }

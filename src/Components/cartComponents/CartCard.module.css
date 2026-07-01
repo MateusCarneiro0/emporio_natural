@@ -1,33 +1,31 @@
 .card {
+  display: flex;
+  flex-direction: row;
   border: 1px solid var(--dark-green-principal);
   background-color: var(--principal-bg-color);
-  width: 90vw;
-  height: 65px;
-  display: flex;
+  min-width: 90vw;
+  max-height: 65px;
   border-radius: 17.5px;
-  margin-top: 15px;
-  margin-left: 15px;
+  margin: 15px auto;
   justify-content: space-between;
   align-items: center;
+  padding-right: 10px;
+  flex-grow: 1;
 }
 .card h3 {
   color: var(--principal-green);
-  margin-right: 225px;
 }
 .card img {
-  position: relative;
-  left: auto;
-  height: 65px;
-  width: 75px;
-  object-fit: cover;
-}
-.price {
-  position: relative;
-  right: 100px;
+  height: auto;
+  max-height: 50px;
+  max-width: fit-content;
+  width: 25%;
+  align-self: flex-start;
+  object-fit: contain;
+  flex-shrink: 0;
+  overflow-y: hidden;
 }
 .button {
-  margin-top: 11.5px;
-  margin-left: 15px;
   background-color: red;
   color: #fff;
   width: 40px;
@@ -36,6 +34,7 @@
   border: none;
   outline: none;
   font-size: 24px;
+  flex-shrink: 0;
 }
 .button:hover {
   cursor: pointer;
@@ -47,12 +46,20 @@
 .last {
   margin-bottom: 100px;
 }
-.cartCard {
+.cartContainer {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow-y: hidden;
+  min-width: 90vw; 
 }
-.quantity {
-  position: relative;
-  right: 10%;
+.price{
+  overflow-wrap: nowrap;
+
+}
+
+@media(max-width:400px){
+  .card{
+    width: 90vw;
+  }
 }
