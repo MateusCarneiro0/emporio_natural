@@ -17,7 +17,7 @@ const productsSlice = createSlice({
       state.isLoading = true;
     },
     rejected(sta, action) {
-      sta.error = "Error in fetch products try later";
+      sta.error = action?.payload || "Error in fetch product";
       sta.isLoading = false;
     },
     receiveProducts(sta, act) {

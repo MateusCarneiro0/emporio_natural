@@ -4,11 +4,13 @@ export function fetchProducts() {
   return async (dispatch, getState) => {
     dispatch({ type: "products/loadingProducts" });
     try {
-      
       const data = await requestJson("/");
       dispatch({ type: "products/receiveProducts", payload: data });
     } catch (err) {
-      dispatch({ type: "products/rejected", payload:"Error on fetch products" });
+      dispatch({
+        type: "products/rejected",
+        payload: "Error on fetch products",
+      });
     }
   };
 }
@@ -18,13 +20,17 @@ export function getProduct(id) {
     dispatch({ type: "products/loadingProducts" });
     try {
       const data = await requestJson(`products/${id}`);
-      
-      dispatch({
-        type: "products/receivedCurrentProduct",
-        payload: data.at(0),
-      });
-    } catch {
-      dispatch({ type: "products/rejected" });
+      const product = data?.at?.(0);
+      if (product) {
+        dispatch({
+          type: "products/receivedCurrentProduct",
+          payload: product,
+        });
+      } else {
+        throw new Error("Produto não encontrado");
+      }
+    } catch (err) {
+      dispatch({ type: "products/rejected", payload: err.message });
     }
   };
 }
