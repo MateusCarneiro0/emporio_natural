@@ -58,8 +58,18 @@
 
 }
 
-@media(max-width:400px){
-  .card{
-    width: 90vw;
+@media(max-width:380px){
+  .card {
+    padding-right:8px ;  
+    gap: 6px;
+  }
+  .card h3 {
+    font-size: 0.80rem;
+  }
+  .price, .quantity {
+    font-size: 0.80rem;
+  }
+  .card img{
+    object-fit: fill;
   }
 }
