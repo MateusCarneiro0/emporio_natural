@@ -25,7 +25,7 @@ function Product() {
     dispatch(getProduct(id));
   }, [id, dispatch]);
 
-  const { cartProducts } = useSelector((store) => store.cart);
+  const { cartProducts, error: cartError } = useSelector((store) => store.cart);
 
   const { isLoading, currentProduct, error } = useSelector(
     (store) => store.products,
@@ -101,7 +101,9 @@ function Product() {
                 categoria,
               }),
             );
-            navigate("/cart");
+            if (!cartError && !isLoading) {
+              navigate("/cart");
+            }
           }}
         >
           {cartProducts?.some?.((productItem) => productItem.nome === nome)
