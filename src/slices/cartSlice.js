@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import getLocalStorage from "../api/localStorageThunk";
+import { logout } from "./authSlice";
 
 const initialState = {
   cartProducts: [],
@@ -57,7 +58,9 @@ const cartReducer = createSlice({
           sta.error = "";
           sta.cartProducts = act.payload.cart;
         }
-      });
+      }).addCase(logout, (sta,act) => {
+        sta.cartProducts = []
+      })
   },
 });
 
