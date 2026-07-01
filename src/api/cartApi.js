@@ -37,6 +37,9 @@ export function addProductCart(product) {
         payload: product,
       });
     } catch (err) {
+      if (err.name === "ProductNotFound" && product?.id) {
+        dispatch(deleteProductCart(product.id))
+      }
       dispatch({ type: "cart/rejected", payload: err.message });
     }
   };
@@ -47,9 +50,10 @@ export function deleteProductCart(productId) {
     const { authUserId: userId } = getState().auth;
     const { cartProducts } = getState().cart;
 
-    const product = cartProducts.filter(
-      (productCart) => productCart?.id === productId,
-    ).at(0)
+    const product = cartProducts
+      .filter((productCart) => productCart?.id === productId)
+      .at(0);
+    if (!product) throw new Error("Produto inexistente para deletar");
 
     verifyProductCart(product);
 
