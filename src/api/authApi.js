@@ -56,6 +56,11 @@ export function createNewUser(user) {
 export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
+    if (!username || !password) {
+      throw new Error(
+        "Nome de usuário e Senha nulos ou inválidos tente novamente",
+      );
+    }
     try {
       const data = await requestJson(`users/login`, {
         method: "POST",
