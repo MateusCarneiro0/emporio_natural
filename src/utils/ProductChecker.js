@@ -11,7 +11,7 @@ function verifyKeys(listOfKeys, currentProduct) {
   } else {
     const verified =
       listOfKeys.filter((key) => {
-        return key in currentProduct;
+        return key in currentProduct && currentProduct[key];
       }).length === listOfKeys.length;
     return verified;
   }
