@@ -22,7 +22,11 @@ export function createNewUser(user) {
           type: "auth/rejectedSignup",
           payload: { hasRepeated: true },
         });
-      } else if (user.user.length > 100 || user.password.length > 100 || data?.manyCharacters) {
+      } else if (
+        user.user.length > 100 ||
+        user.password.length > 100 ||
+        data?.manyCharacters
+      ) {
         dispatch({
           type: "auth/rejectedSignup",
           payload: { manyCharacters: true },
@@ -64,15 +68,21 @@ export function loginUser(username, password) {
 
       if (data.auth) {
         const { id, user, cart } = data;
-        const loggedUser = { id, user };
-        dispatch({ type: "auth/loginUser", payload: loggedUser });
-        dispatch({ type: "cart/receiveCart", payload: cart });
-
+        if (Array.isArray(cart) && id && user) {
+          const loggedUser = { id, user };
+          dispatch({ type: "auth/loginUser", payload: loggedUser });
+          dispatch({ type: "cart/receiveCart", payload: cart });
+        } else {
+          throw new Error("Erro em encontrar um carrinho");
+        }
       } else {
         dispatch({ type: "auth/authRejected" });
       }
     } catch (err) {
-      dispatch({ type: "auth/rejected", payload: "Error when login user in server try later"});
+      dispatch({
+        type: "auth/rejected",
+        payload: err.message,
+      });
     }
   };
 }
