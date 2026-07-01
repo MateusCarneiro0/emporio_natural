@@ -1,4 +1,5 @@
 .productsContainer {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 3fr);
   gap: 20px;
@@ -7,16 +8,13 @@
   margin: 0 auto; /* Centraliza o bloco inteiro na tela do site */
   padding: 20px;
 }
-.products {
-  display: flex-box;
-}
 .products header {
   align-self: center;
   justify-self: center;
   margin-bottom: 40px;
   margin-top: 40px;
 }
-.products header h2{
+.products header h2 {
   font-family: "Quantico";
 }
 .spinner {
@@ -55,4 +53,16 @@
   justify-self: center;
   margin-top: 90px;
   margin-bottom: 300px;
+}
+
+@media (max-width: 600px) {
+  .productsContainer {
+    display: grid;
+    grid-template-columns: repeat(1, 3fr);
+    gap: 20px;
+
+    max-width: 95vw; /* Limita a largura máxima do bloco inteiro de produtos */
+    margin: 0 auto; /* Centraliza o bloco inteiro na tela do site */
+    padding: 1vw;
+  }
 }
