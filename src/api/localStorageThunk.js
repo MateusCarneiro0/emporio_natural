@@ -5,10 +5,9 @@ import requestJson from "./requestJson";
 const getLocalStorage = createAsyncThunk(
   "auth/getLocalStorage",
   async (_, { rejectWithValue }) => {
-    const id = JSON.parse(localStorage.getItem(idKey));
-    if (!id) return null;
-
     try {
+      const id = JSON.parse(localStorage.getItem(idKey));
+      if (!id) return null;
       const data = await requestJson(`/users/fetch/${id}`);
       return data;
     } catch (err) {
