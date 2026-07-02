@@ -16,7 +16,7 @@
 .img {
   height: auto;
   width: fit-content;
-  object-fit: fill; 
+  object-fit: fill;
 }
 .informations {
   display: flex;
@@ -62,7 +62,7 @@
   display: flex;
   flex-direction: column;
 }
-.labelInput{
+.labelInput {
   font-size: 1.5rem;
   color: rgb(2, 117, 2);
 }
@@ -76,17 +76,19 @@
 .price {
   font-size: 1.5rem;
 }
-@media(max-width:491px){
-  .product{
+@media (max-width: 520px) {
+  .product {
     flex-direction: column;
-    margin-bottom: 100px;
+    padding-bottom: 100px;
   }
-  .imgContainer{
+  .imgContainer {
     width: 100vw;
   }
-  .img{
+  .img {
     object-fit: contain;
     width: 100%;
   }
-
+  .productInput {
+    width: 75%;
+  }
 }

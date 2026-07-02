@@ -89,7 +89,7 @@ function Product() {
               }}
             />
             <p className={styles.price}>
-              Total:{Number((preco * quantity).toFixed(2))} R$
+              Total:<strong>{Number((preco * quantity).toFixed(2))}</strong> R$
             </p>
           </div>
         </div>
