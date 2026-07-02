@@ -73,3 +73,23 @@
     object-fit: fill;
   }
 }
+@media(max-width:280px){
+  .card {
+    padding-right:10px ;  
+    gap: 6px;
+  }
+  .card h3 {
+    font-size: 0.65rem;
+  }
+  .price, .quantity {
+    font-size: 0.65rem;
+  }
+  .card img{
+    object-fit: fill;
+  }
+  .button{
+    height: 25px;
+    width: 25px;
+    overflow-y: hidden;
+  }
+}
