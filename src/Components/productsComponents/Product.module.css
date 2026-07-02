@@ -1,14 +1,31 @@
 .product{
   display: flex;
   justify-content: space-between;
+  flex-direction: row;
+  gap: 15px;
+}
+.imgContainer{
+  width: 50%;
+  height: 500px;
+  aspect-ratio: 1/1;
+  display: flex;
+  margin-right: auto;
+  flex-shrink: 0;
+}
+.img{
+  height: auto;
+  width: fit-content;
+  object-fit: contain;
 }
 .informations{
   display: flex;
   flex-direction: column;
+  gap: 25px;
 }
 .importantInformations{
   display: flex;
   flex-direction: column;
+  gap: 50px;
 }
 .name{
   align-self: center;
@@ -16,6 +33,33 @@
   color: rgb(129, 196, 30);
 }
 .description{
+  text-align: start;
+  font-size: 1.5rem;
+}
+.details{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.category{
+  font-size: 1.5rem;
+}
+.seePlus{
+  font-size: 1.5rem;
+}
+.seePlus a {
+  color: var(--principal-green);
+}
+.priceContainer{
+  display: flex;
+  flex-direction: column;
+}
+.productInput{
+  width: 25vw;
+  height: 35px;
+  border-radius: 10px;
   text-align: center;
-  
+}
+.price{
+  font-size: 1.5rem;
 }

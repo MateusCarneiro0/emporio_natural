@@ -48,7 +48,7 @@ function Product() {
           <p className={styles.description}>{descricao}</p>
         </div>
         <div className={styles.details}>
-          <p className={styles.categoryContainer}>
+          <p className={styles.category}>
             Categorias:{" "}
             {categorias?.map((categoria, index) => (
               <strong key={categoria}>
