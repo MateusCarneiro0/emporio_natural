@@ -16,7 +16,7 @@
 .img {
   height: auto;
   width: fit-content;
-  object-fit: fill; /*491px*/
+  object-fit: fill; 
 }
 .informations {
   display: flex;
@@ -75,4 +75,18 @@
 }
 .price {
   font-size: 1.5rem;
+}
+@media(max-width:491px){
+  .product{
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
+  .imgContainer{
+    width: 100vw;
+  }
+  .img{
+    object-fit: contain;
+    width: 100%;
+  }
+
 }
