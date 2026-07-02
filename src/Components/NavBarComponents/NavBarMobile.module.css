@@ -1,0 +1,27 @@
+.nav {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--principal-bg-color);
+  gap: 15px;
+  align-items: center;
+  font-family: "Inter";
+}
+.nav .imageLink {
+  text-decoration: none;
+  color: rgb(49, 36, 36);
+}
+.nav .imageLink:hover {
+  cursor: pointer;
+}
+.nav .textLink {
+  font-size: 20px;
+  text-decoration: none;
+  color: rgb(49, 36, 36);
+}
+.nav :global(.active):not(.imageLink) {
+  color: var(--dark-green-principal);
+}
+.nav .textLink:not(:global(.active)):hover {
+  color: var(--principal-green);
+}
