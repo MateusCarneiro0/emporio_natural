@@ -2,8 +2,6 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  margin-top: 30px;
-  margin-right: 150px;
 }
 .links a {
   text-decoration: none;

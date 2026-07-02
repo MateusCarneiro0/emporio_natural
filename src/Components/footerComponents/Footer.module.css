@@ -1,6 +1,15 @@
 .footer {
+  padding-top: 30px;
   display: flex;
   background-color: var(--dark-green-principal);
   padding-bottom: 45px;
   justify-content: space-around;
+  gap: 10px;
+}
+
+@media(max-width:555px){
+  .footer{
+    padding: 30px 7.5px;
+    justify-content: space-between;
+  }
 }
