@@ -1,10 +1,11 @@
-.product{
+.product {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   gap: 15px;
+  background-color: var(--principal-bg-color);
 }
-.imgContainer{
+.imgContainer {
   width: 50%;
   height: 500px;
   aspect-ratio: 1/1;
@@ -12,54 +13,66 @@
   margin-right: auto;
   flex-shrink: 0;
 }
-.img{
+.img {
   height: auto;
   width: fit-content;
-  object-fit: contain;
+  object-fit: fill; /*491px*/
 }
-.informations{
+.informations {
   display: flex;
   flex-direction: column;
   gap: 25px;
+  flex: 1;
+  min-width: 0;
 }
-.importantInformations{
+.importantInformations {
   display: flex;
   flex-direction: column;
   gap: 50px;
 }
-.name{
+.name {
   align-self: center;
   font-size: 3rem;
   color: rgb(129, 196, 30);
+  word-wrap: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
-.description{
+.description {
   text-align: start;
   font-size: 1.5rem;
+  color: var(--dark-green-principal);
 }
-.details{
+.details {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  color: var(--dark-green-principal);
 }
-.category{
+.category {
   font-size: 1.5rem;
 }
-.seePlus{
+.seePlus {
   font-size: 1.5rem;
 }
 .seePlus a {
   color: var(--principal-green);
 }
-.priceContainer{
+.priceContainer {
   display: flex;
   flex-direction: column;
 }
-.productInput{
+.labelInput{
+  font-size: 1.5rem;
+  color: rgb(2, 117, 2);
+}
+.productInput {
   width: 25vw;
   height: 35px;
   border-radius: 10px;
   text-align: center;
+  background-color: var(--principal-bg-color);
 }
-.price{
+.price {
   font-size: 1.5rem;
 }

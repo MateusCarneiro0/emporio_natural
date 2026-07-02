@@ -73,8 +73,10 @@ function Product() {
               gap: "20px",
             }}
           >
+            <span className={styles.labelInput}>Digite uma quantidade:</span>
             <input
               type="number"
+              inputMode="numeric"
               placeholder="digite uma quantidade"
               className={styles.productInput}
               value={quantity}
