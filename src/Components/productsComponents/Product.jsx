@@ -40,52 +40,56 @@ function Product() {
   return (
     <div className={styles.product}>
       <div className={styles.imgContainer}>
-        <img alt={nome} src={imagem} />
+        <img alt={nome} src={imagem} className={styles.img} />
       </div>
       <div className={styles.informations}>
-        <h1>{nome}</h1>
-        <p className={styles.description}>{descricao}</p>
-        <p className={styles.categoryContainer}>
-          Categorias:{" "}
-          {categorias?.map((categoria, index) => (
-            <strong key={categoria}>
-              {index === categorias.length - 1
-                ? `${categoria}.`
-                : `${categoria},`}
-            </strong>
-          ))}
-        </p>
-        <p className={styles.seePlus}>
-          Conheça mais clicando{" "}
-          <a href={link}>
-            <strong>aqui</strong>
-          </a>
-        </p>
-        <div
-          className={styles.priceContainer}
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            gap: "20px",
-          }}
-        >
-          <input
-            type="number"
-            placeholder="digite uma quantidade"
-            className={styles.productInput}
-            value={quantity}
-            onChange={(ev) => {
-              setQuantity((quantity) => {
-                const value =
-                  +ev.target.value <= 0 ? quantity : +ev.target.value;
-                return categoria === "Un" ? Math.round(value) : value;
-              });
-            }}
-          />
-          <p className={styles.price}>
-            Total:{Number((preco * quantity).toFixed(2))} R$
+        <div className={styles.importantInformations}>
+          <h1 className={styles.name}>{nome}</h1>
+          <p className={styles.description}>{descricao}</p>
+        </div>
+        <div className={styles.details}>
+          <p className={styles.categoryContainer}>
+            Categorias:{" "}
+            {categorias?.map((categoria, index) => (
+              <strong key={categoria}>
+                {index === categorias.length - 1
+                  ? `${categoria}.`
+                  : `${categoria},`}
+              </strong>
+            ))}
           </p>
+          <p className={styles.seePlus}>
+            Conheça mais clicando{" "}
+            <a href={link}>
+              <strong>aqui</strong>
+            </a>
+          </p>
+          <div
+            className={styles.priceContainer}
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              gap: "20px",
+            }}
+          >
+            <input
+              type="number"
+              placeholder="digite uma quantidade"
+              className={styles.productInput}
+              value={quantity}
+              onChange={(ev) => {
+                setQuantity((quantity) => {
+                  const value =
+                    +ev.target.value <= 0 ? quantity : +ev.target.value;
+                  return categoria === "Un" ? Math.round(value) : value;
+                });
+              }}
+            />
+            <p className={styles.price}>
+              Total:{Number((preco * quantity).toFixed(2))} R$
+            </p>
+          </div>
         </div>
         <Button
           onClick={() => {
