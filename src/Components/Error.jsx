@@ -1,17 +1,12 @@
-function Error() {
+import styles from "./Error.module.css";
+
+function Error({ message }) {
   return (
-    <h3
-      style={{
-        fontSize: "60px",
-        justifySelf: "center",
-        alignSelf: "center",
-        color: "red",
-        marginTop: "150px",
-        marginBottom:"350px"
-      }}
-    >
-      Um erro ocorreu tente denovo
-    </h3>
+    <div className={styles.errorContainer}>
+      <h3 className={styles.errorMessage}>
+        {message ? message : "Um erro ocorreu tente denovo"}
+      </h3>
+    </div>
   );
 }
 
