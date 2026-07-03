@@ -55,17 +55,17 @@ const authReducer = createSlice({
       sta.authError = false;
       localStorage.removeItem(idKey);
     },
-    authRejected(sta) {
-      sta.error = "";
+    authRejected(sta, act) {
+      sta.error = act?.payload
+        ? act.payload
+        : "Usuário ou senha não encontrados tente novamente";
       sta.isLoading = false;
       sta.authError = true;
     },
     rejectedSignup(sta, act) {
       sta.error = "";
       sta.isLoading = false;
-      sta.signupError = act.payload.manyCharacters
-        ? "Many characters use less characters(100 in total)"
-        : "User is has repeated";
+      sta.signupError = act.payload;
     },
   },
   extraReducers: (builder) => {

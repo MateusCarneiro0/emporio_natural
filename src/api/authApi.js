@@ -1,5 +1,10 @@
 import requestJson from "./requestJson";
-
+class EnoughDataError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = "EnoughDataError";
+  }
+}
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
@@ -14,13 +19,15 @@ export function createNewUser(user) {
       });
 
       if (!user?.user || !user?.password) {
-        throw new Error("username or password is not identificated");
+        throw new EnoughDataError(
+          "Campos de usuário ou de senha nulos preencha-os",
+        );
       }
 
       if (data?.hasRepeated) {
         dispatch({
           type: "auth/rejectedSignup",
-          payload: { hasRepeated: true },
+          payload: "Nome de usuário já criado",
         });
       } else if (
         user.user.length > 100 ||
@@ -29,7 +36,7 @@ export function createNewUser(user) {
       ) {
         dispatch({
           type: "auth/rejectedSignup",
-          payload: { manyCharacters: true },
+          payload: "Muitos caracteres use no máximo 100 caracteres",
         });
       } else {
         const { id, user: createdUser, cart } = data;
@@ -41,8 +48,10 @@ export function createNewUser(user) {
       if (err.name === "FetchApiError") {
         dispatch({
           type: "auth/rejected",
-          payload: "Erro when create user in server",
+          payload: "Erro em criar usuário tente novamente mais tarde",
         });
+      } else if (err.name === "EnoughDataError") {
+        dispatch({ type: "auth/rejectedSignup", payload: err.message });
       } else {
         dispatch({
           type: "auth/rejected",
@@ -57,7 +66,7 @@ export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch({ type: "auth/loadingUsers" });
     if (!username || !password) {
-      throw new Error(
+      throw new EnoughDataError(
         "Nome de usuário e Senha nulos ou inválidos tente novamente",
       );
     }
@@ -78,16 +87,23 @@ export function loginUser(username, password) {
           dispatch({ type: "auth/loginUser", payload: loggedUser });
           dispatch({ type: "cart/receiveCart", payload: cart });
         } else {
-          throw new Error("Erro em encontrar um carrinho");
+          throw new Error("Erro em encontrar um carrinho no servidor tente novamente mais tarde");
         }
       } else {
         dispatch({ type: "auth/authRejected" });
       }
     } catch (err) {
-      dispatch({
-        type: "auth/rejected",
-        payload: err.message,
-      });
+      if (err.name === "EnoughDataError") {
+        dispatch({
+          type: "auth/authRejected",
+          payload: err.message,
+        });
+      } else {
+        dispatch({
+          type: "auth/rejected",
+          payload: err.message,
+        });
+      }
     }
   };
 }
