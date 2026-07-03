@@ -5,7 +5,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
 import { NavLink } from "react-router-dom";
-import NavLoginButton from "./NavLoginButton"
+import NavLoginButton from "./NavLoginButton";
 
 function NavModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +31,14 @@ function NavModal() {
 
       {isOpen && (
         <main className={styles.links}>
+          <NavLink to="/" className={styles.textLink}>
+            Inicio
+          </NavLink>
+          <div className={styles.separator}>
+            <span>
+              <hr></hr>
+            </span>
+          </div>
           <NavLink to="/produtos" className={styles.textLink}>
             Produtos
           </NavLink>
@@ -79,7 +87,12 @@ function NavModal() {
             </>
           )}
 
-          {isAuthenticated ? <LogoutIconNavMobile />:<NavLoginButton />}
+          {isAuthenticated ? <LogoutIconNavMobile /> : <NavLoginButton />}
+          <div className={styles.separator}>
+            <span>
+              <hr></hr>
+            </span>
+          </div>
         </main>
       )}
     </div>
