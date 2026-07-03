@@ -5,7 +5,7 @@
   overflow-y: hidden;
 }
 .spinner {
-  overflow-y: hidden;
+  overflow: hidden;
   display: flex;
   position: absolute;
   left: 50%;
@@ -17,6 +17,6 @@
 }
 .spinner h2 {
   overflow-y: hidden;
-
+  width: 100%;
   color: var(--principal-green);
 }

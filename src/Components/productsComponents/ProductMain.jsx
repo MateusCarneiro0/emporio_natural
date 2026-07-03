@@ -40,7 +40,8 @@ const ProductMain = memo(function ProductMain() {
 
   if (id) return <Outlet />;
 
-  if (isLoading || isLoadingCart) return <Spinner />;
+  if (isLoading || isLoadingCart)
+    return <Spinner message="Carregando Produtos..." />;
   if (error) return <Error />;
 
   return (

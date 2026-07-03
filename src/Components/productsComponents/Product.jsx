@@ -33,7 +33,7 @@ function Product() {
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
 
-  if (isLoading) return <Spinner />;
+  if (isLoading) return <Spinner message="Carregando Produto..." />;
 
   if (error) return <Error />;
 
