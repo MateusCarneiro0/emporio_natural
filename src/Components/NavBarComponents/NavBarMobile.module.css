@@ -20,6 +20,9 @@
   text-decoration: none;
   color: rgb(49, 36, 36);
 }
+.nav :global(.active):not(.imageLink) {
+  color: var(--dark-green-principal);
+}
 .nav .textLink:not(:global(.active)):hover {
   color: var(--principal-green);
 }
