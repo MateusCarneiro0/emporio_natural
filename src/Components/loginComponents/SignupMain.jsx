@@ -9,7 +9,7 @@ import LoginButton from "./LoginButton";
 import Error from "../Error";
 
 import { ThreeDots } from "react-loader-spinner";
-import styles from "./SignupMain.module.css";
+import styles from "./LoginMain.module.css";
 function SignupMain() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ function SignupMain() {
   return (
     <div className={styles.loginContainer}>
       <form className={styles.login} onSubmit={handleSignup}>
-        <h1 style={{ color: "#f7f4e3" }}>Vamos se registrar</h1>
+        <h1 className={styles.title}>Vamos se registrar</h1>
         <Input
           placeholder={"Digite seu username"}
           setState={setUsername}
@@ -48,27 +48,17 @@ function SignupMain() {
           placeholder={"Digite sua senha"}
           setState={setPassword}
           value={password}
-                    disabled={isLoading}
-
+          disabled={isLoading}
         />
-        {signupError && (
-          <p className={styles.errorSignup}>{signupError}</p>
-        )}
+        {signupError && <p className={styles.errorSignup}>{signupError}</p>}
         {isLoading ? (
-          <>
-            <ThreeDots />
-            <span style={{ color: "white" }}>Carregando...</span>{" "}
-          </>
+          <ThreeDots />
         ) : (
-          <LoginButton
-            color="white"
-            backgroundColor="rgb(94, 133, 231)"
-            disabled={!clickabel}
-          >
+          <LoginButton register={true} disabled={!clickabel}>
             Registrar
           </LoginButton>
         )}
-        <p>
+        <p className={`${styles.notHaveLink}`}>
           Tem uma conta? Aperte{" "}
           <Link className={styles.link} to="/login">
             Aqui

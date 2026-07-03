@@ -1,6 +1,6 @@
 .button {
   transition: 0.2s all ease-in;
-  width: 400px;
+  width: 95%;
   height: 50px;
   border-radius: 25px;
   outline: none;
@@ -16,4 +16,10 @@
 .button:disabled {
   opacity: 0.3;
   cursor: not-allowed;
+}
+.register {
+  background-color: rgb(94, 133, 231);
+}
+.login {
+  background-color: rgb(163, 220, 79);
 }

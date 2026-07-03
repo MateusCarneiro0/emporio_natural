@@ -1,12 +1,10 @@
 import styles from "./LoginButton.module.css";
 
-function LoginButton({ children, color, backgroundColor, onClick, disabled }) {
+function LoginButton({ children, disabled, register }) {
   return (
     <button
       type="submit"
-      onClick={onClick}
-      className={styles.button}
-      style={{ color, backgroundColor }}
+      className={`${styles.button} ${register ? styles.register:styles.login}`}
       disabled={disabled}
     >
       {children}

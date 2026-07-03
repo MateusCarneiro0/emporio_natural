@@ -21,7 +21,8 @@ function LoginMain() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const clickabel = username && password;
-  function handleClick(ev) {
+  function handleSubmit(ev) {
+    ev.preventDefault();
     ev.preventDefault();
     dispatch(loginUser(username, password));
   }
@@ -32,8 +33,8 @@ function LoginMain() {
   if (error) return <Error />;
   return (
     <div className={styles.loginContainer}>
-      <form className={styles.login}>
-        <h1 style={{ color: "#f7f4e3" }}>Que bom te ver de volta</h1>
+      <form className={styles.login} onSubmit={handleSubmit}>
+        <h1 className={styles.title}>Que bom te ver de volta</h1>
         <Input
           placeholder={"Digite seu username"}
           setState={setUsername}
@@ -50,13 +51,9 @@ function LoginMain() {
           <p className={styles.authError}>Senha ou usuários inválidos</p>
         )}
         {isLoading ? (
-          <>
-            <ThreeDots />
-            <span style={{ color: "white" }}>Carregando...</span>
-          </>
+          <ThreeDots />
         ) : (
           <LoginButton
-            onClick={handleClick}
             disabled={!clickabel}
             color="white"
             backgroundColor="rgb(163, 220, 79)"
@@ -64,7 +61,7 @@ function LoginMain() {
             Login
           </LoginButton>
         )}
-        <p>
+        <p className={styles.notHaveLink}>
           Não tem uma conta ainda ? Aperte{" "}
           <Link className={styles.link} to="/signup">
             Aqui
