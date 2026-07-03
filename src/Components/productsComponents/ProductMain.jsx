@@ -42,7 +42,7 @@ const ProductMain = memo(function ProductMain() {
 
   if (isLoading || isLoadingCart)
     return <Spinner message="Carregando Produtos..." />;
-  if (error) return <Error />;
+  if (error) return <Error message={error} />;
 
   return (
     <main className={styles.products}>

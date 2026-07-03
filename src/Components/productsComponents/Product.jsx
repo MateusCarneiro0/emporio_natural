@@ -35,7 +35,7 @@ function Product() {
 
   if (isLoading) return <Spinner message="Carregando Produto..." />;
 
-  if (error) return <Error />;
+  if (error) return <Error message={error} />;
 
   return (
     <div className={styles.product}>

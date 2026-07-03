@@ -18,7 +18,7 @@ function CartMain() {
   );
 
   if (isLoading) return <Spinner message="Carregando Carrinho..." />;
-  if (error) return <Error />;
+  if (error) return <Error message={error} />;
 
   if (!cartProducts?.length)
     return (

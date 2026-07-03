@@ -30,7 +30,7 @@ function LoginMain() {
   useEffect(() => {
     if (isAuthenticated) navigate("/produtos");
   }, [isAuthenticated, navigate]);
-  if (error) return <Error />;
+  if (error) return <Error message={error} />;
   return (
     <div className={styles.loginContainer}>
       <form className={styles.login} onSubmit={handleSubmit}>
