@@ -19,16 +19,13 @@ function CartMain() {
 
   if (isLoading) return <Spinner message="Carregando Carrinho..." />;
   if (error) return <Error />;
+
   if (!cartProducts?.length)
     return (
       <div
-        style={{
-          marginBottom: "70vh",
-          display: "flex",
-          justifyContent: "center",
-        }}
+        className={styles.enoughProducts}
       >
-        <h2 style={{ color: "rgb(192, 195, 137)" }}>
+        <h2>
           Hey 👋,vamos adicionar algum produto?
         </h2>
       </div>
