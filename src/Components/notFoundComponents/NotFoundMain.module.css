@@ -5,6 +5,8 @@
   height: 250px;
   align-items: center;
   justify-content: center;
+  margin-top:250px;
+  margin-bottom:200px;
 }
 .code{
    color:red;
