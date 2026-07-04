@@ -15,7 +15,7 @@ function NotFound() {
       >
         404 Not Found :(
       </div>
-      <Footer />;
+      <Footer />
     </>
   );
 }
