@@ -14,13 +14,23 @@
   overflow-wrap:break-word;
   word-break:normal;
 }
-
+.button {
+  color:white;
+  background-color:red;
+  width:85%;
+  outline:none;
+  border: 1px transparent solid;
+  border-radius:10px;
+}
 @media(max-width:375px){
   .code{
     font-size:1.8rem;
   }
   .message{
-    font-size: 1rem;
+    font-size: 0.85rem;
+  }
+  .button {
+    font-size:0.85rem;
   }
 }
 
