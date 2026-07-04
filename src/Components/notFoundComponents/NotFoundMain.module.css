@@ -5,7 +5,7 @@
   height: 250px;
   align-items: center;
   justify-content: center;
-  margin-top:250px;
+  margin-top:200px;
   margin-bottom:200px;
 }
 .code{
@@ -17,6 +17,7 @@
   font-size:1.2rem;
   overflow-wrap:break-word;
   word-break:normal;
+  text-align:center;
 }
 .button {
   color:white;
