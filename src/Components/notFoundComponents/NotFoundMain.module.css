@@ -19,7 +19,7 @@
 .button {
   color:white;
   background-color:red;
-  max-width:300px;
+  width:85%;
   height:45px;
   outline:none;
   border: 1px transparent solid;
