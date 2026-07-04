@@ -6,9 +6,9 @@ function NotFound() {
     <div className={styles.notFoundContainer}>
       <h1 className={styles.code}>404</h1>
       <h3 className={styles.message}>
-        A rota especificada não existe tente outra rota
+        A rota especificada não existe, tente outra rota.
       </h3>
-      <button className={styles.button} onClick={() => navigate("/")}>Voltar</button>
+      <button className={styles.button} onClick={() => navigate("/")}>Voltar ao início</button>
     </div>
   );
 }
