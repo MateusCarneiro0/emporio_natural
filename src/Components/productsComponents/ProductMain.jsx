@@ -79,7 +79,7 @@ const ProductMain = memo(function ProductMain() {
             </CardProduct>
           ))
         ) : (
-          <h1 className={styles.enough}>Nenhum produto</h1>
+          <h1 className={styles.enough}>Nenhum produto procure outro produto</h1>
         )}
       </div>
     </main>
