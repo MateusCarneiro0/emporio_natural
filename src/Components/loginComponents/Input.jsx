@@ -1,8 +1,9 @@
 import styles from "./Input.module.css";
 
-function Input({ setState, placeholder, value, disabled }) {
+function Input({ setState, placeholder, value, disabled, type }) {
   return (
     <input
+      type={type}
       className={styles.input}
       placeholder={placeholder}
       value={value}
