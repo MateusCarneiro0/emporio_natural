@@ -51,6 +51,9 @@
   color: var(--principal-green);
   align-self: center;
   justify-self: center;
+  text-align: center;
+  overflow-wrap:break-word;
+  word-break:normal;
   margin-top: 90px;
   margin-bottom: 300px;
 }
@@ -83,5 +86,8 @@
     height: 50px;
     align-self: center;
     justify-self: center;
+  }
+  .enough {
+    font-size:1.8rem;
   }
 }
