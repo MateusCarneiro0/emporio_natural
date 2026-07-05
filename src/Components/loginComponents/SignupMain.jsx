@@ -49,6 +49,7 @@ function SignupMain() {
           setState={setPassword}
           value={password}
           disabled={isLoading}
+          type={"password"}
         />
         {signupError && <p className={styles.errorSignup}>{signupError}</p>}
         {isLoading ? (
