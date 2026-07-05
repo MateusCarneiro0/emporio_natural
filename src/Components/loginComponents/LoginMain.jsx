@@ -46,6 +46,7 @@ function LoginMain() {
           setState={setPassword}
           value={password}
           disabled={isLoading}
+          type="password"
         />
         {authError && (
           <p className={styles.authError}>Senha ou usuários inválidos</p>
