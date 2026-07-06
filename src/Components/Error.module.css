@@ -15,3 +15,9 @@
   padding-bottom: 170px;
   padding-top: 45px;
 }
+@media (max-width: 450px) {
+  .errorMessage {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+}
