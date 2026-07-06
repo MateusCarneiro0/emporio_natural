@@ -8,3 +8,16 @@
   height: 50px;
   width: 50px;
 }
+.logo h2{
+  font-size: 2rem;
+}
+@media (max-width:375px){
+  .logo h2{
+    font-size: 1.5rem;
+  }
+}
+@media(max-width:265px){
+  .logo h2{
+    font-size: 1.25rem;
+  }
+}

@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
 import { NavLink } from "react-router-dom";
 import NavLoginButton from "./NavLoginButton";
-
+import Logo from "./Logo"
 function NavModal() {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated } = useSelector((store) => store.auth);
@@ -32,7 +32,7 @@ function NavModal() {
       {isOpen && (
         <main className={styles.links}>
           <NavLink to="/" className={styles.textLink}>
-            Inicio
+            <Logo />
           </NavLink>
           <div className={styles.separator}>
             <span>
