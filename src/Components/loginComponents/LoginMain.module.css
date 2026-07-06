@@ -25,7 +25,9 @@
   transform: translateY(-5px);
 }
 .authError {
+  font-size: 1.4rem;
   color: rgb(246, 75, 75);
+  text-align: center;
 }
 .title {
   color: #f7f4e3;
