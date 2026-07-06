@@ -7,7 +7,8 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import NavLoginButton from "./NavLoginButton";
 import LogoutIconNav from "./LogoutIconNav";
-
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import EmailIcon from "@mui/icons-material/Email";
 function NavBarDesktop() {
   const { isAuthenticated } = useSelector((store) => store.auth);
   const { id } = useParams();
@@ -29,10 +30,10 @@ function NavBarDesktop() {
         <Logo />
       </NavLink>
       <NavLink to="/produtos" className={styles.textLink}>
-        Produtos
+        <ShoppingBagIcon /> <span>Produtos</span>
       </NavLink>
       <a href="mailto:emporionatural36@gmail.com" className={styles.textLink}>
-        Contato
+        <EmailIcon /> <span>Contato</span>
       </a>
       {isAuthenticated ? (
         <NavLink to="/cart" className={styles.textLink}>

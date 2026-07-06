@@ -6,7 +6,9 @@ import { useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
 import { NavLink } from "react-router-dom";
 import NavLoginButton from "./NavLoginButton";
-import Logo from "./Logo"
+import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
+import Logo from "./Logo";
+import EmailIcon from "@mui/icons-material/Email";
 function NavModal() {
   const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated } = useSelector((store) => store.auth);
@@ -40,7 +42,7 @@ function NavModal() {
             </span>
           </div>
           <NavLink to="/produtos" className={styles.textLink}>
-            Produtos
+            <ShoppingBagIcon /> <span>Produtos</span>
           </NavLink>
           <div className={styles.separator}>
             <span>
@@ -51,7 +53,7 @@ function NavModal() {
             href="mailto:emporionatural36@gmail.com"
             className={styles.textLink}
           >
-            Contato
+            <EmailIcon /> <span>Contato</span>
           </a>
           <div className={styles.separator}>
             <span>
@@ -61,6 +63,7 @@ function NavModal() {
           {isAuthenticated && (
             <>
               <NavLink to="/cart" className={styles.textLink}>
+              <span>Carrinho</span>
                 {({ isActive }) => (
                   /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
                   <IconButton>
