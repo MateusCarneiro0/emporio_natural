@@ -58,13 +58,13 @@ const ProductMain = memo(function ProductMain() {
           value={query}
           onChange={(ev) => setQuery(ev.target.value)}
         />
-        {displayProducts.length && (
+        {Boolean(displayProducts.length) && (
           <h3 className={styles.lengthDisplay}>
             Foram encontrados <i>{displayProducts.length}</i> produtos
           </h3>
         )}
       </header>
-      <div className={styles.productsContainer}>
+      <div className={displayProducts.length ? styles.productsContainer:styles.enoughContainer}>
         {displayProducts.length ? (
           displayProducts.map((product) => (
             <CardProduct
@@ -79,7 +79,7 @@ const ProductMain = memo(function ProductMain() {
             </CardProduct>
           ))
         ) : (
-          <h1 className={styles.enough}>Nenhum produto procure outro produto</h1>
+          <h1 className={styles.enough}>Nenhum produto encontrado, procure outro produto</h1>
         )}
       </div>
     </main>
