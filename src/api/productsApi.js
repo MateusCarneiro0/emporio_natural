@@ -4,12 +4,12 @@ export function fetchProducts() {
   return async (dispatch, getState) => {
     dispatch({ type: "products/loadingProducts" });
     try {
-      const data = await requestJson("/");
+      const data = await requestJson("");
       dispatch({ type: "products/receiveProducts", payload: data });
     } catch (err) {
       dispatch({
         type: "products/rejected",
-        payload: "Error on fetch products",
+        payload: "Erro em buscar os produtos, tente novamente mais tarde.",
       });
     }
   };

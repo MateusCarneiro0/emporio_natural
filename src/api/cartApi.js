@@ -73,7 +73,7 @@ export function deleteProductCart(productId) {
       if (err.name === "ProductNotFound") {
         dispatch({ type: "cart/rejected", payload: err.message });
       } else {
-        dispatch({ type: "cart/rejected", payload: "Error on delete product" });
+        dispatch({ type: "cart/rejected", payload: "Erro em deletar o produto, tente novamente mais tarde" });
       }
     }
   };
@@ -98,7 +98,7 @@ export function payCart() {
           type: "cart/payCart",
         });
       } else {
-        throw new Error("Error on pay cart");
+        throw new Error("Erro em pagar o carrinho, reinicie a página ou tente novamente mais tarde");
       }
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
