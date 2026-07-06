@@ -56,7 +56,7 @@ const authReducer = createSlice({
       localStorage.removeItem(idKey);
     },
     authRejected(sta, act) {
-      sta.error = act?.payload
+      sta.authError = act?.payload
         ? act.payload
         : "Usuário ou senha não encontrados tente novamente";
       sta.isLoading = false;

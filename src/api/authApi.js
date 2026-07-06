@@ -67,7 +67,7 @@ export function loginUser(username, password) {
     dispatch({ type: "auth/loadingUsers" });
     if (!username || !password) {
       throw new EnoughDataError(
-        "Nome de usuário e Senha nulos ou inválidos tente novamente",
+        "Campos de usuário ou de senha nulos preencha-os",
       );
     }
     try {

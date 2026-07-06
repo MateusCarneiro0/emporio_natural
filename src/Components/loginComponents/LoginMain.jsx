@@ -52,7 +52,7 @@ function LoginMain() {
           type="password"
         />
         {authError && (
-          <p className={styles.authError}>Senha ou usuários inválidos</p>
+          <p className={styles.authError}>Usuário ou senha não existem tente de novo</p>
         )}
         {isLoading ? (
           <ThreeDots />

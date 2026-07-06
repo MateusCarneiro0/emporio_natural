@@ -56,7 +56,7 @@ function SignupMain() {
           type="password"
           signup={true}
         />
-        {signupError && <p className={styles.errorSignup}>{signupError}</p>}
+        {signupError && <p className={styles.authError}>{signupError}</p>}
         {isLoading ? (
           <ThreeDots />
         ) : (
