@@ -58,7 +58,7 @@
 
 }
 
-@media(max-width:380px){
+@media(max-width:340px){
   .card {
     padding-right:8px ;  
     gap: 6px;

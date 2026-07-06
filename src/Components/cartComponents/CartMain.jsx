@@ -22,11 +22,10 @@ function CartMain() {
 
   if (!cartProducts?.length)
     return (
-      <div
-        className={styles.enoughProducts}
-      >
+      <div className={styles.enoughProducts}>
         <h2>
-          Hey 👋,vamos adicionar algum produto?
+          Hey 👋,você não colocou nada no carrinho.{" "}
+          <strong>Vamos adicionar algum produto?</strong>
         </h2>
       </div>
     );

@@ -1,16 +1,20 @@
 .cart {
   height: 70vh;
-  display: flex-box;
+  display: flex;
+  flex-direction: column;
 }
-.enoughProducts{
-  margin-top: 150px;
+.enoughProducts {
+  width: 100vw;
+  min-height: 65px;
+  margin-top: 300px;
   margin-bottom: 250px;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.enoughProducts h2{
+.enoughProducts h2 {
   text-align: center;
-  align-self: center;
-  overflow: hidden;
   overflow-wrap: break-word;
   word-break: normal;
+  color: var(--principal-green);
 }

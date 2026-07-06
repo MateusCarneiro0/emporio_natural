@@ -63,7 +63,6 @@ function NavModal() {
           {isAuthenticated && (
             <>
               <NavLink to="/cart" className={styles.textLink}>
-              <span>Carrinho</span>
                 {({ isActive }) => (
                   /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
                   <IconButton>
@@ -74,6 +73,13 @@ function NavModal() {
                         transition: "color 0.2s ease",
                       }}
                     />
+                    <span
+                      style={{
+                        color: isActive ? "rgb(170, 173, 121)" : "#757575",
+                      }}
+                    >
+                      Carrinho
+                    </span>{" "}
                     <span>
                       {!cartProducts?.length
                         ? null

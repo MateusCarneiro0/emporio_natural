@@ -47,6 +47,13 @@ function NavBarDesktop() {
                   transition: "color 0.2s ease",
                 }}
               />
+              <span
+                style={{
+                  color: isActive ? "rgb(170, 173, 121)" : "#757575",
+                }}
+              >
+                Carrinho
+              </span>
               <span>
                 {!cartProducts?.length ? null : `(${cartProducts?.length})`}
               </span>
