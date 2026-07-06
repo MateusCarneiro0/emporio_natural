@@ -30,6 +30,8 @@ function LoginMain() {
   useEffect(() => {
     if (isAuthenticated) navigate("/produtos");
   }, [isAuthenticated, navigate]);
+  if (error.toLocaleLowerCase() === "failed to fetch")
+    return <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />;
   if (error) return <Error message={error} />;
   return (
     <div className={styles.loginContainer}>
