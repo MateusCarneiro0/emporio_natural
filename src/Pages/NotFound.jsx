@@ -1,20 +1,12 @@
 import Footer from "../Components/footerComponents/Footer";
 import NavBar from "../Components/NavBarComponents/NavBar";
+import NotFoundMain from "../Components/notFoundComponents/NotFoundMain";
 
 function NotFound() {
   return (
     <>
       <NavBar />
-      <div
-        style={{
-          color: "red",
-          fontSize: "70px",
-          marginBottom: "500px",
-          fontFamily: "Inter",
-        }}
-      >
-        404 Not Found :(
-      </div>
+      <NotFoundMain />
       <Footer />
     </>
   );

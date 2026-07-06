@@ -1,46 +1,43 @@
 .notFoundContainer {
   display: flex;
   flex-direction: column;
+  gap: 35px;
   width: 100vw;
   height: 250px;
   align-items: center;
   justify-content: center;
-  margin-top:200px;
-  margin-bottom:200px;
+  margin-top: 200px;
+  margin-bottom: 200px;
 }
-.code{
-   color:#dc3545;
-   font-size:2.5rem;
+.code {
+  color: #dc3545;
+  font-size: 2.5rem;
+  margin-bottom: 25px;
 }
-.message{
-  color:red;
-  font-size:1.2rem;
-  overflow-wrap:break-word;
-  word-break:normal;
-  text-align:center;
+.message {
+  color: rgb(255, 85, 85);
+  font-size: 1.9rem;
+  overflow-wrap: break-word;
+  word-break: normal;
+  text-align: center;
 }
 .button {
-  color:white;
-  background-color:red;
-  width:85%;
-  height:45px;
-  outline:none;
+  color: white;
+  background-color: rgb(194, 1, 1);
+  width: 85%;
+  height: 45px;
+  outline: none;
   border: 1px transparent solid;
-  border-radius:10px;
+  border-radius: 10px;
 }
-@media(max-width:375px){
-  .code{
-    font-size:1.8rem;
+@media (max-width: 375px) {
+  .code {
+    font-size: 2rem;
   }
-  .message{
-    font-size: 0.85rem;
+  .message {
+    font-size: 1rem;
   }
   .button {
-    font-size:0.85rem;
+    font-size: 0.85rem;
   }
 }
-
-
-
-
-
