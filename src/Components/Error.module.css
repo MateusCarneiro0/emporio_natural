@@ -1,14 +1,17 @@
 .errorMessage {
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: rgb(249, 73, 73);
+  text-align: center;
+  overflow-wrap: break-word;
 }
+
 .errorContainer {
   display: flex;
-  width: 90vw;
-  height: 350px;
+  width: 100vw;
+  height: 50vh;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 250px;
-  margin-top: 250px;
+  padding-bottom: 170px;
+  padding-top: 45px;
 }
