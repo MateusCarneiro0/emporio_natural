@@ -41,17 +41,20 @@ function SignupMain() {
       <form className={styles.login} onSubmit={handleSignup}>
         <h1 className={styles.title}>Vamos se registrar</h1>
         <Input
-          placeholder={"Digite seu username"}
+          placeholder="Digite seu username"
           setState={setUsername}
           value={username}
           disabled={isLoading}
+          type="user"
+          signup={true}
         />
         <Input
-          placeholder={"Digite sua senha"}
+          placeholder="Digite sua senha"
           setState={setPassword}
           value={password}
           disabled={isLoading}
-          type={"password"}
+          type="password"
+          signup={true}
         />
         {signupError && <p className={styles.errorSignup}>{signupError}</p>}
         {isLoading ? (

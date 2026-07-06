@@ -1,8 +1,11 @@
 import styles from "./Input.module.css";
 
-function Input({ setState, placeholder, value, disabled, type }) {
+function Input({ setState, placeholder, value, disabled, type, signup }) {
   return (
     <input
+      autoComplete={
+        type === "user" ? "name" : signup ? "new-password" : "current-password"
+      }
       type={type}
       className={styles.input}
       placeholder={placeholder}

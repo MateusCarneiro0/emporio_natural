@@ -42,6 +42,7 @@ function LoginMain() {
           setState={setUsername}
           value={username}
           disabled={isLoading}
+          type="user"
         />
         <Input
           placeholder={"Digite sua senha"}
