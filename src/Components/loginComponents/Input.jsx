@@ -4,7 +4,7 @@ function Input({ setState, placeholder, value, disabled, type, signup }) {
   return (
     <input
       autoComplete={
-        type === "user" ? "name" : signup ? "new-password" : "current-password"
+        type === "user" ? "username" : signup ? "new-password" : "current-password"
       }
       type={type}
       className={styles.input}
