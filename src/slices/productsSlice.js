@@ -43,8 +43,11 @@ const productsSlice = createSlice({
       sta.currentProduct = act.payload;
       sta.error = "";
     },
+    leaveOfCurrentProduct(sta){
+      sta.currentProduct = {}
+    }
   },
 });
 
-export const { searchProducts } = productsSlice.actions;
+export const { searchProducts, leaveOfCurrentProduct } = productsSlice.actions;
 export default productsSlice.reducer;

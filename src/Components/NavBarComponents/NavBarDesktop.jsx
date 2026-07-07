@@ -1,28 +1,24 @@
-import { NavLink, useNavigate, useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Logo from "./Logo";
 import styles from "./NavBar.module.css";
 import IconButton from "@mui/material/IconButton";
-import WestIcon from "@mui/icons-material/West";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import NavLoginButton from "./NavLoginButton";
 import LogoutIconNav from "./LogoutIconNav";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import EmailIcon from "@mui/icons-material/Email";
+import LeaveProductIcon from "./LeaveProductIcon";
+
 function NavBarDesktop() {
   const { isAuthenticated } = useSelector((store) => store.auth);
   const { id } = useParams();
-  const navigate = useNavigate();
   const { cartProducts } = useSelector((store) => store.cart);
 
   return (
     <nav className={styles.nav}>
       {id ? (
-        <NavLink>
-          <IconButton onClick={() => navigate(-1)}>
-            <WestIcon />
-          </IconButton>
-        </NavLink>
+        <LeaveProductIcon />
       ) : (
         isAuthenticated && <LogoutIconNav />
       )}
