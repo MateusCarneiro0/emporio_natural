@@ -14,7 +14,10 @@ function CartMain() {
   const dispatch = useDispatch();
 
   const totalCust = Number(
-    cartProducts?.reduce((prev, cur) => prev + cur.total, 0).toFixed(2),
+    (Array.isArray(cartProducts)
+      ? cartProducts.reduce((prev, cur) => prev + (cur?.total || 0), 0)
+      : 0
+    ).toFixed(2),
   );
 
   if (isLoading) return <Spinner message="Carregando Carrinho..." />;

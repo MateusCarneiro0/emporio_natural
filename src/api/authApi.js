@@ -42,7 +42,8 @@ export function createNewUser(user) {
         const { id, user: createdUser, cart } = data;
         const newUser = { id, user: createdUser };
         dispatch({ type: "auth/createNewUser", payload: newUser });
-        dispatch({ type: "cart/receiveCart", payload: { cart } });
+        // fix: pass the cart array directly (previously was { cart })
+        dispatch({ type: "cart/receiveCart", payload: cart });
       }
     } catch (err) {
       if (err.name === "FetchApiError") {
