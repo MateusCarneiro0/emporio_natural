@@ -1,7 +1,7 @@
 import requestJson from "./requestJson";
 import { verifyProductCart } from "../utils/ProductChecker";
 /*
-{
+{ 
       "nome": "Maçã Fuji",
       "descricao": "Maçã fresca, doce e crocante. Excelente para lanches saudáveis e preparo de sucos.",
       "imagem": "/products/maca.png",
