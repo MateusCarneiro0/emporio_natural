@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styles from "./Proposit.module.css";
 
-function Proposit() {
+function Purpose() {
   return (
     <section className={styles.proposit}>
       <img
@@ -27,4 +27,4 @@ function Proposit() {
   );
 }
 
-export default Proposit;
+export default Purpose;

@@ -1,10 +1,10 @@
 import Motives from "./Motives";
-import Proposit from "./Proposit";
+import Purpose from "./Purpose";
 
 function HomeMain() {
   return (
     <div>
-      <Proposit />
+      <Purpose />
       <Motives />
     </div>
   );

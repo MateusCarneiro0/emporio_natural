@@ -4,13 +4,13 @@ import App from "./App.jsx";
 import "./index.css";
 import { Provider } from "react-redux";
 import store from "./app/store.js";
-import Storager from "./Storager.jsx";
+import AppBootstrap from "./AppBootstrap.jsx";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <Storager>
+      <AppBootstrap>
         <App />
-      </Storager>
+      </AppBootstrap>
     </Provider>
   </React.StrictMode>,
 );

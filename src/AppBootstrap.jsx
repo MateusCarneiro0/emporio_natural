@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./api/localStorageThunk";
 import { fetchProducts } from "./api/productsApi";
 
-function Storager({ children }) {
+function AppBootstrap({ children }) {
   const { isAuthenticated } = useSelector((store) => store.auth);
   const { products } = useSelector((store) => store.products);
   const dispatch = useDispatch();
@@ -20,4 +20,4 @@ function Storager({ children }) {
   return children;
 }
 
-export default Storager;
+export default AppBootstrap;
