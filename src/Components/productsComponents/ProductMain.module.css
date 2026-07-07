@@ -16,6 +16,8 @@
 }
 .products header h2 {
   font-family: "Quantico";
+  align-self: center;
+  text-align: center;
 }
 .spinner {
   align-self: center;
