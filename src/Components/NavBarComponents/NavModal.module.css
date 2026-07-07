@@ -53,6 +53,9 @@
   padding-top: 10px;
 }
 .textLink {
+  gap: 7.5px;
+  display: flex;
+  align-items: center;
   justify-self: start;
   text-decoration: none;
   color: rgb(36, 0, 0);

@@ -18,6 +18,8 @@
   font-size: 20px;
   text-decoration: none;
   color: rgb(49, 36, 36);
+  gap: 7.5px;
+  display: flex;
 }
 .nav :global(.active):not(.imageLink) {
   color: var(--dark-green-principal);
