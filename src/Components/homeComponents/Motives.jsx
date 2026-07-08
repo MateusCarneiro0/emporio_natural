@@ -33,12 +33,11 @@ function Motives() {
     <div className={styles.motives}>
       <h1>Por quê comprar?</h1>
       {motives.map((item, i) => {
-        const key = crypto.randomUUID();
         return (
           <Card
             isLast={i === motives.length - 1}
             src={item.icone}
-            key={key}
+            key={item.texto}
             id="icon"
             right={i % 2 === 0}
           >
