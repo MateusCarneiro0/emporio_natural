@@ -14,7 +14,7 @@ function CartMain() {
   const dispatch = useDispatch();
 
   const totalCust = Number(
-    (cartProducts?.length > 0
+    (cartProducts?.length 
       ? cartProducts.reduce((prev, cur) => prev + (cur?.total || 0), 0)
       : 0
     ).toFixed(2),
