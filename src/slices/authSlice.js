@@ -9,6 +9,7 @@ const initialState = {
   isAuthenticated: false,
   authError: false,
   signupError: false,
+  isLoadingGetStorage:false
 };
 
 const authReducer = createSlice({
@@ -72,6 +73,7 @@ const authReducer = createSlice({
     builder
       .addCase(getLocalStorage.pending, (state) => {
         state.isLoading = true;
+        state.isLoadingGetStorage = true;
       })
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
         if (action.payload !== null) {
@@ -83,6 +85,7 @@ const authReducer = createSlice({
           sta.authUser = "";
           sta.authUserId = "";
         }
+        sta.isLoadingGetStorage = false;
         sta.isLoading = false;
         sta.error = "";
         sta.authError = false;
