@@ -53,13 +53,16 @@ const cartReducer = createSlice({
         sta.isLoading = true;
       })
       .addCase(getLocalStorage.fulfilled, (sta, act) => {
-        if (act.payload !== null) {
+        if (act.payload !== null && act.payload.cart) {
           sta.error = "";
           sta.cartProducts = act.payload.cart;
+        } else {
+          sta.cartProducts = [];
         }
-       else{
-         sta.cartProducts = []
-       }
+        sta.isLoading = false;
+      })
+      .addCase(getLocalStorage.rejected, (sta) => {
+        sta.cartProducts = [];
         sta.isLoading = false;
       })
       .addCase(logout, (sta, act) => {
