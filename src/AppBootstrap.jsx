@@ -15,7 +15,7 @@ function AppBootstrap({ children }) {
     if (!isAuthenticated) {
       dispatch(getLocalStorage());
     }
-  }, [dispatch, isAuthenticated]);
+  }, [dispatch]);
 
   return children;
 }
