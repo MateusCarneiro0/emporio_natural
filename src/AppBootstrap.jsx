@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./api/localStorageThunk";
 import { fetchProducts } from "./api/productsApi";
-
+import SpinnerFullScreen from "./Components/SpinnerFullScreen"
 function AppBootstrap({ children }) {
-  const { isAuthenticated } = useSelector((store) => store.auth);
+  const { isAuthenticated, isLoadingGetStorage } = useSelector((store) => store.auth);
   const { products } = useSelector((store) => store.products);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,7 +16,7 @@ function AppBootstrap({ children }) {
       dispatch(getLocalStorage());
     }
   }, [dispatch]);
-
+   if(isLoadingGetStorage) return <SpinnerFullScreen message="Carregando dados..." />
   return children;
 }
 
