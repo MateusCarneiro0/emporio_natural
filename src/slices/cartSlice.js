@@ -57,6 +57,9 @@ const cartReducer = createSlice({
           sta.error = "";
           sta.cartProducts = act.payload.cart;
         }
+       else{
+         sta.cartProducts = []
+       }
         sta.isLoading = false;
       })
       .addCase(logout, (sta, act) => {
