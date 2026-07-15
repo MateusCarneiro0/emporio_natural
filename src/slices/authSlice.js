@@ -99,6 +99,6 @@ const authReducer = createSlice({
   },
 });
 
-export const { logout } = authReducer.actions;
+export const { logout,rejectedSignup,authRejected,rejected } = authReducer.actions;
 
 export default authReducer.reducer;
