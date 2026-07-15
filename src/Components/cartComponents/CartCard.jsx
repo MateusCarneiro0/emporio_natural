@@ -35,6 +35,7 @@ function CartCard({
       <button
         className={styles.button}
         onClick={(ev) => {
+          ev.stopPropagation()
           ev.preventDefault();
           dispatch(deleteProductCart(productId));
         }}

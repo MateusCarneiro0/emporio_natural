@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import getLocalStorage from "../api/localStorageThunk";
-import { logout } from "./authSlice";
+import { authRejected, logout, rejected, rejectedSignup } from "./authSlice";
 
 const initialState = {
   cartProducts: [],
@@ -67,7 +67,13 @@ const cartReducer = createSlice({
       })
       .addCase(logout, (sta, act) => {
         sta.cartProducts = [];
-      });
+      })
+      .addMatcher(
+        isAnyOf(rejected, rejectedSignup, authRejected),
+        (state, act) => {
+          state.isLoading = false;
+        },
+      );
   },
 });
 
