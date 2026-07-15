@@ -33,6 +33,12 @@ function Product() {
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
 
+  function handleChangeInput(ev) {
+    const value = +ev.target.value
+    if(Number.isFinite(value)){
+      setQuantity(() => categoria === "Un" ? Math.round(value):value)
+    }
+  }
   if (isLoading) return <Spinner message="Carregando Produto..." />;
 
   if (error) return <Error message={error} />;
@@ -75,18 +81,12 @@ function Product() {
           >
             <span className={styles.labelInput}>Digite uma quantidade:</span>
             <input
-              type="number"
+              type="text"
               inputMode="numeric"
               placeholder="digite uma quantidade"
               className={styles.productInput}
               value={quantity}
-              onChange={(ev) => {
-                setQuantity((quantity) => {
-                  const value =
-                    +ev.target.value <= 0 ? quantity : +ev.target.value;
-                  return categoria === "Un" ? Math.round(value) : value;
-                });
-              }}
+              onChange={handleChangeInput}
             />
             <p className={styles.price}>
               Total:<strong>{Number((preco * quantity).toFixed(2))}</strong> R$
