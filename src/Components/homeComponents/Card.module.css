@@ -1,70 +1,58 @@
 .card {
   transition: 500ms all ease-in;
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.22);
-  border-radius: 1rem;
-  width: min(100%, 480px);
-  min-height: 96px;
-  padding: 1rem 1.2rem;
-  margin-top: 1.25rem;
-  background: linear-gradient(135deg, var(--principal-green) 0%, #b7bb67 100%);
+  justify-content: start;
+  border: 1px var(--dark-green-principal) solid;
+  border-radius: 13px;
+  width: 35%;
+  height: 120px;
+  margin-top: 100px;
+  background-color: var(--principal-green);
   color: white;
-  box-shadow: 0 16px 40px rgba(97, 116, 37, 0.16);
+  align-items: center;
+  gap: 10px;
 }
-
-.card:hover {
-  transform: translateY(-3px);
-}
-
 .card p {
   text-wrap: balance;
   word-break: break-word;
-  line-height: 1.5;
-  font-size: 0.95rem;
 }
-
 .card img {
-  height: 54px;
-  width: 54px;
-  object-fit: contain;
-  flex-shrink: 0;
+  height: 50px;
+  width: 50px;
+  padding-left: 7px;
 }
-
 .left {
-  align-self: flex-start;
+  margin-right: auto;
 }
-
 .right {
   margin-left: auto;
 }
-
 .last {
-  margin-bottom: 1rem;
+  margin-bottom: 100px;
 }
-
-@media (max-width: 768px) {
+@media (max-width: 600px) {
   .card {
-    width: 100%;
-    min-height: auto;
-    margin-top: 1rem;
-    padding: 0.95rem 1rem;
+    width: 70vw;
   }
-
   .left,
   .right {
-    align-self: stretch;
+    justify-self: center;
+    align-self: center;
+  }
+  .right {
     margin-left: 0;
   }
-
-  .card p {
-    font-size: 0.92rem;
+  .left {
+    margin-right: 0;
   }
 }
-
-@media (max-width: 460px) {
-  /* .card {
-    width: 90vw;
-  } */
+@media (max-width: 295px) {
+  .card {
+    width: 70vw;
+    height: 160px;
+  }
+  .card img {
+    height: 70px;
+    width: 70px;
+  }
 }
