@@ -13,13 +13,16 @@ import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
 
 function Product() {
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
+  
+  const clickabel = quantity > 0
+  
+  const { id } = useParams();
 
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getProduct(id));
@@ -94,6 +97,7 @@ function Product() {
           </div>
         </div>
         <Button
+          disabled={!clickabel}
           onClick={() => {
             dispatch(
               addProductCart({

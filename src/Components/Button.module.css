@@ -11,10 +11,14 @@
   box-shadow: 0.75px 0.75px 0.75px rgba(0, 0, 0, 0.25);
   transition: 0.2s all ease-in;
 }
-.button:hover {
+.button:not(:disabled):hover {
   cursor: pointer;
   transform: translateY(-5px);
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.8);
+}
+.button:disabled{
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 @media(max-width:525px){
   .button{
