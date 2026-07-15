@@ -1,51 +1,107 @@
 .proposit {
-  display: inline-block;
   position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(22, 43, 16, 0.9),
+    rgba(95, 110, 37, 0.45)
+  );
 }
 
 .heroImg {
   display: block;
-  height: 450px;
-  width: 100vw;
-  justify-self: center;
-  margin-top: 10px;
+  width: 100%;
+  min-height: clamp(420px, 65vh, 620px);
+  max-height: 660px;
   object-fit: cover;
+  filter: saturate(1.08) contrast(1.02);
 }
+
 .textAction {
   position: absolute;
-  justify-self: center;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem clamp(1rem, 4vw, 3rem);
+  text-align: center;
+  color: white;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.2));
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.textAction h1 {
+  max-width: 740px;
+  font-size: clamp(1.8rem, 2.8vw, 2.7rem);
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.textAction p {
+  max-width: 700px;
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
+  line-height: 1.8;
   text-wrap: balance;
   word-break: break-word;
-  padding: 20px;
-  line-height: 25px;
-  position: absolute; /* Remove o texto do fluxo e o sobrepõe à imagem */
-  top: 50%; /* Alinha verticalmente no meio */
-  left: 50%; /* Alinha horizontalmente no meio */
-  transform: translate(-50%, -50%); /* Centraliza perfeitamente o bloco */
-  color: white;
-  text-align: center;
-  background-color: rgba(
-    0,
-    0,
-    0,
-    0.5
-  ); /* Fundo semi-transparente para leitura */
-  padding: 15px;
-  border-radius: 8px;
 }
+
+.ctaLink {
+  margin-top: 0.25rem;
+}
+
 .textAction button {
   align-self: center;
-  margin-top: 15px;
-  height: 45px;
-  width: 200px;
-  border-radius: 20px;
-  background-color: #f7f4e3;
-  outline: none;
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f7f4e3, #efe7be);
+  color: #304b18;
+  font-weight: 700;
   border: none;
-  transition: all 0.2s ease-in;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
+
 .textAction button:hover {
-  background-color: #ece6c4;
-  transform: scale(1.1);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
   cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .textAction {
+    padding: 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .textAction h1 {
+    font-size: clamp(1.4rem, 5vw, 1.9rem);
+  }
+
+  .textAction p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .textAction button {
+    width: 100%;
+    max-width: 280px;
+  }
 }

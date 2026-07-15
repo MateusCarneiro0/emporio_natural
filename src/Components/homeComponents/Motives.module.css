@@ -1,10 +1,24 @@
 .motives {
   display: flex;
   flex-direction: column;
+  gap: 1rem;
+  padding: 3.5rem 1rem 4.5rem;
+  background: linear-gradient(180deg, #f8f6e8 0%, #f3efe0 100%);
+  
 }
+
 .motives h1 {
-  color: var(--principal-green);
-  padding-top: 15px;
+  color: #4f6b2a;
+  padding-top: 0.25rem;
   justify-self: center;
   align-self: center;
+  text-align: center;
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .motives {
+    padding: 2.5rem 1rem 3rem;
+  }
 }
