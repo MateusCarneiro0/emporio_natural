@@ -15,7 +15,7 @@ function AppBootstrap({ children }) {
     if (!isAuthenticated) {
       dispatch(getLocalStorage());
     }
-  }, [dispatch]);
+  }, [dispatch, isAuthenticated]);
    if(isLoadingGetStorage) return <SpinnerFullScreen message="Carregando dados..." />
   return children;
 }
