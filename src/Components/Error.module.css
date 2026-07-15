@@ -2,6 +2,7 @@
 .message {
   text-align: center;
   overflow-wrap: break-word;
+  word-break: normal;
 }
 
 .errorContainer {
@@ -23,9 +24,20 @@
 .message {
   font-size: 2.5rem;
 }
+.button{
+  background-color: rgb(241, 63, 63);
+  color: #fff;
+  border-radius: 15px;
+  width: 450px;
+  height: 45px;
+  border: none;
+}
 @media (max-width: 450px) {
   .errorMessage {
     margin-right: 15px;
     margin-left: 15px;
+  }
+  .button{
+    width:90vw;
   }
 }
