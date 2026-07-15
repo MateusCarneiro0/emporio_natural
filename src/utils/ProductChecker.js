@@ -28,10 +28,6 @@ export function verifyProductCart(currentProduct) {
     "quantity",
   ];
   const verified = verifyKeys(listOfKeys, currentProduct);
-
-  console.log(listOfKeys.filter((key) => key in currentProduct));
-  console.log(verified);
-  console.log(currentProduct);
   
   if (!verified) {
     throw new ProductNotFound("Product not found");

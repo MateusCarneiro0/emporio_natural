@@ -11,7 +11,6 @@ const getLocalStorage = createAsyncThunk(
       const data = await requestJson(`/users/fetch/${id}`);
       return data;
     } catch (err) {
-      console.log(err.message);
       return rejectWithValue(err.message);
     }
   },
