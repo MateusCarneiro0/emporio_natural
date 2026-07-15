@@ -10,10 +10,10 @@ export class FetchApiError extends Error {
 export default async function requestJson(url, options) {
   const res = await fetch(`${BASE_URL}/${url}`, options);
   if (!res.ok) {
-    throw new FetchApiError("A error ocurred in response", res.status);
+    throw new FetchApiError("Houve um erro na procura de dados, tente novamente", res.status);
   }
   const data = await res.json().catch(() => {
-    throw new FetchApiError("A error ocurred in response", res.status);
+    throw new FetchApiError("Houve um erro na procura de dados, tente novamente", res.status);
   });
   return data;
 }
