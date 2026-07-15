@@ -4,7 +4,6 @@ import getLocalStorage from "./api/localStorageThunk";
 import { fetchProducts } from "./api/productsApi";
 import SpinnerFullScreen from "./Components/SpinnerFullScreen";
 function AppBootstrap({ children }) {
-  const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
   const { isAuthenticated, isLoadingGetStorage } = useSelector(
     (store) => store.auth,
   );
@@ -22,9 +21,9 @@ function AppBootstrap({ children }) {
     }
   }, [dispatch, isAuthenticated]);
 
-  if (isLoadingGetStorage || isLoadingCart)
+  if (isLoadingGetStorage)
     return <SpinnerFullScreen message="Carregando dados..." />;
-  
+
   return children;
 }
 
