@@ -66,7 +66,7 @@ const ProductMain = memo(function ProductMain() {
       </header>
       <div className={displayProducts.length ? styles.productsContainer:styles.enoughContainer}>
         {displayProducts.length ? (
-          displayProducts.map((product) => (
+          displayProducts.map((product, i) => (
             <CardProduct
               key={product.id}
               title={product.nome}
@@ -74,6 +74,7 @@ const ProductMain = memo(function ProductMain() {
               price={product.preco}
               id={product.id}
               categoria={product.categoria}
+              isLast={i + 1 >= displayProducts.length}
             >
               {product.descricao}
             </CardProduct>

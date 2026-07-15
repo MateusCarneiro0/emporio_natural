@@ -10,11 +10,12 @@ const CardProduct = memo(function CardProduct({
   price,
   id,
   categoria,
+  isLast
 }) {
   const navigate = useNavigate();
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} ${isLast ? styles.last:""}`}>
       <img src={src} alt={title} />
       <h3>{title}</h3>
       <p className={styles.description}>{children}</p>
