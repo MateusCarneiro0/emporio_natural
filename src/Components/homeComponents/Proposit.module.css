@@ -12,7 +12,7 @@
 .heroImg {
   display: block;
   width: 100%;
-  min-height: clamp(420px, 65vh, 620px);
+  min-height: 500px;
   max-height: 660px;
   object-fit: cover;
   filter: saturate(1.08) contrast(1.02);
