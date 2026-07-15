@@ -1,6 +1,5 @@
-.errorMessage {
-  font-size: 3rem;
-  color: rgb(249, 73, 73);
+.errorMessage,
+.message {
   text-align: center;
   overflow-wrap: break-word;
 }
@@ -14,6 +13,15 @@
   justify-content: center;
   padding-bottom: 170px;
   padding-top: 45px;
+}
+.errorMessage {
+  font-size: 1.5rem;
+  color: rgb(249, 73, 73);
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+.message {
+  font-size: 2.5rem;
 }
 @media (max-width: 450px) {
   .errorMessage {
