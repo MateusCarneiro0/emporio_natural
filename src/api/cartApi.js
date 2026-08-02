@@ -21,10 +21,9 @@ export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
 
-    verifyProductCart(product);
-
     dispatch({ type: "cart/loadingCart" });
     try {
+      verifyProductCart(product);
       await requestJson(`users/${userId}/addproductcart`, {
         method: "POST",
         headers: {
@@ -38,7 +37,7 @@ export function addProductCart(product) {
       });
     } catch (err) {
       if (err.name === "ProductNotFound" && product?.id) {
-        dispatch(deleteProductCart(product.id))
+        dispatch(deleteProductCart(product.id));
       }
       dispatch({ type: "cart/rejected", payload: err.message });
     }
@@ -55,10 +54,10 @@ export function deleteProductCart(productId) {
       .at(0);
     if (!product) throw new Error("Produto inexistente para deletar");
 
-    verifyProductCart(product);
-
+    
     dispatch({ type: "cart/loadingCart" });
     try {
+      verifyProductCart(product);
       await requestJson(`users/${userId}/removeProductCart`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -73,7 +72,10 @@ export function deleteProductCart(productId) {
       if (err.name === "ProductNotFound") {
         dispatch({ type: "cart/rejected", payload: err.message });
       } else {
-        dispatch({ type: "cart/rejected", payload: "Erro em deletar o produto, tente novamente mais tarde" });
+        dispatch({
+          type: "cart/rejected",
+          payload: "Erro em deletar o produto, tente novamente mais tarde",
+        });
       }
     }
   };
@@ -98,7 +100,9 @@ export function payCart() {
           type: "cart/payCart",
         });
       } else {
-        throw new Error("Erro em pagar o carrinho, reinicie a página ou tente novamente mais tarde");
+        throw new Error(
+          "Erro em pagar o carrinho, reinicie a página ou tente novamente mais tarde",
+        );
       }
     } catch (err) {
       dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
