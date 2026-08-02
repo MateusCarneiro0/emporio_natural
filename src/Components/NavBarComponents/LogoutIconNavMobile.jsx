@@ -11,8 +11,8 @@ function LogoutIconNavMobile() {
     <div className={styles.button}>
       <IconButton
         onClick={() => {
-          navigate("/");
           dispatch(logout());
+          navigate("/");
         }}
       >
         <LogoutIcon sx={{ color: "rgb(255, 42, 42)" }} />{" "}
