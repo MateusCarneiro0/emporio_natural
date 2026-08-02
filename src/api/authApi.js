@@ -1,4 +1,4 @@
-import requestJson from "./requestJson";
+import requestJson, { FetchApiError } from "./requestJson";
 class EnoughDataError extends Error {
   constructor(message) {
     super(message);
@@ -40,10 +40,14 @@ export function createNewUser(user) {
         });
       } else {
         const { id, user: createdUser, cart } = data;
-        const newUser = { id, user: createdUser };
-        dispatch({ type: "auth/createNewUser", payload: newUser });
-        // fix: pass the cart array directly (previously was { cart })
-        dispatch({ type: "cart/receiveCart", payload: cart });
+        if (id && createdUser && Array.isArray(cart)) {
+          const newUser = { id, user: createdUser };
+          dispatch({ type: "auth/createNewUser", payload: newUser });
+
+          dispatch({ type: "cart/receiveCart", payload: cart });
+        } else {
+          throw new FetchApiError("Erro em criar usuário");
+        }
       }
     } catch (err) {
       if (err.name === "FetchApiError") {
@@ -88,7 +92,9 @@ export function loginUser(username, password) {
           dispatch({ type: "auth/loginUser", payload: loggedUser });
           dispatch({ type: "cart/receiveCart", payload: cart });
         } else {
-          throw new Error("Erro em encontrar um carrinho no servidor tente novamente mais tarde");
+          throw new Error(
+            "Erro em encontrar um carrinho no servidor tente novamente mais tarde",
+          );
         }
       } else {
         dispatch({ type: "auth/authRejected" });
