@@ -10,6 +10,11 @@ export function createNewUser(user) {
     dispatch({ type: "auth/loadingUsers" });
     dispatch({ type: "cart/loadingCart" });
     try {
+      if (!user?.user || !user?.password) {
+        throw new EnoughDataError(
+          "Campos de usuário ou de senha nulos preencha-os",
+        );
+      }
       const data = await requestJson(`users/createnewuser`, {
         method: "POST",
         headers: {
@@ -17,12 +22,6 @@ export function createNewUser(user) {
         },
         body: JSON.stringify(user),
       });
-
-      if (!user?.user || !user?.password) {
-        throw new EnoughDataError(
-          "Campos de usuário ou de senha nulos preencha-os",
-        );
-      }
 
       if (data?.hasRepeated) {
         dispatch({
