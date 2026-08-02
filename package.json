@@ -11,7 +11,6 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@base-ui/react": "^1.5.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^9.0.1",
@@ -23,8 +22,7 @@
     "react-loader-spinner": "^8.0.2",
     "react-redux": "^9.3.0",
     "react-router-dom": "^7.17.0",
-    "redux": "^5.0.1",
-    "vitest": "^4.1.10"
+    "redux": "^5.0.1"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.1",
@@ -40,7 +38,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "jsdom": "^29.1.1",
-    "vite": "^4.4.5",
+    "vite": "^6.4.3",
     "vite-plugin-eslint": "^1.8.1"
   }
 }

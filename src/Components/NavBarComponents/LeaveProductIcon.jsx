@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import WestIcon from "@mui/icons-material/West";
 import { IconButton } from "@mui/material";
 import { leaveOfCurrentProduct } from "../../slices/productsSlice";
@@ -11,11 +11,9 @@ function LeaveProductIcon() {
     dispatch(leaveOfCurrentProduct());
   }
   return (
-    <NavLink>
       <IconButton onClick={handleClick}>
         <WestIcon />
       </IconButton>
-    </NavLink>
   );
 }
 

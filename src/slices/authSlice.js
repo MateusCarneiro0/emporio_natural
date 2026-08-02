@@ -55,7 +55,6 @@ const authReducer = createSlice({
         ? act.payload
         : "Usuário ou senha não encontrados tente novamente";
       sta.isLoading = false;
-      sta.authError = true;
     },
     rejectedSignup(sta, act) {
       sta.error = "";
