@@ -8,7 +8,8 @@ export class FetchApiError extends Error {
   }
 }
 export default async function requestJson(url, options) {
-  const res = await fetch(`${BASE_URL}/${url}`, options);
+  
+  const res = await fetch(`${BASE_URL}/${String(url).replace(/^\/+/, "")}`, options);
   if (!res.ok) {
     throw new FetchApiError("Houve um erro na procura de dados, tente novamente", res.status);
   }
