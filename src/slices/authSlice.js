@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { idKey } from "../secretKeys";
 import getLocalStorage from "../api/localStorageThunk";
+
 const initialState = {
   authUser: "",
   authUserId: "",
-  users: [],
   isLoading: false,
   isAuthenticated: false,
   authError: false,
@@ -16,14 +16,8 @@ const authReducer = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    receiveUsers(sta, act) {
-      sta.users = act.payload;
-      sta.isLoading = false;
-      sta.error = "";
-    },
     createNewUser(sta, action) {
       sta.authUserId = action.payload.id;
-      sta.users = [...sta.users, { ...action.payload, id: sta.authUserId }];
       sta.authUser = action.payload.user;
       sta.isLoading = false;
       sta.error = "";
@@ -91,7 +85,11 @@ const authReducer = createSlice({
         sta.authError = false;
       })
       .addCase(getLocalStorage.rejected, (state) => {
-        return initialState
+        state.isLoadingGetStorage = false
+        state.isLoading = false;
+        state.isAuthenticated = false;
+        state.authUser = "";
+        state.authUserId = "";
       });
   },
 });
