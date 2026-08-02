@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import getLocalStorage from "./api/localStorageThunk";
 import { fetchProducts } from "./api/productsApi";
@@ -10,9 +10,12 @@ function AppBootstrap({ children }) {
   const { products } = useSelector((store) => store.products);
 
   const dispatch = useDispatch();
-
+  const hasFetched = useRef(false);
   useEffect(() => {
-    if (products.length === 0) dispatch(fetchProducts());
+    if (products.length === 0 && !hasFetched.current) {
+      hasFetched.current = true
+      dispatch(fetchProducts());
+    }
   }, [products, dispatch]);
 
   useEffect(() => {
