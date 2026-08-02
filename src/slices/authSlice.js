@@ -91,10 +91,7 @@ const authReducer = createSlice({
         sta.authError = false;
       })
       .addCase(getLocalStorage.rejected, (state) => {
-        state.isLoading = false;
-        state.isAuthenticated = false;
-        state.authUser = "";
-        state.authUserId = "";
+        return initialState
       });
   },
 });
