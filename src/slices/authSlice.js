@@ -9,7 +9,7 @@ const initialState = {
   isAuthenticated: false,
   authError: false,
   signupError: false,
-  isLoadingGetStorage:false
+  isLoadingGetStorage:true
 };
 
 const authReducer = createSlice({
