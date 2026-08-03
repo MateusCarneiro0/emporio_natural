@@ -3,6 +3,7 @@ import { lazy, Suspense } from "react";
 import LoggedProtected from "./Components/protectedRoutes/LoggedProtected";
 import AuthProtected from "./Components/protectedRoutes/AuthProtected";
 import SpinnerFullScreen from "./Components/SpinnerFullScreen";
+import AppLayout from "./Components/AppLayout";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -17,42 +18,44 @@ function App() {
     <BrowserRouter>
       <Suspense fallback={<SpinnerFullScreen />}>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/produtos" element={<Products />}>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/produtos" element={<Products />}>
+              <Route
+                path="/produtos/:id"
+                element={
+                  <AuthProtected>
+                    <Product />
+                  </AuthProtected>
+                }
+              />
+            </Route>
             <Route
-              path="/produtos/:id"
+              path="/cart"
               element={
                 <AuthProtected>
-                  <Product />
+                  <Cart />
                 </AuthProtected>
               }
             />
+            <Route
+              path="/login"
+              element={
+                <LoggedProtected>
+                  <Login />
+                </LoggedProtected>
+              }
+            />
+            <Route
+              path="/signup"
+              element={
+                <LoggedProtected>
+                  <Signup />
+                </LoggedProtected>
+              }
+            />
+            <Route path="*" element={<NotFound />} />
           </Route>
-          <Route
-            path="/cart"
-            element={
-              <AuthProtected>
-                <Cart />
-              </AuthProtected>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <LoggedProtected>
-                <Login />
-              </LoggedProtected>
-            }
-          />
-          <Route
-            path="/signup"
-            element={
-              <LoggedProtected>
-                <Signup />
-              </LoggedProtected>
-            }
-          />
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

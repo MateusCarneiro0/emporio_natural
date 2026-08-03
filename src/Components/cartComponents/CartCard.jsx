@@ -10,13 +10,12 @@ function CartCard({
   price,
   productId,
   quantity,
-  isLast,
   categoria,
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
-    <div className={`${styles.cartContainer} ${isLast ? styles.last : ""}`}>
+    <div className={`${styles.cartContainer}`}>
       <div
         className={styles.card}
         onClick={(ev) => {

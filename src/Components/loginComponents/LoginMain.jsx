@@ -23,7 +23,6 @@ function LoginMain() {
   const clickabel = username && password;
   function handleSubmit(ev) {
     ev.preventDefault();
-    ev.preventDefault();
     dispatch(loginUser(username, password));
   }
 
