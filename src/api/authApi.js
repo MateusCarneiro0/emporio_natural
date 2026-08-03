@@ -1,22 +1,25 @@
 import {
   loadingUsers,
-  rejected,
   rejectedSignup,
   loginUser as loginUserAction,
   authRejected,
+  createNewUser as createNewUserAction
 } from "../slices/authSlice";
 import { loadingCart, receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
+
 class EnoughDataError extends Error {
   constructor(message) {
     super(message);
     this.name = "EnoughDataError";
   }
 }
+
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch(loadingUsers());
     dispatch(loadingCart());
+    console.log(`${user.user} ${user.password}`)
     try {
       if (!user?.user || !user?.password) {
         throw new EnoughDataError(
@@ -43,7 +46,7 @@ export function createNewUser(user) {
         const { id, user: createdUser, cart } = data;
         if (id && createdUser && Array.isArray(cart)) {
           const newUser = { id, user: createdUser };
-          dispatch(createNewUser(newUser));
+          dispatch(createNewUserAction(newUser));
 
           dispatch(receiveCart(cart));
         } else {
