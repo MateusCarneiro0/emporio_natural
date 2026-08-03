@@ -1,0 +1,48 @@
+.errorMessage,
+.message {
+  text-align: center;
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+.errorContainer {
+  display: flex;
+  width: 100vw;
+  height: 50vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 170px;
+  padding-top: 45px;
+}
+.errorMessage {
+  font-size: 1.5rem;
+  color: rgb(249, 73, 73);
+  margin-top: 45px;
+  margin-bottom: 45px;
+}
+.message {
+  font-size: 2.5rem;
+}
+.button {
+  background-color: rgb(241, 63, 63);
+  color: #fff;
+  border-radius: 15px;
+  width: 450px;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+}
+.button:focus {
+  outline: solid 2px rgb(241, 63, 63);
+  outline-offset: 2px;
+}
+@media (max-width: 450px) {
+  .errorMessage {
+    margin-right: 15px;
+    margin-left: 15px;
+  }
+  .button {
+    width: 90vw;
+  }
+}

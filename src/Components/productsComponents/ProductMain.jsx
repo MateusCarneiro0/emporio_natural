@@ -4,11 +4,11 @@ import { Outlet, useParams } from "react-router-dom";
 
 import { searchProducts } from "../../slices/productsSlice";
 
-import Error from "../Error";
 import Spinner from "../Spinner";
 import CardProduct from "./CardProduct";
 
 import styles from "./ProductMain.module.css";
+import ProductsError from "./ProductsError";
 
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
@@ -21,7 +21,7 @@ const ProductMain = memo(function ProductMain() {
   const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
 
   const phraseRef = useRef(null);
-
+  
   useEffect(() => {
     phraseRef.current = [
       "o que falta para o seu dia ficar mais saudável? 🌞",
@@ -42,7 +42,8 @@ const ProductMain = memo(function ProductMain() {
 
   if (isLoading || isLoadingCart)
     return <Spinner message="Carregando Produtos..." />;
-  if (error) return <Error message={error} />;
+
+  if (error) return <ProductsError message={error} />;
 
   return (
     <main className={styles.products}>
