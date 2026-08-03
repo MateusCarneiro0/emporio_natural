@@ -42,9 +42,10 @@ function Product() {
       setQuantity(() => categoria === "Un" ? Math.round(value):value)
     }
   }
-  if (isLoadingCurrentProduct) return <Spinner message="Carregando Produto..." />;
 
   if (error) return <Error message={error} />;
+  
+  if (isLoadingCurrentProduct) return <Spinner message="Carregando Produto..." />;
 
   return (
     <div className={styles.product}>
