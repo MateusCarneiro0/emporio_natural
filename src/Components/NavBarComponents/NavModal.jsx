@@ -16,6 +16,7 @@ function NavModal() {
     <div className={`${styles.modal} ${isOpen ? styles.fixed : ""}`}>
       {isOpen ? (
         <button
+          aria-label="Abrir menu"
           className={`${styles.menuButton} ${styles.closeButton}`}
           onClick={() => setIsOpen((isOpened) => !isOpened)}
         >
@@ -23,6 +24,7 @@ function NavModal() {
         </button>
       ) : (
         <button
+          aria-label="Fechar menu"
           className={styles.menuButton}
           onClick={() => setIsOpen((isOpened) => !isOpened)}
         >
@@ -32,7 +34,7 @@ function NavModal() {
 
       {isOpen && (
         <main className={styles.links}>
-          <NavLink to="/" className={styles.textLink}>
+          <NavLink aria-label="Ir para início" to="/" className={styles.textLink}>
             <Logo />
           </NavLink>
           <div className={styles.separator}>
@@ -40,7 +42,7 @@ function NavModal() {
               <hr></hr>
             </span>
           </div>
-          <NavLink to="/produtos" className={styles.textLink}>
+          <NavLink aria-label="ir para produtos" to="/produtos" className={styles.textLink}>
             <ShoppingBagIcon /> <span>Produtos</span>
           </NavLink>
           <div className={styles.separator}>
@@ -49,6 +51,7 @@ function NavModal() {
             </span>
           </div>
           <a
+            aria-label="Entrar em contato"
             href="mailto:emporionatural36@gmail.com"
             className={styles.textLink}
           >
@@ -61,13 +64,11 @@ function NavModal() {
           </div>
           {isAuthenticated && (
             <>
-              <NavLink to="/cart" className={styles.textLink}>
+              <NavLink aria-label="Ir para carrinho" to="/cart" className={styles.textLink}>
                 {({ isActive }) => (
-                  /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
                   <>
                     <ShoppingCartOutlinedIcon
                       sx={{
-                        // Se estiver ativo, fica azul, se não, fica cinza
                         color: isActive ? "rgb(170, 173, 121)" : "#757575",
                         transition: "color 0.2s ease",
                       }}

@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 import styles from "./NavLoginButton.module.css";
 function NavLoginButton() {
   return (
-    <NavLink className={styles.link} to="/login">
+    <NavLink aria-label="Ir para login" className={styles.link} to="/login">
       <p className={styles.button}>Login</p>
     </NavLink>
   );

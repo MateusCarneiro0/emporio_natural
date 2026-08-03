@@ -8,7 +8,7 @@ function LogoutIconNavMobile() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
-    <div className={styles.button}>
+    <div className={styles.button} aria-label="Sair da conta">
       <IconButton
         onClick={() => {
           dispatch(logout());
