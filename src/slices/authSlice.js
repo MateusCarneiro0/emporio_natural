@@ -70,7 +70,7 @@ const authReducer = createSlice({
         state.isLoadingGetStorage = true;
       })
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
-        if (action.payload !== null) {
+        if (action.payload !== null && action?.payload?.user && action?.payload?.id) {
           sta.authUser = action.payload.user;
           sta.authUserId = action.payload.id;
           sta.isAuthenticated = true;
