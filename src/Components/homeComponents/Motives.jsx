@@ -38,7 +38,7 @@ function Motives() {
             isLast={i === motives.length - 1}
             src={item.icone}
             key={item.texto}
-            id="icon"
+            id=""
             right={i % 2 === 0}
           >
             {item.texto}
