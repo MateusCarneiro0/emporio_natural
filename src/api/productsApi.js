@@ -25,7 +25,10 @@ export function getProduct(id) {
   return async (dispatch, getState) => {
     dispatch(loadingCurrentProduct());
     try {
-      const data = await requestJson(`products/${id}`);
+      if(/^[a-zA-Z0-9]+$/.test(id)){
+        throw new Error("Id não válido")
+      }
+      const data = await requestJson(`products/${encodeURIComponent(id)}`);
       const product = data?.at?.(0);
       if (product) {
         dispatch(receivedCurrentProduct(product));
