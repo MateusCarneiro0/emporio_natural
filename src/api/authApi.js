@@ -1,3 +1,11 @@
+import {
+  loadingUsers,
+  rejected,
+  rejectedSignup,
+  loginUser as loginUserAction,
+  authRejected,
+} from "../slices/authSlice";
+import { loadingCart, receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
 class EnoughDataError extends Error {
   constructor(message) {
@@ -7,8 +15,8 @@ class EnoughDataError extends Error {
 }
 export function createNewUser(user) {
   return async (dispatch, getState) => {
-    dispatch({ type: "auth/loadingUsers" });
-    dispatch({ type: "cart/loadingCart" });
+    dispatch(loadingUsers());
+    dispatch(loadingCart());
     try {
       if (!user?.user || !user?.password) {
         throw new EnoughDataError(
@@ -24,43 +32,31 @@ export function createNewUser(user) {
       });
 
       if (data?.hasRepeated) {
-        dispatch({
-          type: "auth/rejectedSignup",
-          payload: "Nome de usuário já criado",
-        });
+        dispatch(rejectedSignup("Nome de usuário já criado"));
       } else if (
         user.user.length > 100 ||
         user.password.length > 100 ||
         data?.manyCharacters
       ) {
-        dispatch({
-          type: "auth/rejectedSignup",
-          payload: "Muitos caracteres use no máximo 100 caracteres",
-        });
+        dispatch(rejectedSignup("Muitos caracteres use no máximo 100"));
       } else {
         const { id, user: createdUser, cart } = data;
         if (id && createdUser && Array.isArray(cart)) {
           const newUser = { id, user: createdUser };
-          dispatch({ type: "auth/createNewUser", payload: newUser });
+          dispatch(createNewUser(newUser));
 
-          dispatch({ type: "cart/receiveCart", payload: cart });
+          dispatch(receiveCart(cart));
         } else {
           throw new FetchApiError("Erro em criar usuário");
         }
       }
     } catch (err) {
       if (err.name === "FetchApiError") {
-        dispatch({
-          type: "auth/rejected",
-          payload: "Erro em criar usuário tente novamente mais tarde",
-        });
+        dispatch(rejected("Erro em criar usuário tente novamente mais tarde"));
       } else if (err.name === "EnoughDataError") {
-        dispatch({ type: "auth/rejectedSignup", payload: err.message });
+        dispatch(rejectedSignup(err.message));
       } else {
-        dispatch({
-          type: "auth/rejected",
-          payload: err.message,
-        });
+        dispatch(rejected(err.message));
       }
     }
   };
@@ -68,7 +64,7 @@ export function createNewUser(user) {
 
 export function loginUser(username, password) {
   return async (dispatch, getState) => {
-    dispatch({ type: "auth/loadingUsers" });
+    dispatch(loadingUsers());
     if (!username || !password) {
       throw new EnoughDataError(
         "Campos de usuário ou de senha nulos preencha-os",
@@ -88,27 +84,23 @@ export function loginUser(username, password) {
         const { id, user, cart } = data;
         if (Array.isArray(cart) && id && user) {
           const loggedUser = { id, user };
-          dispatch({ type: "auth/loginUser", payload: loggedUser });
-          dispatch({ type: "cart/receiveCart", payload: cart });
+          dispatch(loginUserAction(loggedUser));
+          dispatch(receiveCart(cart));
         } else {
           throw new Error(
             "Erro em encontrar um carrinho no servidor tente novamente mais tarde",
           );
         }
       } else {
-        dispatch({ type: "auth/authRejected" });
+        dispatch(
+          authRejected("Usuário ou senha não encontrados tente novamente"),
+        );
       }
     } catch (err) {
       if (err.name === "EnoughDataError") {
-        dispatch({
-          type: "auth/authRejected",
-          payload: err.message,
-        });
+        dispatch(authRejected(err.message));
       } else {
-        dispatch({
-          type: "auth/rejected",
-          payload: err.message,
-        });
+        dispatch(rejected(err.message));
       }
     }
   };

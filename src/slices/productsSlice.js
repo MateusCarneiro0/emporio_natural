@@ -16,8 +16,8 @@ const productsSlice = createSlice({
     loadingProducts(state) {
       state.isLoading = true;
     },
-    loadingCurrentProduct(state){
-      state.isLoadingCurrentProduct = true
+    loadingCurrentProduct(state) {
+      state.isLoadingCurrentProduct = true;
     },
     rejected(sta, action) {
       sta.error = action?.payload || "Error in fetch product";
@@ -52,5 +52,13 @@ const productsSlice = createSlice({
   },
 });
 
-export const { searchProducts, leaveOfCurrentProduct } = productsSlice.actions;
+export const {
+  searchProducts,
+  leaveOfCurrentProduct,
+  loadingCurrentProduct,
+  loadingProducts,
+  rejected,
+  receiveProducts,
+  receivedCurrentProduct
+} = productsSlice.actions;
 export default productsSlice.reducer;

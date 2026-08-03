@@ -9,8 +9,8 @@ const initialState = {
   isAuthenticated: false,
   authError: false,
   signupError: false,
-  isLoadingGetStorage:true,
-  error:""
+  isLoadingGetStorage: true,
+  error: "",
 };
 
 const authReducer = createSlice({
@@ -70,7 +70,11 @@ const authReducer = createSlice({
         state.isLoadingGetStorage = true;
       })
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
-        if (action.payload !== null && action?.payload?.user && action?.payload?.id) {
+        if (
+          action.payload !== null &&
+          action?.payload?.user &&
+          action?.payload?.id
+        ) {
           sta.authUser = action.payload.user;
           sta.authUserId = action.payload.id;
           sta.isAuthenticated = true;
@@ -85,7 +89,7 @@ const authReducer = createSlice({
         sta.authError = false;
       })
       .addCase(getLocalStorage.rejected, (state) => {
-        state.isLoadingGetStorage = false
+        state.isLoadingGetStorage = false;
         state.isLoading = false;
         state.isAuthenticated = false;
         state.authUser = "";
@@ -94,6 +98,14 @@ const authReducer = createSlice({
   },
 });
 
-export const { logout,rejectedSignup,authRejected,rejected } = authReducer.actions;
+export const {
+  logout,
+  rejectedSignup,
+  authRejected,
+  rejected,
+  createNewUser,
+  loginUser,
+  loadingUsers,
+} = authReducer.actions;
 
 export default authReducer.reducer;

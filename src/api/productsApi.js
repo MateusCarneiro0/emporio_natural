@@ -1,36 +1,39 @@
+import {
+  loadingCurrentProduct,
+  loadingProducts,
+  receivedCurrentProduct,
+  receiveProducts,
+  rejected,
+} from "../slices/productsSlice";
 import requestJson from "./requestJson";
 
 export function fetchProducts() {
   return async (dispatch, getState) => {
-    dispatch({ type: "products/loadingProducts" });
+    dispatch(loadingProducts());
     try {
       const data = await requestJson("");
-      dispatch({ type: "products/receiveProducts", payload: data });
+      dispatch(receiveProducts(data));
     } catch (err) {
-      dispatch({
-        type: "products/rejected",
-        payload: "Erro em buscar os produtos, tente novamente mais tarde.",
-      });
+      dispatch(
+        rejected("Erro em buscar os produtos, tente novamente mais tarde."),
+      );
     }
   };
 }
 
 export function getProduct(id) {
   return async (dispatch, getState) => {
-    dispatch({ type: "products/loadingCurrentProduct" });
+    dispatch(loadingCurrentProduct());
     try {
       const data = await requestJson(`products/${id}`);
       const product = data?.at?.(0);
       if (product) {
-        dispatch({
-          type: "products/receivedCurrentProduct",
-          payload: product,
-        });
+        dispatch(receivedCurrentProduct(product));
       } else {
         throw new Error("Produto não encontrado");
       }
     } catch (err) {
-      dispatch({ type: "products/rejected", payload: err.message });
+      dispatch(rejected(err.message));
     }
   };
 }

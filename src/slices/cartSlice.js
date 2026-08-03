@@ -41,7 +41,7 @@ const cartReducer = createSlice({
       sta.isLoading = false;
       sta.error = "";
     },
-    payCart(sta, act) {
+    payCart(sta) {
       sta.cartProducts = [];
       sta.isLoading = false;
       sta.error = "";
@@ -76,5 +76,14 @@ const cartReducer = createSlice({
       );
   },
 });
+
+export const {
+  loadingCart,
+  receiveCart,
+  rejected: cartRejected,
+  addProductCart,
+  removeProductCart,
+  payCart,
+} = cartReducer.actions;
 
 export default cartReducer.reducer;

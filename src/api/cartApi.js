@@ -1,5 +1,12 @@
 import requestJson from "./requestJson";
 import { verifyProductCart } from "../utils/ProductChecker";
+import {
+  loadingCart,
+  addProductCart as addProductCartAction,
+  cartRejected,
+  removeProductCart,
+  payCart as payCartAction
+} from "../slices/cartSlice";
 /*
 { 
       "nome": "Maçã Fuji",
@@ -21,7 +28,7 @@ export function addProductCart(product) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
 
-    dispatch({ type: "cart/loadingCart" });
+    dispatch(loadingCart());
     try {
       verifyProductCart(product);
       await requestJson(`users/${userId}/addproductcart`, {
@@ -31,15 +38,12 @@ export function addProductCart(product) {
         },
         body: JSON.stringify({ product }),
       });
-      dispatch({
-        type: "cart/addProductCart",
-        payload: product,
-      });
+      dispatch(addProductCartAction(product));
     } catch (err) {
       if (err.name === "ProductNotFound" && product?.id) {
         dispatch(deleteProductCart(product.id));
       }
-      dispatch({ type: "cart/rejected", payload: err.message });
+      dispatch(cartRejected(err.message));
     }
   };
 }
@@ -54,8 +58,7 @@ export function deleteProductCart(productId) {
       .at(0);
     if (!product) throw new Error("Produto inexistente para deletar");
 
-    
-    dispatch({ type: "cart/loadingCart" });
+    dispatch(loadingCart());
     try {
       verifyProductCart(product);
       await requestJson(`users/${userId}/removeProductCart`, {
@@ -64,18 +67,14 @@ export function deleteProductCart(productId) {
         body: JSON.stringify({ id: productId }),
       });
 
-      dispatch({
-        type: "cart/removeProductCart",
-        payload: productId,
-      });
+      dispatch(removeProductCart(productId));
     } catch (err) {
       if (err.name === "ProductNotFound") {
-        dispatch({ type: "cart/rejected", payload: err.message });
+        dispatch(cartRejected(err.message));
       } else {
-        dispatch({
-          type: "cart/rejected",
-          payload: "Erro em deletar o produto, tente novamente mais tarde",
-        });
+        dispatch(
+          cartRejected("Erro em deletar o produto, tente novamente mais tarde"),
+        );
       }
     }
   };
@@ -84,7 +83,7 @@ export function deleteProductCart(productId) {
 export function payCart() {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
-    dispatch({ type: "cart/loadingCart" });
+    dispatch(loadingCart());
     try {
       const data = await requestJson(`users/${userId}/clearCart`, {
         method: "POST",
@@ -96,16 +95,14 @@ export function payCart() {
         }),
       });
       if (data?.status === "clean") {
-        dispatch({
-          type: "cart/payCart",
-        });
+        dispatch(payCartAction());
       } else {
         throw new Error(
           "Erro em pagar o carrinho, reinicie a página ou tente novamente mais tarde",
         );
       }
     } catch (err) {
-      dispatch({ type: "cart/rejected", payload: "Error on pay cart" });
+      dispatch(cartRejected("Erro em pagar carrinho"));
     }
   };
 }
