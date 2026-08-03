@@ -1,25 +1,14 @@
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import { deleteProductCart } from "../../api/cartApi";
 
 import styles from "./CartCard.module.css";
 function CartCard({ src, children, price, productId, quantity, categoria }) {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   return (
     <div className={`${styles.cartContainer}`}>
-      <div
-        aria-expanded={true}
-        aria-controls={true}
-        role="button"
-        aria-label={`Ir para o produto ${children}`}
-        className={styles.card}
-        onClick={(ev) => {
-          ev.preventDefault();
-          navigate(`/produtos/${productId}`);
-        }}
-      >
+      <Link to={`/produtos/${productId}`} className={styles.card}>
         <img src={src} alt={children} />
         <h3>{children}</h3>
         <p className={styles.price}>
@@ -39,7 +28,7 @@ function CartCard({ src, children, price, productId, quantity, categoria }) {
         >
           &times;
         </button>
-      </div>
+      </Link>
     </div>
   );
 }

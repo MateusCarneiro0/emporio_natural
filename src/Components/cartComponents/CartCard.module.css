@@ -11,6 +11,15 @@
   align-items: center;
   padding-right: 10px;
   flex-grow: 1;
+  text-decoration: none;
+  margin-right: 15px;
+  margin-left: 15px;
+}
+
+.card:focus {
+  outline: 3px solid var(--dark-green-principal);
+  outline-offset: 5px;
+  background-color: #e3dfcb;
 }
 .card h3 {
   color: var(--principal-green);
@@ -51,43 +60,48 @@
   justify-content: center;
   align-items: center;
   overflow-y: hidden;
-  min-width: 90vw; 
+  min-width: 90vw;
 }
-.price{
+.price {
   overflow-wrap: nowrap;
-
+  color: rgb(82, 82, 82);
+}
+.quantity {
+  color: rgb(82, 82, 82);
 }
 
-@media(max-width:340px){
+@media (max-width: 340px) {
   .card {
-    padding-right:8px ;  
+    padding-right: 8px;
     gap: 6px;
   }
   .card h3 {
-    font-size: 0.80rem;
+    font-size: 0.8rem;
   }
-  .price, .quantity {
-    font-size: 0.80rem;
+  .price,
+  .quantity {
+    font-size: 0.8rem;
   }
-  .card img{
+  .card img {
     object-fit: fill;
   }
 }
-@media(max-width:280px){
+@media (max-width: 280px) {
   .card {
-    padding-right:10px ;  
+    padding-right: 10px;
     gap: 6px;
   }
   .card h3 {
     font-size: 0.65rem;
   }
-  .price, .quantity {
+  .price,
+  .quantity {
     font-size: 0.65rem;
   }
-  .card img{
+  .card img {
     object-fit: fill;
   }
-  .button{
+  .button {
     height: 25px;
     width: 25px;
     overflow-y: hidden;

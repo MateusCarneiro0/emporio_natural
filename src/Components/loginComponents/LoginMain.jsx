@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { loginUser } from "../../api/authApi";
 
@@ -13,9 +13,8 @@ import { ThreeDots } from "react-loader-spinner";
 import styles from "./LoginMain.module.css";
 
 function LoginMain() {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { isLoading, error, authError, isAuthenticated } = useSelector(
+  const { isLoading, error, authError } = useSelector(
     (store) => store.auth,
   );
   const [username, setUsername] = useState("");
@@ -26,9 +25,7 @@ function LoginMain() {
     dispatch(loginUser(username, password));
   }
 
-  useEffect(() => {
-    if (isAuthenticated) navigate("/produtos");
-  }, [isAuthenticated, navigate]);
+  
   if (error.toLocaleLowerCase() === "failed to fetch")
     return <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />;
   if (error) return <Error message={error} />;
