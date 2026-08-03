@@ -13,39 +13,59 @@ import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
 
 function Product() {
-  const [quantity, setQuantity] = useState(0);
-  
-  const clickabel = quantity > 0
-  
-  const { id } = useParams();
-
-  const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
-
-  useEffect(() => {
-    dispatch(getProduct(id));
-  }, [id, dispatch]);
-
-  const { cartProducts, error: cartError } = useSelector((store) => store.cart);
+  const [quantity, setQuantity] = useState("");
 
   const { isLoadingCurrentProduct, currentProduct, error } = useSelector(
     (store) => store.products,
   );
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
+  const price =
+    Number.isFinite(+quantity) && +quantity > 0
+      ? Number((+quantity * preco).toFixed(2))
+      : 0;
+
+  const clickabel = quantity > 0 && price > 0;
+
+  const { id } = useParams();
+
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getProduct(id));
+  }, [id, dispatch]);
+
+  const { cartProducts } = useSelector((store) => store.cart);
 
   function handleChangeInput(ev) {
-    const value = +ev.target.value
-    if(Number.isFinite(value)){
-      setQuantity(() => categoria === "Un" ? Math.round(value):value)
+    if(categoria === "Un"){
+      setQuantity(`${Math.trunc(+ev.target.value)}`)
+    }else{
+
+      setQuantity(ev.target.value);
     }
   }
-
+  function handleAdd(ev) {
+    ev.preventDefault();
+    if (price <= 0 || quantity <= 0) return;
+    dispatch(
+      addProductCart({
+        nome,
+        imagem,
+        categorias,
+        descricao,
+        total: Number((preco * quantity).toFixed(2)),
+        id,
+        quantity,
+        categoria,
+      }),
+    );
+  }
   if (error) return <Error message={error} />;
-  
-  if (isLoadingCurrentProduct) return <Spinner message="Carregando Produto..." />;
+
+  if (isLoadingCurrentProduct)
+    return <Spinner message="Carregando Produto..." />;
 
   return (
     <div className={styles.product}>
@@ -93,29 +113,13 @@ function Product() {
               onChange={handleChangeInput}
             />
             <p className={styles.price}>
-              Total:<strong>{Number((preco * quantity).toFixed(2))}</strong> R$
+              Total:<strong>{isNaN(price) ? "Inválido":price}</strong> R$
             </p>
           </div>
         </div>
         <Button
           disabled={!clickabel}
-          onClick={() => {
-            dispatch(
-              addProductCart({
-                nome,
-                imagem,
-                categorias,
-                descricao,
-                total: Number((preco * quantity).toFixed(2)),
-                id,
-                quantity,
-                categoria,
-              }),
-            );
-            if (!cartError && !isLoadingCurrentProduct) {
-              navigate("/cart");
-            }
-          }}
+          onClick={handleAdd}
         >
           {cartProducts?.some?.((productItem) => productItem.nome === nome)
             ? "Editar no Carrinho"
