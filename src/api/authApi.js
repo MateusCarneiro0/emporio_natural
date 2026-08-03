@@ -52,11 +52,13 @@ export function createNewUser(user) {
       }
     } catch (err) {
       if (err.name === "FetchApiError") {
-        dispatch(rejected("Erro em criar usuário tente novamente mais tarde"));
+        dispatch(
+          rejectedSignup("Erro em criar usuário tente novamente mais tarde"),
+        );
       } else if (err.name === "EnoughDataError") {
         dispatch(rejectedSignup(err.message));
       } else {
-        dispatch(rejected(err.message));
+        dispatch(rejectedSignup(err.message));
       }
     }
   };
@@ -92,16 +94,17 @@ export function loginUser(username, password) {
           );
         }
       } else {
+        if (data?.error) {
+          dispatch(
+            authRejected("Erro em fazer validação,tente novamente mais tarde"),
+          );
+        }
         dispatch(
-          authRejected("Usuário ou senha não encontrados tente novamente"),
+          authRejected("Usuário ou senha não encontrados, tente novamente mais tarde"),
         );
       }
     } catch (err) {
-      if (err.name === "EnoughDataError") {
-        dispatch(authRejected(err.message));
-      } else {
-        dispatch(rejected(err.message));
-      }
+      dispatch(authRejected(err.message));
     }
   };
 }
