@@ -30,7 +30,7 @@ function Product() {
 
   const { cartProducts, error: cartError } = useSelector((store) => store.cart);
 
-  const { isLoading, currentProduct, error } = useSelector(
+  const { isLoadingCurrentProduct, currentProduct, error } = useSelector(
     (store) => store.products,
   );
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
@@ -42,7 +42,7 @@ function Product() {
       setQuantity(() => categoria === "Un" ? Math.round(value):value)
     }
   }
-  if (isLoading) return <Spinner message="Carregando Produto..." />;
+  if (isLoadingCurrentProduct) return <Spinner message="Carregando Produto..." />;
 
   if (error) return <Error message={error} />;
 
@@ -111,7 +111,7 @@ function Product() {
                 categoria,
               }),
             );
-            if (!cartError && !isLoading) {
+            if (!cartError && !isLoadingCurrentProduct) {
               navigate("/cart");
             }
           }}

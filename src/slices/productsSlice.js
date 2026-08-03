@@ -6,15 +6,18 @@ const initialState = {
   products: [],
   error: "",
   currentProduct: {},
-  times: 0,
+  isLoadingCurrentProduct: false,
 };
 
 const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    loadingProducts(state, act) {
+    loadingProducts(state) {
       state.isLoading = true;
+    },
+    loadingCurrentProduct(state){
+      state.isLoadingCurrentProduct = true
     },
     rejected(sta, action) {
       sta.error = action?.payload || "Error in fetch product";
@@ -39,13 +42,13 @@ const productsSlice = createSlice({
       );
     },
     receivedCurrentProduct(sta, act) {
-      sta.isLoading = false;
+      sta.isLoadingCurrentProduct = false;
       sta.currentProduct = act.payload;
       sta.error = "";
     },
-    leaveOfCurrentProduct(sta){
-      sta.currentProduct = {}
-    }
+    leaveOfCurrentProduct(sta) {
+      sta.currentProduct = {};
+    },
   },
 });
 

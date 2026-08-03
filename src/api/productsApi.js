@@ -17,7 +17,7 @@ export function fetchProducts() {
 
 export function getProduct(id) {
   return async (dispatch, getState) => {
-    dispatch({ type: "products/loadingProducts" });
+    dispatch({ type: "products/loadingCurrentProduct" });
     try {
       const data = await requestJson(`products/${id}`);
       const product = data?.at?.(0);
