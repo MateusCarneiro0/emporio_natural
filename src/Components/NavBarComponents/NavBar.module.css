@@ -27,3 +27,10 @@
 .nav .textLink:not(:global(.active)):hover {
   color: var(--principal-green);
 }
+
+
+@media(max-width:750px){
+  .nav{
+    display: none;
+  }
+}

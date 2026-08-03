@@ -1,7 +1,6 @@
 import { NavLink, useParams } from "react-router-dom";
 import Logo from "./Logo";
 import styles from "./NavBar.module.css";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import NavLoginButton from "./NavLoginButton";
@@ -35,12 +34,12 @@ function NavBarDesktop() {
         <NavLink to="/cart" className={styles.textLink}>
           {({ isActive }) => (
             /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
-            <IconButton>
+            <>
               <ShoppingCartOutlinedIcon
                 sx={{
-                  // Se estiver ativo, fica azul, se não, fica cinza
                   color: isActive ? "rgb(170, 173, 121)" : "#757575",
                   transition: "color 0.2s ease",
+                  
                 }}
               />
               <span
@@ -53,7 +52,7 @@ function NavBarDesktop() {
               <span>
                 {!cartProducts?.length ? null : `(${cartProducts?.length})`}
               </span>
-            </IconButton>
+            </>
           )}
         </NavLink>
       ) : (

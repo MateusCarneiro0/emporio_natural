@@ -1,7 +1,8 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styles from "./Proposit.module.css";
 
 function Purpose() {
+  const navigate = useNavigate();
   return (
     <section className={styles.proposit}>
       <img
@@ -21,9 +22,13 @@ function Purpose() {
           vida para você e sua família através de uma seleção cuidadosa de
           produtos frescos, orgânicos e cheios de sabor.
         </p>
-        <Link to="/produtos" className={styles.ctaLink}>
-          <button type="button">Conheça nossos produtos</button>
-        </Link>
+        <button
+          className={styles.ctaLink}
+          onClick={() => navigate("/produtos")}
+          type="button"
+        >
+          Conheça nossos produtos
+        </button>
       </div>
     </section>
   );

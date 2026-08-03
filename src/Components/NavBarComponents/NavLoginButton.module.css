@@ -7,11 +7,11 @@
   outline: none;
   border: none;
   font-size: 15px;
+  font-family: "Inter";
   transition: 200ms all ease-in;
   text-align: center;
-  justify-self: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
 }
 .button:hover {
   cursor: pointer;
@@ -20,3 +20,4 @@
 .link{
   text-decoration: none;
 }
+

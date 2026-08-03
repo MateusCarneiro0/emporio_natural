@@ -26,3 +26,9 @@
 .nav .textLink:not(:global(.active)):hover {
   color: var(--principal-green);
 }
+
+@media(min-width:751px){
+  .nav{
+    display: none;
+  }
+}

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from "./NavModal.module.css";
-import IconButton from "@mui/material/IconButton";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
@@ -65,7 +64,7 @@ function NavModal() {
               <NavLink to="/cart" className={styles.textLink}>
                 {({ isActive }) => (
                   /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
-                  <IconButton>
+                  <>
                     <ShoppingCartOutlinedIcon
                       sx={{
                         // Se estiver ativo, fica azul, se não, fica cinza
@@ -85,7 +84,7 @@ function NavModal() {
                         ? null
                         : `(${cartProducts?.length})`}
                     </span>
-                  </IconButton>
+                  </>
                 )}
               </NavLink>
               <div className={styles.loginSeparator}>
