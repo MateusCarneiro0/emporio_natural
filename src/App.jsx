@@ -6,6 +6,7 @@ import SpinnerFullScreen from "./Components/SpinnerFullScreen";
 import AppLayout from "./Components/AppLayout";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./Components/Error";
+import AppBootstrap from "./AppBootstrap";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -19,48 +20,50 @@ function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary fallback={<Error />}>
-        <Suspense fallback={<SpinnerFullScreen />}>
-          <Routes>
-            <Route element={<AppLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/produtos" element={<Products />}>
+        <AppBootstrap>
+          <Suspense fallback={<SpinnerFullScreen />}>
+            <Routes>
+              <Route element={<AppLayout />}>
+                <Route path="/" element={<Home />} />
+                <Route path="/produtos" element={<Products />}>
+                  <Route
+                    path="/produtos/:id"
+                    element={
+                      <AuthProtected>
+                        <Product />
+                      </AuthProtected>
+                    }
+                  />
+                </Route>
                 <Route
-                  path="/produtos/:id"
+                  path="/cart"
                   element={
                     <AuthProtected>
-                      <Product />
+                      <Cart />
                     </AuthProtected>
                   }
                 />
+                <Route
+                  path="/login"
+                  element={
+                    <LoggedProtected>
+                      <Login />
+                    </LoggedProtected>
+                  }
+                />
+                <Route
+                  path="/signup"
+                  element={
+                    <LoggedProtected>
+                      <Signup />
+                    </LoggedProtected>
+                  }
+                />
+                <Route path="*" element={<NotFound />} />
               </Route>
-              <Route
-                path="/cart"
-                element={
-                  <AuthProtected>
-                    <Cart />
-                  </AuthProtected>
-                }
-              />
-              <Route
-                path="/login"
-                element={
-                  <LoggedProtected>
-                    <Login />
-                  </LoggedProtected>
-                }
-              />
-              <Route
-                path="/signup"
-                element={
-                  <LoggedProtected>
-                    <Signup />
-                  </LoggedProtected>
-                }
-              />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </Suspense>
+            </Routes>
+          </Suspense>
+        </AppBootstrap>
       </ErrorBoundary>
     </BrowserRouter>
   );
