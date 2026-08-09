@@ -1,9 +1,4 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  createBrowserRouter,
-} from "react-router";
+import { createBrowserRouter } from "react-router";
 import { lazy, Suspense } from "react";
 import LoggedProtected from "./Components/protectedRoutes/LoggedProtected";
 import AuthProtected from "./Components/protectedRoutes/AuthProtected";
@@ -13,6 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Error from "./Components/Error";
 import AppBootstrap from "./AppBootstrap";
 import { RouterProvider } from "react-router/dom";
+import { action as fetchProductLoader } from "./Components/productsComponents/ProductMain";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -24,6 +20,7 @@ const NotFound = lazy(() => import("./Pages/NotFound"));
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
+    errorElement: <Error />,
     children: [
       {
         element: <Home />,
@@ -32,6 +29,7 @@ const router = createBrowserRouter([
       {
         element: <Products />,
         path: "/produtos",
+        loader: fetchProductLoader,
         children: [
           {
             element: (
@@ -76,14 +74,13 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    
-      <ErrorBoundary fallback={<Error />}>
-        <AppBootstrap>
-          <Suspense fallback={<SpinnerFullScreen />}>
-            <RouterProvider router={router} />
-          </Suspense>
-        </AppBootstrap>
-      </ErrorBoundary>
+    <ErrorBoundary fallback={<Error />}>
+      <AppBootstrap>
+        <Suspense fallback={<SpinnerFullScreen />}>
+          <RouterProvider router={router} />
+        </Suspense>
+      </AppBootstrap>
+    </ErrorBoundary>
   );
 }
 

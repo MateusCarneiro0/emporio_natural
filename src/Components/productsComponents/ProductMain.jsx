@@ -1,14 +1,20 @@
 import { useEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useParams } from "react-router";
-
-import { searchProducts } from "../../slices/productsSlice";
+import store from "../../app/store"
+import {
+  loadingProducts,
+  receiveProducts,
+  searchProducts,
+} from "../../slices/productsSlice";
 
 import Spinner from "../Spinner";
 import CardProduct from "./CardProduct";
 
 import styles from "./ProductMain.module.css";
 import ProductsError from "./ProductsError";
+import requestJson from "../../api/requestJson";
+import { rejected } from "../../slices/authSlice";
 
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
@@ -21,7 +27,7 @@ const ProductMain = memo(function ProductMain() {
   const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
 
   const phraseRef = useRef(null);
-  
+
   useEffect(() => {
     phraseRef.current = [
       "o que falta para o seu dia ficar mais saudável? 🌞",
@@ -65,7 +71,13 @@ const ProductMain = memo(function ProductMain() {
           </h3>
         )}
       </header>
-      <div className={displayProducts.length ? styles.productsContainer:styles.enoughContainer}>
+      <div
+        className={
+          displayProducts.length
+            ? styles.productsContainer
+            : styles.enoughContainer
+        }
+      >
         {displayProducts.length ? (
           displayProducts.map((product, i) => (
             <CardProduct
@@ -81,11 +93,25 @@ const ProductMain = memo(function ProductMain() {
             </CardProduct>
           ))
         ) : (
-          <h1 className={styles.enough}>Nenhum produto encontrado, procure outro produto</h1>
+          <h1 className={styles.enough}>
+            Nenhum produto encontrado, procure outro produto
+          </h1>
         )}
       </div>
     </main>
   );
 });
+
+export async function action() {
+  try {
+    const data = await requestJson("");
+    store.dispatch(receiveProducts(data));
+    return data
+  } catch (err) {
+    store.dispatch(
+      rejected("Erro em buscar os produtos, tente novamente mais tarde."),
+    );
+  }
+}
 
 export default ProductMain;
