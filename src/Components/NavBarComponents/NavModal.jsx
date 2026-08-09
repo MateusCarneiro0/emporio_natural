@@ -3,7 +3,7 @@ import styles from "./NavModal.module.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
-import { NavLink } from "react-router-dom";
+import { NavLink } from "react-router";
 import NavLoginButton from "./NavLoginButton";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Logo from "./Logo";

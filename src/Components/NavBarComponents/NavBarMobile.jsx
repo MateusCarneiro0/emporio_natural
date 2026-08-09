@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams } from "react-router";
 import styles from "./NavBarMobile.module.css";
 import NavModal from "./NavModal";
 import LeaveProductIcon from "./LeaveProductIcon";

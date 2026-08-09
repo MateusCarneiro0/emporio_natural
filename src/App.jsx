@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router";
 import { lazy, Suspense } from "react";
 import LoggedProtected from "./Components/protectedRoutes/LoggedProtected";
 import AuthProtected from "./Components/protectedRoutes/AuthProtected";

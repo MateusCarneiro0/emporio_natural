@@ -9,7 +9,6 @@ function AppBootstrap({ children }) {
   const { isAuthenticated, isLoadingGetStorage } = useSelector(
     (store) => store.auth,
   );
-  const { isExistingURL } = useSelector((state) => state.apiErrors);
   const { products } = useSelector((store) => store.products);
   const [isCorrectUrl, setIsCorrectUrl] = useState(true);
   useEffect(() => {
@@ -35,7 +34,6 @@ function AppBootstrap({ children }) {
 
   if (isLoadingGetStorage)
     return <SpinnerFullScreen message="Carregando dados..." />;
-  if(!isExistingURL) return <Error message="URL não válida acesse em outro momento" />
   return children;
 }
 

@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import { logout } from "../../slices/authSlice";
 import { useDispatch } from "react-redux";
 import styles from "./LogoutIconNav.module.css";
