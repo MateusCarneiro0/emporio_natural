@@ -19,6 +19,12 @@
   font-size: 20px;
   text-decoration: none;
   color: rgb(49, 36, 36);
+  outline: dashed 1px var(--dark-green-principal);
+  outline-offset: 30px;
+}
+.nav .textLink:focus {
+  outline: dashed 1px var(--dark-green-principal);
+  outline-offset: 30px;
 }
 .nav :global(.active):not(.imageLink) {
   color: var(--dark-green-principal);
@@ -27,8 +33,8 @@
   color: var(--principal-green);
 }
 
-@media(min-width:751px){
-  .nav{
+@media (min-width: 751px) {
+  .nav {
     display: none;
   }
 }

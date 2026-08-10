@@ -11,6 +11,7 @@ function AppBootstrap({ children }) {
   );
   const { products } = useSelector((store) => store.products);
   const [isCorrectUrl, setIsCorrectUrl] = useState(true);
+
   useEffect(() => {
     if (!URL.canParse(BASE_URL) && isCorrectUrl) {
       setIsCorrectUrl(false);
@@ -19,16 +20,17 @@ function AppBootstrap({ children }) {
   }, [isCorrectUrl]);
   const dispatch = useDispatch();
   const hasFetched = useRef(false);
+  const hasFetchedUser = useRef(false);
   useEffect(() => {
     if (products.length === 0 && !hasFetched.current) {
       hasFetched.current = true;
       dispatch(fetchProducts());
     }
   }, [products, dispatch]);
-
   useEffect(() => {
-    if (!isAuthenticated) {
+    if (!isAuthenticated && !hasFetchedUser.current) {
       dispatch(getLocalStorage());
+      hasFetchedUser.current = true;
     }
   }, [dispatch, isAuthenticated]);
 

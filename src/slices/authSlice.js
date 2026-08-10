@@ -37,6 +37,9 @@ const authReducer = createSlice({
     },
     loadingUsers(sta) {
       sta.isLoading = true;
+      sta.error = ""
+      sta.authError = false
+      sta.signupError = false
     },
     rejected(sta, act) {
       sta.error = act.payload;

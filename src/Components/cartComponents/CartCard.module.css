@@ -57,9 +57,6 @@
   cursor: pointer;
   background-color: #e3dfcb;
 }
-.last {
-  margin-bottom: 100px;
-}
 .cartContainer {
   display: flex;
   justify-content: center;

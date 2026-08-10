@@ -16,9 +16,11 @@ const cartReducer = createSlice({
       sta.isLoading = true;
     },
     receiveCart(sta, act) {
-      sta.cartProducts = act.payload;
-      sta.isLoading = false;
-      sta.error = "";
+      if (act.payload.id) {
+        sta.cartProducts = act.payload;
+        sta.isLoading = false;
+        sta.error = "";
+      }
     },
     rejected(sta, act) {
       sta.isLoading = false;

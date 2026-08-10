@@ -35,7 +35,7 @@ function NavModal() {
       )}
 
       {isOpen && (
-        <main className={styles.links} id="menu-navegacao" aria-controls="menu-navegacao">
+        <nav className={styles.links} id="menu-navegacao" aria-controls="menu-navegacao">
           <NavLink
             aria-label="Ir para início"
             to="/"
@@ -116,7 +116,7 @@ function NavModal() {
               <hr></hr>
             </span>
           </div>
-        </main>
+        </nav>
       )}
     </div>
   );

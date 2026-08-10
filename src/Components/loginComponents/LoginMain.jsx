@@ -14,9 +14,7 @@ import styles from "./LoginMain.module.css";
 
 function LoginMain() {
   const dispatch = useDispatch();
-  const { isLoading, error, authError } = useSelector(
-    (store) => store.auth,
-  );
+  const { isLoading, error, authError } = useSelector((store) => store.auth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const clickabel = username && password;
@@ -25,9 +23,10 @@ function LoginMain() {
     dispatch(loginUser(username, password));
   }
 
-  
   if (error.toLocaleLowerCase() === "failed to fetch")
-    return <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />;
+    return (
+      <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />
+    );
   if (error) return <Error message={error} />;
   return (
     <div className={styles.loginContainer}>
@@ -48,18 +47,14 @@ function LoginMain() {
           type="password"
         />
         {authError && (
-          <p className={styles.authError}>Usuário ou senha não existem tente de novo</p>
+          <p className={styles.authError}>
+            Usuário ou senha não existem tente de novo
+          </p>
         )}
         {isLoading ? (
           <ThreeDots />
         ) : (
-          <LoginButton
-            disabled={!clickabel}
-            color="white"
-            backgroundColor="rgb(163, 220, 79)"
-          >
-            Login
-          </LoginButton>
+          <LoginButton disabled={!clickabel}>Login</LoginButton>
         )}
         <p className={styles.notHaveLink}>
           Não tem uma conta ainda ? Aperte{" "}
