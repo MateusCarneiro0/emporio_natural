@@ -72,3 +72,7 @@
   height: 7.5px;
   margin-bottom: 50px;
 }
+.textLink:focus {
+  outline: 2px var(--dark-green-principal) solid;
+  outline-offset: 5px;
+}

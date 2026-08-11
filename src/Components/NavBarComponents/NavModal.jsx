@@ -35,8 +35,13 @@ function NavModal() {
       )}
 
       {isOpen && (
-        <nav className={styles.links} id="menu-navegacao" aria-controls="menu-navegacao">
+        <nav
+          className={styles.links}
+          id="menu-navegacao"
+          aria-controls="menu-navegacao"
+        >
           <NavLink
+            tabIndex={0}
             aria-label="Ir para início"
             to="/"
             className={styles.textLink}
@@ -49,6 +54,7 @@ function NavModal() {
             </span>
           </div>
           <NavLink
+            tabIndex={0}
             aria-label="ir para produtos"
             to="/produtos"
             className={styles.textLink}
@@ -61,6 +67,7 @@ function NavModal() {
             </span>
           </div>
           <a
+            tabIndex={0}
             aria-label="Entrar em contato"
             href="mailto:emporionatural36@gmail.com"
             className={styles.textLink}
@@ -75,6 +82,7 @@ function NavModal() {
           {isAuthenticated && (
             <>
               <NavLink
+                tabIndex={0}
                 aria-label="Ir para carrinho"
                 to="/cart"
                 className={styles.textLink}

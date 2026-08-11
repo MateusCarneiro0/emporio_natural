@@ -22,10 +22,6 @@
   outline: dashed 1px var(--dark-green-principal);
   outline-offset: 30px;
 }
-.nav .textLink:focus {
-  outline: dashed 1px var(--dark-green-principal);
-  outline-offset: 30px;
-}
 .nav :global(.active):not(.imageLink) {
   color: var(--dark-green-principal);
 }
@@ -33,7 +29,7 @@
   color: var(--principal-green);
 }
 
-@media (min-width: 751px) {
+@media (min-width: 876px) {
   .nav {
     display: none;
   }
