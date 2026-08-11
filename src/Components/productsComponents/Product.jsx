@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getProduct } from "../../api/productsApi";
 
 import Error from "../Error";
 import Button from "../Button";
@@ -34,9 +33,6 @@ function Product() {
   const dispatch = useDispatch();
 
   const { cartProducts } = useSelector((store) => store.cart);
-  useEffect(() => {
-    dispatch(getProduct(id));
-  }, [id, dispatch]);
 
 
   function handleChangeInput(ev) {

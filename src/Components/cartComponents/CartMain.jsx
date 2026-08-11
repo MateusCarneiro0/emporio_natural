@@ -8,6 +8,7 @@ import Error from "../Error";
 import Spinner from "../Spinner";
 
 import styles from "./CartMain.module.css";
+import ToastAlert from "./ToastAlert";
 
 function CartMain() {
   const { cartProducts, isLoading, error } = useSelector((store) => store.cart);
@@ -51,6 +52,7 @@ function CartMain() {
         Total:<strong>{totalCust} R$</strong>
       </h2>
       <Button onClick={() => dispatch(payCart())}>Pagar o carrinho</Button>
+      <ToastAlert />
     </div>
   );
 }

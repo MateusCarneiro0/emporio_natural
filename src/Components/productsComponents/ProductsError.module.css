@@ -33,6 +33,9 @@
   border: none;
   cursor: pointer;
 }
+.button:disabled {
+  opacity: 0.3;
+}
 .button:focus {
   outline: solid 2px rgb(241, 63, 63);
   outline-offset: 2px;
