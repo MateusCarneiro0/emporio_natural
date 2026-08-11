@@ -1,13 +1,13 @@
 import styles from "./Input.module.css";
 
-function Input({ setState, placeholder, value, disabled, type, signup }) {
-  const name = `${type}-${signup ? "register" : "password"}`;
+function Input({ setState, placeholder, value, disabled, type, signup, name }) {
+  const inputName = `${signup ? "register":"login"}-${name}`
   return (
     <>
-      <label htmlFor={name}></label>
+      <label htmlFor={inputName}></label>
       <input
-        name={name}
-        id={name}
+        name={inputName}
+        id={inputName}
         autoComplete={
           type === "user"
             ? "username"

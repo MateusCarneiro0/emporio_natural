@@ -45,7 +45,8 @@ function SignupMain() {
           setState={setUsername}
           value={username}
           disabled={isLoading}
-          type="user"
+          type="text"
+          name="password"
           signup={true}
         />
         <Input
@@ -54,6 +55,7 @@ function SignupMain() {
           value={password}
           disabled={isLoading}
           type="password"
+          name="password"
           signup={true}
         />
         {signupError && <p className={styles.authError}>{signupError}</p>}

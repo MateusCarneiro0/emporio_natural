@@ -37,7 +37,8 @@ function LoginMain() {
           setState={setUsername}
           value={username}
           disabled={isLoading}
-          type="user"
+          type="text"
+          name="username"
         />
         <Input
           placeholder={"Digite sua senha"}
@@ -45,6 +46,7 @@ function LoginMain() {
           value={password}
           disabled={isLoading}
           type="password"
+          name="password"
         />
         {authError && (
           <p className={styles.authError}>
