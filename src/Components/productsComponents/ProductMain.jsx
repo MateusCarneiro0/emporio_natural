@@ -1,20 +1,13 @@
 import { useEffect, useRef, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useParams } from "react-router";
-import store from "../../app/store"
-import {
-  loadingProducts,
-  receiveProducts,
-  searchProducts,
-} from "../../slices/productsSlice";
+import { Outlet, useNavigation, useParams } from "react-router";
+import { searchProducts } from "../../slices/productsSlice";
 
 import Spinner from "../Spinner";
 import CardProduct from "./CardProduct";
 
 import styles from "./ProductMain.module.css";
 import ProductsError from "./ProductsError";
-import requestJson from "../../api/requestJson";
-import { rejected } from "../../slices/authSlice";
 
 const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
@@ -24,10 +17,14 @@ const ProductMain = memo(function ProductMain() {
   const { id } = useParams();
 
   const { authUser } = useSelector((store) => store.auth);
-  const { isLoading: isLoadingCart } = useSelector((store) => store.cart);
 
   const phraseRef = useRef(null);
 
+  const { displayProducts, error } = useSelector((store) => store.products);
+
+  const navigation = useNavigation();
+  const isLoading = navigation.state === "loading";
+  
   useEffect(() => {
     phraseRef.current = [
       "o que falta para o seu dia ficar mais saudável? 🌞",
@@ -37,17 +34,16 @@ const ProductMain = memo(function ProductMain() {
     ].at(Math.floor(Math.random() * 4));
   }, []);
 
-  const { isLoading, displayProducts, error } = useSelector(
-    (store) => store.products,
-  );
   useEffect(() => {
     dispatch(searchProducts(query));
   }, [dispatch, query]);
 
   if (id) return <Outlet />;
 
-  if (isLoading || isLoadingCart)
-    return <Spinner message="Carregando Produtos..." />;
+  if (isLoading)
+    return (
+      <Spinner message={id ? "Carregando produto..." : "Carregando Produtos..."} />
+    );
 
   if (error) return <ProductsError message={error} />;
 
@@ -101,17 +97,5 @@ const ProductMain = memo(function ProductMain() {
     </main>
   );
 });
-
-export async function action() {
-  try {
-    const data = await requestJson("");
-    store.dispatch(receiveProducts(data));
-    return data
-  } catch (err) {
-    store.dispatch(
-      rejected("Erro em buscar os produtos, tente novamente mais tarde."),
-    );
-  }
-}
 
 export default ProductMain;

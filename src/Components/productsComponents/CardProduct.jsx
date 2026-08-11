@@ -2,6 +2,7 @@ import { useNavigate } from "react-router";
 import styles from "./CardProduct.module.css";
 import Button from "../Button";
 import { memo } from "react";
+import { useSelector } from "react-redux";
 const CardProduct = memo(function CardProduct({
   src,
   title,
@@ -13,7 +14,11 @@ const CardProduct = memo(function CardProduct({
   isLast
 }) {
   const navigate = useNavigate();
-
+  const {isAuthenticated} = useSelector(store => store.auth)
+  function handleClick(ev) {
+    ev.preventDefault()
+    navigate(isAuthenticated ? `${id}`:"/login")
+  }
   return (
     <div className={`${styles.card} ${isLast ? styles.last:""}`}>
       <img src={src} alt={title} />
@@ -24,7 +29,7 @@ const CardProduct = memo(function CardProduct({
           {price} R$/{categoria}
         </strong>
       </p>
-      <Button onClick={() => navigate(`${id}`)}>Veja mais</Button>
+      <Button onClick={handleClick}>Veja mais</Button>
     </div>
   );
 });

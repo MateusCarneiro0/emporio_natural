@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { useParams } from "react-router";
+import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
 import { getProduct } from "../../api/productsApi";
@@ -29,14 +29,15 @@ function Product() {
 
   const { id } = useParams();
 
+  const navigate = useNavigate()
 
   const dispatch = useDispatch();
 
+  const { cartProducts } = useSelector((store) => store.cart);
   useEffect(() => {
     dispatch(getProduct(id));
   }, [id, dispatch]);
 
-  const { cartProducts } = useSelector((store) => store.cart);
 
   function handleChangeInput(ev) {
     if(categoria === "Un"){
@@ -61,6 +62,7 @@ function Product() {
         categoria,
       }),
     );
+    navigate("/cart")
   }
   if (error) return <Error message={error} />;
 

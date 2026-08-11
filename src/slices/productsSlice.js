@@ -2,7 +2,6 @@ import { createSlice } from "@reduxjs/toolkit";
 import { verifyProduct } from "../utils/ProductChecker";
 const initialState = {
   displayProducts: [],
-  isLoading: false,
   products: [],
   error: "",
   currentProduct: {},
@@ -13,13 +12,8 @@ const productsSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    loadingProducts(state) {
-      state.isLoading = true;
-      state.error = "";
-    },
-    loadingCurrentProduct(state) {
-      state.isLoadingCurrentProduct = true;
-      state.error = "";
+    resetError(sta){
+      sta.error= ""
     },
     rejected(sta, action) {
       sta.error = action?.payload || "Erro em buscar produto";
@@ -63,5 +57,6 @@ export const {
   rejected,
   receiveProducts,
   receivedCurrentProduct,
+  resetError
 } = productsSlice.actions;
 export default productsSlice.reducer;
