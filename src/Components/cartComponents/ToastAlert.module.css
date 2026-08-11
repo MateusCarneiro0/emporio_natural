@@ -1,8 +1,65 @@
+@keyframes toUp {
+  from {
+    opacity: 0;
+    transform: translateY(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes toRight {
+  from {
+    opacity: 0;
+    transform: translateX(300px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
 .container {
-  display: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  right: 10px;
+  bottom: 80px;
   z-index: 999;
+  background-color: whitesmoke;
+  width: 450px;
+  height: 50px;
+  animation: toRight 400ms;
+  border-radius: 15px;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+.correct {
+  border-top: solid 2px greenyellow;
+}
+.wrong {
+  border-top: solid 2px red;
+}
+.message {
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.message {
+  color: rgb(59, 32, 32);
+}
+.message,.wrong {
+  color: rgb(47, 52, 39);
+}
+.toast {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 500px) {
+  .container {
+    animation: toUp 400ms;
+    width: 90vw;
+  }
 }
