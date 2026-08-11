@@ -5,7 +5,8 @@ import {
   addProductCart as addProductCartAction,
   cartRejected,
   removeProductCart,
-  payCart as payCartAction
+  payCart as payCartAction,
+  addOperationText,
 } from "../slices/cartSlice";
 /*
 { 
@@ -24,7 +25,7 @@ import {
     }
 */
 
-export function addProductCart(product) {
+export function addProductCart(product, isInCart) {
   return async (dispatch, getState) => {
     const { authUserId: userId } = getState().auth;
 
@@ -39,11 +40,21 @@ export function addProductCart(product) {
         body: JSON.stringify({ product }),
       });
       dispatch(addProductCartAction(product));
+      dispatch(
+        addOperationText(
+          `A operação de ${isInCart ? "editar" : "adicionar"} o produto ${product.nome} foi bem-sucedida`,
+        ),
+      );
     } catch (err) {
       if (err.name === "ProductNotFound" && product?.id) {
         dispatch(deleteProductCart(product.id));
       }
       dispatch(cartRejected(err.message));
+      dispatch(
+        addOperationText(
+          `A operação de adicionar o produto ${product.nome} foi mal-sucedida, tente novamente`,
+        ),
+      );
     }
   };
 }
@@ -68,6 +79,11 @@ export function deleteProductCart(productId) {
       });
 
       dispatch(removeProductCart(productId));
+      dispatch(
+        addOperationText(
+          `A operação de remover o produto ${product.nome} foi bem-sucedida`,
+        ),
+      );
     } catch (err) {
       if (err.name === "ProductNotFound") {
         dispatch(cartRejected(err.message));
@@ -76,6 +92,11 @@ export function deleteProductCart(productId) {
           cartRejected("Erro em deletar o produto, tente novamente mais tarde"),
         );
       }
+      dispatch(
+        addOperationText(
+          `A operação de remover o produto ${product.nome} foi mal-sucedida, tente novamente`,
+        ),
+      );
     }
   };
 }

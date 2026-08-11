@@ -1,10 +1,7 @@
 import styles from "./ToastAlert.module.css";
 import CheckCircleOutlineRoundedIcon from "@mui/icons-material/CheckCircleOutlineRounded";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
-function ToastAlert({
-  error = true,
-  text = "A operação de adicionar produto Banana Prata foi bem-sucedida",
-}) {
+function ToastAlert({ error, text }) {
   return (
     <div
       className={`${styles.container} ${error ? styles.wrong : styles.correct}`}

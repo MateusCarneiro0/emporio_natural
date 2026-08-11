@@ -26,7 +26,7 @@
   justify-content: space-between;
   position: fixed;
   right: 10px;
-  bottom: 80px;
+  bottom: 200px;
   z-index: 999;
   background-color: whitesmoke;
   width: 450px;
@@ -35,6 +35,7 @@
   border-radius: 15px;
   padding-right: 5px;
   padding-left: 5px;
+  transition: all ease-in 400ms;
 }
 .correct {
   border-top: solid 2px greenyellow;
@@ -46,20 +47,24 @@
   font-size: 0.75rem;
   font-weight: 600;
 }
-.message {
-  color: rgb(59, 32, 32);
-}
-.message,.wrong {
+.message,
+.correct {
   color: rgb(47, 52, 39);
+}
+.message,
+.wrong {
+  color: rgb(59, 32, 32);
 }
 .toast {
   display: flex;
   gap: 10px;
+  align-items: center;
 }
 
 @media (max-width: 500px) {
   .container {
     animation: toUp 400ms;
     width: 90vw;
+    bottom: 175px;
   }
 }

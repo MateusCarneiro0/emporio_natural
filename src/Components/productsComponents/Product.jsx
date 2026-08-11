@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-
 import Error from "../Error";
 import Button from "../Button";
 
@@ -28,18 +27,19 @@ function Product() {
 
   const { id } = useParams();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
   const { cartProducts } = useSelector((store) => store.cart);
 
-
+  const isInCart = cartProducts?.some?.(
+    (productItem) => productItem.nome === nome,
+  );
   function handleChangeInput(ev) {
-    if(categoria === "Un"){
-      setQuantity(`${Math.trunc(+ev.target.value)}`)
-    }else{
-
+    if (categoria === "Un") {
+      setQuantity(`${Math.trunc(+ev.target.value)}`);
+    } else {
       setQuantity(ev.target.value);
     }
   }
@@ -56,9 +56,9 @@ function Product() {
         id,
         quantity,
         categoria,
-      }),
+      },isInCart),
     );
-    navigate("/cart")
+    navigate("/cart");
   }
   if (error) return <Error message={error} />;
 
@@ -111,17 +111,12 @@ function Product() {
               onChange={handleChangeInput}
             />
             <p className={styles.price}>
-              Total:<strong>{isNaN(price) ? "Inválido":price}</strong> R$
+              Total:<strong>{isNaN(price) ? "Inválido" : price}</strong> R$
             </p>
           </div>
         </div>
-        <Button
-          disabled={!clickabel}
-          onClick={handleAdd}
-        >
-          {cartProducts?.some?.((productItem) => productItem.nome === nome)
-            ? "Editar no Carrinho"
-            : "Adicionar ao carrinho"}
+        <Button disabled={!clickabel} onClick={handleAdd}>
+          {isInCart ? "Editar no Carrinho" : "Adicionar ao carrinho"}
         </Button>
       </div>
     </div>

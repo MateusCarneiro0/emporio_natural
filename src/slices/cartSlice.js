@@ -6,6 +6,7 @@ const initialState = {
   cartProducts: [],
   isLoading: false,
   error: "",
+  operationText: "",
 };
 
 const cartReducer = createSlice({
@@ -14,6 +15,12 @@ const cartReducer = createSlice({
   reducers: {
     loadingCart(sta) {
       sta.isLoading = true;
+    },
+    addOperationText(sta, act) {
+      sta.operationText = act.payload;
+    },
+    cleanOperationText(sta) {
+      sta.operationText = "";
     },
     receiveCart(sta, act) {
       if (act.payload.id) {
@@ -86,6 +93,8 @@ export const {
   addProductCart,
   removeProductCart,
   payCart,
+  addOperationText,
+  cleanOperationText
 } = cartReducer.actions;
 
 export default cartReducer.reducer;
