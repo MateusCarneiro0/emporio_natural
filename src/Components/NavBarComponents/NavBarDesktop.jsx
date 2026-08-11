@@ -21,17 +21,17 @@ function NavBarDesktop() {
       ) : (
         isAuthenticated && <LogoutIconNav />
       )}
-      <NavLink className={styles.textLink} to="/">
+      <NavLink tabIndex={0} className={styles.textLink} to="/">
         <Logo />
       </NavLink>
-      <NavLink to="/produtos" className={styles.textLink}>
+      <NavLink tabIndex={0} to="/produtos" className={styles.textLink}>
         <ShoppingBagIcon /> <span>Produtos</span>
       </NavLink>
       <a href="mailto:emporionatural36@gmail.com" className={styles.textLink}>
         <EmailIcon /> <span>Contato</span>
       </a>
       {isAuthenticated ? (
-        <NavLink to="/cart" className={styles.textLink}>
+        <NavLink tabIndex={0} to="/cart" className={styles.textLink}>
           {({ isActive }) => (
             /* O NavLink expõe 'isActive'. Passamos isso para o IconButton ou para o Ícone */
             <>

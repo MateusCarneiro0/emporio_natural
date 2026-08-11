@@ -21,6 +21,11 @@
   gap: 7.5px;
   display: flex;
 }
+.textLink:focus{
+  outline: 2px solid var(--dark-green-principal);
+  border-radius: 15px;
+  outline-offset: 5px;
+}
 .nav :global(.active):not(.imageLink) {
   color: var(--dark-green-principal);
 }
