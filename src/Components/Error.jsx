@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import styles from "./Error.module.css";
 import Footer from "./footerComponents/Footer";
 import NavBar from "./NavBarComponents/NavBar";
+import { clearErrors } from "../slices/authSlice";
 
 function Error({ message }) {
+  const dispatch = useDispatch() 
   const navigate = useNavigate()
   const handleReturn = () => {
     navigate("/")
-    window.location.reload();
+    dispatch(clearErrors())
   };
   return (
     <>
@@ -22,7 +25,7 @@ function Error({ message }) {
           onClick={handleReturn}
           className={styles.button}
         >
-          Voltar ao início e recarregar página
+          Voltar ao início
         </button>
       </div>
       <Footer />
