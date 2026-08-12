@@ -11,7 +11,9 @@ const getLocalStorage = createAsyncThunk(
       const data = await requestJson(`/users/fetch/${id}`);
       return data;
     } catch (err) {
-      localStorage.removeItem(idKey)//Removing the corrupted key
+      localStorage.removeItem(idKey); //Removing the corrupted key
+      if (err?.status === 401 || err?.status === 422)
+        return rejectWithValue({ error: "invalid" });
       return rejectWithValue(err.message);
     }
   },
