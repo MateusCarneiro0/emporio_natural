@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { verifyProduct } from "../utils/ProductChecker";
+import { clearErrors } from "./authSlice";
 const initialState = {
   displayProducts: [],
   products: [],
   error: "",
-  currentProduct: {},
-  isLoadingCurrentProduct: false,
+  currentProduct: {}
 };
 
 const productsSlice = createSlice({
@@ -47,6 +47,11 @@ const productsSlice = createSlice({
       sta.error = "";
     },
   },
+  extraReducers:(builder) => {
+    builder.addCase(clearErrors, (state) => {
+      state.error = ""
+    })
+  }
 });
 
 export const {
