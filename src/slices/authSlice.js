@@ -65,6 +65,11 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.signupError = act.payload;
     },
+    clearErrors(sta){
+      sta.error = ""
+      sta.signupError = ""
+      sta.authError = ""
+    }
   },
   extraReducers: (builder) => {
     builder
