@@ -114,6 +114,7 @@ export const {
   createNewUser,
   loginUser,
   loadingUsers,
+  clearErrors
 } = authReducer.actions;
 
 export default authReducer.reducer;
