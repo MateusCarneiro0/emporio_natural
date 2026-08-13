@@ -21,7 +21,7 @@
   gap: 7.5px;
   display: flex;
 }
-.textLink:focus{
+.textLink:focus-visible{
   outline: 2px solid var(--dark-green-principal);
   border-radius: 15px;
   outline-offset: 5px;

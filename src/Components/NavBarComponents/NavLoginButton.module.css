@@ -17,7 +17,7 @@
   cursor: pointer;
   background-color: rgb(39, 150, 39);
 }
-.link:focus {
+.link:focus-visible {
   outline: 2px solid var(--dark-green-principal);
   border-radius: 15px;
   outline-offset: 5px;
