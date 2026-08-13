@@ -27,12 +27,11 @@ import {
 
 export function addProductCart(product, isInCart) {
   return async (dispatch, getState) => {
-    const { authUserId: userId } = getState().auth;
 
     dispatch(loadingCart());
     try {
       verifyProductCart(product);
-      await requestJson(`users/${userId}/addproductcart`, {
+      await requestJson(`users/cart`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +60,6 @@ export function addProductCart(product, isInCart) {
 
 export function deleteProductCart(productId) {
   return async (dispatch, getState) => {
-    const { authUserId: userId } = getState().auth;
     const { cartProducts } = getState().cart;
 
     const product = cartProducts
@@ -72,7 +70,7 @@ export function deleteProductCart(productId) {
     dispatch(loadingCart());
     try {
       verifyProductCart(product);
-      await requestJson(`users/${userId}/removeProductCart`, {
+      await requestJson(`users/cart`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: productId }),

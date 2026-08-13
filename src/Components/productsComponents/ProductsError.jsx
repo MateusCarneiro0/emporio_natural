@@ -22,7 +22,7 @@ function ProductsError({ message }) {
         onClick={handleReturn}
         className={styles.button}
       >
-        {isLoading
+        {!isLoading
           ? id
             ? "Buscar produto novamente"
             : "Buscar produtos"

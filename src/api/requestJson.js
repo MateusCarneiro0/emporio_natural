@@ -16,11 +16,12 @@ export class UnathouridedApiError extends Error {
   }
 }
 export default async function requestJson(url, options) {
-  const acessToken = localStorage.getItem(idKey);
+  const acessToken = JSON.parse(localStorage.getItem(idKey));
   const optionsToken = {
     ...options,
-    headers: { ...options.headers, Authorization: `Bearer ${acessToken}` },
+    headers: { ...options?.headers, Authorization: `Bearer ${acessToken}` },
   };
+  console.log(optionsToken)
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
     optionsToken,

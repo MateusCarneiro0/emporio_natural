@@ -41,9 +41,10 @@ export function createNewUser(user) {
       ) {
         dispatch(rejectedSignup("Muitos caracteres use no máximo 100"));
       } else {
-        const { id, user: createdUser, cart } = data;
-        if (id && createdUser && Array.isArray(cart)) {
-          const newUser = { id, user: createdUser };
+        const { acess_token, user: createdUser, cart } = data;
+        if (acess_token && createdUser && Array.isArray(cart)) {
+          const newUser = { acess_token, user: createdUser };
+          console.log(acess_token)
           dispatch(createNewUserAction(newUser));
 
           dispatch(receiveCart(cart));
@@ -84,9 +85,9 @@ export function loginUser(username, password) {
       });
 
       if (data.auth) {
-        const { id, user, cart } = data;
-        if (Array.isArray(cart) && id && user) {
-          const loggedUser = { id, user };
+        const { acess_token, user, cart } = data;
+        if (Array.isArray(cart) && acess_token && user) {
+          const loggedUser = { acess_token, user };
           dispatch(loginUserAction(loggedUser));
           dispatch(receiveCart(cart));
         } else {

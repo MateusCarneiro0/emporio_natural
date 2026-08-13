@@ -18,22 +18,22 @@ const authReducer = createSlice({
   initialState,
   reducers: {
     createNewUser(sta, action) {
-      sta.authUserId = action.payload.id;
+      sta.authUserId = action.payload.acess_token;
       sta.authUser = action.payload.user;
       sta.isLoading = false;
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
-      localStorage.setItem(idKey, JSON.stringify(action.payload.id));
+      localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
-      sta.authUserId = action.payload.id;
+      sta.authUserId = action.payload.acess_token;
       sta.isLoading = false;
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
-      localStorage.setItem(idKey, JSON.stringify(action.payload.id));
+      localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
     },
     loadingUsers(sta) {
       sta.isLoading = true;
