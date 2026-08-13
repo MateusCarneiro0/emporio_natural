@@ -101,11 +101,10 @@ export function deleteProductCart(productId) {
 
 export function payCart() {
   return async (dispatch, getState) => {
-    const { authUserId: userId } = getState().auth;
     dispatch(loadingCart());
     try {
-      const data = await requestJson(`users/${userId}/clearCart`, {
-        method: "POST",
+      const data = await requestJson(`users/clearCart`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
@@ -121,7 +120,7 @@ export function payCart() {
         );
       }
     } catch (err) {
-      dispatch(cartRejected("Erro em pagar carrinho"));
+      dispatch(cartRejected(err?.message || "Erro em pagar carrinho"));
     }
   };
 }
