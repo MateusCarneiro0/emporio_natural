@@ -44,7 +44,6 @@ export function createNewUser(user) {
         const { acess_token, user: createdUser, cart } = data;
         if (acess_token && createdUser && Array.isArray(cart)) {
           const newUser = { acess_token, user: createdUser };
-          console.log(acess_token)
           dispatch(createNewUserAction(newUser));
 
           dispatch(receiveCart(cart));

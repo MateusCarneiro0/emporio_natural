@@ -21,7 +21,6 @@ export default async function requestJson(url, options) {
     ...options,
     headers: { ...options?.headers, Authorization: `Bearer ${acessToken}` },
   };
-  console.log(optionsToken)
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
     optionsToken,
