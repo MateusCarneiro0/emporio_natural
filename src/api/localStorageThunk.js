@@ -8,7 +8,7 @@ const getLocalStorage = createAsyncThunk(
     try {
       const id = JSON.parse(localStorage.getItem(idKey));
       if (!id) return null;
-      const data = await requestJson(`/users/fetch/${id}`);
+      const data = await requestJson(`/users/me`);
       return data;
     } catch (err) {
       localStorage.removeItem(idKey); //Removing the corrupted key

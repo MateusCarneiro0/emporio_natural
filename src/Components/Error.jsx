@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import styles from "./Error.module.css";
-import Footer from "./footerComponents/Footer";
-import NavBar from "./NavBarComponents/NavBar";
 import { clearErrors } from "../slices/authSlice";
 
 function Error({ message }) {
@@ -14,7 +12,6 @@ function Error({ message }) {
   };
   return (
     <>
-      <NavBar />
       <div className={styles.errorContainer}>
         <h2 className={styles.message}>Ocorreu um erro 😭</h2>
         <h3 className={styles.errorMessage}>
@@ -28,7 +25,6 @@ function Error({ message }) {
           Voltar ao início
         </button>
       </div>
-      <Footer />
     </>
   );
 }

@@ -9,8 +9,9 @@ import {
 
 export async function fetchProducts() {
   store.dispatch(resetError());
+
   try {
-    const data = await requestJson("");
+    const data = await requestJson("", { method: "GET" });
     store.dispatch(receiveProducts(data));
     return data;
   } catch (err) {
@@ -26,7 +27,9 @@ export async function getProduct({ params }) {
   store.dispatch(resetError());
 
   try {
-    const data = await requestJson(`products/${encodeURIComponent(id)}`);
+    const data = await requestJson(`products/${encodeURIComponent(id)}`, {
+      method: "GET",
+    });
     const product = data?.at?.(0);
     if (product) {
       store.dispatch(receivedCurrentProduct(product));

@@ -5,7 +5,7 @@ import {
   authRejected,
   createNewUser as createNewUserAction
 } from "../slices/authSlice";
-import { loadingCart, receiveCart } from "../slices/cartSlice";
+import { receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
 
 class EnoughDataError extends Error {
@@ -18,8 +18,6 @@ class EnoughDataError extends Error {
 export function createNewUser(user) {
   return async (dispatch, getState) => {
     dispatch(loadingUsers());
-    dispatch(loadingCart());
-    console.log(`${user.user} ${user.password}`)
     try {
       if (!user?.user || !user?.password) {
         throw new EnoughDataError(
