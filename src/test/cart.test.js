@@ -1,8 +1,23 @@
 import { describe, it, expect } from "vitest";
 import { verifyProductCart, ProductNotFound } from "../utils/ProductChecker";
 import "@testing-library/jest-dom";
-import { addProductCart } from "../api/cartApi";
-import store from "../app/store";
+import { addProductCart, deleteProductCart, payCart } from "../api/cartApi";
+import { configureStore } from "@reduxjs/toolkit";
+import authReducer from "../slices/authSlice";
+import cartReducer from "../slices/cartSlice";
+import productsSlice from "../slices/productsSlice";
+import requestJson from "../api/requestJson";
+const initializeStore = () => {
+  const store = configureStore({
+    reducer: {
+      auth: authReducer,
+      cart: cartReducer,
+      products: productsSlice,
+    },
+  });
+  return store;
+};
+
 describe("Testando validação de dados em adicionar um produto em um carrinho", () => {
   it("Deve ver se o produto é validado com todas as chaves no produto adicionado(não deve retornar nada)", () => {
     const value = verifyProductCart({
@@ -51,9 +66,19 @@ describe("Testando validação de dados em adicionar um produto em um carrinho",
   });
 });
 
-describe("Testando a API do carrinho para criar,ler e remover produtos do carrinho.", () => {
+describe("Testando a API do carrinho para criar,ler e remover produtos do carrinho.", async () => {
+  const data = await requestJson(`users/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: "TEST_CART",
+      password: "TEST_CART",
+    }),
+  });
+  const acess_token_bearer = data.acess_token
   describe("Testando o de adicionar produtos", () => {
     it("Testando em um caso normal onde todos os requisitão são preenchidos", async () => {
+      const store = initializeStore();
       await store.dispatch(
         addProductCart(
           {
@@ -67,13 +92,15 @@ describe("Testando a API do carrinho para criar,ler e remover produtos do carrin
             categoria: "kg",
           },
           true,
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NjczNDU3MSwianRpIjoiNWIxZDM3Y2UtYmZjYy00YzIwLWE5ZGEtNDBlMDdmOWViMjg1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImQ2MWU2MGEyZGY2ZjQ3NDliOTA5YmE5ZThjMmU0MDU4IiwibmJmIjoxNzg2NzM0NTcxLCJjc3JmIjoiMWVkNGNhMTAtOTMxMS00YzcwLWJlYWItZmEwYzY4MDQ0OTk1IiwiZXhwIjoxNzg3OTQ0MTcxfQ.swbcvSri508ZCZDJE3HS3dSqfCUQAWpccint8vhOiqw"
+          acess_token_bearer,
         ),
       );
       const cart = store.getState().cart.cartProducts;
       expect(cart.length >= 1).toBe(true);
     });
     it("Testando com a falta de uma chave no objeto", async () => {
+      const store = initializeStore();
+
       await store.dispatch(
         addProductCart(
           {
@@ -85,19 +112,114 @@ describe("Testando a API do carrinho para criar,ler e remover produtos do carrin
             id: "OOOOOOOOOOOOOOO",
           },
           false,
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc4NjczNDU3MSwianRpIjoiNWIxZDM3Y2UtYmZjYy00YzIwLWE5ZGEtNDBlMDdmOWViMjg1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImQ2MWU2MGEyZGY2ZjQ3NDliOTA5YmE5ZThjMmU0MDU4IiwibmJmIjoxNzg2NzM0NTcxLCJjc3JmIjoiMWVkNGNhMTAtOTMxMS00YzcwLWJlYWItZmEwYzY4MDQ0OTk1IiwiZXhwIjoxNzg3OTQ0MTcxfQ.swbcvSri508ZCZDJE3HS3dSqfCUQAWpccint8vhOiqw"
+          acess_token_bearer,
         ),
       );
-      const cart = store.getState().cart
-      expect(Boolean(cart.error)).toBe(true)
+      const cart = store.getState().cart;
+
+      expect(Boolean(cart.error) && cart.cartProducts.length === 0).toBe(true);
     });
     it("Sem argumentos", async () => {
-      await store.dispatch(addProductCart())
+      const store = initializeStore();
+
+      await store.dispatch(addProductCart());
       const error = store.getState().cart.error;
-      expect(Boolean(error)).toBe(true)
-    })
+      expect(Boolean(error)).toBe(true);
+    });
+    it("Produtos com mesmo identificador", async () => {
+      const store = initializeStore();
+      await store.dispatch(
+        addProductCart(
+          {
+            nome: "Melancia",
+            imagem: "Imagem",
+            categorias: ["top", "legal"],
+            descricao: "Melancia muito boa",
+            total: Number((15 * 3).toFixed(2)),
+            id: "OOOOOOOOOOOOOOO",
+            quantity: 3,
+            categoria: "kg",
+          },
+          true,
+          acess_token_bearer,
+        ),
+      );
+      await store.dispatch(
+        addProductCart(
+          {
+            nome: "Melancia",
+            imagem: "Imagem",
+            categorias: ["top", "legal"],
+            descricao: "Melancia muito boa",
+            total: Number((15 * 3).toFixed(2)),
+            id: "OOOOOOOOOOOOOOO",
+            quantity: 6,
+            categoria: "kg",
+          },
+          true,
+          acess_token_bearer,
+        ),
+      );
+
+      const cart = store.getState().cart.cartProducts;
+      const productQuantity = store.getState().cart.cartProducts.at(0).quantity;
+      expect(cart.length === 1 && productQuantity === 6).toBe(true);
+    });
   });
-  describe("Testando a API de remover produtos",() => {
-    it("Caso ideal")
+  describe("Testando a API de remover produtos", () => {
+    it("Caso ideal", async () => {
+      const store = initializeStore();
+
+      await store.dispatch(
+        addProductCart(
+          {
+            nome: "Melancia",
+            imagem: "Imagem",
+            categorias: ["top", "legal"],
+            descricao: "Melancia muito boa",
+            total: Number((15 * 3).toFixed(2)),
+            id: "OOOOOOOOOOOOOOO",
+            quantity: 3,
+            categoria: "kg",
+          },
+          true,
+          acess_token_bearer,
+        ),
+      );
+      await store.dispatch(
+        deleteProductCart(
+          "OOOOOOOOOOOOOOO",
+          acess_token_bearer,
+        ),
+      );
+      const cart = store.getState().cart;
+      expect(
+        cart.cartProducts.length === 0 && Boolean(cart.operationText),
+      ).toBe(true);
+    });
+    it("Testando sem um produto no carrinho", async () => {
+      const store = initializeStore();
+
+      await store.dispatch(
+        deleteProductCart(
+          "OOOOOOOOOOOOOOO",
+          acess_token_bearer,
+        ),
+      );
+
+      const error = store.getState().cart.error;
+      const cart = store.getState().cart.cartProducts;
+      expect(
+        error === "Produto inexistente pare remover" && cart.length === 0,
+      ).toBe(true);
+    });
+  describe("Testando clean cart",() => {
+    it("Caso ideal",() => {
+      const store = initializeStore()
+      store.dispatch(payCart(acess_token_bearer))
+      const cart = store.getState().cart.cartProducts
+      expect(cart.length === 0).toBe(true)
+    })
   })
+  });
 });

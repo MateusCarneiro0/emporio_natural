@@ -25,19 +25,22 @@ import {
     }
 */
 
-export function addProductCart(product, isInCart,bearerToken) {
+export function addProductCart(product, isInCart, bearerToken) {
   return async (dispatch, getState) => {
-
     dispatch(loadingCart());
     try {
       verifyProductCart(product);
-      await requestJson(`users/cart`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await requestJson(
+        `users/cart`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ product }),
         },
-        body: JSON.stringify({ product }),
-      },bearerToken);
+        bearerToken,
+      );
       dispatch(addProductCartAction(product));
       dispatch(
         addOperationText(
@@ -45,58 +48,77 @@ export function addProductCart(product, isInCart,bearerToken) {
         ),
       );
     } catch (err) {
+      if (err.name === "ProductNotFound" && product?.id) {
+        dispatch(deleteProductCart(product.id));
+      }
       dispatch(cartRejected(err.message));
       dispatch(
         addOperationText(
-          `A operação de adicionar o produto ${product.nome} foi mal-sucedida, tente novamente`,
+          product?.nome
+            ? `A operação de adicionar o produto ${product.nome} foi mal-sucedida, tente novamente`
+            : "Produto inexiste para adicionar",
         ),
       );
     }
   };
 }
 
-export function deleteProductCart(productId) {
+export function deleteProductCart(productId, bearerToken) {
   return async (dispatch, getState) => {
     const { cartProducts } = getState().cart;
 
-    
-    const product = cartProducts
-      .filter((productCart) => productCart?.id === productId)
-      .at(0);
-    if (!product) throw new Error("Produto inexistente para deletar");
-    dispatch(loadingCart());
     try {
-      verifyProductCart(product);
-      await requestJson(`users/cart`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ id: productId }),
-      });
+      const product = cartProducts
+        .filter((productCart) => productCart?.id === productId)
+        .at(0);
+      if (!product) throw new Error("Produto inexistente para deletar");
+      dispatch(loadingCart());
+      try {
+        verifyProductCart(product);
+        await requestJson(
+          `users/cart`,
+          {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: productId }),
+          },
+          bearerToken,
+        );
 
-      dispatch(removeProductCart(productId));
-      dispatch(
-        addOperationText(
-          `A operação de remover o produto ${product.nome} foi bem-sucedida`,
-        ),
-      );
-    } catch (err) {
-      if (err.name === "ProductNotFound") {
-        dispatch(cartRejected(err.message));
-      } else {
+        dispatch(removeProductCart(productId));
         dispatch(
-          cartRejected("Erro em deletar o produto, tente novamente mais tarde"),
+          addOperationText(
+            product?.nome
+              ? `A operação de remover o produto ${product.nome} foi bem-sucedida`
+              : "Produto inexiste para remover",
+          ),
+        );
+      } catch (err) {
+        if (err.name === "ProductNotFound") {
+          dispatch(cartRejected(err.message));
+        } else {
+          dispatch(
+            cartRejected(
+              "Erro em deletar o produto, tente novamente mais tarde",
+            ),
+          );
+        }
+        dispatch(
+          addOperationText(
+            `A operação de remover o produto ${product.nome} foi mal-sucedida, tente novamente`,
+          ),
         );
       }
+    } catch (err) {
+      dispatch(cartRejected("Produto inexistente pare remover"));
       dispatch(
-        addOperationText(
-          `A operação de remover o produto ${product.nome} foi mal-sucedida, tente novamente`,
-        ),
+        addOperationText(`Produto não encontrado no servidor para remoção`),
       );
     }
   };
 }
 
-export function payCart() {
+export function payCart(bearer_token) {
   return async (dispatch, getState) => {
     dispatch(loadingCart());
     try {
@@ -108,7 +130,7 @@ export function payCart() {
         body: JSON.stringify({
           cart: [],
         }),
-      });
+      },bearer_token);
       if (data?.status === "clean") {
         dispatch(payCartAction());
       } else {
