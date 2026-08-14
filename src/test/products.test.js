@@ -117,4 +117,10 @@ describe("Testando a API de produtos", async () => {
         Object.keys(currentProduct).length >= 1,
     ).toBe(true);
   });
+  it("Testando o slice de buscar somente um produto em caso de erro", async () => {
+    const store = initializeStore();
+    await getProduct("ERROR",acess_token_bearer)
+    const error = store.getState().products.error;
+    expect(Boolean(error)).toBe(true)
+  })
 });
