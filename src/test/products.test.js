@@ -119,8 +119,9 @@ describe("Testando a API de produtos", async () => {
   });
   it("Testando o slice de buscar somente um produto em caso de erro", async () => {
     const store = initializeStore();
-    await getProduct("ERROR",acess_token_bearer)
+    const data = await getProduct("ERROR",acess_token_bearer)
     const error = store.getState().products.error;
-    expect(Boolean(error)).toBe(true)
+    const dataError = data?.error
+    expect(Boolean(error) && Boolean(dataError)).toBe(true)
   })
 });
