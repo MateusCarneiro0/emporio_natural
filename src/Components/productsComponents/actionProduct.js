@@ -22,14 +22,14 @@ export async function fetchProducts() {
   }
 }
 
-export async function getProduct({ params }) {
+export async function getProduct({ params },acessToken) {
   const { id } = params;
   store.dispatch(resetError());
 
   try {
     const data = await requestJson(`products/${encodeURIComponent(id)}`, {
       method: "GET",
-    });
+    },acessToken);
     const product = data?.at?.(0);
     if (product) {
       store.dispatch(receivedCurrentProduct(product));
