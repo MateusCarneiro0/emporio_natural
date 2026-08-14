@@ -22,11 +22,10 @@ const cartReducer = createSlice({
       sta.operationText = "";
     },
     receiveCart(sta, act) {
-      if (act.payload.id) {
         sta.cartProducts = act.payload;
         sta.isLoading = false;
         sta.error = "";
-      }
+      
     },
     rejected(sta, act) {
       sta.isLoading = false;

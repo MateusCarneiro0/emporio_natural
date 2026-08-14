@@ -37,9 +37,9 @@ const authReducer = createSlice({
     },
     loadingUsers(sta) {
       sta.isLoading = true;
-      sta.error = ""
-      sta.authError = false
-      sta.signupError = false
+      sta.error = "";
+      sta.authError = false;
+      sta.signupError = false;
     },
     rejected(sta, act) {
       sta.error = act.payload;
@@ -65,11 +65,11 @@ const authReducer = createSlice({
       sta.isLoading = false;
       sta.signupError = act.payload;
     },
-    clearErrors(sta){
-      sta.error = ""
-      sta.signupError = ""
-      sta.authError = ""
-    }
+    clearErrors(sta) {
+      sta.error = "";
+      sta.signupError = "";
+      sta.authError = "";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -78,13 +78,9 @@ const authReducer = createSlice({
         state.isLoadingGetStorage = true;
       })
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
-        if (
-          action.payload !== null &&
-          action?.payload?.user &&
-          action?.payload?.id
-        ) {
+        if (action.payload !== null && action?.payload?.user) {
           sta.authUser = action.payload.user;
-          sta.authUserId = action.payload.id;
+          sta.authUserId = localStorage.getItem(idKey);
           sta.isAuthenticated = true;
         } else {
           sta.isAuthenticated = false;
@@ -96,7 +92,7 @@ const authReducer = createSlice({
         sta.error = "";
         sta.authError = false;
       })
-      .addCase(getLocalStorage.rejected, (state,act) => {
+      .addCase(getLocalStorage.rejected, (state, act) => {
         state.isLoadingGetStorage = false;
         state.isLoading = false;
         state.isAuthenticated = false;
@@ -114,7 +110,7 @@ export const {
   createNewUser,
   loginUser,
   loadingUsers,
-  clearErrors
+  clearErrors,
 } = authReducer.actions;
 
 export default authReducer.reducer;

@@ -15,11 +15,11 @@ export class UnathouridedApiError extends Error {
     this.status = status;
   }
 }
-export default async function requestJson(url, options) {
+export default async function requestJson(url, options,bearerToken) {
   const acessToken = JSON.parse(localStorage.getItem(idKey));
   const optionsToken = {
     ...options,
-    headers: { ...options?.headers, Authorization: `Bearer ${acessToken}` },
+    headers: { ...options?.headers, Authorization: `Bearer ${bearerToken || acessToken}` },
   };
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
