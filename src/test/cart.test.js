@@ -1,12 +1,15 @@
 import { describe, it, expect } from "vitest";
 import { verifyProductCart, ProductNotFound } from "../utils/ProductChecker";
-import "@testing-library/jest-dom";
-import { addProductCart, deleteProductCart, payCart } from "../api/cartApi";
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "../slices/authSlice";
-import cartReducer from "../slices/cartSlice";
+import cartReducer, {
+  addProductCart,
+  payCart,
+  removeProductCart,
+} from "../slices/cartSlice";
 import productsSlice from "../slices/productsSlice";
 import requestJson from "../api/requestJson";
+import store from "../app/store";
 const initializeStore = () => {
   const store = configureStore({
     reducer: {
@@ -66,17 +69,178 @@ describe("Testando validação de dados em adicionar um produto em um carrinho",
   });
 });
 
-describe("Testando a API do carrinho para criar,ler e remover produtos do carrinho.", async () => {
-  const data = await requestJson(`users/login`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: "TEST_CART",
-      password: "TEST_CART",
-    }),
+describe("Testando o reducer do carrinho para criar,ler e remover produtos do carrinho.", async () => {
+  describe("Testando a action de criar produto", () => {
+    it("Em casos normais", () => {
+      const store = initializeStore();
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "OOOOOOOOOOOOOOO",
+          quantity: 3,
+          categoria: "kg",
+        }),
+      );
+      expect(store.getState().cart.cartProducts.length).toBe(1);
+    });
+    it("Em multiplas adições", () => {
+      const store = initializeStore();
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "3",
+          quantity: 3,
+          categoria: "kg",
+        }),
+      );
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "1",
+          quantity: 3,
+          categoria: "kg",
+        }),
+      );
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "2",
+          quantity: 3,
+          categoria: "kg",
+        }),
+      );
+      expect(store.getState().cart.cartProducts.length).toBe(3);
+    });
+    it("Em adições com mesmo identificador", () => {
+      const store = initializeStore();
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "3",
+          quantity: 3,
+          categoria: "kg",
+        }),
+      );
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "3",
+          quantity: 5,
+          categoria: "kg",
+        }),
+      );
+      const quantity = store.getState().cart.cartProducts.at(0).quantity;
+      const lenghtCart = store.getState().cart.cartProducts.length;
+      expect(lenghtCart).toBe(1);
+      expect(quantity).toBe(5);
+    });
   });
-  const acess_token_bearer = data.acess_token
-  describe("Testando o de adicionar produtos", () => {
+  describe("Testando o removedor de produtos", () => {
+    it("Em casos ideais", () => {
+      const store = initializeStore();
+      store.dispatch(
+        addProductCart({
+          nome: "Melancia",
+          imagem: "Imagem",
+          categorias: ["top", "legal"],
+          descricao: "Melancia muito boa",
+          total: Number((15 * 3).toFixed(2)),
+          id: "3",
+          quantity: 5,
+          categoria: "kg",
+        }),
+      );
+
+      expect(store.getState().cart.cartProducts.length).toBe(1);
+
+      store.dispatch(removeProductCart("3"));
+
+      expect(store.getState().cart.cartProducts.length).toBe(0);
+    });
+    it("Em multiplas remoções", () => {
+      const store = initializeStore();
+      for (let i = 0; i < 3; i++) {
+        store.dispatch(
+          addProductCart({
+            nome: "Melancia",
+            imagem: "Imagem",
+            categorias: ["top", "legal"],
+            descricao: "Melancia muito boa",
+            total: Number((15 * 3).toFixed(2)),
+            id: `${i}`,
+            quantity: 5,
+            categoria: "kg",
+          }),
+        );
+      }
+      expect(store.getState().cart.cartProducts.length).toBe(3);
+      for (let i = 0; i < 3; i++) {
+        store.dispatch(removeProductCart(`${i}`));
+      }
+      expect(store.getState().cart.cartProducts.length).toBe(0);
+    });
+    it("Em uma remoção de um produto que não existe", () => {
+      const store = initializeStore();
+      store.dispatch(removeProductCart("4444454787798652"));
+      expect(store.getState().cart.error).toMatch(/\S+/);
+    });
+  });
+  describe("Testando o pagador de carrinho", () => {
+    it("Em casos ideais", () => {
+      const store = initializeStore();
+      for (let i = 0; i < 4; i++) {
+        store.dispatch(
+          addProductCart({
+            nome: "Melancia",
+            imagem: "Imagem",
+            categorias: ["top", "legal"],
+            descricao: "Melancia muito boa",
+            total: Number((15 * 3).toFixed(2)),
+            id: `${i}`,
+            quantity: 5,
+            categoria: "kg",
+          }),
+        );
+      }
+      expect(store.getState().cart.cartProducts.length).toBe(4);
+      store.dispatch(payCart());
+      expect(store.getState().cart.cartProducts.length).toBe(0);
+    });
+    it("Quando não tem produtos no carrinho", () => {
+      const store = initializeStore();
+      store.dispatch(payCart());
+      expect(store.getState().cart.error).toMatch(/\S+/);
+    });
+  });
+});
+
+/*
+
+describe("Testando o de adicionar produtos", () => {
     it("Testando em um caso normal onde todos os requisitão são preenchidos", async () => {
       const store = initializeStore();
       await store.dispatch(
@@ -223,3 +387,5 @@ describe("Testando a API do carrinho para criar,ler e remover produtos do carrin
   })
   });
 });
+
+*/

@@ -101,7 +101,7 @@ describe("Testando a API de produtos", async () => {
     const store = initializeStore();
     store.dispatch(receiveProducts(FAKE_PRODUCTS));
     const products = store.getState().products.displayProducts;
-    expect(products.length === 0).toBe(true);
+    expect(products.length).toBe(0);
   });
   it("Testando a busca de produtos em um caso ideal", async () => {
     const product = await getProduct(

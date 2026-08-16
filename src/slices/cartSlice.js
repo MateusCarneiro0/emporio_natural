@@ -1,6 +1,12 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
 import getLocalStorage from "../api/localStorageThunk";
-import { authRejected, logout, rejected, rejectedSignup, clearErrors } from "./authSlice";
+import {
+  authRejected,
+  logout,
+  rejected,
+  rejectedSignup,
+  clearErrors,
+} from "./authSlice";
 const initialState = {
   cartProducts: [],
   isLoading: false,
@@ -22,10 +28,9 @@ const cartReducer = createSlice({
       sta.operationText = "";
     },
     receiveCart(sta, act) {
-        sta.cartProducts = act.payload;
-        sta.isLoading = false;
-        sta.error = "";
-      
+      sta.cartProducts = act.payload;
+      sta.isLoading = false;
+      sta.error = "";
     },
     rejected(sta, act) {
       sta.isLoading = false;
@@ -38,20 +43,32 @@ const cartReducer = createSlice({
       sta.cartProducts = sta.cartProducts?.length
         ? [...sta.cartProducts, act.payload]
         : [act.payload];
+
       sta.isLoading = false;
       sta.error = "";
     },
     removeProductCart(sta, act) {
+      const lenghtCartProducts = sta.cartProducts.length;
       sta.cartProducts = sta.cartProducts.filter(
         (product) => product.id !== act.payload,
       );
+      if (sta.cartProducts.length < lenghtCartProducts) {
+        sta.error = "";
+      } else {
+        sta.error = "Erro em remover produto";
+      }
       sta.isLoading = false;
-      sta.error = "";
     },
+
     payCart(sta) {
-      sta.cartProducts = [];
-      sta.isLoading = false;
-      sta.error = "";
+      if (sta.cartProducts.length) {
+        sta.cartProducts = [];
+        sta.isLoading = false;
+        sta.error = "";
+      } else {
+        sta.error = "Não há produtos no carrinho para serem pagos";
+        sta.isLoading = false;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -74,8 +91,9 @@ const cartReducer = createSlice({
       })
       .addCase(logout, (sta, act) => {
         sta.cartProducts = [];
-      }).addCase(clearErrors, (sta) => {
-        sta.error = ""
+      })
+      .addCase(clearErrors, (sta) => {
+        sta.error = "";
       })
       .addMatcher(
         isAnyOf(rejected, rejectedSignup, authRejected),
@@ -94,7 +112,7 @@ export const {
   removeProductCart,
   payCart,
   addOperationText,
-  cleanOperationText
+  cleanOperationText,
 } = cartReducer.actions;
 
 export default cartReducer.reducer;
