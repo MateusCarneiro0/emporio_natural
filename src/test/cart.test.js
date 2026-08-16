@@ -8,8 +8,6 @@ import cartReducer, {
   removeProductCart,
 } from "../slices/cartSlice";
 import productsSlice from "../slices/productsSlice";
-import requestJson from "../api/requestJson";
-import store from "../app/store";
 const initializeStore = () => {
   const store = configureStore({
     reducer: {
