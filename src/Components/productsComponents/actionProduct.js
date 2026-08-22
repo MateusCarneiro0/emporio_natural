@@ -22,18 +22,18 @@ export async function fetchProducts() {
   }
 }
 
-export async function getProduct({ params },acessToken) {
+export async function getProduct({ params },bearerToken) {
   const { id } = params;
   store.dispatch(resetError());
 
   try {
-    const data = await requestJson(`products/${encodeURIComponent(id)}`, {
+    const product = await requestJson(`products/${encodeURIComponent(id)}`, {
       method: "GET",
-    },acessToken);
-    const product = data?.at?.(0);
+    },bearerToken);
+    
     if (product) {
       store.dispatch(receivedCurrentProduct(product));
-      return data;
+      return product;
     } else {
       throw new Error("Produto não encontrado");
     }

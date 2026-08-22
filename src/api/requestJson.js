@@ -15,6 +15,11 @@ export class UnathouridedApiError extends Error {
     this.status = status;
   }
 }
+function fetchRefresh(options){
+  const res = fetch(`${BASE_URL}/refresh`,{
+
+  })
+}
 export default async function requestJson(url, options,bearerToken) {
   const acessToken = JSON.parse(localStorage.getItem(idKey));
   const optionsToken = {
@@ -26,7 +31,18 @@ export default async function requestJson(url, options,bearerToken) {
     optionsToken,
   );
   if (!res.ok) {
-    if (res.status === 401 || res.status === 422) {
+    if(res.status === 401){
+      const error = await res.json()
+      if(error?.type_error === "expired"){
+        const refresh = await fetchRefresh()
+      }else{
+        throw new UnathouridedApiError(
+        "Usuário inválido por token errado",
+        res.status,
+      );
+      }
+    }
+    if (res.status === 422) {
       throw new UnathouridedApiError(
         "Usuário inválido por token errado",
         res.status,

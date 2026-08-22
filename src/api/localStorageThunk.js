@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { idKey } from "../secretKeys";
+import { idKey, refreshTokenKey } from "../secretKeys";
 import requestJson from "./requestJson";
 
 const getLocalStorage = createAsyncThunk(
@@ -11,8 +11,10 @@ const getLocalStorage = createAsyncThunk(
       const data = await requestJson(`/users/me`);
       return data;
     } catch (err) {
-      localStorage.removeItem(idKey); //Removing the corrupted key
+      localStorage.removeItem(refreshTokenKey);
+      localStorage.removeItem(idKey);
       if (err?.status === 401 || err?.status === 422)
+        
         return rejectWithValue({ error: "invalid" });
       return rejectWithValue(err.message);
     }

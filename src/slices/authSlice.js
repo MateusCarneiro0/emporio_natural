@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { idKey } from "../secretKeys";
+import { idKey, refreshTokenKey } from "../secretKeys";
 import getLocalStorage from "../api/localStorageThunk";
 
 const initialState = {
@@ -25,6 +25,10 @@ const authReducer = createSlice({
       sta.isAuthenticated = true;
       sta.signupError = false;
       localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
+      localStorage.setItem(
+        refreshTokenKey,
+        JSON.stringify(action.payload.refresh_token),
+      );
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
@@ -34,6 +38,10 @@ const authReducer = createSlice({
       sta.authError = false;
       sta.isAuthenticated = true;
       localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
+      localStorage.setItem(
+        refreshTokenKey,
+        JSON.stringify(action.payload.refresh_token),
+      );
     },
     loadingUsers(sta) {
       sta.isLoading = true;
