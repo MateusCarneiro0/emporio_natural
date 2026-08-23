@@ -24,10 +24,10 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
-      localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
+      localStorage.setItem(idKey, action.payload.acess_token);
       localStorage.setItem(
         refreshTokenKey,
-        JSON.stringify(action.payload.refresh_token),
+        action.payload.refresh_token,
       );
     },
     loginUser(sta, action) {
@@ -37,10 +37,10 @@ const authReducer = createSlice({
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
-      localStorage.setItem(idKey, JSON.stringify(action.payload.acess_token));
+      localStorage.setItem(idKey, action.payload.acess_token);
       localStorage.setItem(
         refreshTokenKey,
-        JSON.stringify(action.payload.refresh_token),
+        action.payload.refresh_token,
       );
     },
     loadingUsers(sta) {

@@ -3,7 +3,7 @@ import {
   rejectedSignup,
   loginUser as loginUserAction,
   authRejected,
-  createNewUser as createNewUserAction
+  createNewUser as createNewUserAction,
 } from "../slices/authSlice";
 import { receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
@@ -41,9 +41,9 @@ export function createNewUser(user) {
       ) {
         dispatch(rejectedSignup("Muitos caracteres use no máximo 100"));
       } else {
-        const { acess_token, user: createdUser, cart } = data;
+        const { acess_token, user: createdUser, cart, refresh_token } = data;
         if (acess_token && createdUser && Array.isArray(cart)) {
-          const newUser = { acess_token, user: createdUser };
+          const newUser = { acess_token, user: createdUser, refresh_token };
           dispatch(createNewUserAction(newUser));
 
           dispatch(receiveCart(cart));
@@ -84,9 +84,9 @@ export function loginUser(username, password) {
       });
 
       if (data.auth) {
-        const { acess_token, user, cart } = data;
-        if (Array.isArray(cart) && acess_token && user) {
-          const loggedUser = { acess_token, user };
+        const { acess_token, user, cart, refresh_token } = data;
+        if (Array.isArray(cart) && acess_token && user && refresh_token) {
+          const loggedUser = { acess_token, user, refresh_token };
           dispatch(loginUserAction(loggedUser));
           dispatch(receiveCart(cart));
         } else {
@@ -101,7 +101,9 @@ export function loginUser(username, password) {
           );
         }
         dispatch(
-          authRejected("Usuário ou senha não encontrados, tente novamente mais tarde"),
+          authRejected(
+            "Usuário ou senha não encontrados, tente novamente mais tarde",
+          ),
         );
       }
     } catch (err) {
