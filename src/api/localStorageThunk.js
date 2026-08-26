@@ -1,13 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { idKey, refreshTokenKey } from "../secretKeys";
 import requestJson from "./requestJson";
-
+const existsCookie = (cookieName) => {
+  return `; ${document.cookie}`.includes(`; ${cookieName}=`);
+}
 const getLocalStorage = createAsyncThunk(
   "auth/getLocalStorage",
   async (_, { rejectWithValue }) => {
     try {
-      const id = JSON.parse(localStorage.getItem(idKey));
-      if (!id) return null;
+      const is_logged = existsCookie("is_logged")
+      if (!is_logged) return null;
       const data = await requestJson(`/users/me`);
       return data;
     } catch (err) {

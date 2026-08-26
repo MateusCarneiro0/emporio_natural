@@ -26,6 +26,7 @@ async function fetchRefresh() {
   const options = {
     method: "POST",
     headers,
+    credentials:true
   };
   const res = await fetch(`${BASE_URL}/refresh`, options);
 
@@ -42,6 +43,7 @@ export default async function requestJson(url, options, bearerToken) {
       ...options?.headers,
       Authorization: `Bearer ${bearerToken || acessToken}`,
     },
+    credentials:true
   };
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
