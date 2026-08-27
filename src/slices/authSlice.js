@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { idKey, refreshTokenKey } from "../secretKeys";
 import getLocalStorage from "../api/localStorageThunk";
 
 const initialState = {
@@ -77,7 +76,7 @@ const authReducer = createSlice({
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
         if (action.payload !== null && action?.payload?.user) {
           sta.authUser = action.payload.user;
-          sta.authUserId = localStorage.getItem(idKey);
+          sta.authUserId = "USER"
           sta.isAuthenticated = true;
         } else {
           sta.isAuthenticated = false;
