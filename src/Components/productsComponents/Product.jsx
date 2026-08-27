@@ -23,7 +23,7 @@ function Product() {
       ? Number((+quantity * preco).toFixed(2))
       : 0;
 
-  const clickabel = quantity > 0 && price > 0;
+  const clickabel = +quantity > 0 && price > 0;
 
   const { id } = useParams();
 
@@ -37,26 +37,39 @@ function Product() {
     (productItem) => productItem.nome === nome,
   );
   function handleChangeInput(ev) {
+    const value = ev.target.value;
+    if (value === "") {
+      setQuantity("");
+      return;
+    }
+
+    if (value.startswith("-")) return;
+
     if (categoria === "Un") {
-      setQuantity(`${Math.trunc(+ev.target.value)}`);
+      setQuantity(`${Math.trunc(+value)}`);
     } else {
-      setQuantity(ev.target.value);
+      if (/^\d*\.?\d*$/.test(value)) {
+        setQuantity(value);
+      }
     }
   }
   function handleAdd(ev) {
     ev.preventDefault();
     if (price <= 0 || quantity <= 0) return;
     dispatch(
-      addProductCart({
-        nome,
-        imagem,
-        categorias,
-        descricao,
-        total: Number((preco * quantity).toFixed(2)),
-        id,
-        quantity,
-        categoria,
-      },isInCart),
+      addProductCart(
+        {
+          nome,
+          imagem,
+          categorias,
+          descricao,
+          total: Number((preco * quantity).toFixed(2)),
+          id,
+          quantity,
+          categoria,
+        },
+        isInCart,
+      ),
     );
     navigate("/cart");
   }
