@@ -1,4 +1,6 @@
 import { BASE_URL, idKey, refreshTokenKey } from "../secretKeys";
+import store from "../app/store";
+import { logout, authRejected } from "../slices/authSlice";
 export class FetchApiError extends Error {
   constructor(message, status) {
     super(message);
@@ -15,9 +17,17 @@ export class UnathouridedApiError extends Error {
     this.status = status;
   }
 }
+
+function returnToTheLogin() {
+  store.dispatch(logout());
+  store.dispatch(
+    authRejected("Houve um erro! E você terá que revalidar sua identidade"),
+  );
+}
+
 async function fetchRefresh() {
   const refresh_token = localStorage.getItem(refreshTokenKey);
-  console.log(refresh_token)
+  console.log(refresh_token);
   const headers = {
     Authorization: `Bearer ${refresh_token}`,
     "Content-Type": "application/json",
@@ -26,11 +36,10 @@ async function fetchRefresh() {
   const options = {
     method: "POST",
     headers,
-    credentials:true
+    credentials: true,
   };
   const res = await fetch(`${BASE_URL}/refresh`, options);
 
-  
   const data = await res.json();
   return data;
 }
@@ -43,7 +52,7 @@ export default async function requestJson(url, options, bearerToken) {
       ...options?.headers,
       Authorization: `Bearer ${bearerToken || acessToken}`,
     },
-    credentials:true
+    credentials: true,
   };
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
@@ -53,23 +62,28 @@ export default async function requestJson(url, options, bearerToken) {
     if (res.status === 401 || res.status === 422) {
       const error = await res.json();
       if (error?.type_error === "expired") {
-        const {acess_token,refresh_token} = await fetchRefresh();
+        const { acess_token, refresh_token } = await fetchRefresh();
         localStorage.setItem(idKey, acess_token);
         localStorage.setItem(refreshTokenKey, refresh_token);
 
         const newRes = await fetch(
           `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
-          {...options,headers:{...options?.headers,Authorization:`Bearer ${acess_token}`}},
+          {
+            ...options,
+            headers: {
+              ...options?.headers,
+              Authorization: `Bearer ${acess_token}`,
+            },
+          },
         );
 
-        if(!newRes.ok){
-          localStorage.removeItem(refreshTokenKey)
-          localStorage.removeItem(idKey)
-          throw new UnathouridedApiError("Erro ao tentar se autenticar")
+        if (!newRes.ok) {
+          returnToTheLogin();
+          throw new UnathouridedApiError("Erro ao tentar se autenticar");
         }
 
-        const data = newRes.json()
-        return data
+        const data = newRes.json();
+        return data;
       } else {
         throw new UnathouridedApiError(
           "Usuário inválido por token errado",
