@@ -24,11 +24,6 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
-      localStorage.setItem(idKey, action.payload.acess_token);
-      localStorage.setItem(
-        refreshTokenKey,
-        action.payload.refresh_token,
-      );
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
@@ -37,11 +32,6 @@ const authReducer = createSlice({
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
-      localStorage.setItem(idKey, action.payload.acess_token);
-      localStorage.setItem(
-        refreshTokenKey,
-        action.payload.refresh_token,
-      );
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -60,7 +50,6 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isLoading = false;
       sta.authError = false;
-      localStorage.removeItem(idKey);
     },
     authRejected(sta, act) {
       sta.authError = act?.payload
