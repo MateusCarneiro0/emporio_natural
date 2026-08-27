@@ -20,11 +20,13 @@ const ProductMain = memo(function ProductMain() {
 
   const phraseRef = useRef(null);
 
-  const { displayProducts, error } = useSelector((store) => store.products);
+  const { displayProducts, error, isLoadingCurrentProduct } = useSelector(
+    (store) => store.products,
+  );
 
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
-  
+
   useEffect(() => {
     phraseRef.current = [
       "o que falta para o seu dia ficar mais saudável? 🌞",
@@ -38,12 +40,13 @@ const ProductMain = memo(function ProductMain() {
     dispatch(searchProducts(query));
   }, [dispatch, query]);
 
-  if (id) return <Outlet />;
-
-  if (isLoading)
+  if (isLoading || isLoadingCurrentProduct)
     return (
-      <Spinner message={id ? "Carregando produto..." : "Carregando Produtos..."} />
+      <Spinner
+        message={id ? "Carregando produto..." : "Carregando Produtos..."}
+      />
     );
+  if (id) return <Outlet />;
 
   if (error) return <ProductsError message={error} />;
 

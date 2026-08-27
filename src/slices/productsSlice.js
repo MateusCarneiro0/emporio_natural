@@ -5,7 +5,8 @@ const initialState = {
   displayProducts: [],
   products: [],
   error: "",
-  currentProduct: {}
+  currentProduct: {},
+  isLoadingCurrentProduct:false
 };
 
 const productsSlice = createSlice({
@@ -19,11 +20,17 @@ const productsSlice = createSlice({
       sta.error = action?.payload || "Erro em buscar produto";
       sta.isLoading = false;
     },
+    loadingCurrentProduct(sta){
+      sta.isLoadingCurrentProduct = true
+      sta.error = ""
+      sta.currentProduct = {}
+    },
     receiveProducts(sta, act) {
       sta.products = act.payload.filter((product) => verifyProduct(product));
       sta.displayProducts = sta.products;
       sta.isLoading = false;
       sta.error = "";
+      sta.isLoadingCurrentProduct = false
     },
     searchProducts(sta, act) {
       const search = act.payload.toLocaleLowerCase();
@@ -45,6 +52,7 @@ const productsSlice = createSlice({
     leaveOfCurrentProduct(sta) {
       sta.currentProduct = {};
       sta.error = "";
+      sta.isLoadingCurrentProduct = false
     },
   },
   extraReducers:(builder) => {

@@ -53,10 +53,10 @@ function Product() {
       }
     }
   }
-  function handleAdd(ev) {
+  async function handleAdd(ev) {
     ev.preventDefault();
     if (price <= 0 || quantity <= 0) return;
-    dispatch(
+    await dispatch(
       addProductCart(
         {
           nome,
@@ -70,7 +70,7 @@ function Product() {
         },
         isInCart,
       ),
-    );
+    ).unwrap()
     navigate("/cart");
   }
   if (error) return <Error message={error} />;
