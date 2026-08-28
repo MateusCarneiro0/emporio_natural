@@ -38,12 +38,8 @@ function Product() {
   );
   function handleChangeInput(ev) {
     const value = ev.target.value;
-    if (value === "") {
-      setQuantity("");
-      return;
-    }
 
-    if (value.startswith("-")) return;
+    if (value.startsWith("-")) return;
 
     if (categoria === "Un") {
       setQuantity(`${Math.trunc(+value)}`);
