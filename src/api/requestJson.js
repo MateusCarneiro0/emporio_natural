@@ -1,5 +1,4 @@
-import { BASE_URL, idKey, refreshTokenKey } from "../secretKeys";
-import store from "../app/store";
+import { BASE_URL} from "../secretKeys";
 import { logout, authRejected } from "../slices/authSlice";
 export class FetchApiError extends Error {
   constructor(message, status) {
@@ -18,7 +17,8 @@ export class UnathouridedApiError extends Error {
   }
 }
 
-function returnToTheLogin() {
+async function returnToTheLogin() {
+  const store = await import ("../app/store")
   store.dispatch(logout());
   store.dispatch(
     authRejected("Houve um erro! E você terá que revalidar sua identidade"),
@@ -26,17 +26,14 @@ function returnToTheLogin() {
 }
 
 async function fetchRefresh() {
-  const refresh_token = localStorage.getItem(refreshTokenKey);
-  console.log(refresh_token);
   const headers = {
-    Authorization: `Bearer ${refresh_token}`,
     "Content-Type": "application/json",
   };
 
   const options = {
     method: "POST",
     headers,
-    credentials: true,
+    credentials: "include",
   };
   const res = await fetch(`${BASE_URL}/refresh`, options);
 
@@ -45,14 +42,13 @@ async function fetchRefresh() {
 }
 
 export default async function requestJson(url, options, bearerToken) {
-  const acessToken = localStorage.getItem(idKey);
   const optionsToken = {
     ...options,
     headers: {
       ...options?.headers,
-      Authorization: `Bearer ${bearerToken || acessToken}`,
+      Authorization: `Bearer ${bearerToken}`,
     },
-    credentials: true,
+    credentials: "include",
   };
   const res = await fetch(
     `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
@@ -62,9 +58,7 @@ export default async function requestJson(url, options, bearerToken) {
     if (res.status === 401 || res.status === 422) {
       const error = await res.json();
       if (error?.type_error === "expired") {
-        const { acess_token, refresh_token } = await fetchRefresh();
-        localStorage.setItem(idKey, acess_token);
-        localStorage.setItem(refreshTokenKey, refresh_token);
+        const newData = await fetchRefresh();
 
         const newRes = await fetch(
           `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
@@ -72,12 +66,11 @@ export default async function requestJson(url, options, bearerToken) {
             ...options,
             headers: {
               ...options?.headers,
-              Authorization: `Bearer ${acess_token}`,
             },
           },
         );
 
-        if (!newRes.ok) {
+        if (!newRes.ok || !newData?.status === "refreshed") {
           returnToTheLogin();
           throw new UnathouridedApiError("Erro ao tentar se autenticar");
         }
