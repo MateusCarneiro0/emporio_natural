@@ -110,3 +110,20 @@ export function loginUser(username, password) {
     }
   };
 }
+
+export function logout(){
+  return async (dispatch,getState) => {
+    dispatch(loadingUsers())
+    try{
+      await requestJson(`users/logout`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+
+    }catch(err){
+      dispatch(authRejected("Error in logout"))
+    }finally{
+      dispatch(logout())
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import { IconButton } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router";
-import { logout } from "../../slices/authSlice";
+import { logout } from "../../api/authApi";
 import { useDispatch } from "react-redux";
 import styles from "./LogoutIconNavMobile.module.css";
 function LogoutIconNavMobile() {
@@ -10,8 +10,8 @@ function LogoutIconNavMobile() {
   return (
     <div className={styles.button} aria-label="Sair da conta">
       <IconButton
-        onClick={() => {
-          dispatch(logout());
+        onClick={async () => {
+          await dispatch(logout());
           navigate("/");
         }}
       >
