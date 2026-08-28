@@ -11,7 +11,7 @@ function LogoutIconNavMobile() {
     <div className={styles.button} aria-label="Sair da conta">
       <IconButton
         onClick={async () => {
-          await dispatch(logout());
+          await dispatch(logout()).unwrap();
           navigate("/");
         }}
       >
