@@ -4,6 +4,7 @@ import {
   loginUser as loginUserAction,
   authRejected,
   createNewUser as createNewUserAction,
+  logout
 } from "../slices/authSlice";
 import { receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
@@ -111,8 +112,8 @@ export function loginUser(username, password) {
   };
 }
 
-export function logout(){
-  return async (dispatch,getState) => {
+export function logoutApi(){
+  return async (dispatch) => {
     dispatch(loadingUsers())
     try{
       await requestJson(`users/logout`, {
