@@ -62,12 +62,7 @@ export default async function requestJson(url, options, bearerToken) {
 
         const newRes = await fetch(
           `${BASE_URL}/${String(url).replace(/^\/+/, "")}`,
-          {
-            ...options,
-            headers: {
-              ...options?.headers,
-            },
-          },
+          optionsToken
         );
 
         if (!newRes.ok || !newData?.status === "refreshed") {
