@@ -4,7 +4,7 @@ import {
   loginUser as loginUserAction,
   authRejected,
   createNewUser as createNewUserAction,
-  logout
+  logout,
 } from "../slices/authSlice";
 import { receiveCart } from "../slices/cartSlice";
 import requestJson, { FetchApiError } from "./requestJson";
@@ -69,12 +69,12 @@ export function createNewUser(user) {
 export function loginUser(username, password) {
   return async (dispatch, getState) => {
     dispatch(loadingUsers());
-    if (!username || !password) {
-      throw new EnoughDataError(
-        "Campos de usuário ou de senha nulos preencha-os",
-      );
-    }
     try {
+      if (!username || !password) {
+        throw new EnoughDataError(
+          "Campos de usuário ou de senha nulos preencha-os",
+        );
+      }
       const data = await requestJson(`users/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -112,19 +112,21 @@ export function loginUser(username, password) {
   };
 }
 
-export function logoutApi(){
+export function logoutApi() {
   return async (dispatch) => {
-    dispatch(loadingUsers())
-    try{
-      await requestJson(`users/logout`, {
+    dispatch(loadingUsers());
+    try {
+      const data = await requestJson(`users/logout`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-
-    }catch(err){
-      dispatch(authRejected("Error in logout"))
-    }finally{
-      dispatch(logout())
+      if(data?.status === "correct"){
+        throw new Error("Erro em fazer logout")
+      }
+    } catch (err) {
+      dispatch(authRejected("Error in logout"));
+    } finally {
+      dispatch(logout());
     }
-  }
+  };
 }
