@@ -19,7 +19,7 @@ function NavModal() {
       {isOpenModal ? (
         <button
           aria-controls="menu-navegacao"
-          aria-label="Abrir menu de navegação"
+          aria-label="Fechar menu de navegação"
           className={`${styles.menuButton} ${styles.closeButton}`}
           onClick={() => dispatch(revertModal())}
         >
@@ -28,7 +28,7 @@ function NavModal() {
       ) : (
         <button
           aria-controls="menu-navegacao"
-          aria-label="Fechar menu de navegação"
+          aria-label="Abrir menu de navegação"
           className={styles.menuButton}
           onClick={() => dispatch(revertModal())}
         >
