@@ -1,25 +1,27 @@
-import { useState } from "react";
 import styles from "./NavModal.module.css";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LogoutIconNavMobile from "./LogoutIconNavMobile";
 import { NavLink } from "react-router";
 import NavLoginButton from "./NavLoginButton";
 import ShoppingBagIcon from "@mui/icons-material/ShoppingBag";
 import Logo from "./Logo";
 import EmailIcon from "@mui/icons-material/Email";
+import { revertModal } from "../../slices/globalSlice";
+
 function NavModal() {
-  const [isOpen, setIsOpen] = useState(false);
   const { isAuthenticated } = useSelector((store) => store.auth);
   const { cartProducts } = useSelector((store) => store.cart);
+  const {isOpenModal} = useSelector((store) => store.global)
+  const dispatch = useDispatch()
   return (
-    <div className={`${styles.modal} ${isOpen ? styles.fixed : ""}`}>
-      {isOpen ? (
+    <div className={`${styles.modal} ${isOpenModal ? styles.fixed : ""}`}>
+      {isOpenModal ? (
         <button
           aria-controls="menu-navegacao"
           aria-label="Abrir menu de navegação"
           className={`${styles.menuButton} ${styles.closeButton}`}
-          onClick={() => setIsOpen((isOpened) => !isOpened)}
+          onClick={() => dispatch(revertModal())}
         >
           &times;
         </button>
@@ -28,13 +30,13 @@ function NavModal() {
           aria-controls="menu-navegacao"
           aria-label="Fechar menu de navegação"
           className={styles.menuButton}
-          onClick={() => setIsOpen((isOpened) => !isOpened)}
+          onClick={() => dispatch(revertModal())}
         >
           &#9776;
         </button>
       )}
 
-      {isOpen && (
+      {isOpenModal && (
         <nav
           className={styles.links}
           id="menu-navegacao"

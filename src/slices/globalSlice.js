@@ -9,24 +9,17 @@ const globalSlice = createSlice({
   name: "global",
   initialState,
   reducers: {
-    openModal(sta) {
-      sta.isOpenModal = true;
+    revertModal(sta) {
+      sta.isOpenModal = !sta.isOpenModal;
     },
     closeModal(sta) {
       sta.isOpenModal = false;
     },
-    addGlobalOperationText(sta, act) {
-      sta.globalOperationText = act.payload;
-    },
-    clearGlobalOperationText(sta) {
-      sta.globalOperationText = "";
-    },
+    
   },
 });
 export const {
-  openModal,
+  revertModal,
   closeModal,
-  addGlobalOperationText,
-  clearGlobalOperationText,
 } = globalSlice.actions;
 export default globalSlice.reducer;

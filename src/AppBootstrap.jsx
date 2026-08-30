@@ -4,11 +4,15 @@ import getLocalStorage from "./api/localStorageThunk";
 import SpinnerFullScreen from "./Components/SpinnerFullScreen";
 import { BASE_URL } from "./secretKeys";
 import Error from "./Components/Error";
+
 function AppBootstrap({ children }) {
   const { isAuthenticated, isLoadingGetStorage } = useSelector(
     (store) => store.auth,
   );
   const [isCorrectUrl, setIsCorrectUrl] = useState(true);
+
+  const dispatch = useDispatch();
+  const hasFetchedUser = useRef(false);
 
   useEffect(() => {
     if (!URL.canParse(BASE_URL) && isCorrectUrl) {
@@ -16,8 +20,6 @@ function AppBootstrap({ children }) {
       throw new Error("Erro em buscar dados no servidor");
     }
   }, [isCorrectUrl]);
-  const dispatch = useDispatch();
-  const hasFetchedUser = useRef(false);
   
   useEffect(() => {
     if (!isAuthenticated && !hasFetchedUser.current) {
@@ -25,7 +27,8 @@ function AppBootstrap({ children }) {
       hasFetchedUser.current = true;
     }
   }, [dispatch, isAuthenticated]);
-
+  
+  
   if (isLoadingGetStorage)
     return <SpinnerFullScreen message="Carregando dados..." />;
   return children;
