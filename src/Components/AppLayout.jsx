@@ -6,11 +6,11 @@ import { closeModal } from "../slices/globalSlice";
 import { useDispatch } from "react-redux";
 
 function AppLayout() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
     dispatch(closeModal());
-  }, [location.pathname,dispatch]);
+  }, [location.pathname, dispatch]);
   return (
     <div>
       <NavBar />

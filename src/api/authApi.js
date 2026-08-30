@@ -115,18 +115,13 @@ export function loginUser(username, password) {
 export function logoutApi() {
   return async (dispatch) => {
     dispatch(loadingUsers());
-    try {
-      const data = await requestJson(`users/logout`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      });
-      if(data?.status === "correct"){
-        throw new Error("Erro em fazer logout")
-      }
-    } catch (err) {
-      dispatch(authRejected("Error in logout"));
-    } finally {
-      dispatch(logout());
+    const data = await requestJson(`users/logout`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
+    if (data?.status === "error") {
+      throw new Error("Erro em fazer logout");
     }
+    dispatch(logout());
   };
 }
