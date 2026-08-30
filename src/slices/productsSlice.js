@@ -20,6 +20,9 @@ const productsSlice = createSlice({
       sta.error = action?.payload || "Erro em buscar produto";
       sta.isLoading = false;
     },
+    loadingCurrentProductAdd(sta){
+      sta.isLoadingCurrentProduct = true
+    },
     loadingCurrentProduct(sta){
       sta.isLoadingCurrentProduct = true
       sta.error = ""
@@ -54,6 +57,9 @@ const productsSlice = createSlice({
       sta.error = "";
       sta.isLoadingCurrentProduct = false
     },
+    isNotLoading(sta){
+      sta.isLoadingCurrentProduct = false
+    }
   },
   extraReducers:(builder) => {
     builder.addCase(clearErrors, (state) => {
@@ -70,6 +76,8 @@ export const {
   rejected,
   receiveProducts,
   receivedCurrentProduct,
-  resetError
+  resetError,
+  loadingCurrentProductAdd,
+  isNotLoading
 } = productsSlice.actions;
 export default productsSlice.reducer;

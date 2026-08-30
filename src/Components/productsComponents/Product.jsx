@@ -66,7 +66,7 @@ function Product() {
         },
         isInCart,
       ),
-    ).unwrap()
+    )
     navigate("/cart");
   }
   if (error) return <Error message={error} />;

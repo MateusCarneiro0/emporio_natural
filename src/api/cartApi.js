@@ -8,6 +8,7 @@ import {
   payCart as payCartAction,
   addOperationText,
 } from "../slices/cartSlice";
+import { isNotLoading, loadingCurrentProductAdd } from "../slices/productsSlice";
 /*
 { 
       "nome": "Maçã Fuji",
@@ -28,6 +29,7 @@ import {
 export function addProductCart(product, isInCart, bearerToken) {
   return async (dispatch, getState) => {
     dispatch(loadingCart());
+    dispatch(loadingCurrentProductAdd())
     try {
       verifyProductCart(product);
       await requestJson(
@@ -59,6 +61,8 @@ export function addProductCart(product, isInCart, bearerToken) {
             : "Produto inexiste para adicionar",
         ),
       );
+    }finally{
+      dispatch(isNotLoading())
     }
   };
 }
@@ -119,7 +123,7 @@ export function deleteProductCart(productId, bearerToken) {
 }
 
 export function payCart(bearer_token) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingCart());
     try {
       const data = await requestJson(`users/clearCart`, {
