@@ -3,7 +3,6 @@ import getLocalStorage from "../api/localStorageThunk";
 
 const initialState = {
   authUser: "",
-  authUserId: "",
   isLoading: false,
   isAuthenticated: false,
   authError: false,
@@ -17,7 +16,6 @@ const authReducer = createSlice({
   initialState,
   reducers: {
     createNewUser(sta, action) {
-      sta.authUserId = action.payload.acess_token;
       sta.authUser = action.payload.user;
       sta.isLoading = false;
       sta.error = "";
@@ -26,7 +24,6 @@ const authReducer = createSlice({
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
-      sta.authUserId = action.payload.acess_token;
       sta.isLoading = false;
       sta.error = "";
       sta.authError = false;
@@ -44,7 +41,6 @@ const authReducer = createSlice({
     },
     logout(sta) {
       sta.authUser = "";
-      sta.authUserId = "";
       sta.isAuthenticated = false;
       sta.error = "";
       sta.isLoading = false;
@@ -76,24 +72,21 @@ const authReducer = createSlice({
       .addCase(getLocalStorage.fulfilled, (sta, action) => {
         if (action.payload !== null && action?.payload?.user) {
           sta.authUser = action.payload.user;
-          sta.authUserId = "USER"
           sta.isAuthenticated = true;
         } else {
           sta.isAuthenticated = false;
           sta.authUser = "";
-          sta.authUserId = "";
         }
         sta.isLoadingGetStorage = false;
         sta.isLoading = false;
         sta.error = "";
         sta.authError = false;
       })
-      .addCase(getLocalStorage.rejected, (state, act) => {
+      .addCase(getLocalStorage.rejected, (state) => {
         state.isLoadingGetStorage = false;
         state.isLoading = false;
         state.isAuthenticated = false;
         state.authUser = "";
-        state.authUserId = "";
       });
   },
 });

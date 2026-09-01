@@ -29,7 +29,7 @@ const CardProduct = memo(function CardProduct({
           {price} R$/{categoria}
         </strong>
       </p>
-      <Button onClick={handleClick}>Veja mais</Button>
+      <Button onClick={handleClick} id={`product-${title}`} ariaLabel={`sobre ${title}`}>Veja mais</Button>
     </div>
   );
 });

@@ -30,6 +30,9 @@ test("Inicializa corretamente", async ({ page }) => {
   await expect(page.locator("html")).toContainText(
     /Naturais, frescos e cheios de sabor/,
   );
+  await page.getByRole("link", { name: "Produtos" }).click();
+  await page.waitForURL("**/produtos")
+  await expect(page.getByText(/Encontrado/)).toBeVisible()
 });
 
 test("Faz o login corretamente", async ({ page }) => {
@@ -41,9 +44,9 @@ test("Faz o login corretamente", async ({ page }) => {
   await page.locator("#login-username").fill("TEST_CART");
   await page.locator("#login-password").fill("TEST_CART");
   await page.getByRole("button", { name: "Entrar" }).click();
-  await page.waitForURL("**/produtos")
+  await page.waitForURL("**/produtos");
 
-  await expect(page.getByText(/Encontrado/i)).toBeVisible()
+  await expect(page.getByText(/Encontrado/i)).toBeVisible();
 });
 
 test("Cria novo usuário corretamente", async ({ page }) => {
@@ -51,13 +54,31 @@ test("Cria novo usuário corretamente", async ({ page }) => {
   await page.getByRole("link", { name: "Ir para login" }).click();
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
-  await page.getByRole("link",{name:/Aqui/i}).click()
+  await page.getByRole("link", { name: /Aqui/i }).click();
 
-  await page.locator("#register-username").fill(`TEST_CART${Math.random() * 7111}`);
+  await page
+    .locator("#register-username")
+    .fill(`TEST_CART${Math.random() * 7111}`);
   await page.locator("#register-password").fill("TEST_CART");
 
   await page.getByRole("button", { name: "Registrar" }).click();
-  await page.waitForURL("**/produtos")
+  await page.waitForURL("**/produtos");
 
-  await expect(page.getByText(/Encontrado/i)).toBeVisible()
+  await expect(page.getByText(/Encontrado/i)).toBeVisible();
+});
+
+test("Acessar e adicionar produtos", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await page.locator("#login-username").fill("TEST_CART");
+  await page.locator("#login-password").fill("TEST_CART");
+
+  await page.getByRole("button", { name: "Entrar" }).click();
+
+  await page.waitForURL("**/produtos");
+  await page.getByRole("button",{name:/Veja mais sobre Maçã Fuji/i}).click()
+  await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible()
+  await page.getByPlaceholder(/digite uma quantidade/i).fill("10")
+  await page.getByRole("button",{name:/Adicionar ao carrinho/i})
 });

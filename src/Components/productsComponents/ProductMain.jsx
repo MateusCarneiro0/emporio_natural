@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, memo } from "react";
+import { useEffect, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Outlet, useNavigation, useParams } from "react-router";
 import { searchProducts } from "../../slices/productsSlice";
@@ -17,9 +17,16 @@ const ProductMain = memo(function ProductMain() {
   const { id } = useParams();
 
   const { authUser } = useSelector((store) => store.auth);
-
-  const phraseRef = useRef(null);
-
+  const phrases = [
+      "o que falta para o seu dia ficar mais saudável? 🌞",
+      "Vamos comprar aquele Whey para começar o dia? 🔋",
+      "Deixa eu adivinhar, que tal comprar uma castanha de caju? 🥜",
+      "A noite e o dia,mas a energia vem de uma frutinha 🍎",
+    ]
+  const [phraseCurrentId,setPhraseCurrentId] = useState(0);
+  useEffect(() => {
+    setPhraseCurrentId(Math.floor(Math.random()*4))
+  },[]) 
   const { displayProducts, error, isLoadingCurrentProduct } = useSelector(
     (store) => store.products,
   );
@@ -27,14 +34,7 @@ const ProductMain = memo(function ProductMain() {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
-  useEffect(() => {
-    phraseRef.current = [
-      "o que falta para o seu dia ficar mais saudável? 🌞",
-      "Vamos comprar aquele Whey para começar o dia? 🔋",
-      "Deixa eu adivinhar, que tal comprar uma castanha de caju? 🥜",
-      "A noite e o dia,mas a energia vem de uma frutinha 🍎",
-    ].at(Math.floor(Math.random() * 4));
-  }, []);
+  
 
   useEffect(() => {
     dispatch(searchProducts(query));
@@ -55,7 +55,7 @@ const ProductMain = memo(function ProductMain() {
       <header>
         {authUser && (
           <h2>
-            Olá <i>{authUser}</i>,{phraseRef.current}
+            Olá <i>{authUser}</i>,{phrases.at(phraseCurrentId)}
           </h2>
         )}
         <input
