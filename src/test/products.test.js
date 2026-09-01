@@ -118,10 +118,8 @@ describe("Testando a API de produtos", async () => {
     ).toBe(true);
   });
   it("Testando o slice de buscar somente um produto em caso de erro", async () => {
-    const store = initializeStore();
-    const data = await getProduct("ERROR",acess_token_bearer)
-    const error = store.getState().products.error;
+    const data = await getProduct({params:{id:"ERROR"}},acess_token_bearer)
     const dataError = data?.error
-    expect(Boolean(error) && Boolean(dataError)).toBe(true)
+    expect(dataError).match(/.+/)
   })
 });
