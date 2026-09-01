@@ -31,8 +31,9 @@ test("Inicializa corretamente", async ({ page }) => {
     /Naturais, frescos e cheios de sabor/,
   );
   await page.getByRole("link", { name: "Produtos" }).click();
-  await page.waitForURL("**/produtos")
-  await expect(page.getByText(/Encontrado/)).toBeVisible()
+  await page.waitForURL("**/produtos");
+
+  await expect(page.getByText(/encontrados/)).toBeVisible();
 });
 
 test("Faz o login corretamente", async ({ page }) => {
@@ -64,10 +65,23 @@ test("Cria novo usuário corretamente", async ({ page }) => {
   await page.getByRole("button", { name: "Registrar" }).click();
   await page.waitForURL("**/produtos");
 
-  await expect(page.getByText(/Encontrado/i)).toBeVisible();
+  await expect(page.getByText(/encontrados/i)).toBeVisible();
 });
 
 test("Acessar e adicionar produtos", async ({ page }) => {
+  //! TYPE YOUR PRODUCTS
+  const products = [
+    "Banana Prata",
+    "Maçã Fuji",
+    "Melancia",
+    "Nozes Mariposa",
+    "Semente de Chia",
+    "Castanha do Pará",
+    "Aveia em Flocos Grossos"
+  ];
+  const indexProduct = Math.floor(Math.random() * products.length)
+  const textRegProduct = new RegExp(`Veja mais sobre ${products.at(indexProduct)}`,"i")
+  const quantity = Math.floor(Math.random() * 240);
   await page.goto("/");
   await page.getByRole("link", { name: "Ir para login" }).click();
 
@@ -77,8 +91,14 @@ test("Acessar e adicionar produtos", async ({ page }) => {
   await page.getByRole("button", { name: "Entrar" }).click();
 
   await page.waitForURL("**/produtos");
-  await page.getByRole("button",{name:/Veja mais sobre Maçã Fuji/i}).click()
-  await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible()
-  await page.getByPlaceholder(/digite uma quantidade/i).fill("10")
-  await page.getByRole("button",{name:/Adicionar ao carrinho/i})
+
+  await page
+    .getByRole("button", { name: textRegProduct })
+    .click();
+  await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
+
+  await page.getByPlaceholder(/digite uma quantidade/i).fill(String(quantity));
+  await page.getByRole("button", { name: /o carrinho/ }).click();
+  await page.waitForURL("**/cart");
+  await expect(page.getByText(String(quantity))).toBeVisible();
 });

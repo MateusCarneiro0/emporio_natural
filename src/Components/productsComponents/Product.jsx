@@ -125,7 +125,7 @@ function Product() {
           </div>
         </div>
         <Button disabled={!clickabel} onClick={handleAdd}>
-          {isInCart ? "Editar no Carrinho" : "Adicionar ao carrinho"}
+          {isInCart ? "Editar no carrinho" : "Adicionar ao carrinho"}
         </Button>
       </div>
     </div>
