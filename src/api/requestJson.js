@@ -18,7 +18,7 @@ export class UnathouridedApiError extends Error {
 }
 
 async function returnToTheLogin() {
-  const store = await import ("../app/store")
+  const store = await import("../app/store")
   store.dispatch(logout());
   store.dispatch(
     authRejected("Houve um erro! E você terá que revalidar sua identidade"),

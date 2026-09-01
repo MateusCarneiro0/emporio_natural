@@ -22,16 +22,25 @@ We suggest that you begin by typing:
     npx playwright test
  */
 
-import { test, expect } from '@playwright/test';
+import { test, expect } from "@playwright/test";
 
-test('Começa corretamente', async ({ page }) => {
-  await page.goto('/');
-  await expect(page).toHaveTitle(/Natural/)
-  await expect(page.locator("html")).toContainText(/Naturais, frescos e cheios de sabor/)
-
+test("Começa corretamente", async ({ page }) => {
+  await page.goto("/");
+  await expect(page).toHaveTitle(/Natural/);
+  await expect(page.locator("html")).toContainText(
+    /Naturais, frescos e cheios de sabor/,
+  );
 });
 
-test("Abre links", async ({page}) => {
-    await page.goto("/")
-    
-})
+test("Abre links", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
+
+  await page.locator("#login-username").fill("TEST_CART");
+  await page.locator("#login-password").fill("TEST_CART");
+  await page.getByRole("button", { name: "Entrar" }).click();
+
+  await expect(page.getByText(/Olá TEST_CART/i)).toBeVisible()
+});
