@@ -24,7 +24,7 @@ We suggest that you begin by typing:
 
 import { test, expect } from "@playwright/test";
 
-test("Começa corretamente", async ({ page }) => {
+test("Inicializa corretamente", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Natural/);
   await expect(page.locator("html")).toContainText(
@@ -32,7 +32,7 @@ test("Começa corretamente", async ({ page }) => {
   );
 });
 
-test("Abre links", async ({ page }) => {
+test("Faz o login corretamente", async ({ page }) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Ir para login" }).click();
 
@@ -41,6 +41,23 @@ test("Abre links", async ({ page }) => {
   await page.locator("#login-username").fill("TEST_CART");
   await page.locator("#login-password").fill("TEST_CART");
   await page.getByRole("button", { name: "Entrar" }).click();
+  await page.waitForURL("**/produtos")
 
-  await expect(page.getByText(/Olá TEST_CART/i)).toBeVisible()
+  await expect(page.getByText(/Encontrado/i)).toBeVisible()
+});
+
+test("Cria novo usuário corretamente", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
+  await page.getByRole("link",{name:/Aqui/i}).click()
+
+  await page.locator("#register-username").fill(`TEST_CART${Math.random() * 7111}`);
+  await page.locator("#register-password").fill("TEST_CART");
+
+  await page.getByRole("button", { name: "Registrar" }).click();
+  await page.waitForURL("**/produtos")
+
+  await expect(page.getByText(/Encontrado/i)).toBeVisible()
 });

@@ -46,7 +46,7 @@ function SignupMain() {
           value={username}
           disabled={isLoading}
           type="text"
-          name="password"
+          name="username"
           signup={true}
         />
         <Input
