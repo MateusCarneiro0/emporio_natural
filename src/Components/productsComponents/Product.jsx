@@ -3,12 +3,12 @@ import { useState } from "react";
 import { useParams, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import Error from "../Error";
 import Button from "../Button";
 
 import styles from "./Product.module.css";
 import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
+import ProductsError from "./ProductsError";
 
 function Product() {
   const [quantity, setQuantity] = useState("");
@@ -69,7 +69,7 @@ function Product() {
     )
     navigate("/cart");
   }
-  if (error) return <Error message={error} />;
+  if (error) return <ProductsError message={error} />;
 
   if (isLoadingCurrentProduct)
     return <Spinner message="Carregando Produto..." />;

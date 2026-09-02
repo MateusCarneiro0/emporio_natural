@@ -1,31 +1,7 @@
-/**
- npx playwright test
-    Runs the end-to-end tests.
-
-  npx playwright test --ui
-    Starts the interactive UI mode.
-
-  npx playwright test --project=chromium
-    Runs the tests only on Desktop Chrome.
-
-  npx playwright test example
-    Runs the tests in a specific file.
-
-  npx playwright test --debug
-    Runs the tests in debug mode.
-
-  npx playwright codegen
-    Auto generate tests with Codegen.
-
-We suggest that you begin by typing:
-
-    npx playwright test
- */
-
 import { test, expect } from "@playwright/test";
 
-const session_username = `TEST_CART324trdgxf4`; //! Defina um usuário para cada teste
-const loginUser = async (page,password) => {
+export const session_username = `TEST_CART324trfggfdjfkgkjfgkdfdgdfgjkfdfgfgdgxf4`; //! Defina um usuário para cada teste
+export const loginUser = async (page,password) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Ir para login" }).click();
 
@@ -33,7 +9,7 @@ const loginUser = async (page,password) => {
   await page.locator("#login-password").fill(password || "TEST_CART");
 
   await page.getByRole("button", { name: "Entrar" }).click();
-  await page.waitForURL("**/produtos");
+  if(!password) await page.waitForURL("**/produtos");
 };
 const addProductInCart = async (page, message, quantity) => {
   await page.getByRole("link", { name: "Produtos" }).click();
@@ -218,7 +194,7 @@ test("Se usuário existir ver se há algum erro", async({page}) => {
 })
 
 test("Se login ter credenciais erradas", async ({page}) => {
-  await loginUser(page,"ERROR")
+  await loginUser(page,"ERROR ERROR ERROR")
   await expect(page.getByText("Usuário ou senha não existem tente de novo")).toBeVisible()
 })
 
