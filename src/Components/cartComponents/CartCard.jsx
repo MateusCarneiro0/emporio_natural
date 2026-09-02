@@ -18,7 +18,7 @@ function CartCard({ src, children, price, productId, quantity, categoria }) {
           {quantity} {categoria}
         </p>
         <button
-          aria-label="Apagar produto do carrinho"
+          aria-label={`Apagar ${children} do carrinho`}
           className={styles.button}
           onClick={(ev) => {
             ev.stopPropagation();

@@ -24,6 +24,30 @@ We suggest that you begin by typing:
 
 import { test, expect } from "@playwright/test";
 
+const session_username = `TEST_CART324trdgxf4`; //! Defina um usuário para cada teste
+const loginUser = async (page,password) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await page.locator("#login-username").fill(session_username);
+  await page.locator("#login-password").fill(password || "TEST_CART");
+
+  await page.getByRole("button", { name: "Entrar" }).click();
+  await page.waitForURL("**/produtos");
+};
+const addProductInCart = async (page, message, quantity) => {
+  await page.getByRole("link", { name: "Produtos" }).click();
+
+  const textRegProduct2 = new RegExp(message, "i");
+
+  await page.getByRole("button", { name: textRegProduct2 }).click();
+  await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
+
+  await page.getByPlaceholder(/digite uma quantidade/i).fill(String(quantity));
+  await page.getByRole("button", { name: /o carrinho/ }).click();
+  await page.waitForURL("**/cart");
+};
+
 test("Inicializa corretamente", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Natural/);
@@ -34,6 +58,22 @@ test("Inicializa corretamente", async ({ page }) => {
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/)).toBeVisible();
+});
+
+test("Cria novo usuário corretamente", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
+  await page.getByRole("link", { name: /Aqui/i }).click();
+
+  await page.locator("#register-username").fill(session_username);
+  await page.locator("#register-password").fill("TEST_CART");
+
+  await page.getByRole("button", { name: "Registrar" }).click();
+  await page.waitForURL("**/produtos");
+
+  await expect(page.getByText(/encontrados/i)).toBeVisible();
 });
 
 test("Faz o login corretamente", async ({ page }) => {
@@ -50,24 +90,6 @@ test("Faz o login corretamente", async ({ page }) => {
   await expect(page.getByText(/Encontrado/i)).toBeVisible();
 });
 
-test("Cria novo usuário corretamente", async ({ page }) => {
-  await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
-
-  await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
-  await page.getByRole("link", { name: /Aqui/i }).click();
-
-  await page
-    .locator("#register-username")
-    .fill(`TEST_CART${Math.random() * 7111}`);
-  await page.locator("#register-password").fill("TEST_CART");
-
-  await page.getByRole("button", { name: "Registrar" }).click();
-  await page.waitForURL("**/produtos");
-
-  await expect(page.getByText(/encontrados/i)).toBeVisible();
-});
-
 test("Acessar e adicionar produtos", async ({ page }) => {
   //! TYPE YOUR PRODUCTS
   const products = [
@@ -77,24 +99,19 @@ test("Acessar e adicionar produtos", async ({ page }) => {
     "Nozes Mariposa",
     "Semente de Chia",
     "Castanha do Pará",
-    "Aveia em Flocos Grossos"
+    "Aveia em Flocos Grossos",
   ];
-  const indexProduct = Math.floor(Math.random() * products.length)
-  const textRegProduct = new RegExp(`Veja mais sobre ${products.at(indexProduct)}`,"i")
+
+  const indexProduct = Math.floor(Math.random() * products.length);
+  const textRegProduct = new RegExp(
+    `Veja mais sobre ${products.at(indexProduct)}`,
+    "i",
+  );
   const quantity = Math.floor(Math.random() * 240);
-  await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
 
-  await page.locator("#login-username").fill("TEST_CART");
-  await page.locator("#login-password").fill("TEST_CART");
+  await loginUser(page);
 
-  await page.getByRole("button", { name: "Entrar" }).click();
-
-  await page.waitForURL("**/produtos");
-
-  await page
-    .getByRole("button", { name: textRegProduct })
-    .click();
+  await page.getByRole("button", { name: textRegProduct }).click();
   await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
 
   await page.getByPlaceholder(/digite uma quantidade/i).fill(String(quantity));
@@ -102,3 +119,107 @@ test("Acessar e adicionar produtos", async ({ page }) => {
   await page.waitForURL("**/cart");
   await expect(page.getByText(String(quantity))).toBeVisible();
 });
+
+test("Remover produtos", async ({ page }) => {
+  const products = [
+    "Banana Prata",
+    "Maçã Fuji",
+    "Melancia",
+    "Nozes Mariposa",
+    "Semente de Chia",
+    "Castanha do Pará",
+    "Aveia em Flocos Grossos",
+  ];
+
+  const indexProduct = Math.floor(Math.random() * products.length);
+  const textRegProductDelete = new RegExp(
+    `Apagar ${products.at(indexProduct)} do carrinho`,
+    "i",
+  );
+  const textRegProduct = new RegExp(
+    `Veja mais sobre ${products.at(indexProduct)}`,
+    "i",
+  );
+
+  await loginUser(page);
+  await addProductInCart(page, textRegProduct, 35);
+  // await page
+  //   .getByRole("button", { name: textRegProduct })
+  //   .click();
+  // await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
+
+  // await page.getByPlaceholder(/digite uma quantidade/i).fill(String(45));
+  // await page.getByRole("button", { name: /o carrinho/ }).click();
+
+  await expect(
+    page.getByText(/você não colocou nada no carrinho/g),
+  ).not.toBeAttached();
+
+  await page.getByRole("button", { name: textRegProductDelete }).click();
+
+  await expect(page.getByText(products.at(indexProduct))).not.toBeAttached();
+});
+
+test("Pagar carrinho", async ({ page }) => {
+  //! TYPE YOUR PRODUCTS
+  const products = [
+    "Banana Prata",
+    "Maçã Fuji",
+    "Melancia",
+    "Nozes Mariposa",
+    "Semente de Chia",
+    "Castanha do Pará",
+    "Aveia em Flocos Grossos",
+  ];
+
+  const indexProduct = Math.floor(Math.random() * products.length);
+  const textRegProduct = new RegExp(
+    `Veja mais sobre ${products.at(indexProduct)}`,
+    "i",
+  );
+  const quantity = Math.floor(Math.random() * 240);
+
+  await loginUser(page);
+
+  await addProductInCart(page, textRegProduct, quantity);
+
+  await expect(page.getByText(String(quantity))).toBeVisible();
+
+  await page.getByRole("link", { name: "Produtos" }).click();
+
+  const textRegProduct2 = new RegExp(
+    `Veja mais sobre ${products.at(indexProduct ? indexProduct - 1 : indexProduct + 1)}`,
+    "i",
+  );
+
+  await addProductInCart(page, textRegProduct2, quantity);
+
+  await page.getByRole("button", { name: "Pagar o carrinho" }).click();
+  await page.waitForURL("**/cart");
+  await expect(
+    page.getByText(
+      /^Hey 👋,você não colocou nada no carrinho\. Vamos adicionar algum produto\?$/,
+    ),
+  ).toBeVisible();
+});
+
+test("Se usuário existir ver se há algum erro", async({page}) => {
+  await page.goto("/");
+  await page.getByRole("link", { name: "Ir para login" }).click();
+
+  await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
+  await page.getByRole("link", { name: /Aqui/i }).click();
+
+  await page.locator("#register-username").fill(session_username);
+  await page.locator("#register-password").fill("TEST_CART");
+
+  await page.getByRole("button", { name: "Registrar" }).click();
+  await expect(page.getByText("Nome de usuário já criado")).toBeVisible()
+})
+
+test("Se login ter credenciais erradas", async ({page}) => {
+  await loginUser(page,"ERROR")
+  await expect(page.getByText("Usuário ou senha não existem tente de novo")).toBeVisible()
+})
+
+
