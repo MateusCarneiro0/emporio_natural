@@ -1,16 +1,26 @@
 import { test, expect } from "@playwright/test";
 
 export const session_username = `TEST_CART324trfggkfdjfkgkjfgkdfdgdfgjkfdfgfgdgxf4`; //! Defina um usuário para cada teste
-export const loginUser = async (page,password) => {
+
+export const goToLink = async (page, linkReg, selector) => {
+  const linkRegUse = new RegExp(
+    linkReg,
+    selector === undefined ? "i" : selector,
+  );
+  await page.getByRole("link", { name: linkRegUse }).click();
+};
+
+export const loginUser = async (page, password) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
+  await goToLink(page, "Ir para login");
 
   await page.locator("#login-username").fill(session_username);
   await page.locator("#login-password").fill(password || "TEST_CART");
 
   await page.getByRole("button", { name: "Entrar" }).click();
-  if(!password) await page.waitForURL("**/produtos");
+  if (!password) await page.waitForURL("**/produtos");
 };
+
 const addProductInCart = async (page, message, quantity) => {
   await page.getByRole("link", { name: "Produtos" }).click();
 
@@ -30,7 +40,7 @@ test("Inicializa corretamente", async ({ page }) => {
   await expect(page.locator("html")).toContainText(
     /Naturais, frescos e cheios de sabor/,
   );
-  await page.getByRole("link", { name: "Produtos" }).click();
+  await goToLink(page, "Produtos", "");
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/)).toBeVisible();
@@ -38,7 +48,7 @@ test("Inicializa corretamente", async ({ page }) => {
 
 test("Cria novo usuário corretamente", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
+  await goToLink(page, "Ir para login", "i");
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
@@ -54,7 +64,7 @@ test("Cria novo usuário corretamente", async ({ page }) => {
 
 test("Faz o login corretamente", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
+  await page.goToLink(page, "Ir para login");
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
 
@@ -119,13 +129,6 @@ test("Remover produtos", async ({ page }) => {
 
   await loginUser(page);
   await addProductInCart(page, textRegProduct, 35);
-  // await page
-  //   .getByRole("button", { name: textRegProduct })
-  //   .click();
-  // await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
-
-  // await page.getByPlaceholder(/digite uma quantidade/i).fill(String(45));
-  // await page.getByRole("button", { name: /o carrinho/ }).click();
 
   await expect(
     page.getByText(/você não colocou nada no carrinho/g),
@@ -161,7 +164,7 @@ test("Pagar carrinho", async ({ page }) => {
 
   await expect(page.getByText(String(quantity))).toBeVisible();
 
-  await page.getByRole("link", { name: "Produtos" }).click();
+  await goToLink(page, "Produtos", "");
 
   const textRegProduct2 = new RegExp(
     `Veja mais sobre ${products.at(indexProduct ? indexProduct - 1 : indexProduct + 1)}`,
@@ -179,9 +182,9 @@ test("Pagar carrinho", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Se usuário existir ver se há algum erro", async({page}) => {
+test("Se usuário existir ver se há algum erro", async ({ page }) => {
   await page.goto("/");
-  await page.getByRole("link", { name: "Ir para login" }).click();
+  await goToLink(page, "Ir para login");
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
@@ -190,12 +193,12 @@ test("Se usuário existir ver se há algum erro", async({page}) => {
   await page.locator("#register-password").fill("TEST_CART");
 
   await page.getByRole("button", { name: "Registrar" }).click();
-  await expect(page.getByText("Nome de usuário já criado")).toBeVisible()
-})
+  await expect(page.getByText("Nome de usuário já criado")).toBeVisible();
+});
 
-test("Se login ter credenciais erradas", async ({page}) => {
-  await loginUser(page,"ERROR ERROR ERROR")
-  await expect(page.getByText("Usuário ou senha não existem tente de novo")).toBeVisible()
-})
-
-
+test("Se login ter credenciais erradas", async ({ page }) => {
+  await loginUser(page, "ERROR ERROR ERROR");
+  await expect(
+    page.getByText("Usuário ou senha não existem tente de novo"),
+  ).toBeVisible();
+});
