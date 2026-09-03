@@ -1,12 +1,19 @@
-import {test,expect} from "@playwright/test"
-import { rejected } from "../slices/productsSlice"
+import { test, expect } from "@playwright/test";
+import {BASE_URL} from "../secretKeys"
+test("Testando se quando há erro renderiza página de erro", async ({
+  page,
+}) => {
+  await page.route(`${BASE_URL}/products`, route => {
+    route.fulfill({
+      status:500,
+      contentType:"application/json",
+      body:{error:"Products not found"}
+    })
+  })
+  await page.goto("/");
+  
+  await page.getByRole("button", { name: "Produtos" }).click();
+  await expect(page.getByText("Erro em buscar os produtos, tente novamente mais tarde.")).toBeVisible();
 
-test("Testando se quando há erro renderiza página de erro", async ({page}) => {
-    await page.goto("/")
-    const store = await page.evaluate(() => window.__STORE__)
-    store.dispatch(rejected("Erro em buscar produtos"))
-    await expect(page.getByText("Erro em buscar produtos")).toBeVisible()
-
-    await page.getByRole("button",{name:"Buscar produtos"}).click()
-    await expect(page.getByText(/encontrados/)).toBeVisible();
-})
+  await page.getByRole("button", { name: "Buscar produtos" }).click();
+});

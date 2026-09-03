@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 
-export const session_username = `TEST_CART324trfggfdjfkgkjfgkdfdgdfgjkfdfgfgdgxf4`; //! Defina um usuário para cada teste
+export const session_username = `TEST_CART324trfggkfdjfkgkjfgkdfdgdfgjkfdfgfgdgxf4`; //! Defina um usuário para cada teste
 export const loginUser = async (page,password) => {
   await page.goto("/");
   await page.getByRole("link", { name: "Ir para login" }).click();
