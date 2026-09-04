@@ -2,23 +2,30 @@ import { test, expect } from "@playwright/test";
 import { session_username } from "./constants_e2e";
 import { goToLink, loginUser, addProductInCart } from "./constants_e2e";
 
-test.describe.configure({ mode: 'serial' });
+test.use({ viewport: { width: 380, height: 840 } });
 
-test("Inicializa corretamente", async ({ page }) => {
+test("(MOBILE)Inicializa corretamente", async ({ page }) => {
   await page.goto("/");
   await expect(page).toHaveTitle(/Natural/);
   await expect(page.locator("html")).toContainText(
     /Naturais, frescos e cheios de sabor/,
   );
-  await goToLink(page, "Produtos", "");
+  await goToLink(page, "Produtos", "", true);
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/)).toBeVisible();
 });
-
-test("Cria novo usuário corretamente", async ({ page }) => {
+test("(MOBILE)Menu mobile fecha ao abrir links", async ({ page }) => {
   await page.goto("/");
-  await goToLink(page, "Ir para login", "i");
+  await page.getByRole("button", { name: "Abrir menu de navegação" }).click();
+  await page.getByRole("link", { name: "Produtos" }).click();
+  await expect(
+    page.getByRole("button", { name: "Fechar menu de navegação" }),
+  ).not.toBeAttached();
+});
+test("(MOBILE)Cria novo usuário corretamente", async ({ page }) => {
+  await page.goto("/");
+  await goToLink(page, "Ir para login", "i", true);
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
@@ -32,9 +39,9 @@ test("Cria novo usuário corretamente", async ({ page }) => {
   await expect(page.getByText(/encontrados/i)).toBeVisible();
 });
 
-test("Faz o login corretamente", async ({ page }) => {
+test("(MOBILE)Faz o login corretamente", async ({ page }) => {
   await page.goto("/");
-  await goToLink(page, "Ir para login");
+  await goToLink(page, "Ir para login","",true);
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
 
@@ -46,7 +53,7 @@ test("Faz o login corretamente", async ({ page }) => {
   await expect(page.getByText(/Encontrado/i)).toBeVisible();
 });
 
-test("Acessar e adicionar produtos", async ({ page }) => {
+test("(MOBILE)Acessar e adicionar produtos", async ({ page }) => {
   //! TYPE YOUR PRODUCTS
   const products = [
     "Banana Prata",
@@ -65,7 +72,7 @@ test("Acessar e adicionar produtos", async ({ page }) => {
   );
   const quantity = Math.floor(Math.random() * 240);
 
-  await loginUser(page);
+  await loginUser(page, undefined, true);
 
   await page.getByRole("button", { name: textRegProduct }).click();
   await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
@@ -76,7 +83,7 @@ test("Acessar e adicionar produtos", async ({ page }) => {
   await expect(page.getByText(String(quantity))).toBeVisible();
 });
 
-test("Remover produtos", async ({ page }) => {
+test("(MOBILE)Remover produtos", async ({ page }) => {
   const products = [
     "Banana Prata",
     "Maçã Fuji",
@@ -97,8 +104,8 @@ test("Remover produtos", async ({ page }) => {
     "i",
   );
 
-  await loginUser(page);
-  await addProductInCart(page, textRegProduct, 35);
+  await loginUser(page, undefined, true);
+  await addProductInCart(page, textRegProduct, 35,true);
 
   await expect(
     page.getByText(/você não colocou nada no carrinho/g),
@@ -109,7 +116,7 @@ test("Remover produtos", async ({ page }) => {
   await expect(page.getByText(products.at(indexProduct))).not.toBeAttached();
 });
 
-test("Pagar carrinho", async ({ page }) => {
+test("(MOBILE)Pagar carrinho", async ({ page }) => {
   //! TYPE YOUR PRODUCTS
   const products = [
     "Banana Prata",
@@ -128,18 +135,20 @@ test("Pagar carrinho", async ({ page }) => {
   );
   const quantity = Math.floor(Math.random() * 240);
 
-  await loginUser(page);
+  await loginUser(page, undefined, true);
 
-  await addProductInCart(page, textRegProduct, quantity);
+  await addProductInCart(page, textRegProduct, quantity,true);
 
   await expect(page.getByText(String(quantity))).toBeVisible();
+
+  // await goToLink(page, "Produtos", "", true);
 
   const textRegProduct2 = new RegExp(
     `Veja mais sobre ${products.at(indexProduct ? indexProduct - 1 : indexProduct + 1)}`,
     "i",
   );
 
-  await addProductInCart(page, textRegProduct2, quantity);
+  await addProductInCart(page, textRegProduct2, quantity,true);
 
   await page.getByRole("button", { name: "Pagar o carrinho" }).click();
   await page.waitForURL("**/cart");
@@ -150,9 +159,11 @@ test("Pagar carrinho", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Se usuário existir ver se há algum erro", async ({ page }) => {
+test("(MOBILE)Se usuário existir ver se há algum erro na criação de usuário", async ({
+  page,
+}) => {
   await page.goto("/");
-  await goToLink(page, "Ir para login");
+  await goToLink(page, "Ir para login","i",true);
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
@@ -164,8 +175,8 @@ test("Se usuário existir ver se há algum erro", async ({ page }) => {
   await expect(page.getByText("Nome de usuário já criado")).toBeVisible();
 });
 
-test("Se login ter credenciais erradas", async ({ page }) => {
-  await loginUser(page, "ERROR ERROR ERROR");
+test("(MOBILE)Se login ter credenciais erradas", async ({ page }) => {
+  await loginUser(page, "ERROR ERROR ERROR",true);
   await expect(
     page.getByText("Usuário ou senha não existem tente de novo"),
   ).toBeVisible();
