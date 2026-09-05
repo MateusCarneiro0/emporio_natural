@@ -1,7 +1,7 @@
 //Deve ser definido o nome do usuário nos testes em cada teste
 import { expect } from "@playwright/test";
 
-export const session_username = `TEST_CART31144444`;
+export const session_username = `TEST_CART${Math.floor(Math.random()*1000)}`;
 export const session_username_mobile = `TEST_CART_MOBILE${Math.floor(Math.random()*1000)}`;
 
 export const goToLink = async (page, linkReg, selector, mobile) => {
