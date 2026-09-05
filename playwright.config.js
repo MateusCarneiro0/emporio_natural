@@ -1,17 +1,16 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+const __dirname = path.dirname(import.meta.filename);
+
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
 /**
  * @see https://playwright.dev/docs/test-configuration
  */
+
 export default defineConfig({
   timeout:90000,
   testDir: './src/e2e',
@@ -32,8 +31,12 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-  },
 
+    
+  },
+  metadata:{
+    api_url:process.env.VITE_API_URL
+  },
   /* Configure projects for major browsers */
   projects: [
     {

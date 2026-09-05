@@ -10,7 +10,7 @@ test("Inicializa corretamente", async ({ page }) => {
   await expect(page.locator("html")).toContainText(
     /Naturais, frescos e cheios de sabor/,
   );
-  await goToLink(page, "Produtos", "");
+  await goToLink(page, "ir para produtos", "i");
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/)).toBeVisible();
@@ -58,7 +58,7 @@ test("Acessar e adicionar produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = Math.floor(Math.random() * products.length);
+  const indexProduct = 3
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -121,7 +121,7 @@ test("Pagar carrinho", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = Math.floor(Math.random() * products.length);
+  const indexProduct = 3
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",

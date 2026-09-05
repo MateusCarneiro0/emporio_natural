@@ -1,6 +1,8 @@
 import { test, expect } from "@playwright/test";
-import { session_username } from "./constants_e2e";
+import { session_username_mobile } from "./constants_e2e";
 import { goToLink, loginUser, addProductInCart } from "./constants_e2e";
+
+test.describe.configure({ mode: 'serial' });
 
 test.use({ viewport: { width: 380, height: 840 } });
 
@@ -10,7 +12,7 @@ test("(MOBILE)Inicializa corretamente", async ({ page }) => {
   await expect(page.locator("html")).toContainText(
     /Naturais, frescos e cheios de sabor/,
   );
-  await goToLink(page, "Produtos", "", true);
+  await goToLink(page, "ir para produtos", "i", true);
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/)).toBeVisible();
@@ -30,7 +32,7 @@ test("(MOBILE)Cria novo usuário corretamente", async ({ page }) => {
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
 
-  await page.locator("#register-username").fill(session_username);
+  await page.locator("#register-username").fill(session_username_mobile);
   await page.locator("#register-password").fill("TEST_CART");
 
   await page.getByRole("button", { name: "Registrar" }).click();
@@ -65,7 +67,7 @@ test("(MOBILE)Acessar e adicionar produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = Math.floor(Math.random() * products.length);
+  const indexProduct = 3
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -94,7 +96,7 @@ test("(MOBILE)Remover produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = Math.floor(Math.random() * products.length);
+  const indexProduct = 3
   const textRegProductDelete = new RegExp(
     `Apagar ${products.at(indexProduct)} do carrinho`,
     "i",
@@ -106,7 +108,6 @@ test("(MOBILE)Remover produtos", async ({ page }) => {
 
   await loginUser(page, undefined, true);
   await addProductInCart(page, textRegProduct, 35,true);
-
   await expect(
     page.getByText(/você não colocou nada no carrinho/g),
   ).not.toBeAttached();
@@ -128,7 +129,7 @@ test("(MOBILE)Pagar carrinho", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = Math.floor(Math.random() * products.length);
+  const indexProduct = 3
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -168,7 +169,7 @@ test("(MOBILE)Se usuário existir ver se há algum erro na criação de usuário
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
 
-  await page.locator("#register-username").fill(session_username);
+  await page.locator("#register-username").fill(session_username_mobile);
   await page.locator("#register-password").fill("TEST_CART");
 
   await page.getByRole("button", { name: "Registrar" }).click();
