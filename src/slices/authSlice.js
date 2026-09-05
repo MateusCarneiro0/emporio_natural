@@ -21,6 +21,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
+      sta.isLoadingGetStorage = false
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
