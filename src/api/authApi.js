@@ -67,13 +67,18 @@ export function createNewUser(user) {
 }
 
 export function loginUser(username, password) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingUsers());
     try {
       if (!username || !password) {
         throw new EnoughDataError(
           "Campos de usuário ou de senha nulos preencha-os",
         );
+      }
+      if(username.length >= 100 || password.length >= 100){
+        dispatch(
+            authRejected("Muitos caracteres use no máximo 100"),
+          );
       }
       const data = await requestJson(`users/login`, {
         method: "POST",

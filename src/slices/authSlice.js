@@ -21,7 +21,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.isAuthenticated = true;
       sta.signupError = false;
-      sta.isLoadingGetStorage = false
+      sta.isLoadingGetStorage = false;
     },
     loginUser(sta, action) {
       sta.authUser = action.payload.user;
@@ -29,6 +29,7 @@ const authReducer = createSlice({
       sta.error = "";
       sta.authError = false;
       sta.isAuthenticated = true;
+      sta.isLoadingGetStorage = false;
     },
     loadingUsers(sta) {
       sta.isLoading = true;
@@ -38,7 +39,9 @@ const authReducer = createSlice({
     },
     rejected(sta, act) {
       sta.error = act.payload;
-      sta.authError = false;
+      sta.authError = "";
+      sta.isLoadingGetStorage = false;
+      sta.isLoading = false;
     },
     logout(sta) {
       sta.authUser = "";
@@ -52,11 +55,13 @@ const authReducer = createSlice({
         ? act.payload
         : "Usuário ou senha não encontrados tente novamente";
       sta.isLoading = false;
+      sta.isLoadingGetStorage = false;
     },
     rejectedSignup(sta, act) {
       sta.error = "";
       sta.isLoading = false;
       sta.signupError = act.payload;
+      sta.isLoadingGetStorage = false;
     },
     clearErrors(sta) {
       sta.error = "";
