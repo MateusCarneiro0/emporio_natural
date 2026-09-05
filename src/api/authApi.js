@@ -79,6 +79,7 @@ export function loginUser(username, password) {
         dispatch(
             authRejected("Muitos caracteres use no máximo 100"),
           );
+        return;
       }
       const data = await requestJson(`users/login`, {
         method: "POST",
