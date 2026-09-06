@@ -74,6 +74,7 @@ test("Acessar e adicionar produtos", async ({ page }) => {
   await page.getByRole("button", { name: /o carrinho/ }).click();
   await page.waitForURL("**/cart");
   await expect(page.getByText(String(quantity))).toBeVisible();
+  await expect(page.getByText(/foi bem-sucedida/i).first()).toBeVisible()
 });
 
 test("Remover produtos", async ({ page }) => {
@@ -107,6 +108,8 @@ test("Remover produtos", async ({ page }) => {
   await page.getByRole("button", { name: textRegProductDelete }).click();
 
   await expect(page.getByText(products.at(indexProduct))).not.toBeAttached();
+    await expect(page.getByText(/foi bem-sucedida/i).first()).toBeVisible()
+
 });
 
 test("Pagar carrinho", async ({ page }) => {
@@ -148,6 +151,7 @@ test("Pagar carrinho", async ({ page }) => {
       /^Hey 👋,você não colocou nada no carrinho\. Vamos adicionar algum produto\?$/,
     ),
   ).toBeVisible();
+  
 });
 
 test("Se usuário existir ver se há algum erro", async ({ page }) => {

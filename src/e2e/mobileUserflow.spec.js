@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { session_username_mobile } from "./constants_e2e";
 import { goToLink, loginUser, addProductInCart } from "./constants_e2e";
 
-test.describe.configure({ mode: 'serial' });
+test.describe.configure({ mode: "serial" });
 
 test.use({ viewport: { width: 380, height: 840 } });
 
@@ -43,7 +43,7 @@ test("(MOBILE)Cria novo usuário corretamente", async ({ page }) => {
 
 test("(MOBILE)Faz o login corretamente", async ({ page }) => {
   await page.goto("/");
-  await goToLink(page, "Ir para login","",true);
+  await goToLink(page, "Ir para login", "", true);
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
 
@@ -67,7 +67,7 @@ test("(MOBILE)Acessar e adicionar produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = 3
+  const indexProduct = 3;
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -83,6 +83,7 @@ test("(MOBILE)Acessar e adicionar produtos", async ({ page }) => {
   await page.getByRole("button", { name: /o carrinho/ }).click();
   await page.waitForURL("**/cart");
   await expect(page.getByText(String(quantity))).toBeVisible();
+  await expect(page.getByText(/foi bem-sucedida/i).first()).toBeVisible();
 });
 
 test("(MOBILE)Remover produtos", async ({ page }) => {
@@ -96,7 +97,7 @@ test("(MOBILE)Remover produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = 3
+  const indexProduct = 3;
   const textRegProductDelete = new RegExp(
     `Apagar ${products.at(indexProduct)} do carrinho`,
     "i",
@@ -107,7 +108,7 @@ test("(MOBILE)Remover produtos", async ({ page }) => {
   );
 
   await loginUser(page, undefined, true);
-  await addProductInCart(page, textRegProduct, 35,true);
+  await addProductInCart(page, textRegProduct, 35, true);
   await expect(
     page.getByText(/você não colocou nada no carrinho/g),
   ).not.toBeAttached();
@@ -115,6 +116,7 @@ test("(MOBILE)Remover produtos", async ({ page }) => {
   await page.getByRole("button", { name: textRegProductDelete }).click();
 
   await expect(page.getByText(products.at(indexProduct))).not.toBeAttached();
+  await expect(page.getByText(/foi bem-sucedida/i).first()).toBeVisible();
 });
 
 test("(MOBILE)Pagar carrinho", async ({ page }) => {
@@ -129,7 +131,7 @@ test("(MOBILE)Pagar carrinho", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = 3
+  const indexProduct = 3;
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -138,7 +140,7 @@ test("(MOBILE)Pagar carrinho", async ({ page }) => {
 
   await loginUser(page, undefined, true);
 
-  await addProductInCart(page, textRegProduct, quantity,true);
+  await addProductInCart(page, textRegProduct, quantity, true);
 
   await expect(page.getByText(String(quantity))).toBeVisible();
 
@@ -149,7 +151,7 @@ test("(MOBILE)Pagar carrinho", async ({ page }) => {
     "i",
   );
 
-  await addProductInCart(page, textRegProduct2, quantity,true);
+  await addProductInCart(page, textRegProduct2, quantity, true);
 
   await page.getByRole("button", { name: "Pagar o carrinho" }).click();
   await page.waitForURL("**/cart");
@@ -164,7 +166,7 @@ test("(MOBILE)Se usuário existir ver se há algum erro na criação de usuário
   page,
 }) => {
   await page.goto("/");
-  await goToLink(page, "Ir para login","i",true);
+  await goToLink(page, "Ir para login", "i", true);
 
   await expect(page.getByText("Que bom te ver de volta")).toBeVisible();
   await page.getByRole("link", { name: /Aqui/i }).click();
@@ -177,7 +179,7 @@ test("(MOBILE)Se usuário existir ver se há algum erro na criação de usuário
 });
 
 test("(MOBILE)Se login ter credenciais erradas", async ({ page }) => {
-  await loginUser(page, "ERROR ERROR ERROR",true);
+  await loginUser(page, "ERROR ERROR ERROR", true);
   await expect(
     page.getByText("Usuário ou senha não existem tente de novo"),
   ).toBeVisible();
