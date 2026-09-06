@@ -9,8 +9,8 @@ function LogoutIconNavMobile() {
     dispatch(logoutApi());
   };
   return (
-    <div className={styles.button} aria-label="Sair da conta">
-      <IconButton onClick={handleClick}>
+    <div className={styles.button} >
+      <IconButton onClick={handleClick} aria-label="Sair da conta">
         <LogoutIcon sx={{ color: "rgb(255, 42, 42)" }} />{" "}
         <span className={styles.leaveText}>Sair</span>
       </IconButton>

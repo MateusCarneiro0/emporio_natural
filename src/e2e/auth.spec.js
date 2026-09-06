@@ -89,20 +89,42 @@ test.describe("Testando se quando um usuário se loga ele persiste sessão", () 
     await expect(page.getByText("Laranja Pera")).toBeVisible();
   });
 });
+test.describe("Testando se usuário consegue sair da conta", () => {
+  test("No desktop", async ({ page }) => {
+    await loginUser(page, undefined, undefined, session_username_auth);
+    await page.getByRole("button", { name: /Sair da conta/i }).click();
+    
+    await goToLink(page, "ir para produtos", "i", false);
+    await page
+      .getByRole("button", { name: /Veja mais sobre Laranja Pera/i })
+      .click();
+    await expect(page.getByText(/Bom te ver de volta/i).first()).toBeVisible();
+  });
+  test("No celular", async ({ page }) => {
+    await page.setViewportSize({width:380,height:840})
 
+    await loginUser(page, undefined, true, session_username_auth_mobile);
+    await page.waitForURL("**/produtos")
+    await page.waitForTimeout(5000)
+
+    await page.getByRole("button", { name: "Abrir menu de navegação" }).click();
+
+    await page.getByRole("button", { name: "Sair da conta" }).click();
+    
+    await page
+      .getByRole("button", { name: /Veja mais sobre Laranja Pera/i })
+      .click();
+    await expect(page.getByText(/Bom te ver de volta/i).first()).toBeVisible();
+  });
+});
 test("Se token de acesso expirar usuário persiste sessão com refresh token", async ({
   page,
   context,
 }) => {
   await loginUser(page, undefined, false, session_username_auth);
-  const allCookies = await context.cookies();
+  await page.waitForLoadState("networkidle");
 
-  const remainingCookies = allCookies.filter(
-    (cookie) => cookie.name !== "acess_token",
-  );
-
-  await context.clearCookies();
-  await context.addCookies(remainingCookies);
+  await context.clearCookies({ name: "acess_token" });
 
   await goToLink(page, "Carrinho", "i", false);
 
@@ -118,11 +140,15 @@ test("Se token de acesso e de refresh acabarem, usuário deve sair da conta", as
   context,
 }) => {
   await loginUser(page, undefined, false, session_username_auth);
-  
-  await context.clearCookies();
-    console.log(await context.cookies())
-  await addProductInCart(page,"Veja mais sobre Laranja Pera",10,false)
 
-  await expect(page.getByText(/Que bom te ver de volta/i)).toBeVisible()
-  
+  // const allCookies = await context.cookies()
+  // const tokens = allCookies.filter(cookie => cookie.name === "acess_token" || cookie.name === "refresh_token")
+  // tokens.forEach(cookie => deleteCookie(context,cookie))
+  await page.waitForLoadState("networkidle");
+  await context.clearCookies({ name: "acess_token" });
+  await context.clearCookies({ name: "refresh_token" });
+
+  await addProductInCart(page, "Veja mais sobre Laranja Pera", 10, false);
+
+  await expect(page.getByText(/Que bom te ver de volta/i)).toBeVisible();
 });

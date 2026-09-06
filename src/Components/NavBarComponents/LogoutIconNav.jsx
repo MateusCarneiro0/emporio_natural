@@ -10,7 +10,7 @@ function LogoutIconNav() {
   };
 
   return (
-    <IconButton onClick={handleClick}>
+    <IconButton onClick={handleClick} aria-label="Sair da conta">
       <LogoutIcon sx={{ color: "rgb(255, 42, 42)" }} />{" "}
       <span className={styles.leaveText}>Sair</span>
     </IconButton>
