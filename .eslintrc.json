@@ -1,10 +1,21 @@
 {
-  "extends": "react-app",
-  "plugins": ["react-refresh"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:react-refresh/recommended"
+  ],
+  "plugins": ["react", "react-hooks", "react-refresh"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "ecmaFeatures": { "jsx": true }
+  },
+  "settings": {
+    "react": { "version": "detect" }
+  },
   "rules": {
-    "react-refresh/only-export-components": [
-      "warn",
-      { "allowConstantExport": true }
-    ]
+    "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
+    "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
   }
 }
