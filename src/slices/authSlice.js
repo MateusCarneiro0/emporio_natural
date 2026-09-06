@@ -86,7 +86,6 @@ const authReducer = createSlice({
         sta.isLoadingGetStorage = false;
         sta.isLoading = false;
         sta.error = "";
-        sta.authError = false;
       })
       .addCase(getLocalStorage.rejected, (state) => {
         state.isLoadingGetStorage = false;
