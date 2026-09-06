@@ -12,6 +12,7 @@ export const goToLink = async (page, linkReg, selector, mobile) => {
   if (mobile) {
     await page.getByRole("button", { name: "Abrir menu de navegação" }).click();
   }
+   
   await page.getByRole("link", { name: linkRegUse }).click();
 };
 
@@ -23,6 +24,7 @@ export const loginUser = async (page, password, mobile,username) => {
   await page.locator("#login-password").fill(password || "TEST_CART");
 
   await page.getByRole("button", { name: "Entrar" }).click();
+  
 };
 
 export const addProductInCart = async (page, message, quantity,mobile) => {

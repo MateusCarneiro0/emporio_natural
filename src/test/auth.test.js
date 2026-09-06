@@ -115,7 +115,6 @@ describe("Testando os slices do auth", () => {
     const store = initializeStore();
     
     await store.dispatch(loginUser("TEST_CART".repeat(16), "TEST_CART"));
-    console.log("TEST_CART".repeat(16))
     const authState = store.getState().auth;
 
     expect(authState.authUser).toBe("");

@@ -2,7 +2,7 @@ import { test, expect } from "@playwright/test";
 import { session_username } from "./constants_e2e";
 import { goToLink, loginUser, addProductInCart } from "./constants_e2e";
 
-test.describe.configure({ mode: 'serial' });
+test.describe.configure({ mode: "serial" });
 
 test("Inicializa corretamente", async ({ page }) => {
   await page.goto("/");
@@ -58,7 +58,7 @@ test("Acessar e adicionar produtos", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = 3
+  const indexProduct = 3;
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -121,7 +121,7 @@ test("Pagar carrinho", async ({ page }) => {
     "Aveia em Flocos Grossos",
   ];
 
-  const indexProduct = 3
+  const indexProduct = 3;
   const textRegProduct = new RegExp(
     `Veja mais sobre ${products.at(indexProduct)}`,
     "i",
@@ -169,4 +169,35 @@ test("Se login ter credenciais erradas", async ({ page }) => {
   await expect(
     page.getByText("Usuário ou senha não existem tente de novo"),
   ).toBeVisible();
+});
+
+test.describe("Erro no carrinho renderiza pop-up de erro", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route(`${process.env.VITE_API_URL}/users/cart`, async (route) =>
+      route.fulfill({
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Erro ao procurar carrinho" }),
+      }),
+    );
+  });
+  test("No desktop", async ({ page }) => {
+    const textReg = new RegExp("Veja mais sobre Laranja Pera", "i");
+    await loginUser(page, "TEST_CART", false);
+    await addProductInCart(page, textReg, 10, false);
+    await expect(
+      page.getByText(/foi mal-sucedida, tente novamente/i),
+    ).toBeVisible();
+  });
+  test("No celular", async ({ page }) => {
+    await page.setViewportSize({ width: 380, height: 840 });
+
+    const textReg = new RegExp("Veja mais sobre Laranja Pera", "i");
+    await loginUser(page,"TEST_CART",true,session_username);
+    await page.waitForURL("**/produtos")
+    await addProductInCart(page, textReg, 10, true);
+    await expect(
+      page.getByText(/foi mal-sucedida, tente novamente/i),
+    ).toBeVisible();
+  });
 });
