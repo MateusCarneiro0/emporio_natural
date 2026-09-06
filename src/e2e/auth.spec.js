@@ -89,6 +89,7 @@ test.describe("Testando se quando um usuário se loga ele persiste sessão", () 
     await expect(page.getByText("Laranja Pera")).toBeVisible();
   });
 });
+
 test.describe("Testando se usuário consegue sair da conta", () => {
   test("No desktop", async ({ page }) => {
     await loginUser(page, undefined, undefined, session_username_auth);
@@ -141,9 +142,6 @@ test("Se token de acesso e de refresh acabarem, usuário deve sair da conta", as
 }) => {
   await loginUser(page, undefined, false, session_username_auth);
 
-  // const allCookies = await context.cookies()
-  // const tokens = allCookies.filter(cookie => cookie.name === "acess_token" || cookie.name === "refresh_token")
-  // tokens.forEach(cookie => deleteCookie(context,cookie))
   await page.waitForLoadState("networkidle");
   await context.clearCookies({ name: "acess_token" });
   await context.clearCookies({ name: "refresh_token" });

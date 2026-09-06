@@ -30,7 +30,6 @@ test("Cria novo usuário corretamente", async ({ page }) => {
   await page.waitForURL("**/produtos");
 
   await expect(page.getByText(/encontrados/i)).toBeVisible();
-  
 });
 
 test("Faz o login corretamente", async ({ page }) => {
@@ -172,20 +171,40 @@ test("Se login ter credenciais erradas", async ({ page }) => {
   ).toBeVisible();
 });
 
-test("Erro no carrinho renderiza pop-up de erro", async ({ page }) => {
-  const textReg = new RegExp("Veja mais sobre Laranja Pera", "i");
-  
-  await page.route(`${process.env.VITE_API_URL}/users/cart`, async (route) =>
-    route.fulfill({
-      status: 500,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Erro ao procurar carrinho" }),
-    }),
-  );
+test.describe("Erro no carrinho renderiza pop-up de erro", () => {
+  test.beforeEach(async ({ page }) => {
+    await page.route(`${process.env.VITE_API_URL}/users/cart`, async (route) =>
+      route.fulfill({
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ error: "Erro ao procurar carrinho" }),
+      }),
+    );
+  });
+  test("No desktop", async ({ page }) => {
+    const textReg = new RegExp("Veja mais sobre Laranja Pera", "i");
+    await loginUser(page, "TEST_CART", false);
+    await addProductInCart(page, textReg, 10, false);
+    await expect(
+      page.getByText(/foi mal-sucedida, tente novamente/i),
+    ).toBeVisible();
+  });
+  test("No celular", async ({ page }) => {
+    await page.setViewportSize({ width: 380, height: 840 });
 
-  await loginUser(page, "TEST_CART", false);
-  await addProductInCart(page, textReg, 10, false);
-  await expect(
-    page.getByText(/foi mal-sucedida, tente novamente/i),
-  ).toBeVisible();
+    const textReg = new RegExp("Veja mais sobre Laranja Pera", "i");
+
+    await loginUser(page, "TEST_CART", true, session_username);
+    await page.waitForURL("**/produtos");
+
+    await page.getByRole("button", { name: textReg }).click();
+    await expect(page.getByText(/Digite uma quantidade/i)).toBeVisible();
+
+    await page.getByPlaceholder(/digite uma quantidade/i).fill(String(15));
+    await page.getByRole("button", { name: /o carrinho/ }).click();
+    await page.waitForURL("**/cart");
+    await expect(
+      page.getByText(/foi mal-sucedida, tente novamente/i),
+    ).toBeVisible();
+  });
 });

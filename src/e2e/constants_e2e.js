@@ -40,19 +40,3 @@ export const addProductInCart = async (page, message, quantity, mobile) => {
   await page.getByRole("button", { name: /o carrinho/ }).click();
   await page.waitForURL("**/cart");
 };
-
-export const deleteCookie = async (context, cookie) => {
-
-  if(!cookie || !cookie?.name){
-    throw new Error("Erro no cookie")
-  }
-  await context.addCookies([
-    {
-      name: cookie.name,
-      value: cookie.value || '', // Playwright expects a string value
-      domain: cookie.domain,     // Ensure domain matches to overwrite correctly
-      path: cookie.path || '/',  // Ensure path matches to overwrite correctly
-      expires: 0,                // Sets expiration to the past to delete it
-    }
-  ]);
-};
