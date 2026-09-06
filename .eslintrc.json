@@ -2,8 +2,7 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:react-refresh/recommended"
+    "plugin:react-hooks/recommended"
   ],
   "plugins": ["react", "react-hooks", "react-refresh"],
   "parserOptions": {
