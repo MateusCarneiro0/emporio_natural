@@ -16,5 +16,9 @@
   "rules": {
     "react-refresh/only-export-components": ["warn", { "allowConstantExport": true }],
     "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
+  },
+  "env":{
+    "browser":true,
+    "es2021":true
   }
 }
