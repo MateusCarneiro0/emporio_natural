@@ -43,5 +43,8 @@
     "vite": "^6.4.3",
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^4.1.10"
-  }
+  },
+  "allowScripts":{
+    "esbuild":true
+  } 	
 }
