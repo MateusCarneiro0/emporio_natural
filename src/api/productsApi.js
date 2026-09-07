@@ -8,7 +8,7 @@ import {
 import requestJson from "./requestJson";
 
 export function fetchProducts() {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingProducts());
     try {
       const data = await requestJson("");
@@ -22,7 +22,7 @@ export function fetchProducts() {
 }
 
 export function getProduct(id) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingCurrentProduct());
     try {
       const data = await requestJson(`products/${encodeURIComponent(id)}`);

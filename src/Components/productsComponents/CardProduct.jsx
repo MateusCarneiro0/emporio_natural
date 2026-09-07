@@ -7,7 +7,6 @@ const CardProduct = memo(function CardProduct({
   src,
   title,
   children,
-  categorias,
   price,
   id,
   categoria,

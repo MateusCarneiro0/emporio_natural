@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useDispatch } from "react-redux";
-
+import React from "react"
 import { deleteProductCart } from "../../api/cartApi";
 
 import styles from "./CartCard.module.css";

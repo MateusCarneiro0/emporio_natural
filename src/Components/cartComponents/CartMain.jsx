@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-
+import React from "react"
 import { payCart } from "../../api/cartApi";
 import Button from "../Button";
 import CartCard from "./CartCard";

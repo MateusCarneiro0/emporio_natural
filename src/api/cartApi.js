@@ -27,7 +27,7 @@ import { isNotLoading, loadingCurrentProductAdd } from "../slices/productsSlice"
 */
 
 export function addProductCart(product, isInCart, bearerToken) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingCart());
     dispatch(loadingCurrentProductAdd())
     try {

@@ -18,7 +18,6 @@
     "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }]
   },
   "env":{
-    "browser":true,
-    "es2021":true
+    "browser":true
   }
 }

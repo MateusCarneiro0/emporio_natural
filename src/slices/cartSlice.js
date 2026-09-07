@@ -89,7 +89,7 @@ const cartReducer = createSlice({
         sta.cartProducts = [];
         sta.isLoading = false;
       })
-      .addCase(logout, (sta, act) => {
+      .addCase(logout, (sta) => {
         sta.cartProducts = [];
       })
       .addCase(clearErrors, (sta) => {
@@ -97,7 +97,7 @@ const cartReducer = createSlice({
       })
       .addMatcher(
         isAnyOf(rejected, rejectedSignup, authRejected),
-        (state, act) => {
+        (state) => {
           state.isLoading = false;
         },
       );

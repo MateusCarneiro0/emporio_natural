@@ -17,7 +17,7 @@ class EnoughDataError extends Error {
 }
 
 export function createNewUser(user) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingUsers());
     try {
       if (!user?.user || !user?.password) {
