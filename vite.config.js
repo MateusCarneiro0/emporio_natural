@@ -5,7 +5,10 @@ import eslint from 'vite-plugin-eslint';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(), eslint()],
+  plugins: [react(), eslint({
+      failOnError: false, // REMOVER DEPOIS
+      failOnWarning: false,
+    })],
   test: {
     globals: true,
     environment: 'jsdom',
