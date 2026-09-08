@@ -103,7 +103,7 @@ A aplicação depende de uma API própria, que **não faz parte deste repositór
 ### Como executar a API
 
 ```bash
-cd ~/Área\ de\ trabalho/api_products
+git clone https://github.com/MateusCarneiro0/api_products.git
 
 # 1. Crie e ative o ambiente virtual (já existe um na pasta `venv/`)
 python -m venv venv
@@ -116,6 +116,8 @@ pip install -r requirements.txt
 # 3. Rode a aplicação (porta padrão 5000, configurável via PORT)
 python app.py
 ```
+
+Não se esqueça de ter um servidor Redis rodando na máquina ou na nuvem 
 
 A API ficará disponível em `http://localhost:5000`. Configure `VITE_API_URL` no frontend apontando para ela (veja abaixo).
 
