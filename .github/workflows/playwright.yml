@@ -18,6 +18,8 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
+      env:
+        VITE_API_URL: ${{secrets.VITE_APIURL}}
       run: npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
@@ -25,7 +27,3 @@ jobs:
         name: playwright-report
         path: playwright-report/
         retention-days: 30
-    - name: Run Playwright tests
-      env:
-        VITE_API_URL: ${{ secrets.VITE_API_URL }}
-      run: npx playwright test
