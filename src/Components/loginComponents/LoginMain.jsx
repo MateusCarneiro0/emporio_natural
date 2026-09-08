@@ -50,7 +50,7 @@ function LoginMain() {
         />
         {authError && (
           <p className={styles.authError}>
-            Usuário ou senha não existem tente de novo
+            {authError}
           </p>
         )}
         {isLoading ? (
