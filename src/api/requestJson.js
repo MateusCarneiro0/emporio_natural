@@ -74,7 +74,7 @@ export default async function requestJson(url, options, bearerToken) {
           optionsToken
         );
 
-        if (!newRes.ok || !newData?.status === "refreshed") {
+        if (!newRes.ok || newData?.status !== "refreshed") {
           returnToTheLogin();
           throw new UnathouridedApiError("Erro ao tentar se autenticar");
         }
