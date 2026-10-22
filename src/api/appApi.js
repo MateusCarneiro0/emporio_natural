@@ -23,16 +23,15 @@ async function fetchRefresh() {
 async function baseQueryWithReauth(args, api, extraOptions) {
   let result = await baseQuery(args, api, extraOptions);
 
-  if (result.error) {
-    if (result.error.status === 401) {
-      const { res } = await fetchRefresh();
-      if (res.ok) {
-        result = await baseQuery(args, api, extraOptions);
-      } else {
-        api.dispatch(logout());
-      }
+  if (result.error && result?.error.status === 401) {
+    const { res } = await fetchRefresh();
+    if (res.ok) {
+      result = await baseQuery(args, api, extraOptions);
+    } else {
+      api.dispatch(logout());
     }
   }
+
   return result;
 }
 
