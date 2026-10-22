@@ -45,18 +45,9 @@ const appApi = createApi({
       query: () => "/",
       providesTags: ["Products"],
     }),
-    getSpecificProduct: builder.query({
+    getProductById: builder.query({
       query: (id) => `/products/${id}`,
-      providesTags: (result) =>
-        result
-          ? [
-              ...result.map(({ id }) => ({
-                type: "Product",
-                id,
-              })),
-              "Product",
-            ]
-          : ["Product"],
+      providesTags: ["Product"],
     }),
     getCart: builder.query({
       query: () => "cart",
@@ -97,7 +88,7 @@ export default appApi;
 
 export const {
   useGetProductsQuery,
-  useGetSpecificProductQuery,
+  useGetProductByIdQuery,
   useGetCartQuery,
   useAddProductCartMutation,
   useDeleteProductCartMutation,
