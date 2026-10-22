@@ -33,17 +33,15 @@ const router = createBrowserRouter([
         element: <Products />,
         path: "/produtos",
         loader: fetchProducts,
-        children: [
-          {
-            element: (
-              <AuthProtected>
-                <Product />
-              </AuthProtected>
-            ),
-            path: "/produtos/:id",
-            loader: getProduct,
-          },
-        ],
+      },
+      {
+        element: (
+          <AuthProtected>
+            <Product />
+          </AuthProtected>
+        ),
+        path: "/produtos/:id",
+        loader: getProduct,
       },
       {
         element: (
