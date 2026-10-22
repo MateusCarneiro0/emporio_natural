@@ -9,13 +9,16 @@ import styles from "./Product.module.css";
 import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
 import ProductsError from "./ProductsError";
+import { useGetProductByIdQuery } from "../../api/appApi";
 
 function Product() {
   const [quantity, setQuantity] = useState("");
-
-  const { isLoadingCurrentProduct, currentProduct, error } = useSelector(
-    (store) => store.products,
-  );
+  const params = useParams();
+  const {
+    data: currentProduct = {},
+    error,
+    isLoading,
+  } = useGetProductByIdQuery(params?.id);
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
   const price =
@@ -66,12 +69,12 @@ function Product() {
         },
         isInCart,
       ),
-    )
+    );
     navigate("/cart");
   }
   if (error) return <ProductsError message={error} />;
 
-  if (isLoadingCurrentProduct)
+  if (isLoading)
     return <Spinner message="Carregando Produto..." />;
 
   return (
