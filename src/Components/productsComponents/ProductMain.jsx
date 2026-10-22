@@ -1,7 +1,7 @@
 import { useEffect, useState, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Outlet, useNavigation, useParams } from "react-router";
 import { searchProducts } from "../../slices/productsSlice";
+import { useGetProductsQuery } from "../../api/appApi";
 
 import Spinner from "../Spinner";
 import CardProduct from "./CardProduct";
@@ -13,8 +13,7 @@ const ProductMain = memo(function ProductMain() {
   const [query, setQuery] = useState("");
 
   const dispatch = useDispatch();
-
-  const { id } = useParams();
+  const {data:displayProducts,isFetching:isLoading,error,isSuccess} = useGetProductsQuery()
 
   const { authUser } = useSelector((store) => store.auth);
   const phrases = [
@@ -27,28 +26,19 @@ const ProductMain = memo(function ProductMain() {
   useEffect(() => {
     setPhraseCurrentId(Math.floor(Math.random()*4))
   },[]) 
-  const { displayProducts, error, isLoadingCurrentProduct } = useSelector(
-    (store) => store.products,
-  );
-
-  const navigation = useNavigation();
-  const isLoading = navigation.state === "loading";
-
-  
 
   useEffect(() => {
     dispatch(searchProducts(query));
   }, [dispatch, query]);
 
-  if (isLoading || isLoadingCurrentProduct)
+  if (isLoading)
     return (
       <Spinner
-        message={id ? "Carregando produto..." : "Carregando Produtos..."}
+        message="Carregando produtos..."
       />
     );
-  if (id) return <Outlet />;
 
-  if (error) return <ProductsError message={error} />;
+  if (error || !isSuccess) return <ProductsError message={error} />;
 
   return (
     <main className={styles.products}>

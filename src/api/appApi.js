@@ -32,9 +32,8 @@ async function baseQueryWithReauth(args, api, extraOptions) {
         api.dispatch(logout());
       }
     }
-
-    return result;
   }
+  return result;
 }
 
 const appApi = createApi({
@@ -44,7 +43,7 @@ const appApi = createApi({
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => "/",
-      providesTags: "Products",
+      providesTags: ["Products"],
     }),
     getSpecificProduct: builder.query({
       query: (id) => `/products/${id}`,
@@ -61,7 +60,7 @@ const appApi = createApi({
     }),
     getCart: builder.query({
       query: () => "cart",
-      providesTags: "Products",
+      providesTags: ["Products"],
     }),
 
     addProductCart: builder.mutation({
@@ -83,6 +82,14 @@ const appApi = createApi({
 
       invalidatesTags: ["Cart"],
     }),
+
+    createNewUser: builder.mutation({
+      query: (body) => ({
+        url: "users/createnewuser",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -92,6 +99,7 @@ export const {
   useGetProductsQuery,
   useGetSpecificProductQuery,
   useGetCartQuery,
-  useAddProductCartQuery,
-  useDeleteProductCart
+  useAddProductCartMutation,
+  useDeleteProductCartMutation,
+  useCreateNewUserMutation,
 } = appApi;
