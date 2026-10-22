@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import React from "react"
+import React from "react";
 import { payCart } from "../../api/cartApi";
 import Button from "../Button";
 import CartCard from "./CartCard";
@@ -10,11 +10,12 @@ import styles from "./CartMain.module.css";
 import ToastAlert from "./ToastAlert";
 import { useEffect } from "react";
 import { cleanOperationText } from "../../slices/cartSlice";
+import { useGetCartQuery } from "../../api/appApi";
 
 function CartMain() {
-  const { cartProducts, isLoading, error, operationText } = useSelector(
-    (store) => store.cart,
-  );
+  const { data: cartProducts, isLoading, error } = useGetCartQuery();
+  
+  const { operationText } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
   const totalCust = Number(
