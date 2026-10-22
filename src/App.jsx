@@ -8,10 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Error from "./Components/Error";
 import AppBootstrap from "./AppBootstrap";
 import { RouterProvider } from "react-router/dom";
-import {
-  fetchProducts,
-  getProduct,
-} from "./Components/productsComponents/actionProduct";
+
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -32,7 +29,6 @@ const router = createBrowserRouter([
       {
         element: <Products />,
         path: "/produtos",
-        loader: fetchProducts,
       },
       {
         element: (
@@ -41,7 +37,6 @@ const router = createBrowserRouter([
           </AuthProtected>
         ),
         path: "/produtos/:id",
-        loader: getProduct,
       },
       {
         element: (
