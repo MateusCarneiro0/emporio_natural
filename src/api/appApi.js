@@ -30,7 +30,7 @@ async function baseQueryWithReauth(args, api, extraOptions) {
         refreshState = fetchRefresh();
       }
       const { res } = await refreshState;
-      if (res.ok) {
+      if (res?.ok) {
         result = await baseQuery(args, api, extraOptions);
       } else {
         api.dispatch(logout());
@@ -60,14 +60,14 @@ const appApi = createApi({
       providesTags: (result, error, id) => [{ type: "Product", id }],
     }),
     getCart: builder.query({
-      query: () => "cart",
-      providesTags: ["Products"],
+      query: () => "users/cart",
+      providesTags: ["Cart"],
     }),
 
     addProductCart: builder.mutation({
       query: (body) => ({
         method: "POST",
-        url: "cart",
+        url: "users/cart",
         body,
       }),
 
@@ -77,7 +77,7 @@ const appApi = createApi({
     deleteProductCart: builder.mutation({
       query: (body) => ({
         method: "DELETE",
-        url: "cart",
+        url: "users/cart",
         body,
       }),
 
