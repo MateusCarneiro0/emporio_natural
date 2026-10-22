@@ -44,10 +44,11 @@ const appApi = createApi({
     getProducts: builder.query({
       query: () => "/",
       providesTags: ["Products"],
+      keepUnusedDataFor: 120,
     }),
     getProductById: builder.query({
       query: (id) => `/products/${id}`,
-      providesTags: ["Product"],
+      providesTags: (result, error, id) => [{ type: "Product", id }],
     }),
     getCart: builder.query({
       query: () => "cart",
