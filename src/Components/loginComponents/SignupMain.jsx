@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
-
+import { Form, Link, useActionData, useNavigate,redirect } from "react-router";
+import { useSelector } from "react-redux";
+import store from "../../app/store";
 import { createNewUser } from "../../api/authApi";
 
 import Input from "./Input";
@@ -12,33 +12,27 @@ import { ThreeDots } from "react-loader-spinner";
 import styles from "./LoginMain.module.css";
 function SignupMain() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const actionData = useActionData();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { isAuthenticated, isLoading, error, signupError } = useSelector(
+  const { isAuthenticated, isLoading, error } = useSelector(
     (store) => store.auth,
   );
   const clickabel = username && password;
 
-  function handleSignup(ev) {
-    ev.preventDefault();
-    const newUser = {
-      user: username,
-      password,
-    };
-    dispatch(createNewUser(newUser));
-  }
   useEffect(() => {
     if (isAuthenticated) {
       navigate("/produtos");
     }
   }, [isAuthenticated, navigate]);
-   if (error?.toLocaleLowerCase() === "failed to fetch")
-    return <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />;
+  if (error?.toLocaleLowerCase() === "failed to fetch")
+    return (
+      <Error message="Erro ao buscar ou mandar dados no servidor, tente novamente" />
+    );
   if (error) return <Error message={error} />;
   return (
     <div className={styles.loginContainer}>
-      <form className={styles.login} onSubmit={handleSignup}>
+      <Form method="POST" className={styles.login}>
         <h1 className={styles.title}>Vamos se registrar</h1>
         <Input
           placeholder="Digite seu username"
@@ -58,7 +52,9 @@ function SignupMain() {
           name="password"
           signup={true}
         />
-        {signupError && <p className={styles.authError}>{signupError}</p>}
+        {actionData?.error && (
+          <p className={styles.authError}>{actionData?.error}</p>
+        )}
         {isLoading ? (
           <ThreeDots />
         ) : (
@@ -73,9 +69,25 @@ function SignupMain() {
           </Link>{" "}
           para logar nela
         </p>
-      </form>
+      </Form>
     </div>
   );
+}
+
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await store.dispatch(
+      createNewUser({
+        user: data["register-username"],
+        password: data["register-password"],
+      }),
+    );
+    redirect("/produtos");
+  } catch (err) {
+    return { error: err.message, ok: false };
+  }
 }
 
 export default SignupMain;

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router";
-
+import { useSelector } from "react-redux";
+import { Form, Link, redirect, useActionData } from "react-router";
+import store from "../../app/store";
 import { loginUser } from "../../api/authApi";
 
 import Input from "./Input";
@@ -13,15 +13,11 @@ import { ThreeDots } from "react-loader-spinner";
 import styles from "./LoginMain.module.css";
 
 function LoginMain() {
-  const dispatch = useDispatch();
-  const { isLoading, error, authError } = useSelector((store) => store.auth);
+  const actionData = useActionData();
+  const { isLoading, error } = useSelector((store) => store.auth);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const clickabel = username && password;
-  function handleSubmit(ev) {
-    ev.preventDefault();
-    dispatch(loginUser(username, password));
-  }
 
   if (error.toLocaleLowerCase() === "failed to fetch")
     return (
@@ -30,7 +26,7 @@ function LoginMain() {
   if (error) return <Error message={error} />;
   return (
     <div className={styles.loginContainer}>
-      <form className={styles.login} onSubmit={handleSubmit}>
+      <Form className={styles.login} method="POST">
         <h1 className={styles.title}>Que bom te ver de volta</h1>
         <Input
           placeholder={"Digite seu username"}
@@ -48,11 +44,7 @@ function LoginMain() {
           type="password"
           name="password"
         />
-        {authError && (
-          <p className={styles.authError}>
-            {authError}
-          </p>
-        )}
+        {actionData?.error && <p className={styles.authError}>{actionData?.error}</p>}
         {isLoading ? (
           <ThreeDots />
         ) : (
@@ -65,9 +57,21 @@ function LoginMain() {
           </Link>{" "}
           para ter uma conta
         </p>
-      </form>
+      </Form>
     </div>
   );
+}
+
+//login-username
+export async function action({ request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  try {
+    await store.dispatch(loginUser(data["login-username"], data["login-password"]));
+    redirect("/produtos");
+  } catch (err) {
+    return { error: err.message, ok: false };
+  }
 }
 
 export default LoginMain;

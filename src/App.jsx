@@ -9,6 +9,8 @@ import Error from "./Components/Error";
 import AppBootstrap from "./AppBootstrap";
 import { RouterProvider } from "react-router/dom";
 import BootstrapError from "./Components/BootstrapError";
+import { action as loginAction } from "./Components/loginComponents/LoginMain";
+import { action as signupAction } from "./Components/loginComponents/SignupMain";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -53,6 +55,7 @@ const router = createBrowserRouter([
           </LoggedProtected>
         ),
         path: "/login",
+        action: loginAction,
       },
       {
         element: (
@@ -61,6 +64,7 @@ const router = createBrowserRouter([
           </LoggedProtected>
         ),
         path: "/signup",
+        action: signupAction,
       },
       {
         element: <NotFound />,

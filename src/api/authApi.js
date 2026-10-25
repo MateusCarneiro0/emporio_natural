@@ -1,8 +1,6 @@
 import {
   loadingUsers,
-  rejectedSignup,
   loginUser as loginUserAction,
-  authRejected,
   createNewUser as createNewUserAction,
   logout,
 } from "../slices/authSlice";
@@ -20,48 +18,37 @@ class EnoughDataError extends Error {
 export function createNewUser(user) {
   return async (dispatch) => {
     dispatch(loadingUsers());
-    try {
-      if (!user?.user || !user?.password) {
-        throw new EnoughDataError(
-          "Campos de usuário ou de senha nulos preencha-os",
-        );
-      }
-      const data = await requestJson(`users/createnewuser`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      });
 
-      if (data?.hasRepeated) {
-        dispatch(rejectedSignup("Nome de usuário já criado"));
-      } else if (
-        user.user.length > 100 ||
-        user.password.length > 100 ||
-        data?.manyCharacters
-      ) {
-        dispatch(rejectedSignup("Muitos caracteres use no máximo 100"));
-      } else {
-        const { user: createdUser, cart } = data;
-        if (createdUser && Array.isArray(cart)) {
-          const newUser = { user: createdUser };
-          dispatch(createNewUserAction(newUser));
+    if (!user?.user || !user?.password) {
+      throw new EnoughDataError(
+        "Campos de usuário ou de senha nulos preencha-os",
+      );
+    }
+    const data = await requestJson(`users/createnewuser`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
 
-          dispatch(receiveCart(cart));
-        } else {
-          throw new FetchApiError("Erro em criar usuário");
-        }
-      }
-    } catch (err) {
-      if (err.name === "FetchApiError") {
-        dispatch(
-          rejectedSignup("Erro em criar usuário tente novamente mais tarde"),
-        );
-      } else if (err.name === "EnoughDataError") {
-        dispatch(rejectedSignup(err.message));
+    if (data?.hasRepeated) {
+      throw new Error("Nome de usuário já criado");
+    } else if (
+      user.user.length > 100 ||
+      user.password.length > 100 ||
+      data?.manyCharacters
+    ) {
+      throw new Error("Muitos caracteres use no máximo 100");
+    } else {
+      const { user: createdUser, cart } = data;
+      if (createdUser && Array.isArray(cart)) {
+        const newUser = { user: createdUser };
+        dispatch(createNewUserAction(newUser));
+
+        dispatch(receiveCart(cart));
       } else {
-        dispatch(rejectedSignup(err.message));
+        throw new FetchApiError("Erro em criar usuário");
       }
     }
   };
@@ -70,49 +57,42 @@ export function createNewUser(user) {
 export function loginUser(username, password) {
   return async (dispatch) => {
     dispatch(loadingUsers());
-    try {
-      if (!username || !password) {
-        throw new EnoughDataError(
-          "Campos de usuário ou de senha nulos preencha-os",
-        );
-      }
-      if (username.length >= 100 || password.length >= 100) {
-        dispatch(authRejected("Muitos caracteres use no máximo 100"));
-        return;
-      }
-      const data = await requestJson(`users/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username,
-          password,
-        }),
-      });
 
-      if (data.auth) {
-        const { user, cart } = data;
-        if (Array.isArray(cart) && user) {
-          dispatch(loginUserAction(user));
-          dispatch(receiveCart(cart));
-        } else {
-          throw new Error(
-            "Erro em encontrar um carrinho no servidor tente novamente mais tarde",
-          );
-        }
+    if (!username || !password) {
+      throw new EnoughDataError(
+        "Campos de usuário ou de senha nulos preencha-os",
+      );
+    }
+    if (username.length >= 100 || password.length >= 100) {
+      throw new Error("Muitos caracteres use no máximo 100");
+    }
+    const data = await requestJson(`users/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+
+    if (data.auth) {
+      const { user, cart } = data;
+      if (Array.isArray(cart) && user) {
+        dispatch(loginUserAction(user));
+        dispatch(receiveCart(cart));
       } else {
-        if (data?.error) {
-          dispatch(
-            authRejected("Erro em fazer validação,tente novamente mais tarde"),
-          );
-        }
-        dispatch(
-          authRejected(
-            "Usuário ou senha não encontrados, tente novamente mais tarde",
-          ),
+        throw new Error(
+          "Erro em encontrar um carrinho no servidor tente novamente mais tarde",
         );
       }
-    } catch (err) {
-      dispatch(authRejected(err.message));
+    } else {
+      if (data?.error) {
+        throw new Error("Erro em fazer validação,tente novamente mais tarde");
+      }
+
+      throw new Error(
+        "Usuário ou senha não encontrados, tente novamente mais tarde",
+      );
     }
   };
 }
