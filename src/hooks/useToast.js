@@ -9,4 +9,6 @@ export function useToast(text, isSuccess, name, time = 5000) {
     const toastTimeout = setTimeout(() => dispatch(closeToast(name)), time);
     return () => clearTimeout(toastTimeout);
   }, [dispatch, time, name]);
+
+  return { closeToast: () => dispatch(closeToast(name)) };
 }
