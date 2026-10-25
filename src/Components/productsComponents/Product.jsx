@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import Button from "../Button";
 
 import styles from "./Product.module.css";
-import { addProductCart } from "../../api/cartApi";
 import Spinner from "../Spinner";
 import ProductsError from "./ProductsError";
-import { useGetProductByIdQuery } from "../../api/appApi";
+import {
+  useAddProductCartMutation,
+  useGetProductByIdQuery,
+} from "../../api/appApi";
 
 function Product() {
   const [quantity, setQuantity] = useState("");
@@ -19,6 +21,7 @@ function Product() {
     error,
     isLoading,
   } = useGetProductByIdQuery(params?.id);
+  const [addProduct, { isLoading: isAdding }] = useAddProductCartMutation();
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
   const price =
@@ -55,27 +58,25 @@ function Product() {
   async function handleAdd(ev) {
     ev.preventDefault();
     if (price <= 0 || quantity <= 0) return;
-    await dispatch(
-      addProductCart(
-        {
-          nome,
-          imagem,
-          categorias,
-          descricao,
-          total: Number((preco * quantity).toFixed(2)),
-          id,
-          quantity,
-          categoria,
-        },
-        isInCart,
-      ),
-    );
-    navigate("/cart");
+    await addProduct({
+      product: {
+        nome,
+        imagem,
+        categorias,
+        descricao,
+        total: Number((preco * quantity).toFixed(2)),
+        id,
+        quantity,
+        categoria,
+      },
+    })
+      .unwrap()
+      .then(() => navigate("/cart"))
+      .catch((error) => console.error(error));
   }
   if (error) return <ProductsError message={error} />;
 
-  if (isLoading)
-    return <Spinner message="Carregando Produto..." />;
+  if (isLoading) return <Spinner message="Carregando Produto..." />;
 
   return (
     <div className={styles.product}>
@@ -127,9 +128,13 @@ function Product() {
             </p>
           </div>
         </div>
-        <Button disabled={!clickabel} onClick={handleAdd}>
-          {isInCart ? "Editar no carrinho" : "Adicionar ao carrinho"}
-        </Button>
+        {isAdding ? (
+          <Spinner />
+        ) : (
+          <Button disabled={!clickabel} onClick={handleAdd}>
+            {isInCart ? "Editar no carrinho" : "Adicionar ao carrinho"}
+          </Button>
+        )}
       </div>
     </div>
   );

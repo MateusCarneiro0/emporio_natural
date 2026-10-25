@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import React from "react";
 import { payCart } from "../../api/cartApi";
 import Button from "../Button";
 import CartCard from "./CartCard";
@@ -14,6 +13,7 @@ import { useGetCartQuery } from "../../api/appApi";
 
 function CartMain() {
   const { data, isLoading, error } = useGetCartQuery();
+  
   const cartProducts = data?.cart
   console.log(data);
   const { operationText } = useSelector((store) => store.cart);
