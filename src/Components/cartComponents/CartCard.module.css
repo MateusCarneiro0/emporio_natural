@@ -46,7 +46,7 @@
   font-size: 24px;
   flex-shrink: 0;
 }
-.button:focus{
+.button:focus {
   outline: 2px solid red;
   outline-offset: 2px;
 }
@@ -70,6 +70,10 @@
 }
 .quantity {
   color: rgb(82, 82, 82);
+}
+.spinnerContainer {
+  width: 400px;
+  height: 50px;
 }
 
 @media (max-width: 340px) {
