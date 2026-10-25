@@ -1,13 +1,36 @@
 import { Link } from "react-router";
-import { useDispatch } from "react-redux";
-import React from "react";
 
 import styles from "./CartCard.module.css";
 import { useDeleteProductCartMutation } from "../../api/appApi";
+import Spinner from "../Spinner";
+import { createToast } from "../../utils/createToast";
+
 function CartCard({ src, children, price, productId, quantity, categoria }) {
-  const [deleteProduct, { isLoading: isDeleting, isSuccess: isDeleted }] =
+  const [deleteProduct, { isLoading: isDeleting }] =
     useDeleteProductCartMutation();
-  const dispatch = useDispatch();
+  const handleClick = async (ev) => {
+    ev.stopPropagation();
+    ev.preventDefault();
+    await deleteProduct({ id: productId })
+      .unwrap()
+      .then(() => {
+        createToast(
+          `O produto ${children} foi removido com sucesso`,
+          true,
+          `deleted-product-${children}`,
+        );
+      })
+      .catch((error) => {
+        console.error(error);
+        createToast(
+          `O produto ${children} não pôde ser removido`,
+          false,
+          `deleted-product-${children}`,
+          7000,
+        );
+      });
+  };
+
   return (
     <div className={`${styles.cartContainer}`}>
       <Link to={`/produtos/${productId}`} className={styles.card}>
@@ -19,22 +42,15 @@ function CartCard({ src, children, price, productId, quantity, categoria }) {
         <p className={styles.quantity}>
           {quantity} {categoria}
         </p>
-        {!isDeleting && (
+        {
           <button
             aria-label={`Apagar ${children} do carrinho`}
             className={styles.button}
-            onClick={async (ev) => {
-              ev.stopPropagation();
-              ev.preventDefault();
-              await deleteProduct({ id: productId })
-                .unwrap()
-                .then((pay) => console.log(`sucessfully: ${pay}`))
-                .catch((error) => console.error(error));
-            }}
+            onClick={handleClick}
           >
-            &times;
+            {isDeleting ? "...":"×"}
           </button>
-        )}
+        }
       </Link>
     </div>
   );
