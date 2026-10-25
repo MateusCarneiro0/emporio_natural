@@ -2,7 +2,13 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BASE_URL } from "../secretKeys";
 import { logout } from "../slices/authSlice";
 
-const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL, credentials: "include" });
+const baseQuery = fetchBaseQuery({
+  baseUrl: BASE_URL,
+  credentials: "include",
+  prepareHeaders: (headers) => {
+    headers.set("Content-Type", "application/json");
+  },
+});
 let refreshState = null;
 
 async function fetchRefresh() {

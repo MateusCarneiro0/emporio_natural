@@ -1,10 +1,12 @@
 import { Link } from "react-router";
 import { useDispatch } from "react-redux";
-import React from "react"
-import { deleteProductCart } from "../../api/cartApi";
+import React from "react";
 
 import styles from "./CartCard.module.css";
+import { useDeleteProductCartMutation } from "../../api/appApi";
 function CartCard({ src, children, price, productId, quantity, categoria }) {
+  const [deleteProduct, { isLoading: isDeleting, isSuccess: isDeleted }] =
+    useDeleteProductCartMutation();
   const dispatch = useDispatch();
   return (
     <div className={`${styles.cartContainer}`}>
@@ -17,17 +19,22 @@ function CartCard({ src, children, price, productId, quantity, categoria }) {
         <p className={styles.quantity}>
           {quantity} {categoria}
         </p>
-        <button
-          aria-label={`Apagar ${children} do carrinho`}
-          className={styles.button}
-          onClick={(ev) => {
-            ev.stopPropagation();
-            ev.preventDefault();
-            dispatch(deleteProductCart(productId));
-          }}
-        >
-          &times;
-        </button>
+        {!isDeleting && (
+          <button
+            aria-label={`Apagar ${children} do carrinho`}
+            className={styles.button}
+            onClick={async (ev) => {
+              ev.stopPropagation();
+              ev.preventDefault();
+              await deleteProduct({ id: productId })
+                .unwrap()
+                .then((pay) => console.log(`sucessfully: ${pay}`))
+                .catch((error) => console.error(error));
+            }}
+          >
+            &times;
+          </button>
+        )}
       </Link>
     </div>
   );
