@@ -120,20 +120,22 @@ export function loginUser(username, password) {
 export function logoutApi() {
   return async (dispatch) => {
     dispatch(loadingUsers());
-    const data = await requestJson(`users/logout`, {
-      method: "DELETE",
-      headers: { "Content-Type": "application/json" },
-    });
-    if (data?.status === "error") {
+    try {
+      const data = await requestJson(`users/logout`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!data?.status === "error") {
+        dispatch(logout());
+        createToast("Você saiu de sua conta!", true, "logout", 5000);
+      }
+    } catch {
       createToast(
         "Não dá para sair de sua conta! Tente novamente",
         false,
         "logout",
         7000,
       );
-    } else {
-      dispatch(logout());
-      createToast("Você saiu de sua conta!", true, "logout", 5000);
     }
   };
 }
