@@ -3,6 +3,7 @@ import { logout } from "./authSlice";
 
 const initialState = {
   isOpenModal: false,
+  toasts: [],
 };
 
 const globalSlice = createSlice({
@@ -15,6 +16,12 @@ const globalSlice = createSlice({
     closeModal(sta) {
       sta.isOpenModal = false;
     },
+    openToast(sta, act) {
+      sta.toasts = sta.toasts.push(act.payload);
+    },
+    closeToast(sta, act) {
+      sta.toasts = sta.toasts.filter((toast) => toast.name !== act.payload);
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(logout, (sta) => {
@@ -22,5 +29,7 @@ const globalSlice = createSlice({
     });
   },
 });
-export const { revertModal, closeModal } = globalSlice.actions;
+
+export const { revertModal, closeModal, openToast, closeToast } =
+  globalSlice.actions;
 export default globalSlice.reducer;
