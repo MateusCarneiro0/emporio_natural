@@ -17,7 +17,8 @@ const globalSlice = createSlice({
       sta.isOpenModal = false;
     },
     openToast(sta, act) {
-      sta.toasts = sta.toasts.push(act.payload);
+      sta.toasts.filter((toast) => act.payload.name !== toast.name);
+      sta.toasts.push(act.payload);
     },
     closeToast(sta, act) {
       sta.toasts = sta.toasts.filter((toast) => toast.name !== act.payload);
