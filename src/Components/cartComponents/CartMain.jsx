@@ -7,8 +7,6 @@ import Spinner from "../Spinner";
 
 import styles from "./CartMain.module.css";
 import ToastAlert from "./ToastAlert";
-import { useEffect } from "react";
-import { cleanOperationText } from "../../slices/cartSlice";
 import { useGetCartQuery } from "../../api/appApi";
 
 function CartMain() {
@@ -25,13 +23,7 @@ function CartMain() {
       : 0
     ).toFixed(2),
   );
-  useEffect(() => {
-    if (!operationText) return;
-
-    const toastTimeout = setTimeout(() => dispatch(cleanOperationText()), 6000);
-
-    return () => clearTimeout(toastTimeout);
-  }, [operationText, dispatch]);
+  
   if (isLoading) return <Spinner message="Carregando Carrinho..." />;
 
   if (!cartProducts?.length)
