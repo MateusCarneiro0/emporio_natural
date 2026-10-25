@@ -146,7 +146,7 @@ function Product() {
             </p>
           </div>
         </div>
-        {!isAdding ? (
+        {isAdding ? (
           <div className={styles.spinnerContainer}>
             <Spinner type="md" message="" />
           </div>
