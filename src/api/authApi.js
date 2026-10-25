@@ -125,7 +125,7 @@ export function logoutApi() {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });
-      if (!data?.status === "error") {
+      if (data?.status !== "error") {
         dispatch(logout());
         createToast("Você saiu de sua conta!", true, "logout", 5000);
       }
