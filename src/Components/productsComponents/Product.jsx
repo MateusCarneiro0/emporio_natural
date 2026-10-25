@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { useParams, useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 
 import Button from "../Button";
 
@@ -10,20 +9,27 @@ import Spinner from "../Spinner";
 import ProductsError from "./ProductsError";
 import {
   useAddProductCartMutation,
+  useGetCartQuery,
   useGetProductByIdQuery,
 } from "../../api/appApi";
+import { createToast } from "../../utils/createToast";
 
 function Product() {
   const [quantity, setQuantity] = useState("");
+
   const params = useParams();
+
   const {
     data: currentProduct = {},
     error,
     isLoading,
   } = useGetProductByIdQuery(params?.id);
+  const { data: cartProducts } = useGetCartQuery();
   const [addProduct, { isLoading: isAdding }] = useAddProductCartMutation();
+
   const { nome, imagem, categorias, descricao, preco, link, categoria } =
     currentProduct;
+
   const price =
     Number.isFinite(+quantity) && +quantity > 0
       ? Number((+quantity * preco).toFixed(2))
@@ -35,13 +41,10 @@ function Product() {
 
   const navigate = useNavigate();
 
-  const dispatch = useDispatch();
-
-  const { cartProducts } = useSelector((store) => store.cart);
-
   const isInCart = cartProducts?.some?.(
     (productItem) => productItem.nome === nome,
   );
+
   function handleChangeInput(ev) {
     const value = ev.target.value;
 
@@ -71,8 +74,23 @@ function Product() {
       },
     })
       .unwrap()
-      .then(() => navigate("/cart"))
-      .catch((error) => console.error(error));
+      .then(() => {
+        navigate("/cart");
+        createToast(
+          `A operação de adicionar ${nome} no carrinho foi bem sucedida`,
+          true,
+          `create-product-cart-${nome}`,
+        );
+      })
+      .catch((error) => {
+        createToast(
+          `A operação de adicionar ${nome} no carrinho foi mal sucedida :(`,
+          false,
+          `create-product-cart-${nome}`,
+          7000
+        );
+        console.error(error);
+      });
   }
   if (error) return <ProductsError message={error} />;
 
@@ -128,8 +146,10 @@ function Product() {
             </p>
           </div>
         </div>
-        {isAdding ? (
-          <Spinner />
+        {!isAdding ? (
+          <div className={styles.spinnerContainer}>
+            <Spinner type="md" message="" />
+          </div>
         ) : (
           <Button disabled={!clickabel} onClick={handleAdd}>
             {isInCart ? "Editar no carrinho" : "Adicionar ao carrinho"}
