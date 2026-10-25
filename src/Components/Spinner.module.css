@@ -1,9 +1,23 @@
 .spinnerContainer {
   position: relative;
-  width: 100vw;
-  height: 75vh;
   overflow-y: hidden;
 }
+
+.sm {
+  width: 45px;
+  height: 90px;
+}
+
+.md {
+  width: 150px;
+  height: 75px;
+}
+
+.lg {
+  width: 100vw;
+  height: 75vh;
+}
+
 .spinner {
   overflow: hidden;
   display: flex;
