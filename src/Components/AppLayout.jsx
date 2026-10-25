@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { closeModal, toastSelector } from "../slices/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Toast from "./Toast";
+import { deleteToast } from "../utils/createToast";
 
 function AppLayout() {
   const dispatch = useDispatch();
@@ -20,7 +21,12 @@ function AppLayout() {
       <Footer />
 
       {toasts.map((toast) => (
-        <Toast text={toast.text} key={toast.name} error={!toast.isSuccess} />
+        <Toast
+          text={toast.text}
+          key={toast.name}
+          error={!toast.isSuccess}
+          close={() => deleteToast(toast.name)}
+        />
       ))}
     </div>
   );

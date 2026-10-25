@@ -60,6 +60,21 @@
   gap: 10px;
   align-items: center;
 }
+.deleteButton {
+  background-color: rgb(245, 50, 50);
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 15px;
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 200ms ease-in;
+  & :hover {
+    background-color: rgb(224, 33, 33);
+  }
+}
 
 @media (max-width: 500px) {
   .container {
