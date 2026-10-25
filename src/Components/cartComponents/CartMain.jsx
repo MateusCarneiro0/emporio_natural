@@ -13,8 +13,9 @@ import { cleanOperationText } from "../../slices/cartSlice";
 import { useGetCartQuery } from "../../api/appApi";
 
 function CartMain() {
-  const { data: cartProducts, isLoading, error } = useGetCartQuery();
-  
+  const { data, isLoading, error } = useGetCartQuery();
+  const cartProducts = data?.cart
+  console.log(data);
   const { operationText } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
@@ -27,12 +28,9 @@ function CartMain() {
   useEffect(() => {
     if (!operationText) return;
 
-    const toastInterval = setInterval(
-      () => dispatch(cleanOperationText()),
-      6000,
-    );
+    const toastTimeout = setTimeout(() => dispatch(cleanOperationText()), 6000);
 
-    return () => clearInterval(toastInterval);
+    return () => clearTimeout(toastTimeout);
   }, [operationText, dispatch]);
   if (isLoading) return <Spinner message="Carregando Carrinho..." />;
 
