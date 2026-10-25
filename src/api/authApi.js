@@ -7,6 +7,7 @@ import {
   logout,
 } from "../slices/authSlice";
 import { receiveCart } from "../slices/cartSlice";
+import { createToast } from "../utils/createToast";
 import requestJson, { FetchApiError } from "./requestJson";
 
 class EnoughDataError extends Error {
@@ -75,10 +76,8 @@ export function loginUser(username, password) {
           "Campos de usuário ou de senha nulos preencha-os",
         );
       }
-      if(username.length >= 100 || password.length >= 100){
-        dispatch(
-            authRejected("Muitos caracteres use no máximo 100"),
-          );
+      if (username.length >= 100 || password.length >= 100) {
+        dispatch(authRejected("Muitos caracteres use no máximo 100"));
         return;
       }
       const data = await requestJson(`users/login`, {
@@ -126,8 +125,15 @@ export function logoutApi() {
       headers: { "Content-Type": "application/json" },
     });
     if (data?.status === "error") {
-      throw new Error("Erro em fazer logout");
+      createToast(
+        "Não dá para sair de sua conta! Tente novamente",
+        false,
+        "logout",
+        7000,
+      );
+    } else {
+      dispatch(logout());
+      createToast("Você saiu de sua conta!", true, "logout", 5000);
     }
-    dispatch(logout());
   };
 }
