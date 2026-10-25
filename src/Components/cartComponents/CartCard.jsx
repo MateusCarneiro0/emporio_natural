@@ -2,7 +2,6 @@ import { Link } from "react-router";
 
 import styles from "./CartCard.module.css";
 import { useDeleteProductCartMutation } from "../../api/appApi";
-import Spinner from "../Spinner";
 import { createToast } from "../../utils/createToast";
 
 function CartCard({ src, children, price, productId, quantity, categoria }) {
