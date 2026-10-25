@@ -8,7 +8,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import Error from "./Components/Error";
 import AppBootstrap from "./AppBootstrap";
 import { RouterProvider } from "react-router/dom";
-
+import BootstrapError from "./Components/BootstrapError";
 
 const Home = lazy(() => import("./Pages/Home"));
 const Products = lazy(() => import("./Pages/Products"));
@@ -71,7 +71,7 @@ const router = createBrowserRouter([
 ]);
 function App() {
   return (
-    <ErrorBoundary fallback={<Error />}>
+    <ErrorBoundary fallback={<BootstrapError />}>
       <AppBootstrap>
         <Suspense fallback={<SpinnerFullScreen />}>
           <RouterProvider router={router} />
