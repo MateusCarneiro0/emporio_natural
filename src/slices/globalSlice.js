@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice } from "@reduxjs/toolkit";
 import { logout } from "./authSlice";
 
 const initialState = {
@@ -29,6 +29,11 @@ const globalSlice = createSlice({
     });
   },
 });
+const getGlobal = (store) => store.global;
+export const toastSelector = createSelector(
+  [getGlobal],
+  (state) => state.toasts,
+);
 
 export const { revertModal, closeModal, openToast, closeToast } =
   globalSlice.actions;
