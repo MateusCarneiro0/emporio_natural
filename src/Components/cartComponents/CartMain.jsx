@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { payCart } from "../../api/cartApi";
 import Button from "../Button";
 import CartCard from "./CartCard";
@@ -6,15 +6,12 @@ import CartCard from "./CartCard";
 import Spinner from "../Spinner";
 
 import styles from "./CartMain.module.css";
-import ToastAlert from "./ToastAlert";
 import { useGetCartQuery } from "../../api/appApi";
 
 function CartMain() {
-  const { data, isLoading, error } = useGetCartQuery();
+  const { data, isLoading } = useGetCartQuery();
   
   const cartProducts = data?.cart
-  console.log(data);
-  const { operationText } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
 
   const totalCust = Number(
@@ -35,9 +32,6 @@ function CartMain() {
             <strong>Vamos adicionar algum produto?</strong>
           </h2>
         </div>
-        {operationText && (
-          <ToastAlert text={operationText} error={Boolean(error)} />
-        )}
       </>
     );
   return (
@@ -61,9 +55,6 @@ function CartMain() {
         </h2>
         <Button onClick={() => dispatch(payCart())}>Pagar o carrinho</Button>
       </div>
-      {operationText && (
-        <ToastAlert text={operationText} error={Boolean(error)} />
-      )}
     </>
   );
 }
