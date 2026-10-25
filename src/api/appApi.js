@@ -89,14 +89,6 @@ const appApi = createApi({
 
       invalidatesTags: ["Cart"],
     }),
-
-    createNewUser: builder.mutation({
-      query: (body) => ({
-        url: "users/createnewuser",
-        method: "POST",
-        body,
-      }),
-    }),
   }),
 });
 
@@ -108,5 +100,4 @@ export const {
   useGetCartQuery,
   useAddProductCartMutation,
   useDeleteProductCartMutation,
-  useCreateNewUserMutation,
 } = appApi;
